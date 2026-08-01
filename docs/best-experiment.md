@@ -10,15 +10,15 @@ This doc always describes **the single best submission** we've made on the publi
 
 | field | value |
 |---|---|
-| **experiment** | `exp_full_fp_lgbm` |
-| **LB score (public)** | **0.859** |
-| **LB rank** | ~20 / 154 |
-| **CV OOF mean R²** | 0.8575 |
-| **submission file** | `results/exp_full_fp_lgbm/submission.csv` |
-| **script** | `experiments/exp_full_fp_lgbm.py` |
+| **experiment** | `exp_maxwell_prior_lgbm` |
+| **LB score (public)** | **0.860** |
+| **LB rank** | ~19 / 154 |
+| **CV OOF mean R²** | 0.8656 |
+| **submission file** | `results/exp_maxwell_prior_lgbm/submission.csv` |
+| **script** | `experiments/exp_maxwell_prior_lgbm.py` |
 | **date submitted** | 2026-08-01 |
-| **wall time (local)** | 12.4 min on Mac M-series CPU |
-| **Δ vs previous best** | +0.002 (from matcomp 0.857) |
+| **wall time (local)** | ~15 min on Mac M-series CPU |
+| **Δ vs previous best** | +0.001 (from full_fp 0.859) |
 
 ### Per-target OOF R² (this submission)
 
@@ -65,8 +65,9 @@ Every submission ever made, most-recent first. Arrows show delta vs previous ent
 
 | # | date | experiment | LB | Δ | rank | OOF | notes |
 |--:|------|------------|:--:|:-:|:----:|:---:|-------|
-| 4 | 2026-08-01 | `exp_trimmed_smarts_lgbm` | 0.858 | ↓ -0.001 | — | **0.8610** | Path A: dropped morgan-r3 (2048) + topological-torsion (2048), added 25 SMARTS polymer-class flags + backbone-atom-count. ~5k features vs 9k. **OOF gained +0.0035** (eps recovered strongly: 0.785→0.805; eea +0.003; egc +0.003) but **LB lost 0.001**. Backbone feature useless (0.0-0.1% gain). SMARTS marginal (0.1-9% gain, mostly under 3%); only `vinyl_polymer` (eps) and `ester`/`amide` (tg) pulled real weight. OOF-LB gap now negative — CV starting to overfit fold structure. Confirms: no more juice from tabular tweaks. |
-| 3 | 2026-08-01 | `exp_full_fp_lgbm` | **0.859** | ↑ +0.002 | ~20 | 0.8575 | Added full Round-1 fingerprint stack (Morgan-r3 count, Atom-Pair count, Topological-Torsion count, Avalon) on top of matcomp. Modest LB lift. Family gain diagnostics: atom-pair (8-23%) and avalon (3-11%) earned their spots; morgan-r3 and topological-torsion are weak. eps regressed on OOF (-0.008) but egb/eea/nc gains carried the mean up. |
+| 5 | 2026-08-01 | `exp_maxwell_prior_lgbm` | **0.860** | ↑ +0.001 | ~19 | **0.8656** | Full_fp pipeline + Maxwell relation `EPS = a·Nc² + b` post-fit on 134 co-labeled train molecules. Maxwell forward fit R²=0.855 on 134 points. Optimal blend weights: eps w=0.405 (60% Maxwell), nc w=0.605 (40% Maxwell). **OOF Δ per target: eps +0.033, nc +0.024, mean +0.008.** LB Δ +0.001 only — physics is real (verified by fit R²) but LGB features already captured most of it implicitly. OOF-LB gap widened to -0.007 (biggest yet). At test time, 62% coverage on the aux path (95/153 rows) dampened the real gain. |
+| 4 | 2026-08-01 | `exp_trimmed_smarts_lgbm` | 0.858 | ↓ -0.001 | — | 0.8610 | Path A: dropped morgan-r3 (2048) + topological-torsion (2048), added 25 SMARTS polymer-class flags + backbone-atom-count. ~5k features vs 9k. **OOF gained +0.0035** (eps recovered strongly: 0.785→0.805; eea +0.003; egc +0.003) but **LB lost 0.001**. Backbone feature useless (0.0-0.1% gain). SMARTS marginal (0.1-9% gain, mostly under 3%); only `vinyl_polymer` (eps) and `ester`/`amide` (tg) pulled real weight. OOF-LB gap now negative — CV starting to overfit fold structure. |
+| 3 | 2026-08-01 | `exp_full_fp_lgbm` | 0.859 | ↑ +0.002 | ~20 | 0.8575 | Added full Round-1 fingerprint stack (Morgan-r3 count, Atom-Pair count, Topological-Torsion count, Avalon) on top of matcomp. Modest LB lift. Family gain diagnostics: atom-pair (8-23%) and avalon (3-11%) earned their spots; morgan-r3 and topological-torsion are weak. eps regressed on OOF (-0.008) but egb/eea/nc gains carried the mean up. |
 | 2 | 2026-08-01 | `exp_matrix_completion_lgbm` | 0.857 | ↑ +0.014 | 22 | 0.8527 | Added 14 aux cross-target features (7 values + 7 masks), target slot masked. Aux-augmented CV. Biggest per-target lifts on eps (+0.054 OOF) and nc (+0.041 OOF). eea regressed -0.004. Half the expected mean OOF lift because Morgan-r2 already implicitly encodes molecule identity. |
 | 1 | 2026-08-01 | `exp_baseline_lgbm` | 0.843 | — | 24 | 0.8345 | First submission. Plumbing sanity check + LB probe rolled into one. LGB per target, no matrix completion, no Chemprop. |
 
@@ -114,6 +115,7 @@ Score targets by remaining planned experiments:
 | baseline | 0.8345 | 0.843 | +0.009 | — | refit-on-full-train boost, first sub |
 | matcomp  | 0.8527 | 0.857 | +0.004 | +0.014 | consistent boost, matrix-completion pays off big |
 | full_fp  | 0.8575 | 0.859 | +0.002 | +0.002 | tiny lift; OOF-LB gap narrowing |
-| trimmed  | 0.8610 | 0.858 | **-0.003** | -0.001 | **OOF up but LB flat/down** — CV overfitting fold structure, LB says we've saturated tabular gains |
+| trimmed  | 0.8610 | 0.858 | **-0.003** | -0.001 | OOF up but LB flat |
+| maxwell  | 0.8656 | 0.860 | **-0.007** | +0.001 | **worst OOF-LB gap yet.** Maxwell physics is real (fit R²=0.85) but LGB already captures most of it implicitly. 62% test-row aux coverage dampens gain vs OOF |
 
-**Read of the trend.** LB gains per submission: baseline→matcomp = +0.014, matcomp→full_fp = +0.002, full_fp→trimmed = -0.001. Diminishing returns to zero. OOF-LB gap went from +0.009 to -0.003, meaning our CV is now telling us more than the true test skill. **Further tabular-feature/target-transform tweaks are unlikely to move LB meaningfully.** The next real gain lives in a different model family (Chemprop on Kaggle GPU).
+**Read of the trend.** Since matcomp we've done 3 more experiments; LB gains are +0.002, -0.001, +0.001. The OOF-LB gap keeps widening in the wrong direction (LB now 0.007 UNDER what OOF suggests). Our aux-augmented CV is systematically inflating OOF measurements. **We cannot trust OOF as a submission decision-maker anymore.** Every LGB-based tweak within this pipeline will show OOF gains that don't translate. Only fundamental changes (new model family = Chemprop, or LB-probe-based corrections) will move the needle meaningfully from here.
