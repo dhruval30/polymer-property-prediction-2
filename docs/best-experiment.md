@@ -61,6 +61,7 @@ Every submission ever made, most-recent first. Arrows show delta vs previous ent
 
 | # | date | experiment | LB | Δ | rank | OOF | notes |
 |--:|------|------------|:--:|:-:|:----:|:---:|-------|
+| 3 | 2026-08-01 | `exp_full_fp_lgbm` | *TBD* | — | — | **0.8575** | Added full Round-1 fingerprint stack (Morgan-r3 count, Atom-Pair count, Topological-Torsion count, Avalon) on top of matcomp. Mean OOF +0.005 vs matcomp. Diagnostics: atom-pair (8-23% gain) and avalon (3-11%) earned their spots; morgan-r3 and topological-torsion are weak/useless. eps regressed -0.008, ei flat — 9k features on ~229 rows is overfitting small-data targets. LB not yet submitted. |
 | 2 | 2026-08-01 | `exp_matrix_completion_lgbm` | **0.857** | ↑ +0.014 | **22** | 0.8527 | Added 14 aux cross-target features per row (7 values + 7 masks), target slot masked. Aux-augmented CV. Biggest per-target lifts on eps (+0.054) and nc (+0.041); eea regressed -0.004. Half the expected mean lift because Morgan-r2 already implicitly encodes molecule identity — dampening aux-feature marginal utility. |
 | 1 | 2026-08-01 | `exp_baseline_lgbm` | 0.843 | — | 24 | 0.8345 | First submission. Plumbing sanity check + LB probe rolled into one. LGB per target, no matrix completion, no Chemprop. |
 
