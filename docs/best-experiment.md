@@ -11,8 +11,8 @@ This doc always describes **the single best submission** we've made on the publi
 | field | value |
 |---|---|
 | **experiment** | `exp_matrix_completion_lgbm` |
-| **LB score (public)** | **0.857** |
-| **LB rank** | **22 / 154** entrants |
+| **LB score (public)** | **0.859** |
+| **LB rank** | ~20 / 154 |
 | **CV OOF mean R²** | 0.8527 |
 | **submission file** | `results/exp_matrix_completion_lgbm/submission.csv` |
 | **script** | `experiments/exp_matrix_completion_lgbm.py` |
@@ -61,8 +61,8 @@ Every submission ever made, most-recent first. Arrows show delta vs previous ent
 
 | # | date | experiment | LB | Δ | rank | OOF | notes |
 |--:|------|------------|:--:|:-:|:----:|:---:|-------|
-| 3 | 2026-08-01 | `exp_full_fp_lgbm` | *TBD* | — | — | **0.8575** | Added full Round-1 fingerprint stack (Morgan-r3 count, Atom-Pair count, Topological-Torsion count, Avalon) on top of matcomp. Mean OOF +0.005 vs matcomp. Diagnostics: atom-pair (8-23% gain) and avalon (3-11%) earned their spots; morgan-r3 and topological-torsion are weak/useless. eps regressed -0.008, ei flat — 9k features on ~229 rows is overfitting small-data targets. LB not yet submitted. |
-| 2 | 2026-08-01 | `exp_matrix_completion_lgbm` | **0.857** | ↑ +0.014 | **22** | 0.8527 | Added 14 aux cross-target features per row (7 values + 7 masks), target slot masked. Aux-augmented CV. Biggest per-target lifts on eps (+0.054) and nc (+0.041); eea regressed -0.004. Half the expected mean lift because Morgan-r2 already implicitly encodes molecule identity — dampening aux-feature marginal utility. |
+| 3 | 2026-08-01 | `exp_full_fp_lgbm` | 0.858 | ↓ -0.001 | — | **0.8575** | Added full Round-1 fingerprint stack (Morgan-r3 count, Atom-Pair count, Topological-Torsion count, Avalon) on top of matcomp. Mean OOF +0.005 vs matcomp but **LB slightly worse**. Diagnostics: atom-pair (8-23% gain) and avalon (3-11%) earned their spots; morgan-r3 and topological-torsion are weak/useless. eps regressed -0.008, ei flat on OOF. **Small-data overfit hypothesis**: 9k features on 220-330 row targets added noise that hurt LB even though CV moved up (OOF-LB gap flipped sign for the first time). |
+| 2 | 2026-08-01 | `exp_matrix_completion_lgbm` | **0.859** | ↑ +0.016 | ~20 | 0.8527 | Added 14 aux cross-target features per row (7 values + 7 masks), target slot masked. Aux-augmented CV. Biggest per-target lifts on eps (+0.054) and nc (+0.041); eea regressed -0.004. Half the expected mean OOF lift because Morgan-r2 already implicitly encodes molecule identity — dampening aux-feature marginal utility. |
 | 1 | 2026-08-01 | `exp_baseline_lgbm` | 0.843 | — | 24 | 0.8345 | First submission. Plumbing sanity check + LB probe rolled into one. LGB per target, no matrix completion, no Chemprop. |
 
 ---
@@ -83,22 +83,31 @@ When you submit and it does not beat the current best:
 
 ---
 
-## LB landmarks (as of 2026-08-01, before submission #2)
+## LB landmarks (approx, as of 2026-08-01)
 
 Reference points for what different scores buy us on rank:
 
-| rank | team | score | gap to us (0.857) |
+| rank | team | score | gap to us (0.859) |
 |------|------|:-----:|:-----------------:|
-| 1  | Kuch bhi Karna hai | 0.899 | +0.042 |
-| 3  | MUGABROS           | 0.897 | +0.040 |
-| 5  | ShiokParikh08      | 0.893 | +0.036 |
-| 10 | Coding Brigades    | 0.876 | +0.019 |
-| 15 | Bond               | 0.872 | +0.015 |
-| 20 | The Polymaths      | 0.859 | +0.002 |
-| **22** | **Dhruval Padia (us)** | **0.857** | **—** |
-| 24 | (previous us: 0.843) | | |
+| 1  | Kuch bhi Karna hai | 0.899 | +0.040 |
+| 3  | MUGABROS           | 0.897 | +0.038 |
+| 5  | ShiokParikh08      | 0.893 | +0.034 |
+| 10 | Coding Brigades    | 0.876 | +0.017 |
+| 15 | Bond               | 0.872 | +0.013 |
+| 20 | The Polymaths      | 0.859 | ~tied |
+| **~20** | **Dhruval Padia (us)** | **0.859** | **—** |
 
 Score targets by remaining planned experiments:
-- **Local: LGB + CatBoost + HGB cocktail** (same features) → +0.005 to +0.015 → **0.86–0.87 → rank 15–20**.
-- **Kaggle: multitask Chemprop** (single encoder, 7 heads) → +0.02 to +0.04 → **0.88–0.90 → rank 5–10**.
+- **Local: Path A** (trim dead FPs, add SMARTS + backbone) → **narrow-lever, ~+0.005 to +0.010**, expected LB 0.86–0.87 → rank 15–18.
+- **Kaggle: multitask Chemprop** (single encoder, 7 heads) → +0.02 to +0.04 → **0.88–0.90 → rank 5–10**. This is now the dominant remaining lever.
 - **Kaggle: + PI1M SSL pretrain on tg/egc** → +0.005 to +0.015 → **0.89–0.91 → rank 1–5**.
+
+## OOF-vs-LB tracking
+
+| exp | OOF | LB | LB−OOF | note |
+|-----|:---:|:--:|:------:|------|
+| baseline | 0.8345 | 0.843 | **+0.008** | refit-on-full-train boost |
+| matcomp  | 0.8527 | 0.859 | **+0.006** | consistent boost |
+| full_fp  | 0.8575 | 0.858 | **+0.000** | boost vanished → overfit signal from 9k features |
+
+The OOF-to-LB gap started collapsing on `full_fp`. That's the tell: the extra 4,096 fingerprint columns fit the CV folds well enough to inflate OOF, but the LB test set (which is held-out ≠ CV holdout) didn't buy the same signal. Path A (trim + SMARTS) should reverse this trend.
