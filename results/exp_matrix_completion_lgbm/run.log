@@ -1,0 +1,129 @@
+16:26:17  INFO   logging to /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_matrix_completion_lgbm/run.log
+16:26:17  INFO   === exp_matrix_completion_lgbm ===
+16:26:17  INFO   CONFIG: n_splits=5 seed=42 morgan_nbits=2048 n_estimators=4000 early_stop=200
+16:26:17  INFO   CV mode: aux-augmented (aux lookup built from full train; target-being-predicted slot always masked to prevent self-label leak)
+16:26:17  INFO   LGB_PARAMS = {'objective': 'regression', 'metric': 'rmse', 'learning_rate': 0.03, 'num_leaves': 63, 'min_child_samples': 10, 'feature_fraction': 0.5, 'bagging_fraction': 0.85, 'bagging_freq': 1, 'reg_lambda': 1.0, 'verbosity': -1, 'n_jobs': -1, 'seed': 42}
+16:26:17  INFO   loading train.csv / test.csv
+16:26:17  INFO   train raw: (7409, 3)   test raw: (4940, 3)
+16:26:17  INFO   canonicalizing 10605 unique raw SMILES
+16:26:21  INFO   collapsing 4 duplicate (canon, target_type) rows in train by mean
+16:26:21  INFO   train after dedup: (7405, 4)
+16:26:21  INFO   per-target train counts: {'tg': 4139, 'egc': 2028, 'egb': 337, 'eps': 229, 'nc': 229, 'ei': 222, 'eea': 221}
+16:26:21  INFO   per-target test  counts: {'tg': 2763, 'egc': 1352, 'egb': 224, 'eps': 153, 'nc': 153, 'ei': 148, 'eea': 147}
+16:28:44  INFO   desc: shape=(8990, 207)  dropped=10 const cols  time=142.9s
+16:28:47  INFO   morgan2c: shape=(8990, 2048)  time=2.7s
+16:29:17  INFO   maccs: shape=(8990, 167)  time=29.8s
+16:29:17  INFO   SMILES feature matrix: (8990, 2422)  size≈87.1MB
+16:29:17  INFO   cached features to feature_cache.pkl
+16:29:17  INFO   SMILES feature families: desc=207, morgan2c=2048, maccs=167
+16:29:17  INFO   building aux lookup over 5920 unique canonical SMILES in train
+16:29:18  INFO   aux lookup built.  aux features per row: 14 (7 values + 7 masks)
+16:29:18  INFO   ============================================================
+16:29:18  INFO   AUX COVERAGE BY TARGET (from full-train lookup)
+16:29:18  INFO   ============================================================
+16:29:18  INFO      eea: 144/147 test rows have ≥1 aux value (98.0%)
+16:29:18  INFO      egb: 198/224 test rows have ≥1 aux value (88.4%)
+16:29:18  INFO      egc: 503/1352 test rows have ≥1 aux value (37.2%)
+16:29:18  INFO       ei: 145/148 test rows have ≥1 aux value (98.0%)
+16:29:18  INFO      eps: 151/153 test rows have ≥1 aux value (98.7%)
+16:29:18  INFO       nc: 151/153 test rows have ≥1 aux value (98.7%)
+16:29:18  INFO       tg: 337/2763 test rows have ≥1 aux value (12.2%)
+16:29:18  INFO   [eea] train rows=221   test rows=147   y range=[0.3936, 5.1438]   std=1.1047
+16:29:18  INFO   [eea] aux coverage — train rows with ≥1 other-target aux known: 217/221 (98.2%);  mean_known/row=2.88
+16:29:18  INFO   [eea] aux coverage — test  rows with ≥1 other-target aux known: 144/147 (98.0%);  mean_known/row=2.92
+16:29:19  INFO   [eea] fold 0: best_iter= 149   R²=0.7907   n_val=45
+16:29:29  INFO   [eea] fold 1: best_iter=3652   R²=0.9097   n_val=44
+16:29:31  INFO   [eea] fold 2: best_iter= 765   R²=0.8756   n_val=44
+16:29:32  INFO   [eea] fold 3: best_iter= 156   R²=0.8715   n_val=44
+16:29:33  INFO   [eea] fold 4: best_iter= 388   R²=0.7838   n_val=44
+16:29:33  INFO   [eea] OOF R² = 0.8543   (fold mean 0.8463)
+16:29:33  INFO   [eea] refitting on full train for 426 rounds
+16:29:34  INFO   [eea] top aux-feature gains (out of 14 aux feats): aux_val_ei=58, aux_val_egb=54, aux_val_nc=29, aux_val_eps=14, aux_val_egc=7, aux_mask_ei=0
+16:29:34  INFO   [eea] aux gain share: 165/4008 = 4.1%
+16:29:34  INFO   [egb] train rows=337   test rows=224   y range=[0.5068, 10.1137]   std=1.9757
+16:29:34  INFO   [egb] aux coverage — train rows with ≥1 other-target aux known: 298/337 (88.4%);  mean_known/row=2.17
+16:29:34  INFO   [egb] aux coverage — test  rows with ≥1 other-target aux known: 198/224 (88.4%);  mean_known/row=2.17
+16:29:36  INFO   [egb] fold 0: best_iter= 187   R²=0.9264   n_val=68
+16:29:37  INFO   [egb] fold 1: best_iter= 230   R²=0.9459   n_val=68
+16:29:40  INFO   [egb] fold 2: best_iter= 378   R²=0.9224   n_val=67
+16:29:42  INFO   [egb] fold 3: best_iter= 389   R²=0.9012   n_val=67
+16:29:44  INFO   [egb] fold 4: best_iter= 593   R²=0.8077   n_val=67
+16:29:44  INFO   [egb] OOF R² = 0.9050   (fold mean 0.9007)
+16:29:44  INFO   [egb] refitting on full train for 415 rounds
+16:29:46  INFO   [egb] top aux-feature gains (out of 14 aux feats): aux_val_egc=683, aux_val_eps=180, aux_val_eea=81, aux_val_nc=72, aux_val_ei=7, aux_val_tg=2
+16:29:46  INFO   [egb] aux gain share: 1031/19200 = 5.4%
+16:29:46  INFO   [egc] train rows=2028   test rows=1352   y range=[0.0205, 9.8627]   std=1.5678
+16:29:46  INFO   [egc] aux coverage — train rows with ≥1 other-target aux known: 693/2028 (34.2%);  mean_known/row=0.54
+16:29:46  INFO   [egc] aux coverage — test  rows with ≥1 other-target aux known: 503/1352 (37.2%);  mean_known/row=0.63
+16:29:54  INFO   [egc] fold 0: best_iter= 221   R²=0.9035   n_val=406
+16:30:02  INFO   [egc] fold 1: best_iter= 288   R²=0.9048   n_val=406
+16:31:11  INFO   [egc] fold 2: best_iter=3982   R²=0.8854   n_val=406
+16:31:25  INFO   [egc] fold 3: best_iter= 561   R²=0.8863   n_val=405
+16:31:40  INFO   [egc] fold 4: best_iter= 637   R²=0.9020   n_val=405
+16:31:40  INFO   [egc] OOF R² = 0.8966   (fold mean 0.8964)
+16:31:40  INFO   [egc] refitting on full train for 617 rounds
+16:31:52  INFO   [egc] top aux-feature gains (out of 14 aux feats): aux_val_egb=407, aux_val_nc=59, aux_val_eps=33, aux_val_tg=31, aux_val_eea=28, aux_val_ei=21
+16:31:52  INFO   [egc] aux gain share: 601/73691 = 0.8%
+16:31:52  INFO   [ei] train rows=222   test rows=148   y range=[4.0261, 9.8385]   std=1.0447
+16:31:52  INFO   [ei] aux coverage — train rows with ≥1 other-target aux known: 217/222 (97.7%);  mean_known/row=2.79
+16:31:52  INFO   [ei] aux coverage — test  rows with ≥1 other-target aux known: 145/148 (98.0%);  mean_known/row=3.07
+16:32:01  INFO   [ei] fold 0: best_iter=3954   R²=0.8312   n_val=45
+16:32:03  INFO   [ei] fold 1: best_iter= 252   R²=0.8103   n_val=45
+16:32:04  INFO   [ei] fold 2: best_iter= 258   R²=0.8046   n_val=44
+16:32:14  INFO   [ei] fold 3: best_iter=4000   R²=0.8434   n_val=44
+16:32:15  INFO   [ei] fold 4: best_iter= 175   R²=0.6071   n_val=44
+16:32:15  INFO   [ei] OOF R² = 0.7944   (fold mean 0.7793)
+16:32:15  INFO   [ei] refitting on full train for 283 rounds
+16:32:15  INFO   [ei] top aux-feature gains (out of 14 aux feats): aux_val_egc=34, aux_val_eps=32, aux_val_eea=28, aux_val_egb=13, aux_val_nc=10, aux_mask_egc=1
+16:32:15  INFO   [ei] aux gain share: 122/3619 = 3.4%
+16:32:15  INFO   [eps] train rows=229   test rows=153   y range=[2.6100, 9.0900]   std=1.0916
+16:32:15  INFO   [eps] aux coverage — train rows with ≥1 other-target aux known: 226/229 (98.7%);  mean_known/row=2.89
+16:32:15  INFO   [eps] aux coverage — test  rows with ≥1 other-target aux known: 151/153 (98.7%);  mean_known/row=2.86
+16:32:16  INFO   [eps] fold 0: best_iter= 148   R²=0.8607   n_val=46
+16:32:17  INFO   [eps] fold 1: best_iter= 143   R²=0.8052   n_val=46
+16:32:20  INFO   [eps] fold 2: best_iter= 972   R²=0.7616   n_val=46
+16:32:22  INFO   [eps] fold 3: best_iter= 423   R²=0.7879   n_val=46
+16:32:25  INFO   [eps] fold 4: best_iter=1051   R²=0.7635   n_val=45
+16:32:25  INFO   [eps] OOF R² = 0.7931   (fold mean 0.7958)
+16:32:25  INFO   [eps] refitting on full train for 465 rounds
+16:32:26  INFO   [eps] top aux-feature gains (out of 14 aux feats): aux_val_nc=307, aux_val_egb=244, aux_val_eea=52, aux_val_ei=45, aux_val_egc=40, aux_mask_ei=5
+16:32:26  INFO   [eps] aux gain share: 697/4115 = 16.9%
+16:32:26  INFO   [nc] train rows=229   test rows=153   y range=[1.5596, 2.7581]   std=0.2349
+16:32:26  INFO   [nc] aux coverage — train rows with ≥1 other-target aux known: 226/229 (98.7%);  mean_known/row=2.87
+16:32:26  INFO   [nc] aux coverage — test  rows with ≥1 other-target aux known: 151/153 (98.7%);  mean_known/row=2.89
+16:32:29  INFO   [nc] fold 0: best_iter= 927   R²=0.8828   n_val=46
+16:32:30  INFO   [nc] fold 1: best_iter= 265   R²=0.7629   n_val=46
+16:32:32  INFO   [nc] fold 2: best_iter= 386   R²=0.8114   n_val=46
+16:32:35  INFO   [nc] fold 3: best_iter= 919   R²=0.8538   n_val=46
+16:32:36  INFO   [nc] fold 4: best_iter= 404   R²=0.8324   n_val=45
+16:32:36  INFO   [nc] OOF R² = 0.8228   (fold mean 0.8287)
+16:32:36  INFO   [nc] refitting on full train for 444 rounds
+16:32:37  INFO   [nc] top aux-feature gains (out of 14 aux feats): aux_val_eps=21, aux_val_egb=7, aux_val_egc=3, aux_val_eea=0, aux_val_ei=0, aux_mask_eea=0
+16:32:37  INFO   [nc] aux gain share: 33/188 = 17.6%
+16:32:37  INFO   [tg] train rows=4139   test rows=2763   y range=[-109.8200, 495.0000]   std=109.1038
+16:32:37  INFO   [tg] aux coverage — train rows with ≥1 other-target aux known: 490/4139 (11.8%);  mean_known/row=0.13
+16:32:37  INFO   [tg] aux coverage — test  rows with ≥1 other-target aux known: 337/2763 (12.2%);  mean_known/row=0.14
+16:33:10  INFO   [tg] fold 0: best_iter=1716   R²=0.9172   n_val=828
+16:33:35  INFO   [tg] fold 1: best_iter=1094   R²=0.9054   n_val=828
+16:34:02  INFO   [tg] fold 2: best_iter=1328   R²=0.8937   n_val=828
+16:34:23  INFO   [tg] fold 3: best_iter= 925   R²=0.9057   n_val=828
+16:35:03  INFO   [tg] fold 4: best_iter=1789   R²=0.8908   n_val=827
+16:35:03  INFO   [tg] OOF R² = 0.9026   (fold mean 0.9026)
+16:35:03  INFO   [tg] refitting on full train for 1460 rounds
+16:35:30  INFO   [tg] top aux-feature gains (out of 14 aux feats): aux_val_egc=746389, aux_mask_egc=90774, aux_val_egb=32715, aux_val_eps=4202, aux_mask_eps=782, aux_val_eea=0
+16:35:30  INFO   [tg] aux gain share: 874863/727188288 = 0.1%
+16:35:30  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_matrix_completion_lgbm/oof.csv  rows=7405
+16:35:30  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_matrix_completion_lgbm/submission.csv  rows=4940
+16:35:30  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_matrix_completion_lgbm/cv_summary.json
+16:35:30  INFO   ============================================================
+16:35:30  INFO   PER-TARGET OOF R²  (vs baseline reference)
+16:35:30  INFO   ============================================================
+16:35:30  INFO      eea   n=  221   R²=0.8543   (baseline 0.8587, Δ=-0.0044)   aux gain share=4.1%
+16:35:30  INFO      egb   n=  337   R²=0.9050   (baseline 0.8917, Δ=++0.0133)   aux gain share=5.4%
+16:35:30  INFO      egc   n= 2028   R²=0.8966   (baseline 0.8948, Δ=++0.0018)   aux gain share=0.8%
+16:35:30  INFO       ei   n=  222   R²=0.7944   (baseline 0.7730, Δ=++0.0214)   aux gain share=3.4%
+16:35:30  INFO      eps   n=  229   R²=0.7931   (baseline 0.7392, Δ=++0.0539)   aux gain share=16.9%
+16:35:30  INFO       nc   n=  229   R²=0.8228   (baseline 0.7814, Δ=++0.0414)   aux gain share=17.6%
+16:35:30  INFO       tg   n= 4139   R²=0.9026   (baseline 0.9026, Δ=-0.0000)   aux gain share=0.1%
+16:35:30  INFO     MEAN R² = 0.8527   (baseline mean 0.8345, Δ=+0.0182)
+16:35:30  INFO   wall time: 552.9s
