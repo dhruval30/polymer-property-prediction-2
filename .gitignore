@@ -1,0 +1,56 @@
+# --- Data ---
+# Large auxiliary corpus — re-download from Kaggle when needed.
+ppp-round-2/PI1M.csv
+
+# --- Experiment outputs (never commit) ---
+results/
+!results/.gitkeep
+*.pkl
+*.pkl.gz
+*.joblib
+*.ckpt
+*.pt
+*.pth
+*.h5
+*.parquet
+*.feather
+*.npy
+*.npz
+submission*.csv
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# --- Notebook clutter ---
+*-checkpoint.ipynb
+
+# --- Editor / IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Secrets / local config ---
+.env
+.env.*
+kaggle.json
+.claude/settings.local.json
+
+# --- Logs ---
+*.log
