@@ -1,0 +1,452 @@
+{
+  "exp_name": "exp_full_fp_lgbm",
+  "mean_r2": 0.8574721407065509,
+  "per_target": {
+    "eea": {
+      "n_train": 221,
+      "n_test": 147,
+      "oof_r2": 0.8707738137857496,
+      "fold_r2s": [
+        0.8175399016847562,
+        0.9103749323854877,
+        0.9000217310439914,
+        0.8847388937629016,
+        0.8058636069459859
+      ],
+      "best_iters": [
+        221,
+        3950,
+        636,
+        108,
+        1336
+      ],
+      "refit_iters": 699,
+      "family_gains": {
+        "desc": 2323,
+        "morgan2c": 242,
+        "morgan3c": 72,
+        "maccs": 107,
+        "atompair_c": 815,
+        "toptorsion_c": 15,
+        "avalon": 324
+      },
+      "aux_gain_share_pct": 2.498750624687656,
+      "top_aux_gains": [
+        [
+          "aux_val_ei",
+          47
+        ],
+        [
+          "aux_val_egb",
+          25
+        ],
+        [
+          "aux_val_eps",
+          9
+        ],
+        [
+          "aux_val_egc",
+          8
+        ],
+        [
+          "aux_val_nc",
+          8
+        ],
+        [
+          "aux_mask_nc",
+          0
+        ]
+      ],
+      "aux_coverage_train_pct": 98.19004524886877,
+      "aux_coverage_test_pct": 97.95918367346938
+    },
+    "egb": {
+      "n_train": 337,
+      "n_test": 224,
+      "oof_r2": 0.9104669235017836,
+      "fold_r2s": [
+        0.941476382282674,
+        0.9454526270329932,
+        0.9235160242185978,
+        0.9082164937014462,
+        0.8136579235478302
+      ],
+      "best_iters": [
+        246,
+        260,
+        197,
+        236,
+        509
+      ],
+      "refit_iters": 270,
+      "family_gains": {
+        "desc": 12147,
+        "morgan2c": 86,
+        "morgan3c": 86,
+        "maccs": 2466,
+        "atompair_c": 2801,
+        "toptorsion_c": 58,
+        "avalon": 603
+      },
+      "aux_gain_share_pct": 4.699984333385555,
+      "top_aux_gains": [
+        [
+          "aux_val_egc",
+          728
+        ],
+        [
+          "aux_val_eps",
+          76
+        ],
+        [
+          "aux_val_nc",
+          62
+        ],
+        [
+          "aux_val_eea",
+          20
+        ],
+        [
+          "aux_val_ei",
+          6
+        ],
+        [
+          "aux_mask_eps",
+          3
+        ]
+      ],
+      "aux_coverage_train_pct": 88.4272997032641,
+      "aux_coverage_test_pct": 88.39285714285714
+    },
+    "egc": {
+      "n_train": 2028,
+      "n_test": 1352,
+      "oof_r2": 0.9000064175963226,
+      "fold_r2s": [
+        0.9065002150291428,
+        0.9130128921666512,
+        0.8822478209598802,
+        0.8956130274525156,
+        0.9023866399238668
+      ],
+      "best_iters": [
+        328,
+        283,
+        3732,
+        863,
+        903
+      ],
+      "refit_iters": 949,
+      "family_gains": {
+        "desc": 43377,
+        "morgan2c": 9134,
+        "morgan3c": 1558,
+        "maccs": 3958,
+        "atompair_c": 6064,
+        "toptorsion_c": 751,
+        "avalon": 8223
+      },
+      "aux_gain_share_pct": 0.7470998940476514,
+      "top_aux_gains": [
+        [
+          "aux_val_egb",
+          382
+        ],
+        [
+          "aux_val_nc",
+          98
+        ],
+        [
+          "aux_val_tg",
+          22
+        ],
+        [
+          "aux_val_ei",
+          14
+        ],
+        [
+          "aux_val_eps",
+          13
+        ],
+        [
+          "aux_val_eea",
+          10
+        ]
+      ],
+      "aux_coverage_train_pct": 34.171597633136095,
+      "aux_coverage_test_pct": 37.20414201183432
+    },
+    "ei": {
+      "n_train": 222,
+      "n_test": 148,
+      "oof_r2": 0.793321197554641,
+      "fold_r2s": [
+        0.8301167857556153,
+        0.7983734814051802,
+        0.8204508397959448,
+        0.8268054878040473,
+        0.6337380050726851
+      ],
+      "best_iters": [
+        3946,
+        252,
+        246,
+        593,
+        324
+      ],
+      "refit_iters": 356,
+      "family_gains": {
+        "desc": 3106,
+        "morgan2c": 9,
+        "morgan3c": 6,
+        "maccs": 48,
+        "atompair_c": 103,
+        "toptorsion_c": 4,
+        "avalon": 224
+      },
+      "aux_gain_share_pct": 3.1258644536652835,
+      "top_aux_gains": [
+        [
+          "aux_val_egc",
+          27
+        ],
+        [
+          "aux_val_eps",
+          27
+        ],
+        [
+          "aux_val_eea",
+          26
+        ],
+        [
+          "aux_val_nc",
+          16
+        ],
+        [
+          "aux_val_egb",
+          13
+        ],
+        [
+          "aux_mask_eps",
+          1
+        ]
+      ],
+      "aux_coverage_train_pct": 97.74774774774775,
+      "aux_coverage_test_pct": 97.97297297297297
+    },
+    "eps": {
+      "n_train": 229,
+      "n_test": 153,
+      "oof_r2": 0.7853690446373363,
+      "fold_r2s": [
+        0.8507820464396092,
+        0.8021699899700901,
+        0.7609929541481752,
+        0.756125369382383,
+        0.7599692059159253
+      ],
+      "best_iters": [
+        266,
+        143,
+        654,
+        204,
+        1528
+      ],
+      "refit_iters": 292,
+      "family_gains": {
+        "desc": 2505,
+        "morgan2c": 164,
+        "morgan3c": 103,
+        "maccs": 84,
+        "atompair_c": 168,
+        "toptorsion_c": 34,
+        "avalon": 291
+      },
+      "aux_gain_share_pct": 17.7336276674025,
+      "top_aux_gains": [
+        [
+          "aux_val_nc",
+          362
+        ],
+        [
+          "aux_val_egb",
+          243
+        ],
+        [
+          "aux_val_egc",
+          48
+        ],
+        [
+          "aux_val_eea",
+          39
+        ],
+        [
+          "aux_val_ei",
+          28
+        ],
+        [
+          "aux_mask_ei",
+          0
+        ]
+      ],
+      "aux_coverage_train_pct": 98.68995633187772,
+      "aux_coverage_test_pct": 98.69281045751634
+    },
+    "nc": {
+      "n_train": 229,
+      "n_test": 153,
+      "oof_r2": 0.8366918876479214,
+      "fold_r2s": [
+        0.8831093490788857,
+        0.7932849062083089,
+        0.8025717917296292,
+        0.8880364295206689,
+        0.8405075289748168
+      ],
+      "best_iters": [
+        421,
+        436,
+        99,
+        1059,
+        473
+      ],
+      "refit_iters": 479,
+      "family_gains": {
+        "desc": 98,
+        "morgan2c": 3,
+        "morgan3c": 2,
+        "maccs": 1,
+        "atompair_c": 39,
+        "toptorsion_c": 3,
+        "avalon": 18
+      },
+      "aux_gain_share_pct": 11.229946524064172,
+      "top_aux_gains": [
+        [
+          "aux_val_eps",
+          12
+        ],
+        [
+          "aux_val_egb",
+          5
+        ],
+        [
+          "aux_val_egc",
+          2
+        ],
+        [
+          "aux_val_ei",
+          0
+        ],
+        [
+          "aux_val_eea",
+          0
+        ],
+        [
+          "aux_mask_eea",
+          0
+        ]
+      ],
+      "aux_coverage_train_pct": 98.68995633187772,
+      "aux_coverage_test_pct": 98.69281045751634
+    },
+    "tg": {
+      "n_train": 4139,
+      "n_test": 2763,
+      "oof_r2": 0.9056757002221022,
+      "fold_r2s": [
+        0.9235878209002465,
+        0.9113140135517739,
+        0.8954742300408337,
+        0.9075615671831946,
+        0.890343936817703
+      ],
+      "best_iters": [
+        862,
+        768,
+        1172,
+        638,
+        1518
+      ],
+      "refit_iters": 948,
+      "family_gains": {
+        "desc": 378382924,
+        "morgan2c": 43820939,
+        "morgan3c": 38895657,
+        "maccs": 28858079,
+        "atompair_c": 164151375,
+        "toptorsion_c": 12813743,
+        "avalon": 57988475
+      },
+      "aux_gain_share_pct": 0.08678505073737708,
+      "top_aux_gains": [
+        [
+          "aux_val_egc",
+          411609
+        ],
+        [
+          "aux_mask_egc",
+          168203
+        ],
+        [
+          "aux_val_egb",
+          46148
+        ],
+        [
+          "aux_val_eps",
+          2610
+        ],
+        [
+          "aux_mask_egb",
+          599
+        ],
+        [
+          "aux_mask_eps",
+          490
+        ]
+      ],
+      "aux_coverage_train_pct": 11.838608359507127,
+      "aux_coverage_test_pct": 12.196887441187116
+    }
+  },
+  "config": {
+    "n_splits": 5,
+    "seed": 42,
+    "morgan2_nbits": 2048,
+    "morgan3_nbits": 2048,
+    "atompair_nbits": 2048,
+    "toptorsion_nbits": 2048,
+    "avalon_nbits": 512,
+    "n_estimators": 4000,
+    "early_stop": 200,
+    "refit_multiplier": 1.1,
+    "lgb_params": {
+      "objective": "regression",
+      "metric": "rmse",
+      "learning_rate": 0.03,
+      "num_leaves": 63,
+      "min_child_samples": 10,
+      "feature_fraction": 0.5,
+      "bagging_fraction": 0.85,
+      "bagging_freq": 1,
+      "reg_lambda": 1.0,
+      "verbosity": -1,
+      "n_jobs": -1,
+      "seed": 42
+    },
+    "smiles_families": {
+      "desc": 207,
+      "morgan2c": 2048,
+      "morgan3c": 2048,
+      "maccs": 167,
+      "atompair_c": 2048,
+      "toptorsion_c": 2048,
+      "avalon": 512
+    },
+    "n_smiles_features": 9078,
+    "n_aux_features": 14,
+    "n_features_total": 9092,
+    "cv_mode": "aux-augmented"
+  },
+  "elapsed_seconds": 741.5
+}

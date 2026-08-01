@@ -1,0 +1,134 @@
+18:58:16  INFO   logging to /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_full_fp_lgbm/run.log
+18:58:16  INFO   === exp_full_fp_lgbm ===
+18:58:16  INFO   CONFIG: n_splits=5 seed=42 morgan2=2048 morgan3=2048 atompair=2048 toptorsion=2048 avalon=512 n_estimators=4000 early_stop=200
+18:58:16  INFO   CV mode: aux-augmented (aux lookup from full train, target slot always masked)
+18:58:16  INFO   LGB_PARAMS = {'objective': 'regression', 'metric': 'rmse', 'learning_rate': 0.03, 'num_leaves': 63, 'min_child_samples': 10, 'feature_fraction': 0.5, 'bagging_fraction': 0.85, 'bagging_freq': 1, 'reg_lambda': 1.0, 'verbosity': -1, 'n_jobs': -1, 'seed': 42}
+18:58:16  INFO   loading train.csv / test.csv
+18:58:16  INFO   train raw: (7409, 3)   test raw: (4940, 3)
+18:58:16  INFO   canonicalizing 10605 unique raw SMILES
+18:58:20  INFO   collapsing 4 duplicate (canon, target_type) rows in train by mean
+18:58:20  INFO   train after dedup: (7405, 4)
+18:58:20  INFO   per-target train counts: {'tg': 4139, 'egc': 2028, 'egb': 337, 'eps': 229, 'nc': 229, 'ei': 222, 'eea': 221}
+18:58:20  INFO   per-target test  counts: {'tg': 2763, 'egc': 1352, 'egb': 224, 'eps': 153, 'nc': 153, 'ei': 148, 'eea': 147}
+19:00:25  INFO   desc: shape=(8990, 207)  dropped=10 const cols  time=124.9s
+19:00:28  INFO   morgan2c: shape=(8990, 2048)  time=2.7s
+19:00:31  INFO   morgan3c: shape=(8990, 2048)  time=2.8s
+19:01:00  INFO   maccs: shape=(8990, 167)  time=29.2s
+19:01:04  INFO   atompair_c: shape=(8990, 2048)  time=4.7s
+19:01:08  INFO   toptorsion_c: shape=(8990, 2048)  time=3.9s
+19:01:39  INFO   avalon: shape=(8990, 512)  time=30.5s
+19:01:39  INFO   SMILES feature matrix TOTAL: (8990, 9078)  size≈326.4MB
+19:01:39  INFO   cached features to feature_cache.pkl
+19:01:39  INFO   SMILES feature families: desc=207, morgan2c=2048, morgan3c=2048, maccs=167, atompair_c=2048, toptorsion_c=2048, avalon=512
+19:01:39  INFO   SMILES feature TOTAL columns: 9078
+19:01:39  INFO   building aux lookup over 5920 unique canonical SMILES in train
+19:01:41  INFO   aux lookup built.  aux features per row: 14
+19:01:41  INFO   ============================================================
+19:01:41  INFO   AUX COVERAGE BY TARGET (test rows)
+19:01:41  INFO   ============================================================
+19:01:41  INFO      eea: 144/147 (98.0%)
+19:01:41  INFO      egb: 198/224 (88.4%)
+19:01:41  INFO      egc: 503/1352 (37.2%)
+19:01:41  INFO       ei: 145/148 (98.0%)
+19:01:41  INFO      eps: 151/153 (98.7%)
+19:01:41  INFO       nc: 151/153 (98.7%)
+19:01:41  INFO       tg: 337/2763 (12.2%)
+19:01:41  INFO   [eea] train rows=221   test rows=147   y range=[0.3936, 5.1438]   std=1.1047
+19:01:41  INFO   [eea] X shape train=(221, 9092), test=(147, 9092)   (SMILES=9078 + aux=14)
+19:01:41  INFO   [eea] aux coverage — train 217/221 (98.2%);  test 144/147 (98.0%)
+19:01:42  INFO   [eea] fold 0: best_iter= 221   R²=0.8175   n_val=45
+19:01:55  INFO   [eea] fold 1: best_iter=3950   R²=0.9104   n_val=44
+19:01:58  INFO   [eea] fold 2: best_iter= 636   R²=0.9000   n_val=44
+19:01:59  INFO   [eea] fold 3: best_iter= 108   R²=0.8847   n_val=44
+19:02:04  INFO   [eea] fold 4: best_iter=1336   R²=0.8059   n_val=44
+19:02:04  INFO   [eea] OOF R² = 0.8708   (fold mean 0.8637)
+19:02:04  INFO   [eea] refitting on full train for 699 rounds
+19:02:07  INFO   [eea] gain by family (out of 4002):  desc=2323(58.0%)  morgan2c=242(6.0%)  morgan3c=72(1.8%)  maccs=107(2.7%)  atompair_c=815(20.4%)  toptorsion_c=15(0.4%)  avalon=324(8.1%)  aux=100(2.5%)
+19:02:07  INFO   [eea] top-6 aux: aux_val_ei=47, aux_val_egb=25, aux_val_eps=9, aux_val_egc=8, aux_val_nc=8, aux_mask_nc=0
+19:02:07  INFO   [egb] train rows=337   test rows=224   y range=[0.5068, 10.1137]   std=1.9757
+19:02:07  INFO   [egb] X shape train=(337, 9092), test=(224, 9092)   (SMILES=9078 + aux=14)
+19:02:07  INFO   [egb] aux coverage — train 298/337 (88.4%);  test 198/224 (88.4%)
+19:02:09  INFO   [egb] fold 0: best_iter= 246   R²=0.9415   n_val=68
+19:02:12  INFO   [egb] fold 1: best_iter= 260   R²=0.9455   n_val=68
+19:02:14  INFO   [egb] fold 2: best_iter= 197   R²=0.9235   n_val=67
+19:02:16  INFO   [egb] fold 3: best_iter= 236   R²=0.9082   n_val=67
+19:02:19  INFO   [egb] fold 4: best_iter= 509   R²=0.8137   n_val=67
+19:02:19  INFO   [egb] OOF R² = 0.9105   (fold mean 0.9065)
+19:02:19  INFO   [egb] refitting on full train for 270 rounds
+19:02:21  INFO   [egb] gain by family (out of 19149):  desc=12147(63.4%)  morgan2c=86(0.4%)  morgan3c=86(0.4%)  maccs=2466(12.9%)  atompair_c=2801(14.6%)  toptorsion_c=58(0.3%)  avalon=603(3.1%)  aux=900(4.7%)
+19:02:21  INFO   [egb] top-6 aux: aux_val_egc=728, aux_val_eps=76, aux_val_nc=62, aux_val_eea=20, aux_val_ei=6, aux_mask_eps=3
+19:02:21  INFO   [egc] train rows=2028   test rows=1352   y range=[0.0205, 9.8627]   std=1.5678
+19:02:21  INFO   [egc] X shape train=(2028, 9092), test=(1352, 9092)   (SMILES=9078 + aux=14)
+19:02:21  INFO   [egc] aux coverage — train 693/2028 (34.2%);  test 503/1352 (37.2%)
+19:02:35  INFO   [egc] fold 0: best_iter= 328   R²=0.9065   n_val=406
+19:02:48  INFO   [egc] fold 1: best_iter= 283   R²=0.9130   n_val=406
+19:04:25  INFO   [egc] fold 2: best_iter=3732   R²=0.8822   n_val=406
+19:04:52  INFO   [egc] fold 3: best_iter= 863   R²=0.8956   n_val=405
+19:05:21  INFO   [egc] fold 4: best_iter= 903   R²=0.9024   n_val=405
+19:05:21  INFO   [egc] OOF R² = 0.9000   (fold mean 0.9000)
+19:05:21  INFO   [egc] refitting on full train for 949 rounds
+19:05:48  INFO   [egc] gain by family (out of 73618):  desc=43377(58.9%)  morgan2c=9134(12.4%)  morgan3c=1558(2.1%)  maccs=3958(5.4%)  atompair_c=6064(8.2%)  toptorsion_c=751(1.0%)  avalon=8223(11.2%)  aux=550(0.7%)
+19:05:48  INFO   [egc] top-6 aux: aux_val_egb=382, aux_val_nc=98, aux_val_tg=22, aux_val_ei=14, aux_val_eps=13, aux_val_eea=10
+19:05:48  INFO   [ei] train rows=222   test rows=148   y range=[4.0261, 9.8385]   std=1.0447
+19:05:48  INFO   [ei] X shape train=(222, 9092), test=(148, 9092)   (SMILES=9078 + aux=14)
+19:05:48  INFO   [ei] aux coverage — train 217/222 (97.7%);  test 145/148 (98.0%)
+19:06:01  INFO   [ei] fold 0: best_iter=3946   R²=0.8301   n_val=45
+19:06:03  INFO   [ei] fold 1: best_iter= 252   R²=0.7984   n_val=45
+19:06:04  INFO   [ei] fold 2: best_iter= 246   R²=0.8205   n_val=44
+19:06:07  INFO   [ei] fold 3: best_iter= 593   R²=0.8268   n_val=44
+19:06:09  INFO   [ei] fold 4: best_iter= 324   R²=0.6337   n_val=44
+19:06:09  INFO   [ei] OOF R² = 0.7933   (fold mean 0.7819)
+19:06:09  INFO   [ei] refitting on full train for 356 rounds
+19:06:10  INFO   [ei] gain by family (out of 3615):  desc=3106(85.9%)  morgan2c=9(0.2%)  morgan3c=6(0.2%)  maccs=48(1.3%)  atompair_c=103(2.8%)  toptorsion_c=4(0.1%)  avalon=224(6.2%)  aux=113(3.1%)
+19:06:10  INFO   [ei] top-6 aux: aux_val_egc=27, aux_val_eps=27, aux_val_eea=26, aux_val_nc=16, aux_val_egb=13, aux_mask_eps=1
+19:06:10  INFO   [eps] train rows=229   test rows=153   y range=[2.6100, 9.0900]   std=1.0916
+19:06:10  INFO   [eps] X shape train=(229, 9092), test=(153, 9092)   (SMILES=9078 + aux=14)
+19:06:10  INFO   [eps] aux coverage — train 226/229 (98.7%);  test 151/153 (98.7%)
+19:06:12  INFO   [eps] fold 0: best_iter= 266   R²=0.8508   n_val=46
+19:06:13  INFO   [eps] fold 1: best_iter= 143   R²=0.8022   n_val=46
+19:06:16  INFO   [eps] fold 2: best_iter= 654   R²=0.7610   n_val=46
+19:06:17  INFO   [eps] fold 3: best_iter= 204   R²=0.7561   n_val=46
+19:06:23  INFO   [eps] fold 4: best_iter=1528   R²=0.7600   n_val=45
+19:06:23  INFO   [eps] OOF R² = 0.7854   (fold mean 0.7860)
+19:06:23  INFO   [eps] refitting on full train for 292 rounds
+19:06:24  INFO   [eps] gain by family (out of 4077):  desc=2505(61.4%)  morgan2c=164(4.0%)  morgan3c=103(2.5%)  maccs=84(2.1%)  atompair_c=168(4.1%)  toptorsion_c=34(0.8%)  avalon=291(7.1%)  aux=723(17.7%)
+19:06:24  INFO   [eps] top-6 aux: aux_val_nc=362, aux_val_egb=243, aux_val_egc=48, aux_val_eea=39, aux_val_ei=28, aux_mask_ei=0
+19:06:24  INFO   [nc] train rows=229   test rows=153   y range=[1.5596, 2.7581]   std=0.2349
+19:06:24  INFO   [nc] X shape train=(229, 9092), test=(153, 9092)   (SMILES=9078 + aux=14)
+19:06:24  INFO   [nc] aux coverage — train 226/229 (98.7%);  test 151/153 (98.7%)
+19:06:27  INFO   [nc] fold 0: best_iter= 421   R²=0.8831   n_val=46
+19:06:29  INFO   [nc] fold 1: best_iter= 436   R²=0.7933   n_val=46
+19:06:30  INFO   [nc] fold 2: best_iter=  99   R²=0.8026   n_val=46
+19:06:34  INFO   [nc] fold 3: best_iter=1059   R²=0.8880   n_val=46
+19:06:36  INFO   [nc] fold 4: best_iter= 473   R²=0.8405   n_val=45
+19:06:36  INFO   [nc] OOF R² = 0.8367   (fold mean 0.8415)
+19:06:36  INFO   [nc] refitting on full train for 479 rounds
+19:06:39  INFO   [nc] gain by family (out of 187):  desc=98(52.4%)  morgan2c=3(1.6%)  morgan3c=2(1.1%)  maccs=1(0.5%)  atompair_c=39(20.9%)  toptorsion_c=3(1.6%)  avalon=18(9.6%)  aux=21(11.2%)
+19:06:39  INFO   [nc] top-6 aux: aux_val_eps=12, aux_val_egb=5, aux_val_egc=2, aux_val_ei=0, aux_val_eea=0, aux_mask_eea=0
+19:06:39  INFO   [tg] train rows=4139   test rows=2763   y range=[-109.8200, 495.0000]   std=109.1038
+19:06:39  INFO   [tg] X shape train=(4139, 9092), test=(2763, 9092)   (SMILES=9078 + aux=14)
+19:06:39  INFO   [tg] aux coverage — train 490/4139 (11.8%);  test 337/2763 (12.2%)
+19:07:12  INFO   [tg] fold 0: best_iter= 862   R²=0.9236   n_val=828
+19:07:47  INFO   [tg] fold 1: best_iter= 768   R²=0.9113   n_val=828
+19:08:34  INFO   [tg] fold 2: best_iter=1172   R²=0.8955   n_val=828
+19:09:04  INFO   [tg] fold 3: best_iter= 638   R²=0.9076   n_val=828
+19:10:03  INFO   [tg] fold 4: best_iter=1518   R²=0.8903   n_val=827
+19:10:03  INFO   [tg] OOF R² = 0.9057   (fold mean 0.9057)
+19:10:03  INFO   [tg] refitting on full train for 948 rounds
+19:10:38  INFO   [tg] gain by family (out of 725540856):  desc=378382924(52.2%)  morgan2c=43820939(6.0%)  morgan3c=38895657(5.4%)  maccs=28858079(4.0%)  atompair_c=164151375(22.6%)  toptorsion_c=12813743(1.8%)  avalon=57988475(8.0%)  aux=629661(0.1%)
+19:10:38  INFO   [tg] top-6 aux: aux_val_egc=411609, aux_mask_egc=168203, aux_val_egb=46148, aux_val_eps=2610, aux_mask_egb=599, aux_mask_eps=490
+19:10:38  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_full_fp_lgbm/oof.csv  rows=7405
+19:10:38  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_full_fp_lgbm/submission.csv  rows=4940
+19:10:38  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_full_fp_lgbm/cv_summary.json
+19:10:38  INFO   ============================================================
+19:10:38  INFO   PER-TARGET OOF R²  (vs matrix_completion reference)
+19:10:38  INFO   ============================================================
+19:10:38  INFO      eea   n=  221   R²=0.8708   (matcomp 0.8543, Δ=+0.0165)
+19:10:38  INFO      egb   n=  337   R²=0.9105   (matcomp 0.9050, Δ=+0.0055)
+19:10:38  INFO      egc   n= 2028   R²=0.9000   (matcomp 0.8966, Δ=+0.0034)
+19:10:38  INFO       ei   n=  222   R²=0.7933   (matcomp 0.7944, Δ=-0.0011)
+19:10:38  INFO      eps   n=  229   R²=0.7854   (matcomp 0.7931, Δ=-0.0077)
+19:10:38  INFO       nc   n=  229   R²=0.8367   (matcomp 0.8228, Δ=+0.0139)
+19:10:38  INFO       tg   n= 4139   R²=0.9057   (matcomp 0.9026, Δ=+0.0031)
+19:10:38  INFO     MEAN R² = 0.8575   (matcomp mean 0.8527, Δ=+0.0048)
+19:10:38  INFO   wall time: 741.5s
