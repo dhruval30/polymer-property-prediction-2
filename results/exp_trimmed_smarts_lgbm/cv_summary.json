@@ -1,0 +1,667 @@
+{
+  "exp_name": "exp_trimmed_smarts_lgbm",
+  "mean_r2": 0.8610193259523603,
+  "per_target": {
+    "eea": {
+      "n_train": 221,
+      "n_test": 147,
+      "oof_r2": 0.8737960395353127,
+      "fold_r2s": [
+        0.8283129763724157,
+        0.9200765201281575,
+        0.8987625066213785,
+        0.8830492458013802,
+        0.8042498820311892
+      ],
+      "best_iters": [
+        259,
+        806,
+        517,
+        144,
+        582
+      ],
+      "refit_iters": 568,
+      "family_gains": {
+        "desc": 2243,
+        "morgan2c": 303,
+        "maccs": 164,
+        "atompair_c": 870,
+        "avalon": 317,
+        "smarts": 2,
+        "backbone": 0
+      },
+      "aux_gain_share_pct": 2.4256064016004,
+      "top_smarts_gains": [
+        [
+          "vinyl_polymer",
+          2
+        ],
+        [
+          "ether",
+          0
+        ],
+        [
+          "ester",
+          0
+        ],
+        [
+          "amide",
+          0
+        ],
+        [
+          "urea",
+          0
+        ],
+        [
+          "carbonate",
+          0
+        ]
+      ],
+      "backbone_gain": 0,
+      "top_aux_gains": [
+        [
+          "aux_val_egb",
+          37
+        ],
+        [
+          "aux_val_ei",
+          31
+        ],
+        [
+          "aux_val_eps",
+          11
+        ],
+        [
+          "aux_val_nc",
+          8
+        ],
+        [
+          "aux_val_egc",
+          8
+        ],
+        [
+          "aux_mask_nc",
+          0
+        ]
+      ],
+      "aux_coverage_train_pct": 98.19004524886877,
+      "aux_coverage_test_pct": 97.95918367346938
+    },
+    "egb": {
+      "n_train": 337,
+      "n_test": 224,
+      "oof_r2": 0.9088176150044689,
+      "fold_r2s": [
+        0.9347622976650308,
+        0.9421534835653987,
+        0.9249383865889014,
+        0.9107268707919955,
+        0.8124044844869687
+      ],
+      "best_iters": [
+        200,
+        399,
+        3992,
+        288,
+        352
+      ],
+      "refit_iters": 387,
+      "family_gains": {
+        "desc": 13031,
+        "morgan2c": 115,
+        "maccs": 1606,
+        "atompair_c": 2814,
+        "avalon": 528,
+        "smarts": 66,
+        "backbone": 13
+      },
+      "aux_gain_share_pct": 5.0814706496762065,
+      "top_smarts_gains": [
+        [
+          "vinyl_polymer",
+          65
+        ],
+        [
+          "ether",
+          0
+        ],
+        [
+          "ester",
+          0
+        ],
+        [
+          "amide",
+          0
+        ],
+        [
+          "urea",
+          0
+        ],
+        [
+          "carbonate",
+          0
+        ]
+      ],
+      "backbone_gain": 13,
+      "top_aux_gains": [
+        [
+          "aux_val_egc",
+          728
+        ],
+        [
+          "aux_val_eps",
+          116
+        ],
+        [
+          "aux_val_nc",
+          69
+        ],
+        [
+          "aux_val_eea",
+          43
+        ],
+        [
+          "aux_val_ei",
+          6
+        ],
+        [
+          "aux_mask_eea",
+          4
+        ]
+      ],
+      "aux_coverage_train_pct": 88.4272997032641,
+      "aux_coverage_test_pct": 88.39285714285714
+    },
+    "egc": {
+      "n_train": 2028,
+      "n_test": 1352,
+      "oof_r2": 0.9024907535238986,
+      "fold_r2s": [
+        0.9086622650152602,
+        0.9145352996593594,
+        0.8883196918150303,
+        0.8948450328556875,
+        0.9054613332688872
+      ],
+      "best_iters": [
+        336,
+        262,
+        3988,
+        315,
+        824
+      ],
+      "refit_iters": 369,
+      "family_gains": {
+        "desc": 43625,
+        "morgan2c": 7390,
+        "maccs": 4208,
+        "atompair_c": 7435,
+        "avalon": 8589,
+        "smarts": 1445,
+        "backbone": 202
+      },
+      "aux_gain_share_pct": 0.7771985463256612,
+      "top_smarts_gains": [
+        [
+          "aromatic_C",
+          724
+        ],
+        [
+          "vinyl_polymer",
+          712
+        ],
+        [
+          "ether",
+          2
+        ],
+        [
+          "chlorine",
+          1
+        ],
+        [
+          "aromatic_ring",
+          1
+        ],
+        [
+          "ester",
+          1
+        ]
+      ],
+      "backbone_gain": 202,
+      "top_aux_gains": [
+        [
+          "aux_val_egb",
+          391
+        ],
+        [
+          "aux_val_nc",
+          99
+        ],
+        [
+          "aux_val_eps",
+          30
+        ],
+        [
+          "aux_val_tg",
+          18
+        ],
+        [
+          "aux_mask_nc",
+          17
+        ],
+        [
+          "aux_val_eea",
+          7
+        ]
+      ],
+      "aux_coverage_train_pct": 34.171597633136095,
+      "aux_coverage_test_pct": 37.20414201183432
+    },
+    "ei": {
+      "n_train": 222,
+      "n_test": 148,
+      "oof_r2": 0.7925511988759129,
+      "fold_r2s": [
+        0.8320135077502295,
+        0.8109308669758067,
+        0.8084633413202262,
+        0.8324004570436563,
+        0.6116921131877906
+      ],
+      "best_iters": [
+        3134,
+        296,
+        234,
+        602,
+        247
+      ],
+      "refit_iters": 325,
+      "family_gains": {
+        "desc": 3093,
+        "morgan2c": 14,
+        "maccs": 31,
+        "atompair_c": 146,
+        "avalon": 185,
+        "smarts": 20,
+        "backbone": 0
+      },
+      "aux_gain_share_pct": 3.6403750689464975,
+      "top_smarts_gains": [
+        [
+          "ester",
+          20
+        ],
+        [
+          "vinyl_polymer",
+          0
+        ],
+        [
+          "amide",
+          0
+        ],
+        [
+          "urea",
+          0
+        ],
+        [
+          "carbonate",
+          0
+        ],
+        [
+          "urethane",
+          0
+        ]
+      ],
+      "backbone_gain": 0,
+      "top_aux_gains": [
+        [
+          "aux_val_egc",
+          45
+        ],
+        [
+          "aux_val_eea",
+          24
+        ],
+        [
+          "aux_val_egb",
+          23
+        ],
+        [
+          "aux_val_eps",
+          20
+        ],
+        [
+          "aux_val_nc",
+          15
+        ],
+        [
+          "aux_mask_eps",
+          2
+        ]
+      ],
+      "aux_coverage_train_pct": 97.74774774774775,
+      "aux_coverage_test_pct": 97.97297297297297
+    },
+    "eps": {
+      "n_train": 229,
+      "n_test": 153,
+      "oof_r2": 0.8052150652733078,
+      "fold_r2s": [
+        0.8478309312587127,
+        0.832202253684687,
+        0.7959253238576827,
+        0.7938816436376529,
+        0.757728087533992
+      ],
+      "best_iters": [
+        157,
+        102,
+        566,
+        264,
+        911
+      ],
+      "refit_iters": 290,
+      "family_gains": {
+        "desc": 2128,
+        "morgan2c": 134,
+        "maccs": 114,
+        "atompair_c": 384,
+        "avalon": 241,
+        "smarts": 363,
+        "backbone": 0
+      },
+      "aux_gain_share_pct": 17.21170395869191,
+      "top_smarts_gains": [
+        [
+          "vinyl_polymer",
+          363
+        ],
+        [
+          "ester",
+          0
+        ],
+        [
+          "amide",
+          0
+        ],
+        [
+          "urea",
+          0
+        ],
+        [
+          "carbonate",
+          0
+        ],
+        [
+          "urethane",
+          0
+        ]
+      ],
+      "backbone_gain": 0,
+      "top_aux_gains": [
+        [
+          "aux_val_nc",
+          383
+        ],
+        [
+          "aux_val_egb",
+          203
+        ],
+        [
+          "aux_val_egc",
+          51
+        ],
+        [
+          "aux_val_eea",
+          24
+        ],
+        [
+          "aux_val_ei",
+          24
+        ],
+        [
+          "aux_mask_ei",
+          10
+        ]
+      ],
+      "aux_coverage_train_pct": 98.68995633187772,
+      "aux_coverage_test_pct": 98.69281045751634
+    },
+    "nc": {
+      "n_train": 229,
+      "n_test": 153,
+      "oof_r2": 0.8382960756953666,
+      "fold_r2s": [
+        0.906008510724785,
+        0.7789113252697342,
+        0.8155726371214223,
+        0.8793179514001819,
+        0.8457929537937736
+      ],
+      "best_iters": [
+        391,
+        423,
+        82,
+        1360,
+        320
+      ],
+      "refit_iters": 430,
+      "family_gains": {
+        "desc": 72,
+        "morgan2c": 2,
+        "maccs": 2,
+        "atompair_c": 49,
+        "avalon": 22,
+        "smarts": 11,
+        "backbone": 0
+      },
+      "aux_gain_share_pct": 13.368983957219251,
+      "top_smarts_gains": [
+        [
+          "vinyl_polymer",
+          11
+        ],
+        [
+          "ether",
+          0
+        ],
+        [
+          "ester",
+          0
+        ],
+        [
+          "amide",
+          0
+        ],
+        [
+          "urea",
+          0
+        ],
+        [
+          "carbonate",
+          0
+        ]
+      ],
+      "backbone_gain": 0,
+      "top_aux_gains": [
+        [
+          "aux_val_eps",
+          11
+        ],
+        [
+          "aux_val_egb",
+          10
+        ],
+        [
+          "aux_val_egc",
+          3
+        ],
+        [
+          "aux_val_ei",
+          0
+        ],
+        [
+          "aux_val_eea",
+          0
+        ],
+        [
+          "aux_mask_eea",
+          0
+        ]
+      ],
+      "aux_coverage_train_pct": 98.68995633187772,
+      "aux_coverage_test_pct": 98.69281045751634
+    },
+    "tg": {
+      "n_train": 4139,
+      "n_test": 2763,
+      "oof_r2": 0.9059685337582553,
+      "fold_r2s": [
+        0.9231922216467053,
+        0.9079497460412481,
+        0.8991260189696362,
+        0.9083730907614096,
+        0.8909750256897886
+      ],
+      "best_iters": [
+        903,
+        1212,
+        916,
+        819,
+        2013
+      ],
+      "refit_iters": 1007,
+      "family_gains": {
+        "desc": 354599170,
+        "morgan2c": 52733494,
+        "maccs": 44590929,
+        "atompair_c": 208566287,
+        "avalon": 63483095,
+        "smarts": 484556,
+        "backbone": 790876
+      },
+      "aux_gain_share_pct": 0.08892910706910005,
+      "top_smarts_gains": [
+        [
+          "ester",
+          323859
+        ],
+        [
+          "amide",
+          124683
+        ],
+        [
+          "silicon",
+          12010
+        ],
+        [
+          "vinyl_polymer",
+          9136
+        ],
+        [
+          "polystyrene_like",
+          6102
+        ],
+        [
+          "urethane",
+          2655
+        ]
+      ],
+      "backbone_gain": 790876,
+      "top_aux_gains": [
+        [
+          "aux_val_egc",
+          604833
+        ],
+        [
+          "aux_val_egb",
+          31886
+        ],
+        [
+          "aux_mask_egc",
+          6073
+        ],
+        [
+          "aux_val_eps",
+          1898
+        ],
+        [
+          "aux_mask_eps",
+          840
+        ],
+        [
+          "aux_val_eea",
+          0
+        ]
+      ],
+      "aux_coverage_train_pct": 11.838608359507127,
+      "aux_coverage_test_pct": 12.196887441187116
+    }
+  },
+  "config": {
+    "n_splits": 5,
+    "seed": 42,
+    "morgan2_nbits": 2048,
+    "atompair_nbits": 2048,
+    "avalon_nbits": 512,
+    "n_smarts_flags": 25,
+    "smarts_flag_names": [
+      "ester",
+      "amide",
+      "urea",
+      "carbonate",
+      "urethane",
+      "imide",
+      "ether",
+      "aromatic_C",
+      "aromatic_ring",
+      "thiophene",
+      "furan",
+      "pyrrole",
+      "pyridine",
+      "siloxane",
+      "silicon",
+      "fluorine",
+      "chlorine",
+      "sulfone",
+      "sulfide",
+      "nitrile",
+      "phosphate",
+      "boron",
+      "CH2_chain",
+      "vinyl_polymer",
+      "polystyrene_like"
+    ],
+    "n_estimators": 4000,
+    "early_stop": 200,
+    "refit_multiplier": 1.1,
+    "lgb_params": {
+      "objective": "regression",
+      "metric": "rmse",
+      "learning_rate": 0.03,
+      "num_leaves": 63,
+      "min_child_samples": 10,
+      "feature_fraction": 0.5,
+      "bagging_fraction": 0.85,
+      "bagging_freq": 1,
+      "reg_lambda": 1.0,
+      "verbosity": -1,
+      "n_jobs": -1,
+      "seed": 42
+    },
+    "smiles_families": {
+      "desc": 207,
+      "morgan2c": 2048,
+      "maccs": 167,
+      "atompair_c": 2048,
+      "avalon": 512,
+      "smarts": 25,
+      "backbone": 1
+    },
+    "n_smiles_features": 5008,
+    "n_aux_features": 14,
+    "n_features_total": 5022,
+    "cv_mode": "aux-augmented"
+  },
+  "elapsed_seconds": 739.6
+}

@@ -1,0 +1,148 @@
+20:04:57  INFO   logging to /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_trimmed_smarts_lgbm/run.log
+20:04:57  INFO   === exp_trimmed_smarts_lgbm ===
+20:04:57  INFO   CONFIG: n_splits=5 seed=42 morgan2=2048 atompair=2048 avalon=512  smarts=25 + backbone_atom_count(1)  n_estimators=4000 early_stop=200
+20:04:57  INFO   CV mode: aux-augmented (aux lookup from full train, target slot always masked)
+20:04:57  INFO   LGB_PARAMS = {'objective': 'regression', 'metric': 'rmse', 'learning_rate': 0.03, 'num_leaves': 63, 'min_child_samples': 10, 'feature_fraction': 0.5, 'bagging_fraction': 0.85, 'bagging_freq': 1, 'reg_lambda': 1.0, 'verbosity': -1, 'n_jobs': -1, 'seed': 42}
+20:04:57  INFO   loading train.csv / test.csv
+20:04:57  INFO   train raw: (7409, 3)   test raw: (4940, 3)
+20:04:57  INFO   canonicalizing 10605 unique raw SMILES
+20:05:00  INFO   collapsing 4 duplicate (canon, target_type) rows in train by mean
+20:05:00  INFO   train after dedup: (7405, 4)
+20:05:00  INFO   per-target train counts: {'tg': 4139, 'egc': 2028, 'egb': 337, 'eps': 229, 'nc': 229, 'ei': 222, 'eea': 221}
+20:05:00  INFO   per-target test  counts: {'tg': 2763, 'egc': 1352, 'egb': 224, 'eps': 153, 'nc': 153, 'ei': 148, 'eea': 147}
+20:07:10  INFO   desc: shape=(8990, 207)  dropped=10 const cols  time=129.9s
+20:07:13  INFO   morgan2c: shape=(8990, 2048)  time=2.7s
+20:07:42  INFO   maccs: shape=(8990, 167)  time=29.3s
+20:07:47  INFO   atompair_c: shape=(8990, 2048)  time=4.8s
+20:08:18  INFO   avalon: shape=(8990, 512)  time=30.9s
+20:08:21  INFO   smarts: shape=(8990, 25)  time=3.0s
+20:08:23  INFO   backbone: shape=(8990, 1)  time=2.6s  n_nan=0
+20:08:24  INFO   SMILES feature matrix TOTAL: (8990, 5008)  size≈180.1MB
+20:08:24  INFO   cached features to feature_cache.pkl
+20:08:24  INFO   SMILES feature families: desc=207, morgan2c=2048, maccs=167, atompair_c=2048, avalon=512, smarts=25, backbone=1
+20:08:24  INFO   SMILES feature TOTAL columns: 5008
+20:08:24  INFO   building aux lookup over 5920 unique canonical SMILES in train
+20:08:25  INFO   aux lookup built.  aux features per row: 14
+20:08:25  INFO   ============================================================
+20:08:25  INFO   AUX COVERAGE BY TARGET (test rows)
+20:08:25  INFO   ============================================================
+20:08:25  INFO      eea: 144/147 (98.0%)
+20:08:25  INFO      egb: 198/224 (88.4%)
+20:08:25  INFO      egc: 503/1352 (37.2%)
+20:08:25  INFO       ei: 145/148 (98.0%)
+20:08:25  INFO      eps: 151/153 (98.7%)
+20:08:25  INFO       nc: 151/153 (98.7%)
+20:08:25  INFO       tg: 337/2763 (12.2%)
+20:08:25  INFO   [eea] train rows=221   test rows=147   y range=[0.3936, 5.1438]   std=1.1047
+20:08:25  INFO   [eea] X shape train=(221, 5022), test=(147, 5022)   (SMILES=5008 + aux=14)
+20:08:25  INFO   [eea] aux coverage — train 217/221 (98.2%);  test 144/147 (98.0%)
+20:08:27  INFO   [eea] fold 0: best_iter= 259   R²=0.8283   n_val=45
+20:08:30  INFO   [eea] fold 1: best_iter= 806   R²=0.9201   n_val=44
+20:08:33  INFO   [eea] fold 2: best_iter= 517   R²=0.8988   n_val=44
+20:08:34  INFO   [eea] fold 3: best_iter= 144   R²=0.8830   n_val=44
+20:08:37  INFO   [eea] fold 4: best_iter= 582   R²=0.8042   n_val=44
+20:08:37  INFO   [eea] OOF R² = 0.8738   (fold mean 0.8669)
+20:08:37  INFO   [eea] refitting on full train for 568 rounds
+20:08:39  INFO   [eea] gain by family (out of 3999):  desc=2243(56.1%)  morgan2c=303(7.6%)  maccs=164(4.1%)  atompair_c=870(21.8%)  avalon=317(7.9%)  smarts=2(0.1%)  backbone=0(0.0%)  aux=97(2.4%)
+20:08:39  INFO   [eea] top-6 SMARTS flags: vinyl_polymer=2, ether=0, ester=0, amide=0, urea=0, carbonate=0
+20:08:39  INFO   [eea] backbone-length feature gain = 0 (0.00% of total)
+20:08:39  INFO   [eea] top-6 aux: aux_val_egb=37, aux_val_ei=31, aux_val_eps=11, aux_val_nc=8, aux_val_egc=8, aux_mask_nc=0
+20:08:39  INFO   [egb] train rows=337   test rows=224   y range=[0.5068, 10.1137]   std=1.9757
+20:08:39  INFO   [egb] X shape train=(337, 5022), test=(224, 5022)   (SMILES=5008 + aux=14)
+20:08:39  INFO   [egb] aux coverage — train 298/337 (88.4%);  test 198/224 (88.4%)
+20:08:41  INFO   [egb] fold 0: best_iter= 200   R²=0.9348   n_val=68
+20:08:44  INFO   [egb] fold 1: best_iter= 399   R²=0.9422   n_val=68
+20:09:04  INFO   [egb] fold 2: best_iter=3992   R²=0.9249   n_val=67
+20:09:07  INFO   [egb] fold 3: best_iter= 288   R²=0.9107   n_val=67
+20:09:09  INFO   [egb] fold 4: best_iter= 352   R²=0.8124   n_val=67
+20:09:09  INFO   [egb] OOF R² = 0.9088   (fold mean 0.9050)
+20:09:09  INFO   [egb] refitting on full train for 387 rounds
+20:09:12  INFO   [egb] gain by family (out of 19148):  desc=13031(68.1%)  morgan2c=115(0.6%)  maccs=1606(8.4%)  atompair_c=2814(14.7%)  avalon=528(2.8%)  smarts=66(0.3%)  backbone=13(0.1%)  aux=973(5.1%)
+20:09:12  INFO   [egb] top-6 SMARTS flags: vinyl_polymer=65, ether=0, ester=0, amide=0, urea=0, carbonate=0
+20:09:12  INFO   [egb] backbone-length feature gain = 13 (0.07% of total)
+20:09:12  INFO   [egb] top-6 aux: aux_val_egc=728, aux_val_eps=116, aux_val_nc=69, aux_val_eea=43, aux_val_ei=6, aux_mask_eea=4
+20:09:12  INFO   [egc] train rows=2028   test rows=1352   y range=[0.0205, 9.8627]   std=1.5678
+20:09:12  INFO   [egc] X shape train=(2028, 5022), test=(1352, 5022)   (SMILES=5008 + aux=14)
+20:09:12  INFO   [egc] aux coverage — train 693/2028 (34.2%);  test 503/1352 (37.2%)
+20:09:26  INFO   [egc] fold 0: best_iter= 336   R²=0.9087   n_val=406
+20:09:37  INFO   [egc] fold 1: best_iter= 262   R²=0.9145   n_val=406
+20:11:15  INFO   [egc] fold 2: best_iter=3988   R²=0.8883   n_val=406
+20:11:29  INFO   [egc] fold 3: best_iter= 315   R²=0.8948   n_val=405
+20:12:00  INFO   [egc] fold 4: best_iter= 824   R²=0.9055   n_val=405
+20:12:00  INFO   [egc] OOF R² = 0.9025   (fold mean 0.9024)
+20:12:00  INFO   [egc] refitting on full train for 369 rounds
+20:12:13  INFO   [egc] gain by family (out of 73469):  desc=43625(59.4%)  morgan2c=7390(10.1%)  maccs=4208(5.7%)  atompair_c=7435(10.1%)  avalon=8589(11.7%)  smarts=1445(2.0%)  backbone=202(0.3%)  aux=571(0.8%)
+20:12:13  INFO   [egc] top-6 SMARTS flags: aromatic_C=724, vinyl_polymer=712, ether=2, chlorine=1, aromatic_ring=1, ester=1
+20:12:13  INFO   [egc] backbone-length feature gain = 202 (0.27% of total)
+20:12:13  INFO   [egc] top-6 aux: aux_val_egb=391, aux_val_nc=99, aux_val_eps=30, aux_val_tg=18, aux_mask_nc=17, aux_val_eea=7
+20:12:14  INFO   [ei] train rows=222   test rows=148   y range=[4.0261, 9.8385]   std=1.0447
+20:12:14  INFO   [ei] X shape train=(222, 5022), test=(148, 5022)   (SMILES=5008 + aux=14)
+20:12:14  INFO   [ei] aux coverage — train 217/222 (97.7%);  test 145/148 (98.0%)
+20:12:29  INFO   [ei] fold 0: best_iter=3134   R²=0.8320   n_val=45
+20:12:32  INFO   [ei] fold 1: best_iter= 296   R²=0.8109   n_val=45
+20:12:33  INFO   [ei] fold 2: best_iter= 234   R²=0.8085   n_val=44
+20:12:38  INFO   [ei] fold 3: best_iter= 602   R²=0.8324   n_val=44
+20:12:39  INFO   [ei] fold 4: best_iter= 247   R²=0.6117   n_val=44
+20:12:39  INFO   [ei] OOF R² = 0.7926   (fold mean 0.7791)
+20:12:39  INFO   [ei] refitting on full train for 325 rounds
+20:12:41  INFO   [ei] gain by family (out of 3626):  desc=3093(85.3%)  morgan2c=14(0.4%)  maccs=31(0.9%)  atompair_c=146(4.0%)  avalon=185(5.1%)  smarts=20(0.6%)  backbone=0(0.0%)  aux=132(3.6%)
+20:12:41  INFO   [ei] top-6 SMARTS flags: ester=20, vinyl_polymer=0, amide=0, urea=0, carbonate=0, urethane=0
+20:12:41  INFO   [ei] backbone-length feature gain = 0 (0.00% of total)
+20:12:41  INFO   [ei] top-6 aux: aux_val_egc=45, aux_val_eea=24, aux_val_egb=23, aux_val_eps=20, aux_val_nc=15, aux_mask_eps=2
+20:12:41  INFO   [eps] train rows=229   test rows=153   y range=[2.6100, 9.0900]   std=1.0916
+20:12:41  INFO   [eps] X shape train=(229, 5022), test=(153, 5022)   (SMILES=5008 + aux=14)
+20:12:41  INFO   [eps] aux coverage — train 226/229 (98.7%);  test 151/153 (98.7%)
+20:12:42  INFO   [eps] fold 0: best_iter= 157   R²=0.8478   n_val=46
+20:12:44  INFO   [eps] fold 1: best_iter= 102   R²=0.8322   n_val=46
+20:12:48  INFO   [eps] fold 2: best_iter= 566   R²=0.7959   n_val=46
+20:12:50  INFO   [eps] fold 3: best_iter= 264   R²=0.7939   n_val=46
+20:12:56  INFO   [eps] fold 4: best_iter= 911   R²=0.7577   n_val=45
+20:12:56  INFO   [eps] OOF R² = 0.8052   (fold mean 0.8055)
+20:12:56  INFO   [eps] refitting on full train for 290 rounds
+20:12:57  INFO   [eps] gain by family (out of 4067):  desc=2128(52.3%)  morgan2c=134(3.3%)  maccs=114(2.8%)  atompair_c=384(9.4%)  avalon=241(5.9%)  smarts=363(8.9%)  backbone=0(0.0%)  aux=700(17.2%)
+20:12:57  INFO   [eps] top-6 SMARTS flags: vinyl_polymer=363, ester=0, amide=0, urea=0, carbonate=0, urethane=0
+20:12:57  INFO   [eps] backbone-length feature gain = 0 (0.00% of total)
+20:12:57  INFO   [eps] top-6 aux: aux_val_nc=383, aux_val_egb=203, aux_val_egc=51, aux_val_eea=24, aux_val_ei=24, aux_mask_ei=10
+20:12:57  INFO   [nc] train rows=229   test rows=153   y range=[1.5596, 2.7581]   std=0.2349
+20:12:57  INFO   [nc] X shape train=(229, 5022), test=(153, 5022)   (SMILES=5008 + aux=14)
+20:12:57  INFO   [nc] aux coverage — train 226/229 (98.7%);  test 151/153 (98.7%)
+20:12:59  INFO   [nc] fold 0: best_iter= 391   R²=0.9060   n_val=46
+20:13:01  INFO   [nc] fold 1: best_iter= 423   R²=0.7789   n_val=46
+20:13:02  INFO   [nc] fold 2: best_iter=  82   R²=0.8156   n_val=46
+20:13:08  INFO   [nc] fold 3: best_iter=1360   R²=0.8793   n_val=46
+20:13:10  INFO   [nc] fold 4: best_iter= 320   R²=0.8458   n_val=45
+20:13:10  INFO   [nc] OOF R² = 0.8383   (fold mean 0.8451)
+20:13:10  INFO   [nc] refitting on full train for 430 rounds
+20:13:11  INFO   [nc] gain by family (out of 187):  desc=72(38.5%)  morgan2c=2(1.1%)  maccs=2(1.1%)  atompair_c=49(26.2%)  avalon=22(11.8%)  smarts=11(5.9%)  backbone=0(0.0%)  aux=25(13.4%)
+20:13:11  INFO   [nc] top-6 SMARTS flags: vinyl_polymer=11, ether=0, ester=0, amide=0, urea=0, carbonate=0
+20:13:11  INFO   [nc] backbone-length feature gain = 0 (0.00% of total)
+20:13:11  INFO   [nc] top-6 aux: aux_val_eps=11, aux_val_egb=10, aux_val_egc=3, aux_val_ei=0, aux_val_eea=0, aux_mask_eea=0
+20:13:11  INFO   [tg] train rows=4139   test rows=2763   y range=[-109.8200, 495.0000]   std=109.1038
+20:13:11  INFO   [tg] X shape train=(4139, 5022), test=(2763, 5022)   (SMILES=5008 + aux=14)
+20:13:11  INFO   [tg] aux coverage — train 490/4139 (11.8%);  test 337/2763 (12.2%)
+20:13:57  INFO   [tg] fold 0: best_iter= 903   R²=0.9232   n_val=828
+20:14:40  INFO   [tg] fold 1: best_iter=1212   R²=0.9079   n_val=828
+20:15:13  INFO   [tg] fold 2: best_iter= 916   R²=0.8991   n_val=828
+20:15:42  INFO   [tg] fold 3: best_iter= 819   R²=0.9084   n_val=828
+20:16:46  INFO   [tg] fold 4: best_iter=2013   R²=0.8910   n_val=827
+20:16:46  INFO   [tg] OOF R² = 0.9060   (fold mean 0.9059)
+20:16:46  INFO   [tg] refitting on full train for 1007 rounds
+20:17:16  INFO   [tg] gain by family (out of 725893941):  desc=354599170(48.8%)  morgan2c=52733494(7.3%)  maccs=44590929(6.1%)  atompair_c=208566287(28.7%)  avalon=63483095(8.7%)  smarts=484556(0.1%)  backbone=790876(0.1%)  aux=645531(0.1%)
+20:17:16  INFO   [tg] top-6 SMARTS flags: ester=323859, amide=124683, silicon=12010, vinyl_polymer=9136, polystyrene_like=6102, urethane=2655
+20:17:16  INFO   [tg] backbone-length feature gain = 790876 (0.11% of total)
+20:17:16  INFO   [tg] top-6 aux: aux_val_egc=604833, aux_val_egb=31886, aux_mask_egc=6073, aux_val_eps=1898, aux_mask_eps=840, aux_val_eea=0
+20:17:16  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_trimmed_smarts_lgbm/oof.csv  rows=7405
+20:17:16  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_trimmed_smarts_lgbm/submission.csv  rows=4940
+20:17:16  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_trimmed_smarts_lgbm/cv_summary.json
+20:17:16  INFO   ============================================================
+20:17:16  INFO   PER-TARGET OOF R²  (vs full_fp reference)
+20:17:16  INFO   ============================================================
+20:17:16  INFO      eea   n=  221   R²=0.8738   (full_fp 0.8708, Δ=+0.0030)
+20:17:16  INFO      egb   n=  337   R²=0.9088   (full_fp 0.9105, Δ=-0.0017)
+20:17:16  INFO      egc   n= 2028   R²=0.9025   (full_fp 0.9000, Δ=+0.0025)
+20:17:16  INFO       ei   n=  222   R²=0.7926   (full_fp 0.7933, Δ=-0.0007)
+20:17:16  INFO      eps   n=  229   R²=0.8052   (full_fp 0.7854, Δ=+0.0198)
+20:17:16  INFO       nc   n=  229   R²=0.8383   (full_fp 0.8367, Δ=+0.0016)
+20:17:16  INFO       tg   n= 4139   R²=0.9060   (full_fp 0.9057, Δ=+0.0003)
+20:17:16  INFO     MEAN R² = 0.8610   (full_fp mean 0.8575, Δ=+0.0035)
+20:17:16  INFO   wall time: 739.6s
