@@ -13,3 +13,5 @@ Digitized challenge context, rules, and analysis notes. All content here is deri
 
 | 06 | [eda_findings.md](06_eda_findings.md) | Per-target counts, distributions, SMILES stats, train/test overlap, duplicates, 5-pack matrix. |
 | 07 | [plan.md](07_plan.md) | Proposed pipeline — Track A (tg/egc SMILES→property), Track B (5-pack matrix completion), Chemprop multitask, PI1M SSL, score expectation. |
+| 08 | [eda_deep.md](08_eda_deep.md) | Deep EDA — chemistry per target, scaffolds, Tanimoto NN, 5-pack cross-target correlations, polymer class effects, PI1M distribution, CV viability, updated modeling implications + score expectations. |
+| 09 | [data_exploration.md](09_data_exploration.md) | Massive edition — 17 sections. Row-level test accounting, per-target dives, descriptor→target correlations, Morgan bit analysis, UMAP, dedup rungs, rare atoms/charges, signal-to-noise ceilings, PI1M target slicing, Ridge floor baseline, feature engineering catalog, data quality risk register, splitting scheme decision. |

@@ -18,6 +18,10 @@ results/
 *.npz
 submission*.csv
 
+# --- Derived EDA artifacts (regenerate from eda_scripts/) ---
+docs/figures/*.csv
+docs/figures/*.npz
+
 # --- Python ---
 __pycache__/
 *.py[cod]
@@ -27,6 +31,7 @@ __pycache__/
 .venv/
 venv/
 env/
+poly2-venv/
 .mypy_cache/
 .pytest_cache/
 .ruff_cache/
