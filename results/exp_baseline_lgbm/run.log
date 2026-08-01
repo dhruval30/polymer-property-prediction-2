@@ -1,0 +1,88 @@
+15:52:43  INFO   logging to /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_baseline_lgbm/run.log
+15:52:43  INFO   === exp_baseline_lgbm ===
+15:52:43  INFO   CONFIG: n_splits=5 seed=42 morgan_nbits=2048 n_estimators=4000 early_stop=200
+15:52:43  INFO   LGB_PARAMS = {'objective': 'regression', 'metric': 'rmse', 'learning_rate': 0.03, 'num_leaves': 63, 'min_child_samples': 10, 'feature_fraction': 0.5, 'bagging_fraction': 0.85, 'bagging_freq': 1, 'reg_lambda': 1.0, 'verbosity': -1, 'n_jobs': -1, 'seed': 42}
+15:52:43  INFO   loading train.csv / test.csv
+15:52:43  INFO   train raw: (7409, 3)   test raw: (4940, 3)
+15:52:43  INFO   canonicalizing 10605 unique raw SMILES
+15:52:47  INFO   collapsing 4 duplicate (canon, target_type) rows in train by mean
+15:52:47  INFO   train after dedup: (7405, 4)
+15:52:47  INFO   per-target train counts: {'tg': 4139, 'egc': 2028, 'egb': 337, 'eps': 229, 'nc': 229, 'ei': 222, 'eea': 221}
+15:52:47  INFO   per-target test  counts: {'tg': 2763, 'egc': 1352, 'egb': 224, 'eps': 153, 'nc': 153, 'ei': 148, 'eea': 147}
+15:54:56  INFO   desc: shape=(8990, 207)  dropped=10 const cols  time=129.0s
+15:54:58  INFO   morgan2c: shape=(8990, 2048)  time=2.8s
+15:55:28  INFO   maccs: shape=(8990, 167)  time=29.6s
+15:55:28  INFO   feature matrix total: (8990, 2422)  size≈87.1MB
+15:55:28  INFO   cached features to feature_cache.pkl
+15:55:28  INFO   feature families: desc=207, morgan2c=2048, maccs=167
+15:55:28  INFO   [eea] train rows=221   test rows=147   y range=[0.3936, 5.1438]   std=1.1047
+15:55:30  INFO   [eea] fold 0: best_iter= 468   R²=0.8044   n_val=45
+15:55:37  INFO   [eea] fold 1: best_iter=2478   R²=0.9100   n_val=44
+15:55:39  INFO   [eea] fold 2: best_iter= 626   R²=0.8776   n_val=44
+15:55:39  INFO   [eea] fold 3: best_iter= 129   R²=0.8756   n_val=44
+15:55:41  INFO   [eea] fold 4: best_iter= 542   R²=0.7883   n_val=44
+15:55:41  INFO   [eea] OOF R² = 0.8587   (fold mean 0.8512)
+15:55:41  INFO   [eea] refitting on full train for 596 rounds
+15:55:43  INFO   [egb] train rows=337   test rows=224   y range=[0.5068, 10.1137]   std=1.9757
+15:55:44  INFO   [egb] fold 0: best_iter= 184   R²=0.9148   n_val=68
+15:55:46  INFO   [egb] fold 1: best_iter= 259   R²=0.9389   n_val=68
+15:55:47  INFO   [egb] fold 2: best_iter= 193   R²=0.9012   n_val=67
+15:55:49  INFO   [egb] fold 3: best_iter= 281   R²=0.8912   n_val=67
+15:55:51  INFO   [egb] fold 4: best_iter= 291   R²=0.7880   n_val=67
+15:55:51  INFO   [egb] OOF R² = 0.8917   (fold mean 0.8868)
+15:55:51  INFO   [egb] refitting on full train for 284 rounds
+15:55:52  INFO   [egc] train rows=2028   test rows=1352   y range=[0.0205, 9.8627]   std=1.5678
+15:56:02  INFO   [egc] fold 0: best_iter= 402   R²=0.9015   n_val=406
+15:56:11  INFO   [egc] fold 1: best_iter= 400   R²=0.9071   n_val=406
+15:57:42  INFO   [egc] fold 2: best_iter=3979   R²=0.8809   n_val=406
+15:57:52  INFO   [egc] fold 3: best_iter= 286   R²=0.8871   n_val=405
+15:58:14  INFO   [egc] fold 4: best_iter= 809   R²=0.8963   n_val=405
+15:58:14  INFO   [egc] OOF R² = 0.8948   (fold mean 0.8946)
+15:58:14  INFO   [egc] refitting on full train for 442 rounds
+15:58:23  INFO   [ei] train rows=222   test rows=148   y range=[4.0261, 9.8385]   std=1.0447
+15:58:29  INFO   [ei] fold 0: best_iter=2471   R²=0.8386   n_val=45
+15:58:31  INFO   [ei] fold 1: best_iter= 228   R²=0.7937   n_val=45
+15:58:32  INFO   [ei] fold 2: best_iter= 227   R²=0.7655   n_val=44
+15:58:34  INFO   [ei] fold 3: best_iter= 200   R²=0.8121   n_val=44
+15:58:35  INFO   [ei] fold 4: best_iter=  94   R²=0.5781   n_val=44
+15:58:35  INFO   [ei] OOF R² = 0.7730   (fold mean 0.7576)
+15:58:35  INFO   [ei] refitting on full train for 249 rounds
+15:58:36  INFO   [eps] train rows=229   test rows=153   y range=[2.6100, 9.0900]   std=1.0916
+15:58:37  INFO   [eps] fold 0: best_iter= 244   R²=0.8239   n_val=46
+15:58:38  INFO   [eps] fold 1: best_iter= 156   R²=0.7729   n_val=46
+15:58:39  INFO   [eps] fold 2: best_iter= 446   R²=0.7135   n_val=46
+15:58:42  INFO   [eps] fold 3: best_iter=1032   R²=0.6545   n_val=46
+15:58:45  INFO   [eps] fold 4: best_iter= 588   R²=0.7218   n_val=45
+15:58:45  INFO   [eps] OOF R² = 0.7392   (fold mean 0.7373)
+15:58:45  INFO   [eps] refitting on full train for 490 rounds
+15:58:48  INFO   [nc] train rows=229   test rows=153   y range=[1.5596, 2.7581]   std=0.2349
+15:58:49  INFO   [nc] fold 0: best_iter= 391   R²=0.8279   n_val=46
+15:58:50  INFO   [nc] fold 1: best_iter= 229   R²=0.7630   n_val=46
+15:58:53  INFO   [nc] fold 2: best_iter= 746   R²=0.7683   n_val=46
+15:58:54  INFO   [nc] fold 3: best_iter= 188   R²=0.7948   n_val=46
+15:58:55  INFO   [nc] fold 4: best_iter= 243   R²=0.7372   n_val=45
+15:58:55  INFO   [nc] OOF R² = 0.7814   (fold mean 0.7782)
+15:58:55  INFO   [nc] refitting on full train for 267 rounds
+15:58:56  INFO   [tg] train rows=4139   test rows=2763   y range=[-109.8200, 495.0000]   std=109.1038
+15:59:35  INFO   [tg] fold 0: best_iter=1684   R²=0.9158   n_val=828
+15:59:54  INFO   [tg] fold 1: best_iter= 823   R²=0.9055   n_val=828
+16:00:32  INFO   [tg] fold 2: best_iter=1405   R²=0.8934   n_val=828
+16:00:59  INFO   [tg] fold 3: best_iter=1206   R²=0.9072   n_val=828
+16:01:35  INFO   [tg] fold 4: best_iter=1627   R²=0.8910   n_val=827
+16:01:35  INFO   [tg] OOF R² = 0.9026   (fold mean 0.9026)
+16:01:35  INFO   [tg] refitting on full train for 1545 rounds
+16:02:12  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_baseline_lgbm/oof.csv  rows=7405
+16:02:12  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_baseline_lgbm/submission.csv  rows=4940
+16:02:12  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_baseline_lgbm/cv_summary.json
+16:02:12  INFO   ============================================================
+16:02:12  INFO   PER-TARGET OOF R²
+16:02:12  INFO   ============================================================
+16:02:12  INFO      eea   n=  221   R²=0.8587
+16:02:12  INFO      egb   n=  337   R²=0.8917
+16:02:12  INFO      egc   n= 2028   R²=0.8948
+16:02:12  INFO       ei   n=  222   R²=0.7730
+16:02:12  INFO      eps   n=  229   R²=0.7392
+16:02:12  INFO       nc   n=  229   R²=0.7814
+16:02:12  INFO       tg   n= 4139   R²=0.9026
+16:02:12  INFO     MEAN R² = 0.8345
+16:02:12  INFO   wall time: 569.3s

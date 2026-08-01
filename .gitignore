@@ -2,9 +2,9 @@
 # Large auxiliary corpus — re-download from Kaggle when needed.
 ppp-round-2/PI1M.csv
 
-# --- Experiment outputs (never commit) ---
-results/
-!results/.gitkeep
+# --- Experiment outputs ---
+# results/ IS tracked (so we keep run.log, cv_summary.json, submission.csv, oof.csv).
+# Heavy artifacts are excluded by extension rules below.
 *.pkl
 *.pkl.gz
 *.joblib
@@ -16,7 +16,6 @@ results/
 *.feather
 *.npy
 *.npz
-submission*.csv
 
 # --- Derived EDA artifacts (regenerate from eda_scripts/) ---
 docs/figures/*.csv
@@ -59,3 +58,4 @@ kaggle.json
 
 # --- Logs ---
 *.log
+!results/**/run.log

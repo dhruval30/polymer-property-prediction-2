@@ -33,22 +33,23 @@ Context for Claude when working with Dhruval on this Kaggle competition.
 
 ```
 experiments/
-  exp_<descriptive_name>.py    # one script per experiment, self-contained
-  _utils.py                     # shared: paths, logging, target transforms, CV splits
+  exp_<descriptive_name>.py    # ONE self-contained standalone script per experiment
 results/
   exp_<descriptive_name>/
-    run.log                     # structured log from setup_logging
+    run.log                     # logs (file + stdout)
     oof.csv                     # OOF predictions
     submission.csv              # test predictions
-    cv_summary.json             # metrics + weights
+    cv_summary.json             # metrics
     checkpoint.pkl.gz           # for resumable long runs
 data/                            # symlinked or contains train.csv / test.csv
 ```
 
+- **No shared `_utils.py`.** Every experiment script is self-contained — all imports, constants, helpers, featurization, CV, training, and output live in the one file. Yes this means duplication across scripts. Yes that's the point: I can look at one file six months later and reproduce it without archaeology through utils commits. If a common recipe stabilizes, I'll copy-paste it into the next experiment, not import it.
 - Experiment names are descriptive (`exp_polymer_physics_stack.py`, not `exp1.py`).
-- Feature caching lives under `results/_feature_cache/` keyed by a content hash.
+- Feature caching lives under `results/_feature_cache/` keyed by a content hash — the caching code is inlined per script.
+- Every script uses `tqdm` for visible progress on any loop that takes more than a couple seconds (featurization, per-fold training, etc.).
+- Every experiment writes `run.log` (via python `logging` to both file + stdout) and a `cv_summary.json` I can grep later.
 - Long runs must checkpoint per phase so I can Ctrl+C and resume.
-- Every experiment ends with a `cv_summary.json` I can grep later.
 
 ## Commit style
 
