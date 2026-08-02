@@ -1,0 +1,139 @@
+13:20:40  INFO   logging to /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_maxwell_prior_catboost/run.log
+13:20:40  INFO   === exp_maxwell_prior_catboost ===
+13:20:40  INFO   CONFIG: n_splits=5 seed=42 morgan2=2048 morgan3=2048 atompair=2048 toptorsion=2048 avalon=512 early_stop=200
+13:20:40  INFO   CV mode: aux-augmented (aux lookup from full train, target slot always masked)
+13:20:40  INFO   Post-fit: Maxwell relation EPS↔Nc physics prior blend
+13:20:40  INFO   CAT_PARAMS = {'iterations': 4000, 'depth': 8, 'learning_rate': 0.03, 'l2_leaf_reg': 3.0, 'rsm': 0.5, 'bootstrap_type': 'Bernoulli', 'subsample': 0.85, 'random_seed': 42, 'thread_count': -1, 'verbose': False, 'allow_writing_files': False, 'nan_mode': 'Min', 'loss_function': 'RMSE', 'eval_metric': 'RMSE'}
+13:20:40  INFO   loading train.csv / test.csv
+13:20:40  INFO   train raw: (7409, 3)   test raw: (4940, 3)
+13:20:40  INFO   canonicalizing 10605 unique raw SMILES
+13:20:43  INFO   collapsing 4 duplicate (canon, target_type) rows in train by mean
+13:20:43  INFO   train after dedup: (7405, 4)
+13:20:43  INFO   per-target train counts: {'tg': 4139, 'egc': 2028, 'egb': 337, 'eps': 229, 'nc': 229, 'ei': 222, 'eea': 221}
+13:20:43  INFO   per-target test  counts: {'tg': 2763, 'egc': 1352, 'egb': 224, 'eps': 153, 'nc': 153, 'ei': 148, 'eea': 147}
+13:22:42  INFO   desc: shape=(8990, 207)  dropped=10 const cols  time=118.9s
+13:22:45  INFO   morgan2c: shape=(8990, 2048)  time=2.6s
+13:22:48  INFO   morgan3c: shape=(8990, 2048)  time=2.8s
+13:23:10  INFO   maccs: shape=(8990, 167)  time=22.0s
+13:23:15  INFO   atompair_c: shape=(8990, 2048)  time=4.7s
+13:23:18  INFO   toptorsion_c: shape=(8990, 2048)  time=3.9s
+13:23:42  INFO   avalon: shape=(8990, 512)  time=23.5s
+13:23:42  INFO   SMILES feature matrix TOTAL: (8990, 9078)  size≈326.4MB
+13:23:43  INFO   cached features to feature_cache.pkl
+13:23:43  INFO   SMILES feature families: desc=207, morgan2c=2048, morgan3c=2048, maccs=167, atompair_c=2048, toptorsion_c=2048, avalon=512
+13:23:43  INFO   SMILES feature TOTAL columns: 9078
+13:23:43  INFO   building aux lookup over 5920 unique canonical SMILES in train
+13:23:44  INFO   aux lookup built.  aux features per row: 14
+13:23:44  INFO   [eea] train rows=221   test rows=147   y range=[0.3936, 5.1438]   std=1.1047
+13:23:44  INFO   [eea] X shape train=(221, 9092), test=(147, 9092)
+13:25:05  INFO   [eea] fold 0: best_iter=2476   R²=0.8644   n_val=45
+13:26:12  INFO   [eea] fold 1: best_iter=2088   R²=0.9026   n_val=44
+13:27:24  INFO   [eea] fold 2: best_iter=2198   R²=0.8765   n_val=44
+13:27:42  INFO   [eea] fold 3: best_iter= 400   R²=0.8512   n_val=44
+13:28:21  INFO   [eea] fold 4: best_iter=1078   R²=0.7998   n_val=44
+13:28:21  INFO   [eea] OOF R² (CatBoost only) = 0.8650   (fold mean 0.8589)
+13:28:21  INFO   [eea] refitting on full train for 2296 iterations
+13:29:37  INFO   [egb] train rows=337   test rows=224   y range=[0.5068, 10.1137]   std=1.9757
+13:29:37  INFO   [egb] X shape train=(337, 9092), test=(224, 9092)
+13:29:58  INFO   [egb] fold 0: best_iter= 352   R²=0.9228   n_val=68
+13:30:56  INFO   [egb] fold 1: best_iter=1574   R²=0.9402   n_val=68
+13:31:37  INFO   [egb] fold 2: best_iter=1017   R²=0.8996   n_val=67
+13:32:22  INFO   [egb] fold 3: best_iter=1133   R²=0.9079   n_val=67
+13:33:27  INFO   [egb] fold 4: best_iter=1485   R²=0.8091   n_val=67
+13:33:27  INFO   [egb] OOF R² (CatBoost only) = 0.9002   (fold mean 0.8959)
+13:33:27  INFO   [egb] refitting on full train for 1246 iterations
+13:34:19  INFO   [egc] train rows=2028   test rows=1352   y range=[0.0205, 9.8627]   std=1.5678
+13:34:19  INFO   [egc] X shape train=(2028, 9092), test=(1352, 9092)
+13:39:19  INFO   [egc] fold 0: best_iter=3949   R²=0.9115   n_val=406
+13:42:34  INFO   [egc] fold 1: best_iter=2287   R²=0.9141   n_val=406
+13:47:36  INFO   [egc] fold 2: best_iter=3973   R²=0.8787   n_val=406
+13:51:00  INFO   [egc] fold 3: best_iter=2689   R²=0.8957   n_val=405
+13:53:49  INFO   [egc] fold 4: best_iter=2298   R²=0.9175   n_val=405
+13:53:49  INFO   [egc] OOF R² (CatBoost only) = 0.9034   (fold mean 0.9035)
+13:53:49  INFO   [egc] refitting on full train for 2957 iterations
+13:57:21  INFO   [ei] train rows=222   test rows=148   y range=[4.0261, 9.8385]   std=1.0447
+13:57:21  INFO   [ei] X shape train=(222, 9092), test=(148, 9092)
+13:59:11  INFO   [ei] fold 0: best_iter=3986   R²=0.7940   n_val=45
+13:59:37  INFO   [ei] fold 1: best_iter= 720   R²=0.7912   n_val=45
+14:00:57  INFO   [ei] fold 2: best_iter=2523   R²=0.8151   n_val=44
+14:01:21  INFO   [ei] fold 3: best_iter= 636   R²=0.8252   n_val=44
+14:01:31  INFO   [ei] fold 4: best_iter= 126   R²=0.6992   n_val=44
+14:01:31  INFO   [ei] OOF R² (CatBoost only) = 0.7934   (fold mean 0.7849)
+14:01:31  INFO   [ei] refitting on full train for 792 iterations
+14:01:56  INFO   [eps] train rows=229   test rows=153   y range=[2.6100, 9.0900]   std=1.0916
+14:01:56  INFO   [eps] X shape train=(229, 9092), test=(153, 9092)
+14:02:39  INFO   [eps] fold 0: best_iter=1189   R²=0.8275   n_val=46
+14:04:25  INFO   [eps] fold 1: best_iter=3476   R²=0.8521   n_val=46
+14:06:04  INFO   [eps] fold 2: best_iter=2905   R²=0.7203   n_val=46
+14:09:01  INFO   [eps] fold 3: best_iter=3866   R²=0.7377   n_val=46
+14:10:23  INFO   [eps] fold 4: best_iter=1528   R²=0.6789   n_val=45
+14:10:23  INFO   [eps] OOF R² (CatBoost only) = 0.7588   (fold mean 0.7633)
+14:10:23  INFO   [eps] refitting on full train for 3195 iterations
+14:13:03  INFO   [nc] train rows=229   test rows=153   y range=[1.5596, 2.7581]   std=0.2349
+14:13:03  INFO   [nc] X shape train=(229, 9092), test=(153, 9092)
+14:14:56  INFO   [nc] fold 0: best_iter=2938   R²=0.9043   n_val=46
+14:15:27  INFO   [nc] fold 1: best_iter= 666   R²=0.7637   n_val=46
+14:16:01  INFO   [nc] fold 2: best_iter=1025   R²=0.8379   n_val=46
+14:17:17  INFO   [nc] fold 3: best_iter=2293   R²=0.8552   n_val=46
+14:18:18  INFO   [nc] fold 4: best_iter=1852   R²=0.7887   n_val=45
+14:18:18  INFO   [nc] OOF R² (CatBoost only) = 0.8246   (fold mean 0.8300)
+14:18:18  INFO   [nc] refitting on full train for 2037 iterations
+14:19:22  INFO   [tg] train rows=4139   test rows=2763   y range=[-109.8200, 495.0000]   std=109.1038
+14:19:22  INFO   [tg] X shape train=(4139, 9092), test=(2763, 9092)
+14:26:10  INFO   [tg] fold 0: best_iter=3996   R²=0.9267   n_val=828
+14:33:25  INFO   [tg] fold 1: best_iter=3920   R²=0.9110   n_val=828
+14:40:01  INFO   [tg] fold 2: best_iter=3948   R²=0.9000   n_val=828
+14:46:29  INFO   [tg] fold 3: best_iter=3997   R²=0.9065   n_val=828
+14:53:05  INFO   [tg] fold 4: best_iter=3998   R²=0.8970   n_val=827
+14:53:05  INFO   [tg] OOF R² (CatBoost only) = 0.9083   (fold mean 0.9082)
+14:53:05  INFO   [tg] refitting on full train for 4395 iterations
+15:01:11  INFO   ============================================================
+15:01:11  INFO   CatBoost-only per-target OOF R²  (before Maxwell)
+15:01:11  INFO   ============================================================
+15:01:11  INFO      eea   n=  221   R²=0.8650
+15:01:11  INFO      egb   n=  337   R²=0.9002
+15:01:11  INFO      egc   n= 2028   R²=0.9034
+15:01:11  INFO       ei   n=  222   R²=0.7934
+15:01:11  INFO      eps   n=  229   R²=0.7588
+15:01:11  INFO       nc   n=  229   R²=0.8246
+15:01:11  INFO       tg   n= 4139   R²=0.9083
+15:01:11  INFO     MEAN R² (CatBoost only) = 0.8505
+15:01:11  INFO   ============================================================
+15:01:11  INFO   MAXWELL RELATION POST-FIT (EPS ↔ Nc)
+15:01:11  INFO   ============================================================
+15:01:11  INFO   co-labeled train molecules (both EPS and Nc): n=134
+15:01:11  INFO   raw Pearson r(EPS, Nc)  = 0.9183
+15:01:11  INFO   raw Pearson r(EPS, Nc²) = 0.9248
+15:01:11  INFO   Maxwell FORWARD fit (EPS = a·Nc² + b): a=1.0401  b=0.6155  R²=0.8553  (on 134 points)
+15:01:11  INFO   Maxwell REVERSE fit (Nc² = a'·EPS + b'): a'=0.8223  b'=0.0398  R²(on Nc)=0.8368  (on 134 points)
+15:01:11  INFO   eps blend: effective-Nc lookup covers 229 canons
+15:01:11  INFO   eps OOF rows with no effective Nc available: 95
+15:01:11  INFO   eps blend: baseline OOF R² = 0.7588
+15:01:11  INFO   eps blend: pure-Maxwell (w=0) OOF R² = 0.7845
+15:01:11  INFO   eps blend: best  w = 0.370   (w=1 is CAT-only, w=0 is Maxwell-only)
+15:01:11  INFO   eps blend: best OOF R² = 0.7978   Δ = +0.0390
+15:01:11  INFO   nc blend: effective-EPS lookup covers 229 canons
+15:01:11  INFO   nc OOF rows with no effective EPS available: 95
+15:01:11  INFO   nc blend: baseline OOF R² = 0.8246
+15:01:11  INFO   nc blend: pure-Maxwell (w=0) OOF R² = 0.8001
+15:01:11  INFO   nc blend: best  w = 0.575
+15:01:11  INFO   nc blend: best OOF R² = 0.8530   Δ = +0.0284
+15:01:11  INFO   test eps rows: 95/153 have train nc label available
+15:01:12  INFO   test nc rows: 95/153 have train eps label available
+15:01:12  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_maxwell_prior_catboost/oof.csv  rows=7405
+15:01:12  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_maxwell_prior_catboost/submission.csv  rows=4940
+15:01:12  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_maxwell_prior_catboost/cv_summary.json
+15:01:12  INFO   ============================================================
+15:01:12  INFO   FINAL PER-TARGET OOF R²  (CatBoost + Maxwell)  vs LGB reference
+15:01:12  INFO   ============================================================
+15:01:12  INFO     target         CAT   LGB (ref)     delta
+15:01:12  INFO        eea      0.8650      0.8543   +0.0107
+15:01:12  INFO        egb      0.9002      0.9050   -0.0048
+15:01:12  INFO        egc      0.9034      0.8966   +0.0068
+15:01:12  INFO         ei      0.7934      0.7944   -0.0010
+15:01:12  INFO        eps      0.7978      0.8186   -0.0208
+15:01:12  INFO         nc      0.8530      0.8603   -0.0073
+15:01:12  INFO         tg      0.9083      0.9026   +0.0057
+15:01:12  INFO       MEAN      0.8602      0.8617   -0.0015
+15:01:12  INFO     (LGB LB reference: 0.860)
+15:01:12  INFO   wall time: 100.5min
