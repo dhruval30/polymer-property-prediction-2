@@ -24,6 +24,20 @@ This doc always describes **the single best submission** we've made on the publi
 
 > **Reproduction note:** Δ +0.001 LB comes at the cost of +100 min of CatBoost compute. For practical reproduction the **2-way blend (Chemprop + LGB, LB 0.894, ~67 min)** is a much better ROI. See [best-ensemble.md § "Preferred vs best-scoring ensemble"](best-ensemble.md) for the tradeoff.
 
+## Best solo (non-ensemble) submission
+
+| field | value |
+|---|---|
+| **experiment** | `exp_chemprop_multitask_cpu_3seed` |
+| **LB score** | **0.892** |
+| **CV OOF mean R²** | 0.8701 |
+| **submission file** | `results/exp_chemprop_multitask_cpu_3seed/submission.csv` |
+| **script** | `experiments/exp_chemprop_multitask_cpu_3seed.py` |
+| **wall time** | 224.7 min on Mac CPU (5-fold × 3-seed × 60 epochs + 3 refits × 50 epochs = 18 model trainings total) |
+| **Δ vs prior solo best** | +0.005 (single-seed Chemprop at 0.887) |
+
+The 3-seed bag improves OOF by +0.015 mean R² over single-seed (biggest wins: eps +0.033, egc +0.024, eea +0.020, tg +0.015). LB gain is smaller (+0.005) because the bag already averages some of the variance that single-seed's refit-on-full-data captured. This is the best-performing SOLO base model in the pipeline — makes it the strongest candidate to replace single-seed Chemprop in the ensemble blend.
+
 ### Per-target OOF R² (3-way blend)
 
 | target | chemprop | lgb+max | cat+max | **3-way blend** | w_c | w_l | w_x |
@@ -58,8 +72,9 @@ The +0.001 LB improvement over the 2-way blend costs +100 minutes of CatBoost tr
 
 ### What NOT in this submission (top future levers, ordered by EV)
 
-- ❌ **Chemprop 3-seed bagging** (5-fold × 3 seeds = 15 models, per Round-1 recipe). ~2.5h more Mac CPU. Expected +0.003 to +0.008. Then re-blend. **Highest-EV local lever now.**
-- ❌ **Longer Chemprop training** — folds 0, 1, 4 hit max_epochs=40 without early stopping. Extend to 60 epochs, +30 min per fold.
+- ⏳ **Re-blend with 3-seed Chemprop replacing single-seed** (2-way and 3-way variants). Solo 3-seed LB 0.892 vs single-seed 0.887 → blend should improve by +0.003 to +0.006 → **expected 0.898-0.900, rank 2-4**. **Highest-EV local lever NOW.**
+- ~~Chemprop 3-seed bagging~~ ✅ **DONE** — solo LB 0.892 (best solo). Needs re-blend to convert to overall LB gain.
+- ~~Longer Chemprop training (60 epochs)~~ ✅ **DONE** — included in 3-seed run.
 - ~~Add CatBoost as a third base model~~ ✅ **DONE** — added; +0.001 LB for +100 min compute. Poor ROI but adopted.
 - ❌ **Chemprop `--polymer` mode** (Coley group fork) with weighted repeat-unit bonds.
 - ❌ **PI1M SSL pretraining** on tg / egc chemistry (research doc §6). Kaggle GPU only.
@@ -74,7 +89,8 @@ Every submission ever made, most-recent first. Arrows show delta vs previous ent
 
 | # | date | experiment | LB | Δ | rank | OOF | notes |
 |--:|------|------------|:--:|:-:|:----:|:---:|-------|
-| 8 | 2026-08-02 | `exp_blend_nnls_3way` **(ensemble)** | **0.895** 🎯 | ↑ +0.001 | ~4 | 0.8842 | 3-way per-target NNLS blend of Chemprop + LGB+Maxwell + CatBoost+Maxwell. Same bias-mitigation config as 2-way (Chemprop floor 0.40, bias +0.15). CAT gets meaningful weight (0.27-0.31) on egc/ei/tg where it wins solo; zero weight on egb/eps where redundant with LGB. Blend OOF +0.001 over 2-way. LB +0.001. **Marginal gain for +100 min CAT compute — poor ROI. 2-way remains the preferred reproduction target.** |
+| 9 | 2026-08-02 | `exp_chemprop_multitask_cpu_3seed` | **0.892** (best solo) | — vs blend | ~6 | **0.8701** | 5-fold × 3-seed Chemprop bag, max_epochs 60, patience 10. 224 min wall time. OOF beats single-seed by +0.015 (biggest wins: eps +0.033, egc +0.024, eea +0.020, tg +0.015). LB +0.005 vs single-seed. **New best solo submission.** LB lift smaller than OOF lift because bag already averages some variance that single-seed's refit-on-full-data captured. Not the current overall best (blend still leads at 0.895) but the strongest candidate to feed into the next-gen blend. |
+| 8 | 2026-08-02 | `exp_blend_nnls_3way` **(ensemble)** | **0.895** 🎯 | ↑ +0.001 | ~4 | 0.8842 | 3-way per-target NNLS blend of Chemprop + LGB+Maxwell + CatBoost+Maxwell. Same bias-mitigation config as 2-way (Chemprop floor 0.40, bias +0.15). CAT gets meaningful weight (0.27-0.31) on egc/ei/tg where it wins solo; zero weight on egb/eps where redundant with LGB. Blend OOF +0.001 over 2-way. LB +0.001. Marginal gain for +100 min CAT compute — poor ROI. |
 | 7 | 2026-08-02 | `exp_blend_nnls` **(ensemble)** | 0.894 | ↑ +0.007 | 5 | 0.8828 | Per-target NNLS blend of Chemprop + LGB+Maxwell. Chemprop weight floor 0.40 + bias +0.15. Every target's blend OOF improved over either base (+0.007 to +0.023). Weights lean Chemprop on small-data/multitask targets (eea 0.75, egb 0.77, nc 0.65), lean LGB on physics/larger-data (eps 0.45, tg 0.54). LB +0.007 over pure Chemprop. **Preferred ensemble for reproduction** (~67 min vs 3-way's ~167 min for only +0.001 LB gain). |
 | 6 | 2026-08-02 | `exp_chemprop_multitask_cpu` | 0.887 | ↑ +0.027 | 9 | 0.8555 | Multitask D-MPNN (shared BondMessagePassing + 7 regression heads), Chemprop 2.x on Mac CPU, 51.6 min. 5-fold GroupKFold, honest OOF (no aux features), refit on full train for 44 epochs. **OOF 0.856 but LB 0.887 (+0.032 LB-OOF gap)** because (a) graph encoder benefits massively from +25% training data at refit, (b) prior LGB OOFs were aux-inflated so relative comparison was misleading. Biggest single-experiment jump of the competition. |
 | 5 | 2026-08-01 | `exp_maxwell_prior_lgbm` | 0.860 | ↑ +0.001 | ~19 | 0.8656 | Full_fp pipeline + Maxwell relation `EPS = a·Nc² + b` post-fit on 134 co-labeled train molecules. Maxwell forward fit R²=0.855. Optimal blend weights: eps w=0.405, nc w=0.605. OOF Δ +0.008 but LB Δ only +0.001 — physics real but LGB features implicitly captured most of it; also 62% test aux coverage limited gain. |

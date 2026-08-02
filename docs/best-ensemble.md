@@ -159,15 +159,25 @@ To include a third base (e.g., a Chemprop 3-seed bag, or CatBoost, or PI1M-pretr
 
 | strategy | expected lift over current 3-way NNLS | notes |
 |----------|:--------------------------------------:|-------|
+| **⭐ Re-blend with 3-seed Chemprop base** | +0.003 to +0.006 | Just swap the Chemprop OOF/submission source in the blend script. 3-seed solo LB 0.892 vs single-seed 0.887. **Highest-EV, do this next.** |
 | **Rank-based blend** (rank predictions, blend ranks, then map back) | 0 to +0.005 | Robust to per-model scale bias. Good if models have different bias profiles. |
 | ~~Add CatBoost as 3rd base~~ | ~~+0.002 to +0.008~~ | **Attempted 2026-08-02. Actual: +0.001 LB for +100 min compute.** LGB↔CAT correlation too high. |
-| **Add bagged Chemprop (5-seed) as 4th base** | +0.003 to +0.008 | Different model family than CAT/LGB. Higher expected value than adding more trees. |
+| ~~Add bagged Chemprop as 4th base~~ | | Actually easier as a base *replacement* (see top row) than as a 4th base — the 3-seed OOFs strictly improve on single-seed OOFs, no reason to keep both. |
 | **Add Chemprop with `--polymer` mode as 4th base** | +0.002 to +0.005 | Weighted repeat-unit bonds (Coley group fork). Different molecular representation. |
 | **Ridge meta-stacker** on OOF (learned per-target linear combo without NNLS constraint) | 0 to +0.003 | Risky on 220-row small targets. May overfit. |
 | **Per-target Bayesian model averaging** (weights proportional to `exp(-N * MSE_oof / 2)`) | +0.001 to +0.005 | Statistically principled but similar to NNLS in practice. |
 | **Cross-target meta-features** (feed OOF of other 6 targets as features to a per-target Ridge on top of NNLS) | +0.003 to +0.008 | Second bite at matrix completion. Watch small-data overfit. |
 
 **Key lesson from adding CatBoost:** diversity within a model family (tree ↔ tree) gives ~0.001 LB per new base. Diversity across families (tree ↔ graph like Chemprop) gave ~0.007 LB. **Future ensemble adds should be from new families**, not another tree.
+
+### New base signals available (for future blend construction)
+
+| base | LB solo | script | wall time | notes |
+|------|:-------:|--------|:---------:|-------|
+| Chemprop 1-seed | 0.887 | `exp_chemprop_multitask_cpu.py` | 52 min | Original — kept for historical alignment |
+| **Chemprop 3-seed bag** | **0.892** | `exp_chemprop_multitask_cpu_3seed.py` | 225 min | **Best solo. Preferred Chemprop base for future blends.** |
+| LGB + Maxwell | 0.860 | `exp_maxwell_prior_lgbm.py` | 15 min | Tree base with physics prior |
+| CatBoost + Maxwell | ~0.860 | `exp_maxwell_prior_catboost.py` | 100 min | Marginal ensemble value |
 
 ### Ensemble reproduction gotchas
 
