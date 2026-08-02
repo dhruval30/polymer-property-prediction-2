@@ -4,58 +4,61 @@ This doc always describes **the single best submission** we've made on the publi
 
 > **Rule:** only update the "Current best" block if the new LB > current best LB. Every submission (win or not) gets a history row.
 
+**Companion doc:** for reproducing ensembles (which depend on multiple base-model experiments), see [best-ensemble.md](best-ensemble.md).
+
 ---
 
 ## Current best
 
 | field | value |
 |---|---|
-| **experiment** | `exp_chemprop_multitask_cpu` |
-| **LB score (public)** | **0.887** 🎯 |
-| **LB rank** | **9 / 154** — medal territory |
-| **CV OOF mean R²** | 0.8555 |
-| **submission file** | `results/exp_chemprop_multitask_cpu/submission.csv` |
-| **script** | `experiments/exp_chemprop_multitask_cpu.py` |
+| **experiment** | `exp_blend_nnls` (ENSEMBLE) |
+| **LB score (public)** | **0.894** 🎯 |
+| **LB rank** | **5 / 154** — tied with rank 4 (VOID) and rank 6 (ShiokParikh06) |
+| **CV OOF mean R²** | 0.8828 |
+| **submission file** | `results/exp_blend_nnls/submission.csv` |
+| **script** | `experiments/exp_blend_nnls.py` (see [best-ensemble.md](best-ensemble.md) for full reproduction) |
 | **date submitted** | 2026-08-02 |
-| **wall time (local)** | 51.6 min on Mac M-series CPU |
-| **Δ vs previous best** | **+0.027** (from maxwell_prior 0.860) |
+| **wall time (local)** | 0.1s blend + prerequisite base models (~1h total for Chemprop + ~15min for LGB+Maxwell) |
+| **Δ vs previous best** | **+0.007** (from chemprop-only 0.887) |
 
 ### Per-target OOF R² (this submission)
 
-| target | n_train | OOF R² | fold R² range |
-|--------|--:|:--:|:--:|
-| eea | 221   | 0.8883 | 0.870–0.914 |
-| egb | 337   | **0.9251** | 0.873–0.936 |
-| egc | 2,028 | 0.8830 | 0.797–0.916 |
-| ei  | 222   | 0.7804 | 0.682–0.842 |
-| eps | 229   | 0.7584 | 0.649–0.806 |
-| nc  | 229   | 0.8599 | 0.833–0.888 |
-| tg  | 4,139 | 0.8934 | 0.873–0.912 |
-| **mean OOF** | | **0.8555** | |
-| **LB (actual)** | | **0.887** | LB−OOF gap = **+0.032** 🎯 |
+| target | chemprop | lgb+max | **blend** | w_chem | w_lgb |
+|--------|:--------:|:-------:|:---------:|:------:|:-----:|
+| eea | 0.8883 | 0.8708 | **0.9010** | 0.75 | 0.25 |
+| egb | 0.9251 | 0.9105 | **0.9325** | 0.77 | 0.23 |
+| egc | 0.8830 | 0.9000 | **0.9115** | 0.55 | 0.45 |
+| ei  | 0.7804 | 0.7933 | **0.8092** | 0.58 | 0.42 |
+| eps | 0.7584 | 0.8186 | **0.8295** | 0.45 | 0.55 |
+| nc  | 0.8599 | 0.8603 | **0.8834** | 0.65 | 0.35 |
+| tg  | 0.8934 | 0.9057 | **0.9126** | 0.54 | 0.46 |
+| **mean OOF** | 0.8555 | 0.8656 | **0.8828** | 0.61 | 0.39 |
+| **LB actual** | 0.887 | 0.860 | **0.894** | — | — |
+
+Every single target improved in the blend vs either base model alone.
 
 ### Approach in one paragraph
 
-Multitask D-MPNN. Single shared `BondMessagePassing` encoder (d_h=300, depth=4, dropout=0.05) → `MeanAggregation` → `RegressionFFN(n_tasks=7, hidden=300, n_layers=2, dropout=0.05)`, `batch_norm=True`. Trained on all 7 targets jointly with NaN targets masked from loss (each row contributes only to its labeled targets). Per-target standardization on train fold. 5-fold GroupKFold on canonical SMILES. Chemprop 2.x, CPU only (Mac M-series, 8 threads). Batch 64, max_epochs=40, patience=8, LR 1e-3→1e-4 with 2-epoch warmup, grad_clip=1.0. Refit on full train for 44 epochs (1.1× median best-epoch), then predicted all 7 targets for each unique test SMILES and indexed by test row's `target_type`. Per-fold checkpointing + per-epoch logging built in.
+Per-target NNLS blend of two base models: multitask Chemprop D-MPNN (`exp_chemprop_multitask_cpu`, LB 0.887) and LightGBM+Maxwell physics-prior (`exp_maxwell_prior_lgbm`, LB 0.860). Weights fit per target on the aligned OOFs via `scipy.optimize.nnls`, normalized to sum=1, then adjusted with two LB-bias-aware mitigations: (a) a Chemprop weight floor of 0.40 to prevent over-trusting the aux-inflated LGB OOF, and (b) a +0.15 additive Chemprop bias to reflect its proven LB advantage. Blend weights applied identically to test predictions. Whole blend script runs in <1 second — the compute is all in the base models. Full reproduction chain in [best-ensemble.md](best-ensemble.md).
 
-### Why the OOF-LB gap flipped strongly positive (+0.032)
+### Why the blend worked
 
-Every prior LGB experiment had LB ≤ OOF (aux-augmented CV was systematically inflating OOF). Chemprop went the opposite way — LB WAY higher than OOF. Two mechanisms:
+Chemprop and LGB have complementary per-target strengths (per OOF):
+- **Chemprop wins** on small-data + heavy cross-target-overlap targets (eea, egb, nc)
+- **LGB wins** on larger-data or physics-benefiting targets (egc, ei, eps, tg)
 
-1. **Chemprop's shared encoder benefits massively from more training data.** OOF trains on 80% of molecules (~4,736); the refit uses all 100% (~5,920). +25% more data → substantially better learned molecular representation. Trees don't gain nearly this much from 25% more rows; graph encoders do.
-2. **Chemprop uses HONEST OOF** (no aux features). LGB's OOF was aux-augmented (leaked train-label info for the same molecule via other-target columns). So LGB's OOF was overestimating, Chemprop's OOF was underestimating.
+Blending captured **both** advantages. Every per-target OOF improved (+0.007 to +0.023). Mean blend OOF 0.883 vs Chemprop 0.856 vs LGB 0.866. The LB-bias mitigations (weight floor + bias) kept the blend from over-weighting LGB where its OOF was inflated.
 
-Net: OOF-based comparisons across model families are misleading. LB is the honest truth.
+### What NOT in this submission (top future levers, ordered by EV)
 
-### What NOT in this submission (top future levers)
-
-- ❌ **NNLS per-target blend of Chemprop + LGB (Maxwell-corrected).** Highest-EV lever now. Chemprop and LGB win on different targets (Chemprop: eea/egb/nc; LGB: egc/ei/eps/tg per OOF ordering). Blend should push higher — but need to be careful: LGB OOF is aux-inflated relative to Chemprop, so simple per-target NNLS on OOF may over-weight LGB. Consider using held-out (non-aux) OOF for blend weight fit.
-- ❌ **Chemprop with 3-seed bagging** (5-fold × 3 seeds = 15 models, per Round-1 recipe). ~2.5h more compute. Expected +0.003 to +0.008.
-- ❌ **Longer Chemprop training** — folds 0, 1, 4 hit max_epochs=40 without early stopping. Extending to 60 epochs might help.
-- ❌ **Chemprop `--polymer` mode** with weighted repeat-unit bonds (Coley group fork).
-- ❌ **PI1M SSL pretraining** on tg / egc chemistry (research doc §6).
-- ❌ **CatBoost + XGBoost** added to the tree cocktail before blending with Chemprop.
-- ❌ **LB distribution shift probe** (research doc §9) — 3 subs could unlock up to +0.03 hidden shift correction.
+- ❌ **Chemprop 3-seed bagging** (5-fold × 3 seeds = 15 models, per Round-1 recipe). ~2.5h more Mac CPU. Expected +0.003 to +0.008. Then re-blend.
+- ❌ **Longer Chemprop training** — folds 0, 1, 4 hit max_epochs=40 without early stopping. Extend to 60 epochs, +30 min per fold.
+- ❌ **Add CatBoost or XGBoost** as a third base model to the blend. Diverse tree family, complements LGB.
+- ❌ **Chemprop `--polymer` mode** (Coley group fork) with weighted repeat-unit bonds.
+- ❌ **PI1M SSL pretraining** on tg / egc chemistry (research doc §6). Kaggle GPU only.
+- ❌ **LB distribution shift probe** (research doc §9) — 3 subs could unlock up to +0.03 hidden shift correction. **HIGHEST-EV single lever** if there's a shift.
+- ❌ **Ridge meta-stacker with cross-target OOF as features** (research doc §8.5).
 
 ---
 
@@ -65,7 +68,8 @@ Every submission ever made, most-recent first. Arrows show delta vs previous ent
 
 | # | date | experiment | LB | Δ | rank | OOF | notes |
 |--:|------|------------|:--:|:-:|:----:|:---:|-------|
-| 6 | 2026-08-02 | `exp_chemprop_multitask_cpu` | **0.887** 🎯 | ↑ **+0.027** | **9** | 0.8555 | Multitask D-MPNN (shared BondMessagePassing + 7 regression heads), Chemprop 2.x on Mac CPU, 51.6 min. 5-fold GroupKFold, honest OOF (no aux features), refit on full train for 44 epochs. **OOF 0.856 but LB 0.887 (+0.032 LB-OOF gap!!)** because (a) graph encoder benefits massively from +25% training data at refit, (b) prior LGB OOFs were aux-inflated so relative comparison was misleading. Biggest single-experiment jump of the competition. Cracks top 10 / medal territory. |
+| 7 | 2026-08-02 | `exp_blend_nnls` **(ensemble)** | **0.894** 🎯 | ↑ **+0.007** | **5** | 0.8828 | Per-target NNLS blend of Chemprop + LGB+Maxwell OOFs, normalized to sum=1, with Chemprop weight floor=0.40 + additive bias=0.15 as LB-vs-OOF-bias mitigations. Every target's blend OOF improved over either base (+0.007 to +0.023 per target). Weights lean Chemprop on small-data/multitask targets (eea 0.75, egb 0.77, nc 0.65), lean LGB on physics/larger-data (eps 0.45, tg 0.54). LB +0.007 over pure Chemprop → rank 5, tied with 2 others. Reproduction requires both base experiments — see [best-ensemble.md](best-ensemble.md). |
+| 6 | 2026-08-02 | `exp_chemprop_multitask_cpu` | 0.887 | ↑ +0.027 | 9 | 0.8555 | Multitask D-MPNN (shared BondMessagePassing + 7 regression heads), Chemprop 2.x on Mac CPU, 51.6 min. 5-fold GroupKFold, honest OOF (no aux features), refit on full train for 44 epochs. **OOF 0.856 but LB 0.887 (+0.032 LB-OOF gap)** because (a) graph encoder benefits massively from +25% training data at refit, (b) prior LGB OOFs were aux-inflated so relative comparison was misleading. Biggest single-experiment jump of the competition. |
 | 5 | 2026-08-01 | `exp_maxwell_prior_lgbm` | 0.860 | ↑ +0.001 | ~19 | 0.8656 | Full_fp pipeline + Maxwell relation `EPS = a·Nc² + b` post-fit on 134 co-labeled train molecules. Maxwell forward fit R²=0.855. Optimal blend weights: eps w=0.405, nc w=0.605. OOF Δ +0.008 but LB Δ only +0.001 — physics real but LGB features implicitly captured most of it; also 62% test aux coverage limited gain. |
 | 4 | 2026-08-01 | `exp_trimmed_smarts_lgbm` | 0.858 | ↓ -0.001 | — | 0.8610 | Path A: dropped morgan-r3 (2048) + topological-torsion (2048), added 25 SMARTS polymer-class flags + backbone-atom-count. ~5k features vs 9k. **OOF gained +0.0035** (eps recovered strongly: 0.785→0.805; eea +0.003; egc +0.003) but **LB lost 0.001**. Backbone feature useless (0.0-0.1% gain). SMARTS marginal (0.1-9% gain, mostly under 3%); only `vinyl_polymer` (eps) and `ester`/`amide` (tg) pulled real weight. OOF-LB gap now negative — CV starting to overfit fold structure. |
 | 3 | 2026-08-01 | `exp_full_fp_lgbm` | 0.859 | ↑ +0.002 | ~20 | 0.8575 | Added full Round-1 fingerprint stack (Morgan-r3 count, Atom-Pair count, Topological-Torsion count, Avalon) on top of matcomp. Modest LB lift. Family gain diagnostics: atom-pair (8-23%) and avalon (3-11%) earned their spots; morgan-r3 and topological-torsion are weak. eps regressed on OOF (-0.008) but egb/eea/nc gains carried the mean up. |
@@ -90,24 +94,24 @@ When you submit and it does not beat the current best:
 
 ---
 
-## LB landmarks (approx, as of 2026-08-02)
+## LB landmarks (as of 2026-08-02, after blend submission)
 
-Reference points for what different scores buy us on rank:
+| rank | team | score | gap to us (0.894) |
+|------|------|:-----:|:-----------------:|
+| 1  | Kuch toh Karna hai | 0.902 | +0.008 |
+| 2  | MUGABROS           | 0.900 | +0.006 |
+| 3  | Opus 6.7           | 0.898 | +0.004 |
+| 4  | 『VOID』           | 0.894 | tie |
+| **5** | **Dhruval Padia (us)** | **0.894** | **—** |
+| 6  | ShiokParikh06      | 0.894 | tie |
+| 7  | The Invincibles    | 0.891 | -0.003 |
 
-| rank | approx score | gap to us (0.887) |
-|------|:-----:|:-----------------:|
-| 1  | ~0.899 | +0.012 |
-| 3  | ~0.897 | +0.010 |
-| 5  | ~0.893 | +0.006 |
-| **9 (us)** | **0.887** | **—** |
-| 10 | ~0.876 | -0.011 |
-| 15 | ~0.872 | -0.015 |
-
-Score targets by remaining experiments:
-- **NNLS blend of Chemprop + LGB+Maxwell** → +0.003 to +0.010 → **0.89–0.897 → rank 4–7** (if well-tuned).
-- **Chemprop 3-seed bag** (5-fold × 3 seeds, ~2.5h more CPU) → +0.003 to +0.008 → **0.89–0.895 → rank 4–7**.
-- **PI1M SSL pretrain + Chemprop fine-tune** (Kaggle-only for GPU) → +0.005 to +0.015 → **0.89–0.90 → rank 1–5**.
-- **LB distribution shift probe** (research doc §9, 3 subs) → up to +0.03 if shift found → **potentially #1**.
+Score targets by remaining experiments (ordered by EV):
+- **Chemprop 3-seed bag → re-blend** → +0.003 to +0.008 → **~0.90 → rank 1-3**. Highest-EV local lever.
+- **Longer Chemprop training (60 epochs) → re-blend** → +0.002 to +0.005.
+- **Add CatBoost as third base model → 3-way blend** → +0.002 to +0.006. Local.
+- **PI1M SSL pretrain + Chemprop fine-tune** (Kaggle GPU only) → +0.005 to +0.015 → **could hit 0.90–0.91**.
+- **LB distribution shift probe** (research doc §9, 3 subs) → 0 or **+0.03 hidden lift** if shift exists.
 
 ## OOF-vs-LB tracking
 
@@ -118,6 +122,7 @@ Score targets by remaining experiments:
 | full_fp  | 0.8575 | 0.859 | +0.002 | +0.002 | tiny lift; OOF-LB gap narrowing |
 | trimmed  | 0.8610 | 0.858 | -0.003 | -0.001 | OOF up but LB flat |
 | maxwell  | 0.8656 | 0.860 | -0.007 | +0.001 | worst OOF-LB gap for LGB — aux-augmented CV inflating OOF |
-| **chemprop** | **0.8555** | **0.887** | **+0.032** | **+0.027** | **honest OOF (no aux) + graph encoder benefits from full-data refit → LB WAY above OOF. New paradigm.** |
+| chemprop | 0.8555 | 0.887 | +0.032 | +0.027 | honest OOF (no aux) + graph encoder benefits from full-data refit → LB WAY above OOF |
+| **blend_nnls** | **0.8828** | **0.894** | **+0.011** | **+0.007** | **ensemble of chemprop+lgb, per-target NNLS with Chemprop bias. OOF is average of one honest + one aux-inflated → gap smaller than pure chemprop.** |
 
 **Read of the trend.** The LGB experiments (baseline through maxwell) had a shrinking / negative OOF-LB gap because aux-augmented CV was inflating OOF. Chemprop broke the pattern: honest OOF (no aux) + a model family that benefits substantially from more training data → OOF underestimated LB by 0.032. Going forward, when comparing across model families we should trust LB, not OOF. Within a single model family, OOF trends remain informative.
