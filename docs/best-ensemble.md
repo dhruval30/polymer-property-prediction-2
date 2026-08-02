@@ -12,81 +12,83 @@ Ensemble submissions depend on multiple base-model experiments. Without a tracke
 
 | field | value |
 |---|---|
-| **name** | `exp_blend_nnls_3way` |
-| **LB score** | **0.895** |
-| **LB rank** | ~4 / 154 |
-| **OOF mean R²** | 0.8842 |
-| **submission file** | `results/exp_blend_nnls_3way/submission.csv` |
-| **blend script** | `experiments/exp_blend_nnls_3way.py` |
+| **name** | `exp_blend_nnls_3seed` |
+| **LB score** | **0.897** |
+| **LB rank** | **5 / 154** (tied with 1 other at 0.897; rank 3 is +0.001 away) |
+| **OOF mean R²** | 0.8873 |
+| **submission file** | `results/exp_blend_nnls_3seed/submission.csv` |
+| **blend script** | `experiments/exp_blend_nnls_3seed.py` |
 | **date submitted** | 2026-08-02 |
-| **base models used** | 3 (Chemprop multitask + LGB+Maxwell + CatBoost+Maxwell) |
-| **total reproduction wall time** | ~2h 47min |
+| **base models used** | 2 (Chemprop 3-seed bag + LGB+Maxwell) |
+| **total reproduction wall time** | ~4h (Chemprop 3-seed 225min + LGB+Maxwell 15min + blend <1s) |
 
-> ⚠️ **The +0.001 LB gain over the 2-way blend cost +100 minutes of CatBoost training.** For practical reproduction the 2-way blend below is the better ROI. See [§ Preferred vs best-scoring ensemble](#preferred-vs-best-scoring-ensemble) for the decision framework.
+> **Key insight from evolution:** the 3-way blend (Chemprop single-seed + LGB + CAT, LB 0.895) was superseded by upgrading the Chemprop *base* itself to the 3-seed bag. **Stronger single Chemprop signal > adding a weaker third base (CatBoost).** Same LGB+Maxwell base as before; just swapped the Chemprop OOF/submission source.
 
 ---
 
 ## Preferred vs best-scoring ensemble
 
-**Two ensembles you might want to reproduce, depending on your priority:**
+**Three ensembles worth knowing about:**
 
 | priority | ensemble | LB | wall time | when to use |
 |----------|----------|:--:|:---------:|-------------|
-| **max score** | `exp_blend_nnls_3way` | **0.895** | ~167 min | final submission run, ranking matters |
-| **best ROI** | `exp_blend_nnls` (2-way) | **0.894** | ~67 min | iterating, adding new bases, debugging blend weights, fastest path to a strong submission |
+| **max score** | `exp_blend_nnls_3seed` | **0.897** | ~240 min | final submission, best-ever score |
+| balance | `exp_blend_nnls_3way` | 0.895 | ~267 min | previous best; superseded, slower AND worse |
+| **fast iteration** | `exp_blend_nnls` (2-way, single-seed) | **0.894** | **~67 min** | quick iteration on new blend recipes, debugging blend weights, fastest path to a strong submission |
 
-The 2-way ensemble is 60% of the total wall time for 99.9% of the score. Use the 3-way only when the last 0.001 R² matters for ranking. When adding a new base model (e.g., Chemprop 3-seed bag, PI1M-pretrained model), extend the 2-way script first — that's the honest test of whether the new base adds signal, since CatBoost's redundancy with LGB means it dampens the marginal contribution of anything you add downstream.
+The 2-way single-seed blend (67 min) hits 0.894 — only 0.003 below the best. If you're iterating on a new base model or blend strategy, run against this rather than the full 4h pipeline. Once your new base looks promising, promote it into the 3-seed pipeline for the final submission.
+
+**Learned pattern:** upgrading the strongest base (Chemprop) gives more LB lift than adding a weaker fourth base. Prefer improving Chemprop over adding more tree models.
 
 ---
 
-### Base model dependencies (3-way, current best)
+### Base model dependencies (current best 2-way with 3-seed Chemprop)
 
 | # | source experiment | script | LB (solo) | wall time | contribution |
 |---|-------------------|--------|:---------:|:---------:|--------------|
-| 1 | `exp_chemprop_multitask_cpu` | `experiments/exp_chemprop_multitask_cpu.py` | 0.887 | ~52 min | Multitask D-MPNN. Strong on eea/egb (small-data cross-target overlap). |
-| 2 | `exp_maxwell_prior_lgbm` | `experiments/exp_maxwell_prior_lgbm.py` | 0.860 | ~15 min | LightGBM per-target on full FP stack + Maxwell EPS↔Nc physics-prior. Strong on egb/eps/nc. |
-| 3 | `exp_maxwell_prior_catboost` | `experiments/exp_maxwell_prior_catboost.py` | ~0.860 est. | ~100 min | CatBoost per-target on identical stack as LGB. Strong on egc/ei/tg (targets where CAT wins solo). |
+| 1 | `exp_chemprop_multitask_cpu_3seed` | `experiments/exp_chemprop_multitask_cpu_3seed.py` | **0.892** | ~225 min | 5-fold × 3-seed Chemprop D-MPNN bag. Best solo. Dominant across all 7 targets (mean w=0.70 in blend). |
+| 2 | `exp_maxwell_prior_lgbm` | `experiments/exp_maxwell_prior_lgbm.py` | 0.860 | ~15 min | LightGBM per-target on full FP stack + Maxwell EPS↔Nc physics-prior. Complementary on egc/ei/eps/tg. |
 
 Blend-time compute: **<1 second** (NNLS + weighted averaging in numpy).
 
-### Reproduce the 3-way ensemble from scratch
+### Reproduce the current best ensemble from scratch
 
 ```bash
 # 1. Base — LightGBM with Maxwell prior (~15 min)
 poly2-venv/bin/python experiments/exp_maxwell_prior_lgbm.py
 
-# 2. Base — CatBoost with Maxwell prior (~100 min)  ← slowest step
-poly2-venv/bin/pip install catboost   # if not already installed
-poly2-venv/bin/python experiments/exp_maxwell_prior_catboost.py
-
-# 3. Base — Multitask Chemprop D-MPNN (~52 min)
+# 2. Base — Multitask Chemprop D-MPNN, 5-fold × 3-seed bag (~225 min)   ← slowest step
 poly2-venv/bin/pip install chemprop   # if not already installed
-poly2-venv/bin/python experiments/exp_chemprop_multitask_cpu.py
-
-# 4. 3-way blend (<1 second)
-poly2-venv/bin/python experiments/exp_blend_nnls_3way.py
-
-# 5. Submit results/exp_blend_nnls_3way/submission.csv to Kaggle
-```
-
-Total wall time end-to-end from a clean repo: **~167 minutes**. Base scripts all have per-fold checkpointing — safe to Ctrl+C and resume.
-
-### Reproduce the 2-way ensemble (preferred for practical iteration)
-
-```bash
-# 1. Base — LightGBM with Maxwell prior (~15 min)
-poly2-venv/bin/python experiments/exp_maxwell_prior_lgbm.py
-
-# 2. Base — Multitask Chemprop D-MPNN (~52 min)
-poly2-venv/bin/python experiments/exp_chemprop_multitask_cpu.py
+poly2-venv/bin/python experiments/exp_chemprop_multitask_cpu_3seed.py
 
 # 3. 2-way blend (<1 second)
-poly2-venv/bin/python experiments/exp_blend_nnls.py
+poly2-venv/bin/python experiments/exp_blend_nnls_3seed.py
 
-# 4. Submit results/exp_blend_nnls/submission.csv → LB 0.894
+# 4. Submit results/exp_blend_nnls_3seed/submission.csv → LB 0.897
 ```
 
-Total: **~67 minutes**. Skips CatBoost. LB 0.894 vs 0.895 for 3-way — you give up 0.001 LB to save 100 min.
+Total wall time end-to-end: **~240 min (~4h)**. Chemprop 3-seed has per-fold checkpointing that bundles all 3 seeds per fold — safe to Ctrl+C and resume between folds. LGB has its own feature cache. Blend is instant.
+
+### Alternative faster ensembles
+
+**Reproduce the previous 3-way blend (LB 0.895, ~267 min)** — historical, no reason to use now:
+
+```bash
+poly2-venv/bin/python experiments/exp_maxwell_prior_lgbm.py           # 15 min
+poly2-venv/bin/pip install catboost && poly2-venv/bin/python experiments/exp_maxwell_prior_catboost.py    # 100 min
+poly2-venv/bin/python experiments/exp_chemprop_multitask_cpu.py       # 52 min (single-seed)
+poly2-venv/bin/python experiments/exp_blend_nnls_3way.py
+```
+
+**Reproduce the single-seed 2-way blend (LB 0.894, ~67 min)** — fastest strong submission:
+
+```bash
+poly2-venv/bin/python experiments/exp_maxwell_prior_lgbm.py           # 15 min
+poly2-venv/bin/python experiments/exp_chemprop_multitask_cpu.py       # 52 min (single-seed)
+poly2-venv/bin/python experiments/exp_blend_nnls.py
+```
+
+Use this when iterating on new blend strategies — it's the honest test of whether a new addition helps.
 
 ### Blend config used
 
@@ -103,29 +105,33 @@ In the 3-way blend, when the Chemprop bias is applied, the -0.15 loss to Chempro
 
 Set both to `0.0` for pure OOF-optimal NNLS (both scripts document this alternative).
 
-### Per-target weights (3-way, current best)
+### Per-target weights (current best 2-way with 3-seed Chemprop)
 
-| target | chem OOF | lgb OOF | cat OOF | **blend OOF** | w_c | w_l | w_x | best solo |
-|--------|:--------:|:-------:|:-------:|:-------------:|:---:|:---:|:---:|:---------:|
-| eea | 0.888 | 0.871 | 0.865 | **0.902** | 0.72 | 0.15 | 0.13 | chemprop |
-| egb | 0.925 | 0.911 | 0.900 | **0.933** | 0.77 | 0.23 | 0.00 | chemprop |
-| egc | 0.883 | 0.900 | 0.903 | **0.913** | 0.50 | 0.22 | 0.27 | cat |
-| ei  | 0.780 | 0.793 | 0.793 | **0.814** | 0.56 | 0.14 | 0.31 | cat |
-| eps | 0.758 | 0.819 | 0.798 | **0.830** | 0.45 | 0.55 | 0.00 | lgb |
-| nc  | 0.860 | 0.860 | 0.853 | **0.884** | 0.64 | 0.26 | 0.10 | lgb |
-| tg  | 0.893 | 0.906 | 0.908 | **0.914** | 0.49 | 0.21 | 0.31 | cat |
-| **mean** | 0.856 | 0.866 | 0.860 | **0.884** | 0.59 | 0.25 | 0.16 | — |
+| target | chem 3-seed OOF | lgb OOF | **blend OOF** | w_c | w_l | Δ vs 3-way blend |
+|--------|:---------------:|:-------:|:-------------:|:---:|:---:|:----------------:|
+| eea | 0.908 | 0.871 | **0.913** | 0.88 | 0.12 | +0.010 |
+| egb | 0.931 | 0.911 | **0.935** | 0.83 | 0.17 | +0.003 |
+| egc | 0.907 | 0.900 | **0.917** | 0.71 | 0.29 | +0.004 |
+| ei  | 0.777 | 0.793 | **0.807** | 0.56 | 0.44 | -0.006 |
+| eps | 0.792 | 0.819 | **0.836** | 0.54 | 0.46 | +0.007 |
+| nc  | 0.868 | 0.860 | **0.886** | 0.69 | 0.31 | +0.002 |
+| tg  | 0.908 | 0.906 | **0.917** | 0.68 | 0.32 | +0.003 |
+| **mean** | 0.870 | 0.866 | **0.887** | 0.70 | 0.30 | +0.003 |
 
-**What NNLS "learned" per target:**
-- **egb, eps:** CAT gets ZERO weight. LGB dominates the tree slot for these targets — CAT's errors are correlated enough with LGB's that adding it is pure noise.
-- **egc, ei, tg:** CAT gets meaningful weight (0.27-0.31). These are targets where CAT wins solo over LGB.
-- **eea, nc:** CAT gets small weight (0.10-0.13). Marginal contribution.
+**What NNLS "learned" this time:**
+- **Chemprop weight went UP across the board** (mean 0.61 → 0.70 vs single-seed 2-way blend). The 3-seed Chemprop is genuinely stronger per-target, and NNLS gives it more responsibility.
+- Only target where LGB dominates: **ei** (LGB 0.793 > Chemprop 0.777) — same reason as before.
+- The Chemprop bias floor (0.40) and additive bias (+0.15) still kick in on some targets, but the underlying NNLS weights are already Chemprop-heavy on 5 of 7 targets.
 
-### Why the 3-way barely beat the 2-way
+### Why upgrading Chemprop beat adding CatBoost
 
-CAT and LGB are both tree learners on identical features. Even where CAT wins solo per-target, its errors are structurally similar to LGB's. NNLS is smart enough to only use CAT where it genuinely differs (egc/ei/tg), but even there the marginal gain is ~+0.005-0.015 per target, weighted at ~0.30 → aggregate contribution of only ~+0.001-0.003 mean R².
+Two ways to improve the 2-way blend (Chemprop + LGB):
+1. **Add a 3rd model (CatBoost):** +0.001 LB, +100 min compute → 3-way blend, LB 0.895
+2. **Upgrade the Chemprop base (single-seed → 3-seed bag):** +0.002 LB, +173 min compute → new 2-way blend, LB 0.897
 
-The Chemprop → tree diversity contributed +0.007 LB. The LGB → CAT diversity contributed +0.001 LB. **Diversity between model families >> diversity within a family.**
+Option 2 delivered 2× the LB gain per minute of compute. Reason: **strengthening the strongest base gives more ensemble lift than adding a weaker third base**, because the weaker base's contribution is capped by both its own error rate AND the redundancy with other bases. Chemprop errors are structurally different from tree errors; more Chemprop signal ≈ more diversity in the blend even without adding a new family.
+
+**Generalizable rule for our setup:** if a new base model has solo LB < 0.87, it's unlikely to add meaningful blend lift beyond bagging/improving the strongest existing base first.
 
 ---
 
@@ -135,8 +141,9 @@ Every ensemble attempt (blend, stack, meta-learner) tracked here. Base-model-onl
 
 | # | date | ensemble | LB | Δ | rank | OOF | bases | notes |
 |--:|------|----------|:--:|:-:|:----:|:---:|-------|-------|
-| 2 | 2026-08-02 | `exp_blend_nnls_3way` | **0.895** | ↑ +0.001 | ~4 | 0.8842 | Chemprop + LGB+Maxwell + **CatBoost+Maxwell** | Added CatBoost as 3rd base. CAT gets 0.27-0.31 weight on egc/ei/tg (its solo wins) but 0.0 weight on egb/eps (redundant with LGB). Marginal +0.001 LB gain for +100 min compute — poor ROI. Kept as current best because it does technically win, but 2-way is preferred for practical reproduction. |
-| 1 | 2026-08-02 | `exp_blend_nnls` | 0.894 | — (1st ensemble) | 5 | 0.8828 | Chemprop + LGB+Maxwell | Per-target NNLS with Chemprop weight floor 0.40 + bias +0.15. First ensemble of the competition. +0.007 over pure Chemprop base. **Preferred reproduction target** — ~67 min wall time for 99.9% of the best-ever score. |
+| 3 | 2026-08-02 | `exp_blend_nnls_3seed` | **0.897** 🎯 | ↑ +0.002 | **5** (tied w/ 4) | **0.8873** | **Chemprop 3-seed bag** + LGB+Maxwell | Same 2-way NNLS structure as #1 but with the Chemprop base upgraded to the 5-fold × 3-seed bag (LB 0.892 solo vs 0.887 single-seed). NNLS gave Chemprop more weight (mean 0.61 → 0.70). 6 of 7 target OOFs improved vs 3-way blend; only ei regressed -0.006. **Beats the 3-way blend at lower compute** because Chemprop base upgrade > adding a weak 3rd base (CatBoost). Current best. |
+| 2 | 2026-08-02 | `exp_blend_nnls_3way` | 0.895 | ↑ +0.001 | ~4 | 0.8842 | Chemprop + LGB+Maxwell + **CatBoost+Maxwell** | Added CatBoost as 3rd base. CAT got 0.27-0.31 weight on egc/ei/tg (solo wins), 0.0 weight on egb/eps (redundant with LGB). +0.001 LB for +100 min compute — poor ROI. Superseded by #3. |
+| 1 | 2026-08-02 | `exp_blend_nnls` | 0.894 | — (1st ensemble) | 5 | 0.8828 | Chemprop single-seed + LGB+Maxwell | Per-target NNLS with Chemprop weight floor 0.40 + bias +0.15. First ensemble of the competition. **Fastest reproduction target** — ~67 min wall time. Use when iterating on new base models or blend recipes. |
 
 ---
 

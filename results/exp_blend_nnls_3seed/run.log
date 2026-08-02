@@ -1,0 +1,92 @@
+22:02:01  INFO   logging to /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_blend_nnls_3seed/run.log
+22:02:01  INFO   === exp_blend_nnls_3seed ===
+22:02:01  INFO   input files verified:
+22:02:01  INFO     Chemprop 3-seed dir: /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chemprop_multitask_cpu_3seed
+22:02:01  INFO     LGB+Max dir        : /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_maxwell_prior_lgbm
+22:02:01  INFO   loading OOF from both sources...
+22:02:01  INFO     Chemprop 3-seed OOF: (7405, 4)
+22:02:01  INFO     LGB+Max         OOF: (7405, 4)
+22:02:01  INFO     aligned OOF: (7405, 5)  (train rows with both predictions)
+22:02:01  INFO   loading test submissions...
+22:02:01  INFO     Chemprop 3-seed sub: (4940, 2)
+22:02:01  INFO     LGB+Max         sub: (4940, 2)
+22:02:01  INFO     aligned sub: (4940, 4)
+22:02:01  INFO   ============================================================
+22:02:01  INFO   PER-TARGET NNLS BLEND  (Chemprop 3-seed + LGB+Max)
+22:02:01  INFO   ============================================================
+22:02:01  INFO   CONFIG: CHEMPROP_WEIGHT_FLOOR=0.4   APPLY_CHEMPROP_BIAS=0.15
+22:02:01  INFO   [eea] n_oof=221
+22:02:01  INFO     [eea] individual OOF R²:  Chemprop_3seed=0.9082   LGB+Max=0.8708
+22:02:01  INFO     [eea] NNLS raw:   w_c=0.7288  w_l=0.2760  (sum=1.0047)
+22:02:01  INFO     [eea] normalized: w_c=0.7253  w_l=0.2747
+22:02:01  INFO     [eea] + bias +0.150: w_c=0.8753  w_l=0.1247
+22:02:01  INFO     [eea] BLEND OOF R² = 0.9125   Δ vs better solo = +0.0043   Δ vs single-seed 2-way blend ref = +0.0115
+22:02:01  INFO   [egb] n_oof=337
+22:02:01  INFO     [egb] individual OOF R²:  Chemprop_3seed=0.9305   LGB+Max=0.9105
+22:02:01  INFO     [egb] NNLS raw:   w_c=0.6827  w_l=0.3269  (sum=1.0096)
+22:02:01  INFO     [egb] normalized: w_c=0.6762  w_l=0.3238
+22:02:01  INFO     [egb] + bias +0.150: w_c=0.8262  w_l=0.1738
+22:02:01  INFO     [egb] BLEND OOF R² = 0.9351   Δ vs better solo = +0.0046   Δ vs single-seed 2-way blend ref = +0.0026
+22:02:01  INFO   [egc] n_oof=2028
+22:02:01  INFO     [egc] individual OOF R²:  Chemprop_3seed=0.9070   LGB+Max=0.9000
+22:02:01  INFO     [egc] NNLS raw:   w_c=0.5602  w_l=0.4400  (sum=1.0002)
+22:02:01  INFO     [egc] normalized: w_c=0.5601  w_l=0.4399
+22:02:01  INFO     [egc] + bias +0.150: w_c=0.7101  w_l=0.2899
+22:02:01  INFO     [egc] BLEND OOF R² = 0.9170   Δ vs better solo = +0.0100   Δ vs single-seed 2-way blend ref = +0.0055
+22:02:01  INFO   [ei] n_oof=222
+22:02:01  INFO     [ei] individual OOF R²:  Chemprop_3seed=0.7766   LGB+Max=0.7933
+22:02:01  INFO     [ei] NNLS raw:   w_c=0.4126  w_l=0.5865  (sum=0.9991)
+22:02:01  INFO     [ei] normalized: w_c=0.4130  w_l=0.5870
+22:02:01  INFO     [ei] + bias +0.150: w_c=0.5630  w_l=0.4370
+22:02:01  INFO     [ei] BLEND OOF R² = 0.8073   Δ vs better solo = +0.0139   Δ vs single-seed 2-way blend ref = -0.0019
+22:02:01  INFO   [eps] n_oof=229
+22:02:01  INFO     [eps] individual OOF R²:  Chemprop_3seed=0.7916   LGB+Max=0.8186
+22:02:01  INFO     [eps] NNLS raw:   w_c=0.3965  w_l=0.6084  (sum=1.0049)
+22:02:01  INFO     [eps] normalized: w_c=0.3946  w_l=0.6054
+22:02:01  INFO     [eps] + bias +0.150: w_c=0.5446  w_l=0.4554
+22:02:01  INFO     [eps] BLEND OOF R² = 0.8362   Δ vs better solo = +0.0176   Δ vs single-seed 2-way blend ref = +0.0067
+22:02:01  INFO   [nc] n_oof=229
+22:02:01  INFO     [nc] individual OOF R²:  Chemprop_3seed=0.8681   LGB+Max=0.8603
+22:02:01  INFO     [nc] NNLS raw:   w_c=0.5412  w_l=0.4593  (sum=1.0005)
+22:02:01  INFO     [nc] normalized: w_c=0.5410  w_l=0.4590
+22:02:01  INFO     [nc] + bias +0.150: w_c=0.6910  w_l=0.3090
+22:02:01  INFO     [nc] BLEND OOF R² = 0.8858   Δ vs better solo = +0.0178   Δ vs single-seed 2-way blend ref = +0.0024
+22:02:01  INFO   [tg] n_oof=4139
+22:02:01  INFO     [tg] individual OOF R²:  Chemprop_3seed=0.9083   LGB+Max=0.9057
+22:02:01  INFO     [tg] NNLS raw:   w_c=0.5299  w_l=0.4712  (sum=1.0011)
+22:02:01  INFO     [tg] normalized: w_c=0.5293  w_l=0.4707
+22:02:01  INFO     [tg] + bias +0.150: w_c=0.6793  w_l=0.3207
+22:02:01  INFO     [tg] BLEND OOF R² = 0.9170   Δ vs better solo = +0.0087   Δ vs single-seed 2-way blend ref = +0.0044
+22:02:01  INFO   ============================================================
+22:02:01  INFO   SUMMARY: per-target OOF R² (individual vs blend)
+22:02:01  INFO   ============================================================
+22:02:01  INFO     target    chemp_3s     lgb+max       blend     w_c     w_l   w_c(prev)    2way_ref     Δ_ref
+22:02:01  INFO        eea      0.9082      0.8708      0.9125   0.875   0.125       0.750      0.9010   +0.0115
+22:02:01  INFO        egb      0.9305      0.9105      0.9351   0.826   0.174       0.770      0.9325   +0.0026
+22:02:01  INFO        egc      0.9070      0.9000      0.9170   0.710   0.290       0.550      0.9115   +0.0055
+22:02:01  INFO         ei      0.7766      0.7933      0.8073   0.563   0.437       0.580      0.8092   -0.0019
+22:02:01  INFO        eps      0.7916      0.8186      0.8362   0.545   0.455       0.450      0.8295   +0.0067
+22:02:01  INFO         nc      0.8681      0.8603      0.8858   0.691   0.309       0.650      0.8834   +0.0024
+22:02:01  INFO         tg      0.9083      0.9057      0.9170   0.679   0.321       0.540      0.9126   +0.0044
+22:02:01  INFO       MEAN      0.8701      0.8656      0.8873
+22:02:01  INFO     BLEND OOF vs Chemprop 3-seed solo: +0.0172
+22:02:01  INFO     BLEND OOF vs LGB+Max solo         : +0.0217
+22:02:01  INFO     BLEND OOF vs single-seed 2-way blend (0.8828): +0.0045
+22:02:01  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_blend_nnls_3seed/submission.csv  rows=4940
+22:02:01  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_blend_nnls_3seed/blended_oof.csv  rows=7405
+22:02:01  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_blend_nnls_3seed/blend_summary.json
+22:02:01  INFO   ============================================================
+22:02:01  INFO   DECISION GUIDANCE
+22:02:01  INFO   ============================================================
+22:02:01  INFO   Chemprop 3-seed solo LB (ref): 0.892
+22:02:01  INFO   LGB+Max solo LB (ref):         0.860
+22:02:01  INFO   Single-seed 2-way blend LB (ref): 0.894  (rank 5)
+22:02:01  INFO   3-way blend LB (current best): 0.895  (rank ~4)
+22:02:01  INFO   THIS blend OOF R² mean: 0.8873  (single-seed 2-way was 0.8828)
+22:02:01  INFO   
+22:02:01  INFO   Interpretation rules:
+22:02:01  INFO     - Blend OOF > 0.8870:  strong signal, likely LB > 0.895. SUBMIT.
+22:02:01  INFO     - Blend OOF 0.8850–0.8870:  moderate, likely LB ~0.895-0.897. SUBMIT.
+22:02:01  INFO     - Blend OOF 0.8828–0.8850:  weak, LB likely 0.894–0.896. Marginal — submit if slot avail.
+22:02:01  INFO     - Blend OOF < 0.8828:  3-seed didn't help — investigate weights.
+22:02:01  INFO   wall time: 0.1s
