@@ -24,21 +24,24 @@ Ensemble submissions depend on multiple base-model experiments. Without a tracke
 
 > **Key insight from evolution:** the 3-way blend (Chemprop single-seed + LGB + CAT, LB 0.895) was superseded by upgrading the Chemprop *base* itself to the 3-seed bag. **Stronger single Chemprop signal > adding a weaker third base (CatBoost).** Same LGB+Maxwell base as before; just swapped the Chemprop OOF/submission source.
 
+> **📢 2026-08-03 NEW BASE AVAILABLE — DO THIS NEXT:** `exp_chain_ext_lgbm.py` (LB **0.894** solo) is now the strongest LGB base — LB matches the single-seed 2-way blend. Swapping it into the current best 2-way blend in place of `exp_maxwell_prior_lgbm` (LB 0.860) should push the ensemble to **~0.900–0.905**. Solo LB gap between the two bases (Chemprop 0.892 vs chain-ext LGB 0.894) is now tiny, so NNLS will pick a much more balanced weighting than the current 0.70/0.30 split — meaning the blend should extract way more per-target complementarity. See `exp_blend_nnls_chainext.py`.
+
 ---
 
 ## Preferred vs best-scoring ensemble
 
-**Three ensembles worth knowing about:**
+**Ensembles worth knowing about:**
 
 | priority | ensemble | LB | wall time | when to use |
 |----------|----------|:--:|:---------:|-------------|
-| **max score** | `exp_blend_nnls_3seed` | **0.897** | ~240 min | final submission, best-ever score |
-| balance | `exp_blend_nnls_3way` | 0.895 | ~267 min | previous best; superseded, slower AND worse |
-| **fast iteration** | `exp_blend_nnls` (2-way, single-seed) | **0.894** | **~67 min** | quick iteration on new blend recipes, debugging blend weights, fastest path to a strong submission |
+| **⭐ next up** | `exp_blend_nnls_chainext` (2-way, chain-ext LGB + 3-seed Chemprop) | **TBD** (expected 0.900–0.905) | ~262 min | queued — chain-ext LGB solo already matches single-seed 2-way |
+| current best | `exp_blend_nnls_3seed` | 0.897 | ~240 min | previous best-ever score |
+| balance | `exp_blend_nnls_3way` | 0.895 | ~267 min | superseded, slower AND worse |
+| fast iteration | `exp_blend_nnls` (2-way, single-seed) | 0.894 | ~67 min | quick iteration on new blend recipes |
 
-The 2-way single-seed blend (67 min) hits 0.894 — only 0.003 below the best. If you're iterating on a new base model or blend strategy, run against this rather than the full 4h pipeline. Once your new base looks promising, promote it into the 3-seed pipeline for the final submission.
+**NEW: chain-ext LGB base signal (LB 0.894 solo).** With chain-ext LGB replacing mono-only LGB, the two bases (Chemprop 0.892 + chain-ext LGB 0.894) are near-tied in solo skill. Their errors are structurally different (D-MPNN vs LGB on trimer feats), so the blend should extract strong complementary signal.
 
-**Learned pattern:** upgrading the strongest base (Chemprop) gives more LB lift than adding a weaker fourth base. Prefer improving Chemprop over adding more tree models.
+**Learned pattern:** upgrading the strongest base gives more LB lift than adding a weaker fourth base. Now also: **upgrading the weakest base (LGB mono → chain-ext) is the fastest path to LB improvement when the strongest is already tuned.**
 
 ---
 
@@ -164,27 +167,34 @@ To include a third base (e.g., a Chemprop 3-seed bag, or CatBoost, or PI1M-pretr
 
 ### Alternative ensemble strategies to try (research)
 
-| strategy | expected lift over current 3-way NNLS | notes |
-|----------|:--------------------------------------:|-------|
-| **⭐ Re-blend with 3-seed Chemprop base** | +0.003 to +0.006 | Just swap the Chemprop OOF/submission source in the blend script. 3-seed solo LB 0.892 vs single-seed 0.887. **Highest-EV, do this next.** |
+| strategy | expected lift over current best (0.897) | notes |
+|----------|:---------------------------------------:|-------|
+| ~~Re-blend with 3-seed Chemprop base~~ | ~~+0.003 to +0.006~~ | ✅ **DONE** — LB 0.897 (current best). |
+| **⭐ Re-blend with chain-ext LGB + 3-seed Chemprop (2-way)** | **+0.003 to +0.008** | Chain-ext LGB solo (LB 0.894) now nearly ties Chemprop 3-seed (LB 0.892). NNLS will pick a much more balanced weighting than 0.70/0.30. **Highest-EV single lever now.** Fast (~1 min to write, blend runs in <1 sec). |
+| **3-way blend with chain-ext LGB + mono-LGB + 3-seed Chemprop** | 0 to +0.005 | Safety net: if chain-ext regressed on nc, mono-LGB can take that slot. Compute already exists. |
 | **Rank-based blend** (rank predictions, blend ranks, then map back) | 0 to +0.005 | Robust to per-model scale bias. Good if models have different bias profiles. |
 | ~~Add CatBoost as 3rd base~~ | ~~+0.002 to +0.008~~ | **Attempted 2026-08-02. Actual: +0.001 LB for +100 min compute.** LGB↔CAT correlation too high. |
-| ~~Add bagged Chemprop as 4th base~~ | | Actually easier as a base *replacement* (see top row) than as a 4th base — the 3-seed OOFs strictly improve on single-seed OOFs, no reason to keep both. |
+| ~~Add bagged Chemprop as 4th base~~ | | Actually easier as a base *replacement* (see top row) than as a 4th base. |
 | **Add Chemprop with `--polymer` mode as 4th base** | +0.002 to +0.005 | Weighted repeat-unit bonds (Coley group fork). Different molecular representation. |
+| **Chemprop on trimer SMILES** (instead of monomer) | +0.002 to +0.006 | Trimer graphs 3× larger — big compute hit, but if chain extension worked for LGB it may work even better for a graph encoder. |
 | **Ridge meta-stacker** on OOF (learned per-target linear combo without NNLS constraint) | 0 to +0.003 | Risky on 220-row small targets. May overfit. |
-| **Per-target Bayesian model averaging** (weights proportional to `exp(-N * MSE_oof / 2)`) | +0.001 to +0.005 | Statistically principled but similar to NNLS in practice. |
 | **Cross-target meta-features** (feed OOF of other 6 targets as features to a per-target Ridge on top of NNLS) | +0.003 to +0.008 | Second bite at matrix completion. Watch small-data overfit. |
 
-**Key lesson from adding CatBoost:** diversity within a model family (tree ↔ tree) gives ~0.001 LB per new base. Diversity across families (tree ↔ graph like Chemprop) gave ~0.007 LB. **Future ensemble adds should be from new families**, not another tree.
+**Key lessons:**
+- Diversity within a model family (tree ↔ tree) gives ~0.001 LB per new base.
+- Diversity across families (tree ↔ graph) gives ~0.007 LB.
+- **Upgrading the strongest base > adding a weaker base of same family** (3-seed Chemprop upgrade added +0.002 LB, vs CatBoost as 3rd base +0.001 LB).
+- **Upgrading the WEAKEST base can give the biggest lift** when the strongest is already tuned — chain-ext LGB alone jumped from LB 0.860 to LB 0.894 (+0.034), which is the largest single-base LB lift we've seen. Now expected to propagate into an outsized blend gain.
 
 ### New base signals available (for future blend construction)
 
 | base | LB solo | script | wall time | notes |
 |------|:-------:|--------|:---------:|-------|
 | Chemprop 1-seed | 0.887 | `exp_chemprop_multitask_cpu.py` | 52 min | Original — kept for historical alignment |
-| **Chemprop 3-seed bag** | **0.892** | `exp_chemprop_multitask_cpu_3seed.py` | 225 min | **Best solo. Preferred Chemprop base for future blends.** |
-| LGB + Maxwell | 0.860 | `exp_maxwell_prior_lgbm.py` | 15 min | Tree base with physics prior |
+| **Chemprop 3-seed bag** | **0.892** | `exp_chemprop_multitask_cpu_3seed.py` | 225 min | Best neural solo. Preferred Chemprop base for blends. |
+| LGB + Maxwell (mono-only) | 0.860 | `exp_maxwell_prior_lgbm.py` | 15 min | Original tree base — superseded by chain-ext |
 | CatBoost + Maxwell | ~0.860 | `exp_maxwell_prior_catboost.py` | 100 min | Marginal ensemble value |
+| **⭐ LGB + chain-ext + Maxwell** | **0.894** 🏆 | `exp_chain_ext_lgbm.py` | 37 min | **Best solo overall. Trimer chain extension unlocked +0.034 LB vs mono-only. Preferred LGB base for blends.** |
 
 ### Ensemble reproduction gotchas
 

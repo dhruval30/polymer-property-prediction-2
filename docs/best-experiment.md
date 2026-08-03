@@ -28,31 +28,41 @@ This doc always describes **the single best submission** we've made on the publi
 
 | field | value |
 |---|---|
-| **experiment** | `exp_chemprop_multitask_cpu_3seed` |
-| **LB score** | **0.892** |
-| **CV OOF mean R²** | 0.8701 |
-| **submission file** | `results/exp_chemprop_multitask_cpu_3seed/submission.csv` |
-| **script** | `experiments/exp_chemprop_multitask_cpu_3seed.py` |
-| **wall time** | 224.7 min on Mac CPU (5-fold × 3-seed × 60 epochs + 3 refits × 50 epochs = 18 model trainings total) |
-| **Δ vs prior solo best** | +0.005 (single-seed Chemprop at 0.887) |
+| **experiment** | `exp_chain_ext_lgbm` |
+| **LB score** | **0.894** 🏆 (best solo of the competition) |
+| **CV OOF mean R²** | 0.8662 |
+| **submission file** | `results/exp_chain_ext_lgbm/submission.csv` |
+| **script** | `experiments/exp_chain_ext_lgbm.py` |
+| **wall time** | 36.5 min on Mac CPU (featurize monomer + trimer + LGB × 5-fold × 7 targets + Maxwell blend) |
+| **Δ vs prior solo best** | +0.002 (3-seed Chemprop at 0.892) |
 
-The 3-seed bag improves OOF by +0.015 mean R² over single-seed (biggest wins: eps +0.033, egc +0.024, eea +0.020, tg +0.015). LB gain is smaller (+0.005) because the bag already averages some of the variance that single-seed's refit-on-full-data captured. This is the best-performing SOLO base model in the pipeline — makes it the strongest candidate to replace single-seed Chemprop in the ensemble blend.
+**A single LightGBM model matched the 2-way blend (single-seed) at LB 0.894.** Extended every polymer `*A*` SMILES to a trimer `*AAA*` (head-to-tail via RDKit RWMol), computed a streamlined feature stack on the trimer (RDKit descriptors, Morgan-r2, MACCS, atom-pair, Avalon), and stacked it alongside the full monomer stack (~14k features total + 14 aux). Trimer features carried 38–72% of the per-target gain share — LGB actively prefers trimer features on tg (72%), ei (69%), egb (63%). Maxwell EPS↔Nc physics prior applied on top. **LB gap +0.034 vs prior LGB best (0.860 Maxwell mono-only)** — chain extension unlocked way more LB skill than the +0.005 OOF gain suggested, likely because trimer features generalize to test-set polymers that don't share monomer patterns with train.
 
-### Per-target OOF R² (this submission — 2-way with 3-seed Chemprop)
+### Per-target OOF R² (best-solo — chain-extended LGB)
 
-| target | chemprop 3-seed | lgb+max | **blend** | w_c | w_l | Δ vs 3-way blend ref |
-|--------|:---------------:|:-------:|:---------:|:---:|:---:|:--------------------:|
-| eea | 0.9082 | 0.8708 | **0.9125** | 0.88 | 0.12 | +0.010 |
-| egb | 0.9305 | 0.9105 | **0.9351** | 0.83 | 0.17 | +0.003 |
-| egc | 0.9070 | 0.9000 | **0.9170** | 0.71 | 0.29 | +0.004 |
-| ei  | 0.7766 | 0.7933 | **0.8073** | 0.56 | 0.44 | -0.006 |
-| eps | 0.7916 | 0.8186 | **0.8362** | 0.54 | 0.46 | +0.007 |
-| nc  | 0.8681 | 0.8603 | **0.8858** | 0.69 | 0.31 | +0.002 |
-| tg  | 0.9083 | 0.9057 | **0.9170** | 0.68 | 0.32 | +0.003 |
-| **mean OOF** | **0.8701** | **0.8656** | **0.8873** | 0.70 | 0.30 | +0.003 |
-| **LB actual** | 0.892 | 0.860 | **0.897** | — | — | +0.002 |
+| target | mono-only LGB (LB 0.860) | **chain-ext LGB (LB 0.894)** | Δ OOF | trimer gain share |
+|--------|:------------------------:|:----------------------------:|:-----:|:-----------------:|
+| eea | 0.8543 | **0.8734** | +0.019 | 43% |
+| egb | 0.9050 | **0.9087** | +0.004 | 63% |
+| egc | 0.8966 | **0.9023** | +0.006 | 38% |
+| ei  | 0.7944 | **0.8041** | +0.010 | 69% |
+| eps | 0.8186 | **0.8218** | +0.003 | 56% |
+| nc  | 0.8603 | **0.8471** | **-0.013** ⚠️ | 63% (dropped) |
+| tg  | 0.9026 | **0.9063** | +0.004 | 72% |
+| **mean OOF** | **0.8617** | **0.8662** | **+0.005** | avg 57% |
+| **LB actual** | 0.860 | **0.894** | **+0.034** | — |
 
-6 of 7 targets improved over the 3-way blend (which included CatBoost). The stronger 3-seed Chemprop base carries more weight than the CAT contribution ever did — and does so at *lower total wall time* than the 3-way blend (240 min vs 267 min).
+6 of 7 targets improved on OOF; only **nc regressed -0.013** (probably because nc's tight value range 1.5–2.7 amplifies R² sensitivity to prediction noise, and trimer features add structural context that blurs subtle refractive-index signal). Despite the nc regression, LB shot up +0.034 — trimer features clearly generalize to test-set polymers better than the OOF suggested.
+
+### Ensemble (best overall) — 2-way NNLS blend, still current best on LB
+
+| field | value |
+|---|---|
+| **experiment** | `exp_blend_nnls_3seed` (ENSEMBLE) |
+| **LB score** | **0.897** 🎯 |
+| **CV OOF mean R²** | 0.8873 |
+
+The chain-ext LGB solo at 0.894 is **only 0.003 below the current best ensemble** — meaning a new blend of chain-ext LGB + 3-seed Chemprop should push us well above 0.897. See [best-ensemble.md](best-ensemble.md).
 
 ### Approach in one paragraph
 
@@ -70,16 +80,19 @@ Total ~240 min from clean repo (~225 min Chemprop 3-seed + ~15 min LGB+Maxwell +
 
 ### What NOT in this submission (top future levers, ordered by EV)
 
-- ~~Re-blend with 3-seed Chemprop~~ ✅ **DONE** — this submission. +0.002 LB.
-- ~~Chemprop 3-seed bagging~~ ✅ **DONE**.
+- ~~Re-blend with 3-seed Chemprop~~ ✅ **DONE** — LB 0.897, current best ensemble.
+- ~~Chemprop 3-seed bagging~~ ✅ **DONE** — LB 0.892 solo.
 - ~~Longer Chemprop training (60 epochs)~~ ✅ **DONE**.
-- ~~Add CatBoost as third base~~ ✅ **DONE** — marginal, and now superseded by the 2-way 3-seed variant.
-- ❌ **3-way blend with 3-seed Chemprop + LGB + CAT.** Likely +0.001 LB based on prior 3-way vs 2-way pattern. ~+100 min if CAT cache already exists. Marginal but easy.
-- ❌ **LB distribution shift probe** (research doc §9) — 3 subs could unlock up to +0.03 hidden shift correction. **HIGHEST-EV single lever** if there's a shift. Getting more attractive as we approach the ceiling.
+- ~~Add CatBoost as third base~~ ✅ **DONE** — marginal, now superseded.
+- ~~Chain extension (polymer → trimer features)~~ ✅ **DONE** — LB 0.894 solo, biggest single-experiment LB jump for LGB (+0.034 vs mono-only). New best solo.
+- ⭐ **Re-blend with chain-ext LGB + 3-seed Chemprop (2-way NNLS).** Chain-ext LGB solo (LB 0.894) is now nearly tied with Chemprop 3-seed (LB 0.892) — NNLS will find a more balanced weighting than the previous 0.70/0.30 split. **Expected LB: 0.900–0.905**, +0.003 to +0.008 lift. ~1 min to write, blend runs in <1 sec (bases already exist). **HIGHEST-EV next lever.**
+- ❌ **3-way blend with chain-ext LGB + mono-LGB + 3-seed Chemprop.** NNLS could pick mono-LGB for nc (where chain-ext regressed) and chain-ext elsewhere. Safer than 2-way — but if 2-way already breaks 0.900 may be unnecessary. ~1 min to write.
+- ❌ **LB distribution shift probe** (research doc §9) — 3 subs could unlock up to +0.03 hidden shift correction. Still on the table but chain extension may have already captured most of the shift signal.
 - ❌ **Chemprop `--polymer` mode** (Coley group fork) with weighted repeat-unit bonds. ~4h more.
+- ❌ **Chemprop on trimer SMILES instead of monomer.** Trimer graphs would be 3× larger — big compute hit. Worth trying if chain-ext LGB re-blend saturates.
 - ❌ **PI1M SSL pretraining** on tg / egc chemistry (research doc §6). Kaggle GPU only.
 - ❌ **5-seed Chemprop bag instead of 3-seed** — diminishing returns, another ~3.5h.
-- ❌ **Ridge meta-stacker with cross-target OOF as features** (research doc §8.5).
+- ❌ **Fix nc regression** — could try chain-ext with only monomer features for nc, or increase chain length to 5-mer only for nc.
 
 ---
 
@@ -89,6 +102,7 @@ Every submission ever made, most-recent first. Arrows show delta vs previous ent
 
 | # | date | experiment | LB | Δ | rank | OOF | notes |
 |--:|------|------------|:--:|:-:|:----:|:---:|-------|
+| 11 | 2026-08-03 | `exp_chain_ext_lgbm` | **0.894** 🏆 (best solo) | — vs blend | ~5 | 0.8662 | **Polymer → trimer chain extension.** Extended each `*A*` monomer SMILES to `*AAA*` trimer via RDKit RWMol, computed streamlined feature stack on trimer, stacked with monomer full stack (~14k features + 14 aux). Maxwell prior on top. Trimer features earned 38–72% per-target gain share (biggest: tg 72%, ei 69%). 6 of 7 OOF wins; only nc regressed -0.013. **LB +0.034 vs mono-only Maxwell LGB (0.860) — massive jump.** New best solo, ties single-seed 2-way blend. Next: re-blend with 3-seed Chemprop → expect 0.900+. |
 | 10 | 2026-08-02 | `exp_blend_nnls_3seed` **(ensemble)** | **0.897** 🎯 | ↑ +0.002 | **5** (tied with 4) | **0.8873** | 2-way per-target NNLS blend of **3-seed** Chemprop + LGB+Maxwell. Same NNLS + bias mitigations as single-seed 2-way (floor 0.40, bias +0.15). Chemprop base upgrade from 0.887 → 0.892 solo propagated as +0.002 LB blend lift. NNLS gave Chemprop more weight per-target (mean 0.61 → 0.70) because 3-seed base is genuinely stronger. **Beats the 3-way blend at lower wall time** — Chemprop base upgrade > adding CatBoost. Rank 3 (Opus 6.7, 0.898) only +0.001 away. |
 | 9 | 2026-08-02 | `exp_chemprop_multitask_cpu_3seed` | 0.892 (best solo) | — vs blend | ~6 | 0.8701 | 5-fold × 3-seed Chemprop bag, max_epochs 60, patience 10. 224 min wall time. OOF beats single-seed by +0.015. LB +0.005 vs single-seed. Best solo model in the pipeline — feeds into blend #10. |
 | 8 | 2026-08-02 | `exp_blend_nnls_3way` **(ensemble)** | **0.895** 🎯 | ↑ +0.001 | ~4 | 0.8842 | 3-way per-target NNLS blend of Chemprop + LGB+Maxwell + CatBoost+Maxwell. Same bias-mitigation config as 2-way (Chemprop floor 0.40, bias +0.15). CAT gets meaningful weight (0.27-0.31) on egc/ei/tg where it wins solo; zero weight on egb/eps where redundant with LGB. Blend OOF +0.001 over 2-way. LB +0.001. Marginal gain for +100 min CAT compute — poor ROI. |
@@ -148,7 +162,8 @@ Score targets by remaining experiments (ordered by EV):
 | catboost | 0.8602 | ~0.860 est | ~-0.000 | — (unsubmitted) | tied with LGB solo, wall time 100 min |
 | blend_nnls (2-way) | 0.8828 | 0.894 | +0.011 | +0.007 | ensemble of chemprop+lgb, per-target NNLS with Chemprop bias. Preferred for reproduction. |
 | blend_nnls_3way | 0.8842 | 0.895 | +0.011 | +0.001 | 3-way (adds CatBoost). Marginal +0.001 for +100 min compute. |
-| chemprop_3seed | 0.8701 | 0.892 | +0.022 | +0.005 (vs single-seed) | Best solo model. Smaller gap than single-seed because bagging already captures some refit variance. |
-| **blend_nnls_3seed** | **0.8873** | **0.897** | **+0.010** | **+0.002** | **2-way blend with 3-seed Chemprop replacing single-seed. Best overall — Chemprop base upgrade > adding CatBoost.** |
+| chemprop_3seed | 0.8701 | 0.892 | +0.022 | +0.005 (vs single-seed) | Solo Chemprop bag. Smaller gap than single-seed because bagging already captures some refit variance. |
+| **blend_nnls_3seed** | **0.8873** | **0.897** | **+0.010** | **+0.002** | **2-way blend with 3-seed Chemprop. Best overall.** |
+| **chain_ext_lgbm** | **0.8662** | **0.894** | **+0.028** | **+0.002** (vs 3-seed Chemprop solo) | **NEW BEST SOLO.** Polymer → trimer chain extension applied to LGB. LB-OOF gap +0.028 huge — chain-ext features generalize to test-set polymers much better than fold-CV suggests. Trimer captures signal that survives distribution shift. |
 
 **Read of the trend.** The LGB experiments (baseline through maxwell) had a shrinking / negative OOF-LB gap because aux-augmented CV was inflating OOF. Chemprop broke the pattern: honest OOF (no aux) + a model family that benefits substantially from more training data → OOF underestimated LB by 0.032. Going forward, when comparing across model families we should trust LB, not OOF. Within a single model family, OOF trends remain informative.
