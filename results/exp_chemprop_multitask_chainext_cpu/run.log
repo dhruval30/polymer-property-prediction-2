@@ -1,0 +1,1075 @@
+13:51:51  INFO   logging to /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chemprop_multitask_chainext_cpu/run.log
+13:51:51  INFO   ============================================================
+13:51:51  INFO   === exp_chemprop_multitask_chainext_cpu ===
+13:51:51  INFO   MODE=full   CHAIN_N_UNITS=3
+13:51:51  INFO   CONFIG: device=cpu  n_splits=5  split_seed=42  model_seeds=(42, 43, 44)  max_epochs=60  patience=10  batch_size=64
+13:51:51  INFO   MODEL: d_h=300 depth=4 mp_dropout=0.05  ffn_hidden=300 ffn_layers=2 ffn_dropout=0.05  batch_norm=True
+13:51:51  INFO   BAG: 3-seed × 5-fold = 15 CV models + 3 refit models = 18 total
+13:51:51  INFO   torch threads: 8
+13:51:51  INFO   loading train.csv / test.csv
+13:51:51  INFO   train raw: (7409, 3)   test raw: (4940, 3)
+13:51:51  INFO   canonicalizing 10605 unique raw SMILES
+13:51:55  INFO   collapsing 4 duplicate (canon, target_type) rows in train by mean
+13:51:55  INFO   train after dedup: (7405, 4)
+13:51:55  INFO   per-target train counts: {'tg': 4139, 'egc': 2028, 'egb': 337, 'eps': 229, 'nc': 229, 'ei': 222, 'eea': 221}
+13:51:55  INFO   per-target test  counts: {'tg': 2763, 'egc': 1352, 'egb': 224, 'eps': 153, 'nc': 153, 'ei': 148, 'eea': 147}
+13:51:55  INFO   wide train: n_canon=5920  y shape=(5920, 7)  NaN fraction=82.1%
+13:51:55  INFO   unique test SMILES: 4133
+13:51:55  INFO   expanding 8990 unique monomer SMILES → 3-mer chains
+13:52:11  INFO     chain extension: 8990 extended, 0 fell back to original (0.0%)
+13:52:11  INFO   trimer expansion examples (3):
+13:52:11  INFO     mono[0]: *CCCCCCC(=O)NCCCCCCNC(=O)CCCCCCO*
+13:52:11  INFO     tri [0]: *CCCCCCC(=O)NCCCCCCNC(=O)CCCCCCOCCCCCCC(=O)NCCCCCCNC(=O)CCCCCCOCCCCCCC...
+13:52:11  INFO     mono[1]: *CCCCCCOC(=O)OCCCCCCOC(=O)OCCCCCCOc1ccc(Oc2ccc(O*)cc2)cc1
+13:52:11  INFO     tri [1]: *CCCCCCOC(=O)OCCCCCCOC(=O)OCCCCCCOc1ccc(Oc2ccc(OCCCCCCOC(=O)OCCCCCCOC(...
+13:52:11  INFO     mono[2]: *C1C(*)C2CC1C(C(=O)OCCc1ccccc1)C2C(=O)OCCc1ccccc1
+13:52:11  INFO     tri [2]: *C1C2CC(C(C(=O)OCCc3ccccc3)C2C(=O)OCCc2ccccc2)C1C1C2CC(C(C(=O)OCCc3ccc...
+13:52:11  INFO   ============================================================
+13:52:11  INFO   FOLD 0  (3-seed bag)
+13:52:11  INFO   n_train_canon=4736   n_val_canon=1184
+13:52:11  INFO   [fold 0 seed 42 (1/3)] starting...
+13:53:17  INFO   [fold 0 seed 42 (1/3)] epoch   0  train_loss=0.3401  val_loss=0.3514  epoch_time=59.5s  elapsed=1.0min
+13:54:09  INFO   [fold 0 seed 42 (1/3)] epoch   1  train_loss=0.2737  val_loss=0.3501  epoch_time=52.3s  elapsed=1.9min
+13:55:01  INFO   [fold 0 seed 42 (1/3)] epoch   2  train_loss=0.2290  val_loss=0.2094  epoch_time=52.0s  elapsed=2.7min
+13:56:03  INFO   [fold 0 seed 42 (1/3)] epoch   3  train_loss=0.2004  val_loss=0.2708  epoch_time=62.1s  elapsed=3.8min
+13:57:01  INFO   [fold 0 seed 42 (1/3)] epoch   4  train_loss=0.1834  val_loss=0.2401  epoch_time=58.0s  elapsed=4.7min
+13:57:52  INFO   [fold 0 seed 42 (1/3)] epoch   5  train_loss=0.1767  val_loss=0.2442  epoch_time=50.1s  elapsed=5.6min
+13:58:34  INFO   [fold 0 seed 42 (1/3)] epoch   6  train_loss=0.1683  val_loss=0.1491  epoch_time=42.5s  elapsed=6.3min
+13:59:15  INFO   [fold 0 seed 42 (1/3)] epoch   7  train_loss=0.1520  val_loss=0.1445  epoch_time=40.6s  elapsed=7.0min
+14:00:08  INFO   [fold 0 seed 42 (1/3)] epoch   8  train_loss=0.1381  val_loss=0.1500  epoch_time=53.8s  elapsed=7.8min
+14:01:00  INFO   [fold 0 seed 42 (1/3)] epoch   9  train_loss=0.1377  val_loss=0.1445  epoch_time=51.6s  elapsed=8.7min
+14:01:45  INFO   [fold 0 seed 42 (1/3)] epoch  10  train_loss=0.1358  val_loss=0.1629  epoch_time=44.4s  elapsed=9.4min
+14:02:33  INFO   [fold 0 seed 42 (1/3)] epoch  11  train_loss=0.1248  val_loss=0.1536  epoch_time=48.2s  elapsed=10.3min
+14:03:15  INFO   [fold 0 seed 42 (1/3)] epoch  12  train_loss=0.1132  val_loss=0.1463  epoch_time=42.3s  elapsed=11.0min
+14:03:59  INFO   [fold 0 seed 42 (1/3)] epoch  13  train_loss=0.1039  val_loss=0.1227  epoch_time=44.4s  elapsed=11.7min
+14:04:41  INFO   [fold 0 seed 42 (1/3)] epoch  14  train_loss=0.1013  val_loss=0.1392  epoch_time=42.1s  elapsed=12.4min
+14:05:28  INFO   [fold 0 seed 42 (1/3)] epoch  15  train_loss=0.0971  val_loss=0.1271  epoch_time=46.2s  elapsed=13.2min
+14:06:21  INFO   [fold 0 seed 42 (1/3)] epoch  16  train_loss=0.0975  val_loss=0.1269  epoch_time=53.2s  elapsed=14.1min
+14:07:13  INFO   [fold 0 seed 42 (1/3)] epoch  17  train_loss=0.0905  val_loss=0.1194  epoch_time=51.9s  elapsed=14.9min
+14:07:59  INFO   [fold 0 seed 42 (1/3)] epoch  18  train_loss=0.0844  val_loss=0.1127  epoch_time=46.1s  elapsed=15.7min
+14:08:37  INFO   [fold 0 seed 42 (1/3)] epoch  19  train_loss=0.0824  val_loss=0.1218  epoch_time=38.2s  elapsed=16.3min
+14:09:17  INFO   [fold 0 seed 42 (1/3)] epoch  20  train_loss=0.0803  val_loss=0.1301  epoch_time=40.2s  elapsed=17.0min
+14:09:59  INFO   [fold 0 seed 42 (1/3)] epoch  21  train_loss=0.0758  val_loss=0.1199  epoch_time=41.6s  elapsed=17.7min
+14:10:38  INFO   [fold 0 seed 42 (1/3)] epoch  22  train_loss=0.0702  val_loss=0.1105  epoch_time=39.1s  elapsed=18.3min
+14:11:17  INFO   [fold 0 seed 42 (1/3)] epoch  23  train_loss=0.0719  val_loss=0.1158  epoch_time=39.5s  elapsed=19.0min
+14:11:56  INFO   [fold 0 seed 42 (1/3)] epoch  24  train_loss=0.0659  val_loss=0.1163  epoch_time=38.2s  elapsed=19.6min
+14:12:33  INFO   [fold 0 seed 42 (1/3)] epoch  25  train_loss=0.0600  val_loss=0.1125  epoch_time=37.5s  elapsed=20.3min
+14:13:11  INFO   [fold 0 seed 42 (1/3)] epoch  26  train_loss=0.0648  val_loss=0.1091  epoch_time=38.0s  elapsed=20.9min
+14:14:52  INFO   [fold 0 seed 42 (1/3)] epoch  27  train_loss=0.0617  val_loss=0.1070  epoch_time=100.9s  elapsed=22.6min
+14:16:20  INFO   [fold 0 seed 42 (1/3)] epoch  28  train_loss=0.0574  val_loss=0.1075  epoch_time=88.2s  elapsed=24.0min
+14:17:09  INFO   [fold 0 seed 42 (1/3)] epoch  29  train_loss=0.0528  val_loss=0.1090  epoch_time=49.0s  elapsed=24.9min
+14:17:57  INFO   [fold 0 seed 42 (1/3)] epoch  30  train_loss=0.0552  val_loss=0.1090  epoch_time=47.3s  elapsed=25.7min
+14:18:53  INFO   [fold 0 seed 42 (1/3)] epoch  31  train_loss=0.0532  val_loss=0.1060  epoch_time=56.9s  elapsed=26.6min
+14:19:36  INFO   [fold 0 seed 42 (1/3)] epoch  32  train_loss=0.0511  val_loss=0.1067  epoch_time=42.2s  elapsed=27.3min
+14:20:14  INFO   [fold 0 seed 42 (1/3)] epoch  33  train_loss=0.0510  val_loss=0.1029  epoch_time=38.3s  elapsed=27.9min
+14:20:52  INFO   [fold 0 seed 42 (1/3)] epoch  34  train_loss=0.0482  val_loss=0.1074  epoch_time=38.2s  elapsed=28.6min
+14:21:30  INFO   [fold 0 seed 42 (1/3)] epoch  35  train_loss=0.0470  val_loss=0.1120  epoch_time=38.1s  elapsed=29.2min
+14:22:09  INFO   [fold 0 seed 42 (1/3)] epoch  36  train_loss=0.0457  val_loss=0.1149  epoch_time=38.7s  elapsed=29.9min
+14:22:47  INFO   [fold 0 seed 42 (1/3)] epoch  37  train_loss=0.0427  val_loss=0.1037  epoch_time=37.8s  elapsed=30.5min
+14:23:24  INFO   [fold 0 seed 42 (1/3)] epoch  38  train_loss=0.0451  val_loss=0.1082  epoch_time=37.7s  elapsed=31.1min
+14:24:02  INFO   [fold 0 seed 42 (1/3)] epoch  39  train_loss=0.0414  val_loss=0.1070  epoch_time=37.7s  elapsed=31.7min
+14:24:39  INFO   [fold 0 seed 42 (1/3)] epoch  40  train_loss=0.0406  val_loss=0.1002  epoch_time=37.3s  elapsed=32.4min
+14:25:19  INFO   [fold 0 seed 42 (1/3)] epoch  41  train_loss=0.0385  val_loss=0.1026  epoch_time=39.3s  elapsed=33.0min
+14:25:59  INFO   [fold 0 seed 42 (1/3)] epoch  42  train_loss=0.0382  val_loss=0.1020  epoch_time=39.8s  elapsed=33.7min
+14:26:48  INFO   [fold 0 seed 42 (1/3)] epoch  43  train_loss=0.0400  val_loss=0.1092  epoch_time=49.8s  elapsed=34.5min
+14:27:38  INFO   [fold 0 seed 42 (1/3)] epoch  44  train_loss=0.0397  val_loss=0.1045  epoch_time=49.6s  elapsed=35.3min
+14:28:34  INFO   [fold 0 seed 42 (1/3)] epoch  45  train_loss=0.0374  val_loss=0.1072  epoch_time=55.9s  elapsed=36.3min
+14:29:18  INFO   [fold 0 seed 42 (1/3)] epoch  46  train_loss=0.0363  val_loss=0.1026  epoch_time=44.5s  elapsed=37.0min
+14:30:05  INFO   [fold 0 seed 42 (1/3)] epoch  47  train_loss=0.0331  val_loss=0.1010  epoch_time=46.5s  elapsed=37.8min
+14:30:49  INFO   [fold 0 seed 42 (1/3)] epoch  48  train_loss=0.0337  val_loss=0.1028  epoch_time=44.3s  elapsed=38.5min
+14:31:36  INFO   [fold 0 seed 42 (1/3)] epoch  49  train_loss=0.0334  val_loss=0.1051  epoch_time=47.1s  elapsed=39.3min
+14:32:15  INFO   [fold 0 seed 42 (1/3)] epoch  50  train_loss=0.0339  val_loss=0.1039  epoch_time=38.8s  elapsed=40.0min
+14:32:19  INFO   [fold 0 seed 42 (1/3)] done. time=40.0min  final_epoch=51  approx_best_epoch=41
+14:32:19  INFO   [fold 0 seed 42 (1/3)] per-target R²: eea=0.903  egb=0.931  egc=0.893  ei=0.825  eps=0.812  nc=0.732  tg=0.913
+14:32:19  INFO   [fold 0 seed 43 (2/3)] starting...
+14:33:16  INFO   [fold 0 seed 43 (2/3)] epoch   0  train_loss=0.3544  val_loss=0.5555  epoch_time=51.2s  elapsed=0.9min
+14:34:25  INFO   [fold 0 seed 43 (2/3)] epoch   1  train_loss=0.2441  val_loss=0.2501  epoch_time=69.2s  elapsed=2.0min
+14:35:18  INFO   [fold 0 seed 43 (2/3)] epoch   2  train_loss=0.2265  val_loss=0.2333  epoch_time=52.4s  elapsed=2.9min
+14:36:00  INFO   [fold 0 seed 43 (2/3)] epoch   3  train_loss=0.2000  val_loss=0.1974  epoch_time=41.7s  elapsed=3.6min
+14:36:38  INFO   [fold 0 seed 43 (2/3)] epoch   4  train_loss=0.1852  val_loss=0.2497  epoch_time=38.0s  elapsed=4.2min
+14:37:17  INFO   [fold 0 seed 43 (2/3)] epoch   5  train_loss=0.1689  val_loss=0.1462  epoch_time=39.5s  elapsed=4.9min
+14:37:56  INFO   [fold 0 seed 43 (2/3)] epoch   6  train_loss=0.1548  val_loss=0.1598  epoch_time=39.4s  elapsed=5.5min
+14:38:42  INFO   [fold 0 seed 43 (2/3)] epoch   7  train_loss=0.1417  val_loss=0.1545  epoch_time=45.9s  elapsed=6.3min
+14:39:20  INFO   [fold 0 seed 43 (2/3)] epoch   8  train_loss=0.1355  val_loss=0.1572  epoch_time=37.5s  elapsed=6.9min
+14:39:58  INFO   [fold 0 seed 43 (2/3)] epoch   9  train_loss=0.1274  val_loss=0.1264  epoch_time=38.2s  elapsed=7.6min
+14:40:48  INFO   [fold 0 seed 43 (2/3)] epoch  10  train_loss=0.1179  val_loss=0.1362  epoch_time=50.0s  elapsed=8.4min
+14:41:35  INFO   [fold 0 seed 43 (2/3)] epoch  11  train_loss=0.1185  val_loss=0.1266  epoch_time=46.6s  elapsed=9.2min
+14:42:16  INFO   [fold 0 seed 43 (2/3)] epoch  12  train_loss=0.1111  val_loss=0.1479  epoch_time=41.7s  elapsed=9.9min
+14:43:08  INFO   [fold 0 seed 43 (2/3)] epoch  13  train_loss=0.1020  val_loss=0.1161  epoch_time=51.6s  elapsed=10.7min
+14:43:55  INFO   [fold 0 seed 43 (2/3)] epoch  14  train_loss=0.0989  val_loss=0.1412  epoch_time=47.0s  elapsed=11.5min
+14:44:39  INFO   [fold 0 seed 43 (2/3)] epoch  15  train_loss=0.0946  val_loss=0.1183  epoch_time=43.6s  elapsed=12.2min
+14:45:23  INFO   [fold 0 seed 43 (2/3)] epoch  16  train_loss=0.0895  val_loss=0.1321  epoch_time=44.3s  elapsed=13.0min
+14:46:10  INFO   [fold 0 seed 43 (2/3)] epoch  17  train_loss=0.0847  val_loss=0.1225  epoch_time=47.3s  elapsed=13.8min
+14:47:05  INFO   [fold 0 seed 43 (2/3)] epoch  18  train_loss=0.0815  val_loss=0.1255  epoch_time=55.1s  elapsed=14.7min
+14:47:52  INFO   [fold 0 seed 43 (2/3)] epoch  19  train_loss=0.0883  val_loss=0.1401  epoch_time=47.0s  elapsed=15.5min
+14:48:32  INFO   [fold 0 seed 43 (2/3)] epoch  20  train_loss=0.0764  val_loss=0.1132  epoch_time=39.4s  elapsed=16.1min
+14:49:11  INFO   [fold 0 seed 43 (2/3)] epoch  21  train_loss=0.0745  val_loss=0.1130  epoch_time=38.9s  elapsed=16.8min
+14:49:49  INFO   [fold 0 seed 43 (2/3)] epoch  22  train_loss=0.0706  val_loss=0.1108  epoch_time=38.1s  elapsed=17.4min
+14:50:27  INFO   [fold 0 seed 43 (2/3)] epoch  23  train_loss=0.0695  val_loss=0.1077  epoch_time=37.8s  elapsed=18.0min
+14:51:05  INFO   [fold 0 seed 43 (2/3)] epoch  24  train_loss=0.0612  val_loss=0.1132  epoch_time=38.3s  elapsed=18.7min
+14:51:43  INFO   [fold 0 seed 43 (2/3)] epoch  25  train_loss=0.0621  val_loss=0.1091  epoch_time=37.7s  elapsed=19.3min
+14:52:20  INFO   [fold 0 seed 43 (2/3)] epoch  26  train_loss=0.0605  val_loss=0.1059  epoch_time=37.5s  elapsed=19.9min
+14:52:58  INFO   [fold 0 seed 43 (2/3)] epoch  27  train_loss=0.0597  val_loss=0.1105  epoch_time=38.2s  elapsed=20.6min
+14:53:36  INFO   [fold 0 seed 43 (2/3)] epoch  28  train_loss=0.0563  val_loss=0.1037  epoch_time=38.0s  elapsed=21.2min
+14:54:15  INFO   [fold 0 seed 43 (2/3)] epoch  29  train_loss=0.0543  val_loss=0.1073  epoch_time=38.3s  elapsed=21.8min
+14:54:53  INFO   [fold 0 seed 43 (2/3)] epoch  30  train_loss=0.0508  val_loss=0.1061  epoch_time=38.3s  elapsed=22.5min
+14:55:32  INFO   [fold 0 seed 43 (2/3)] epoch  31  train_loss=0.0489  val_loss=0.1084  epoch_time=38.9s  elapsed=23.1min
+14:56:12  INFO   [fold 0 seed 43 (2/3)] epoch  32  train_loss=0.0473  val_loss=0.0981  epoch_time=39.7s  elapsed=23.8min
+14:56:52  INFO   [fold 0 seed 43 (2/3)] epoch  33  train_loss=0.0463  val_loss=0.1017  epoch_time=40.3s  elapsed=24.4min
+14:57:32  INFO   [fold 0 seed 43 (2/3)] epoch  34  train_loss=0.0429  val_loss=0.1059  epoch_time=39.7s  elapsed=25.1min
+14:58:24  INFO   [fold 0 seed 43 (2/3)] epoch  35  train_loss=0.0429  val_loss=0.0996  epoch_time=52.0s  elapsed=26.0min
+14:59:03  INFO   [fold 0 seed 43 (2/3)] epoch  36  train_loss=0.0407  val_loss=0.1050  epoch_time=39.1s  elapsed=26.6min
+14:59:47  INFO   [fold 0 seed 43 (2/3)] epoch  37  train_loss=0.0410  val_loss=0.1027  epoch_time=44.5s  elapsed=27.4min
+15:00:29  INFO   [fold 0 seed 43 (2/3)] epoch  38  train_loss=0.0409  val_loss=0.1016  epoch_time=41.8s  elapsed=28.1min
+15:01:16  INFO   [fold 0 seed 43 (2/3)] epoch  39  train_loss=0.0384  val_loss=0.1033  epoch_time=46.9s  elapsed=28.9min
+15:01:57  INFO   [fold 0 seed 43 (2/3)] epoch  40  train_loss=0.0359  val_loss=0.1031  epoch_time=41.1s  elapsed=29.5min
+15:02:42  INFO   [fold 0 seed 43 (2/3)] epoch  41  train_loss=0.0370  val_loss=0.1067  epoch_time=45.2s  elapsed=30.3min
+15:03:32  INFO   [fold 0 seed 43 (2/3)] epoch  42  train_loss=0.0351  val_loss=0.1071  epoch_time=49.8s  elapsed=31.1min
+15:03:36  INFO   [fold 0 seed 43 (2/3)] done. time=31.1min  final_epoch=43  approx_best_epoch=33
+15:03:36  INFO   [fold 0 seed 43 (2/3)] per-target R²: eea=0.920  egb=0.923  egc=0.884  ei=0.860  eps=0.864  nc=0.782  tg=0.904
+15:03:36  INFO   [fold 0 seed 44 (3/3)] starting...
+15:04:25  INFO   [fold 0 seed 44 (3/3)] epoch   0  train_loss=0.3381  val_loss=0.2552  epoch_time=44.2s  elapsed=0.7min
+15:05:19  INFO   [fold 0 seed 44 (3/3)] epoch   1  train_loss=0.2659  val_loss=0.3232  epoch_time=54.0s  elapsed=1.6min
+15:06:59  INFO   [fold 0 seed 44 (3/3)] epoch   2  train_loss=0.2248  val_loss=0.2160  epoch_time=100.2s  elapsed=3.3min
+15:08:29  INFO   [fold 0 seed 44 (3/3)] epoch   3  train_loss=0.2066  val_loss=0.2768  epoch_time=89.6s  elapsed=4.8min
+15:09:29  INFO   [fold 0 seed 44 (3/3)] epoch   4  train_loss=0.1834  val_loss=0.2043  epoch_time=59.5s  elapsed=5.8min
+15:10:12  INFO   [fold 0 seed 44 (3/3)] epoch   5  train_loss=0.1662  val_loss=0.1647  epoch_time=43.6s  elapsed=6.5min
+15:10:54  INFO   [fold 0 seed 44 (3/3)] epoch   6  train_loss=0.1590  val_loss=0.1768  epoch_time=41.7s  elapsed=7.2min
+15:11:38  INFO   [fold 0 seed 44 (3/3)] epoch   7  train_loss=0.1506  val_loss=0.2742  epoch_time=43.8s  elapsed=7.9min
+15:12:23  INFO   [fold 0 seed 44 (3/3)] epoch   8  train_loss=0.1434  val_loss=0.1353  epoch_time=45.0s  elapsed=8.7min
+15:13:03  INFO   [fold 0 seed 44 (3/3)] epoch   9  train_loss=0.1329  val_loss=0.1786  epoch_time=40.7s  elapsed=9.4min
+15:13:47  INFO   [fold 0 seed 44 (3/3)] epoch  10  train_loss=0.1273  val_loss=0.1283  epoch_time=43.4s  elapsed=10.1min
+15:14:32  INFO   [fold 0 seed 44 (3/3)] epoch  11  train_loss=0.1216  val_loss=0.1224  epoch_time=45.5s  elapsed=10.9min
+15:15:22  INFO   [fold 0 seed 44 (3/3)] epoch  12  train_loss=0.1132  val_loss=0.1451  epoch_time=49.9s  elapsed=11.7min
+15:16:26  INFO   [fold 0 seed 44 (3/3)] epoch  13  train_loss=0.1091  val_loss=0.1392  epoch_time=64.3s  elapsed=12.8min
+15:17:08  INFO   [fold 0 seed 44 (3/3)] epoch  14  train_loss=0.1014  val_loss=0.1592  epoch_time=41.5s  elapsed=13.4min
+15:17:49  INFO   [fold 0 seed 44 (3/3)] epoch  15  train_loss=0.0940  val_loss=0.1224  epoch_time=41.2s  elapsed=14.1min
+15:18:27  INFO   [fold 0 seed 44 (3/3)] epoch  16  train_loss=0.0929  val_loss=0.1257  epoch_time=37.6s  elapsed=14.8min
+15:19:04  INFO   [fold 0 seed 44 (3/3)] epoch  17  train_loss=0.0937  val_loss=0.1184  epoch_time=37.2s  elapsed=15.4min
+15:19:41  INFO   [fold 0 seed 44 (3/3)] epoch  18  train_loss=0.0828  val_loss=0.1271  epoch_time=37.6s  elapsed=16.0min
+15:20:20  INFO   [fold 0 seed 44 (3/3)] epoch  19  train_loss=0.0864  val_loss=0.1129  epoch_time=38.2s  elapsed=16.6min
+15:20:57  INFO   [fold 0 seed 44 (3/3)] epoch  20  train_loss=0.0801  val_loss=0.1070  epoch_time=37.5s  elapsed=17.3min
+15:21:34  INFO   [fold 0 seed 44 (3/3)] epoch  21  train_loss=0.0722  val_loss=0.1134  epoch_time=37.4s  elapsed=17.9min
+15:22:12  INFO   [fold 0 seed 44 (3/3)] epoch  22  train_loss=0.0772  val_loss=0.1160  epoch_time=37.2s  elapsed=18.5min
+15:22:49  INFO   [fold 0 seed 44 (3/3)] epoch  23  train_loss=0.0741  val_loss=0.1112  epoch_time=37.0s  elapsed=19.1min
+15:23:26  INFO   [fold 0 seed 44 (3/3)] epoch  24  train_loss=0.0660  val_loss=0.1113  epoch_time=37.3s  elapsed=19.7min
+15:24:03  INFO   [fold 0 seed 44 (3/3)] epoch  25  train_loss=0.0647  val_loss=0.1250  epoch_time=37.3s  elapsed=20.4min
+15:24:43  INFO   [fold 0 seed 44 (3/3)] epoch  26  train_loss=0.0656  val_loss=0.1203  epoch_time=39.4s  elapsed=21.0min
+15:25:31  INFO   [fold 0 seed 44 (3/3)] epoch  27  train_loss=0.0637  val_loss=0.1129  epoch_time=48.6s  elapsed=21.8min
+15:26:14  INFO   [fold 0 seed 44 (3/3)] epoch  28  train_loss=0.0594  val_loss=0.1098  epoch_time=42.7s  elapsed=22.5min
+15:26:52  INFO   [fold 0 seed 44 (3/3)] epoch  29  train_loss=0.0582  val_loss=0.1128  epoch_time=37.9s  elapsed=23.2min
+15:27:35  INFO   [fold 0 seed 44 (3/3)] epoch  30  train_loss=0.0534  val_loss=0.1076  epoch_time=42.9s  elapsed=23.9min
+15:27:39  INFO   [fold 0 seed 44 (3/3)] done. time=23.9min  final_epoch=31  approx_best_epoch=21
+15:27:39  INFO   [fold 0 seed 44 (3/3)] per-target R²: eea=0.917  egb=0.925  egc=0.884  ei=0.812  eps=0.870  nc=0.811  tg=0.904
+15:27:39  INFO   [fold 0] BAG per-target R² (avg of 3 seeds): eea=0.9262  egb=0.9335  egc=0.8972  ei=0.8461  eps=0.8706  nc=0.7988  tg=0.9165
+15:27:39  INFO   [fold 0] total time: 95.0min (per-seed: ['40.0', '31.1', '23.9'])
+15:27:39  INFO   [fold 0] wrote checkpoint checkpoint_fold_0.pkl.gz
+15:27:39  INFO   ============================================================
+15:27:39  INFO   FOLD 1  (3-seed bag)
+15:27:39  INFO   n_train_canon=4736   n_val_canon=1184
+15:27:39  INFO   [fold 1 seed 42 (1/3)] starting...
+15:28:30  INFO   [fold 1 seed 42 (1/3)] epoch   0  train_loss=0.3525  val_loss=0.5037  epoch_time=46.0s  elapsed=0.8min
+15:29:10  INFO   [fold 1 seed 42 (1/3)] epoch   1  train_loss=0.2492  val_loss=0.5421  epoch_time=40.1s  elapsed=1.4min
+15:29:48  INFO   [fold 1 seed 42 (1/3)] epoch   2  train_loss=0.2138  val_loss=0.2242  epoch_time=38.3s  elapsed=2.1min
+15:30:26  INFO   [fold 1 seed 42 (1/3)] epoch   3  train_loss=0.1888  val_loss=0.2239  epoch_time=37.6s  elapsed=2.7min
+15:31:14  INFO   [fold 1 seed 42 (1/3)] epoch   4  train_loss=0.1724  val_loss=0.2000  epoch_time=48.4s  elapsed=3.5min
+15:31:59  INFO   [fold 1 seed 42 (1/3)] epoch   5  train_loss=0.1638  val_loss=0.2340  epoch_time=44.8s  elapsed=4.3min
+15:32:44  INFO   [fold 1 seed 42 (1/3)] epoch   6  train_loss=0.1493  val_loss=0.1882  epoch_time=44.7s  elapsed=5.0min
+15:33:26  INFO   [fold 1 seed 42 (1/3)] epoch   7  train_loss=0.1422  val_loss=0.3443  epoch_time=41.9s  elapsed=5.7min
+15:34:13  INFO   [fold 1 seed 42 (1/3)] epoch   8  train_loss=0.1384  val_loss=0.1722  epoch_time=46.7s  elapsed=6.5min
+15:35:02  INFO   [fold 1 seed 42 (1/3)] epoch   9  train_loss=0.1339  val_loss=0.1818  epoch_time=49.3s  elapsed=7.3min
+15:35:54  INFO   [fold 1 seed 42 (1/3)] epoch  10  train_loss=0.1256  val_loss=0.1632  epoch_time=52.3s  elapsed=8.2min
+15:36:47  INFO   [fold 1 seed 42 (1/3)] epoch  11  train_loss=0.1175  val_loss=0.1791  epoch_time=52.3s  elapsed=9.0min
+15:37:37  INFO   [fold 1 seed 42 (1/3)] epoch  12  train_loss=0.1216  val_loss=0.2011  epoch_time=50.2s  elapsed=9.9min
+15:38:27  INFO   [fold 1 seed 42 (1/3)] epoch  13  train_loss=0.1123  val_loss=0.1586  epoch_time=50.6s  elapsed=10.7min
+15:39:15  INFO   [fold 1 seed 42 (1/3)] epoch  14  train_loss=0.1088  val_loss=0.1521  epoch_time=47.5s  elapsed=11.5min
+15:40:08  INFO   [fold 1 seed 42 (1/3)] epoch  15  train_loss=0.0940  val_loss=0.1591  epoch_time=53.2s  elapsed=12.4min
+15:40:51  INFO   [fold 1 seed 42 (1/3)] epoch  16  train_loss=0.0910  val_loss=0.1567  epoch_time=43.4s  elapsed=13.1min
+15:41:35  INFO   [fold 1 seed 42 (1/3)] epoch  17  train_loss=0.0867  val_loss=0.1405  epoch_time=43.7s  elapsed=13.9min
+15:42:18  INFO   [fold 1 seed 42 (1/3)] epoch  18  train_loss=0.0839  val_loss=0.1316  epoch_time=42.9s  elapsed=14.6min
+15:42:55  INFO   [fold 1 seed 42 (1/3)] epoch  19  train_loss=0.0926  val_loss=0.1385  epoch_time=37.6s  elapsed=15.2min
+15:43:36  INFO   [fold 1 seed 42 (1/3)] epoch  20  train_loss=0.0761  val_loss=0.1335  epoch_time=40.0s  elapsed=15.9min
+15:44:13  INFO   [fold 1 seed 42 (1/3)] epoch  21  train_loss=0.0781  val_loss=0.1337  epoch_time=37.0s  elapsed=16.5min
+15:45:03  INFO   [fold 1 seed 42 (1/3)] epoch  22  train_loss=0.0769  val_loss=0.1310  epoch_time=50.2s  elapsed=17.3min
+15:45:51  INFO   [fold 1 seed 42 (1/3)] epoch  23  train_loss=0.0737  val_loss=0.1481  epoch_time=47.9s  elapsed=18.1min
+15:46:32  INFO   [fold 1 seed 42 (1/3)] epoch  24  train_loss=0.0676  val_loss=0.1312  epoch_time=41.1s  elapsed=18.8min
+15:47:12  INFO   [fold 1 seed 42 (1/3)] epoch  25  train_loss=0.0646  val_loss=0.1353  epoch_time=40.4s  elapsed=19.5min
+15:47:50  INFO   [fold 1 seed 42 (1/3)] epoch  26  train_loss=0.0628  val_loss=0.1271  epoch_time=38.0s  elapsed=20.1min
+15:48:29  INFO   [fold 1 seed 42 (1/3)] epoch  27  train_loss=0.0588  val_loss=0.1269  epoch_time=38.7s  elapsed=20.7min
+15:49:07  INFO   [fold 1 seed 42 (1/3)] epoch  28  train_loss=0.0590  val_loss=0.1214  epoch_time=38.4s  elapsed=21.4min
+15:49:47  INFO   [fold 1 seed 42 (1/3)] epoch  29  train_loss=0.0515  val_loss=0.1227  epoch_time=39.8s  elapsed=22.1min
+15:50:26  INFO   [fold 1 seed 42 (1/3)] epoch  30  train_loss=0.0545  val_loss=0.1515  epoch_time=39.1s  elapsed=22.7min
+15:51:08  INFO   [fold 1 seed 42 (1/3)] epoch  31  train_loss=0.0529  val_loss=0.1302  epoch_time=41.8s  elapsed=23.4min
+15:51:46  INFO   [fold 1 seed 42 (1/3)] epoch  32  train_loss=0.0513  val_loss=0.1208  epoch_time=37.6s  elapsed=24.0min
+15:52:30  INFO   [fold 1 seed 42 (1/3)] epoch  33  train_loss=0.0481  val_loss=0.1263  epoch_time=44.6s  elapsed=24.8min
+15:53:10  INFO   [fold 1 seed 42 (1/3)] epoch  34  train_loss=0.0493  val_loss=0.1254  epoch_time=40.2s  elapsed=25.4min
+15:53:54  INFO   [fold 1 seed 42 (1/3)] epoch  35  train_loss=0.0478  val_loss=0.1295  epoch_time=43.3s  elapsed=26.2min
+15:54:34  INFO   [fold 1 seed 42 (1/3)] epoch  36  train_loss=0.0442  val_loss=0.1280  epoch_time=40.4s  elapsed=26.8min
+15:55:12  INFO   [fold 1 seed 42 (1/3)] epoch  37  train_loss=0.0438  val_loss=0.1232  epoch_time=38.1s  elapsed=27.5min
+15:55:52  INFO   [fold 1 seed 42 (1/3)] epoch  38  train_loss=0.0411  val_loss=0.1265  epoch_time=40.1s  elapsed=28.1min
+15:56:30  INFO   [fold 1 seed 42 (1/3)] epoch  39  train_loss=0.0410  val_loss=0.1229  epoch_time=37.7s  elapsed=28.8min
+15:57:10  INFO   [fold 1 seed 42 (1/3)] epoch  40  train_loss=0.0408  val_loss=0.1213  epoch_time=40.2s  elapsed=29.4min
+15:57:58  INFO   [fold 1 seed 42 (1/3)] epoch  41  train_loss=0.0414  val_loss=0.1235  epoch_time=48.2s  elapsed=30.2min
+15:58:44  INFO   [fold 1 seed 42 (1/3)] epoch  42  train_loss=0.0379  val_loss=0.1279  epoch_time=45.4s  elapsed=31.0min
+15:58:47  INFO   [fold 1 seed 42 (1/3)] done. time=31.0min  final_epoch=43  approx_best_epoch=33
+15:58:47  INFO   [fold 1 seed 42 (1/3)] per-target R²: eea=0.864  egb=0.929  egc=0.914  ei=0.735  eps=0.756  nc=0.849  tg=0.884
+15:58:47  INFO   [fold 1 seed 43 (2/3)] starting...
+15:59:36  INFO   [fold 1 seed 43 (2/3)] epoch   0  train_loss=0.3349  val_loss=1.0801  epoch_time=42.1s  elapsed=0.7min
+16:00:19  INFO   [fold 1 seed 43 (2/3)] epoch   1  train_loss=0.2477  val_loss=0.2863  epoch_time=43.1s  elapsed=1.4min
+16:01:04  INFO   [fold 1 seed 43 (2/3)] epoch   2  train_loss=0.2175  val_loss=0.3229  epoch_time=44.6s  elapsed=2.2min
+16:01:48  INFO   [fold 1 seed 43 (2/3)] epoch   3  train_loss=0.1964  val_loss=0.3011  epoch_time=44.4s  elapsed=2.9min
+16:02:29  INFO   [fold 1 seed 43 (2/3)] epoch   4  train_loss=0.1754  val_loss=0.3413  epoch_time=40.3s  elapsed=3.6min
+16:03:09  INFO   [fold 1 seed 43 (2/3)] epoch   5  train_loss=0.1680  val_loss=0.1903  epoch_time=40.7s  elapsed=4.3min
+16:03:58  INFO   [fold 1 seed 43 (2/3)] epoch   6  train_loss=0.1561  val_loss=0.1857  epoch_time=48.1s  elapsed=5.1min
+16:04:43  INFO   [fold 1 seed 43 (2/3)] epoch   7  train_loss=0.1498  val_loss=0.2316  epoch_time=45.2s  elapsed=5.8min
+16:05:24  INFO   [fold 1 seed 43 (2/3)] epoch   8  train_loss=0.1415  val_loss=0.2194  epoch_time=41.4s  elapsed=6.5min
+16:06:03  INFO   [fold 1 seed 43 (2/3)] epoch   9  train_loss=0.1272  val_loss=0.1472  epoch_time=39.3s  elapsed=7.2min
+16:06:44  INFO   [fold 1 seed 43 (2/3)] epoch  10  train_loss=0.1189  val_loss=0.1559  epoch_time=40.9s  elapsed=7.8min
+16:07:25  INFO   [fold 1 seed 43 (2/3)] epoch  11  train_loss=0.1207  val_loss=0.1602  epoch_time=40.4s  elapsed=8.5min
+16:08:08  INFO   [fold 1 seed 43 (2/3)] epoch  12  train_loss=0.1136  val_loss=0.1482  epoch_time=43.2s  elapsed=9.2min
+16:08:58  INFO   [fold 1 seed 43 (2/3)] epoch  13  train_loss=0.1025  val_loss=0.1549  epoch_time=50.0s  elapsed=10.1min
+16:09:43  INFO   [fold 1 seed 43 (2/3)] epoch  14  train_loss=0.1010  val_loss=0.1661  epoch_time=44.5s  elapsed=10.8min
+16:10:22  INFO   [fold 1 seed 43 (2/3)] epoch  15  train_loss=0.0939  val_loss=0.1502  epoch_time=39.0s  elapsed=11.5min
+16:11:00  INFO   [fold 1 seed 43 (2/3)] epoch  16  train_loss=0.0893  val_loss=0.1886  epoch_time=38.4s  elapsed=12.1min
+16:11:38  INFO   [fold 1 seed 43 (2/3)] epoch  17  train_loss=0.0851  val_loss=0.1436  epoch_time=38.2s  elapsed=12.7min
+16:12:18  INFO   [fold 1 seed 43 (2/3)] epoch  18  train_loss=0.0844  val_loss=0.1365  epoch_time=39.9s  elapsed=13.4min
+16:12:56  INFO   [fold 1 seed 43 (2/3)] epoch  19  train_loss=0.0798  val_loss=0.1431  epoch_time=38.4s  elapsed=14.0min
+16:13:34  INFO   [fold 1 seed 43 (2/3)] epoch  20  train_loss=0.0794  val_loss=0.1373  epoch_time=37.2s  elapsed=14.7min
+16:14:11  INFO   [fold 1 seed 43 (2/3)] epoch  21  train_loss=0.0759  val_loss=0.1397  epoch_time=37.0s  elapsed=15.3min
+16:14:48  INFO   [fold 1 seed 43 (2/3)] epoch  22  train_loss=0.0717  val_loss=0.1420  epoch_time=37.1s  elapsed=15.9min
+16:15:26  INFO   [fold 1 seed 43 (2/3)] epoch  23  train_loss=0.0710  val_loss=0.1362  epoch_time=38.6s  elapsed=16.5min
+16:16:04  INFO   [fold 1 seed 43 (2/3)] epoch  24  train_loss=0.0646  val_loss=0.1295  epoch_time=38.1s  elapsed=17.2min
+16:16:45  INFO   [fold 1 seed 43 (2/3)] epoch  25  train_loss=0.0611  val_loss=0.1347  epoch_time=40.4s  elapsed=17.8min
+16:17:25  INFO   [fold 1 seed 43 (2/3)] epoch  26  train_loss=0.0557  val_loss=0.1338  epoch_time=39.9s  elapsed=18.5min
+16:18:04  INFO   [fold 1 seed 43 (2/3)] epoch  27  train_loss=0.0580  val_loss=0.1278  epoch_time=39.3s  elapsed=19.2min
+16:18:43  INFO   [fold 1 seed 43 (2/3)] epoch  28  train_loss=0.0582  val_loss=0.1329  epoch_time=39.2s  elapsed=19.8min
+16:19:24  INFO   [fold 1 seed 43 (2/3)] epoch  29  train_loss=0.0537  val_loss=0.1385  epoch_time=40.4s  elapsed=20.5min
+16:20:04  INFO   [fold 1 seed 43 (2/3)] epoch  30  train_loss=0.0518  val_loss=0.1305  epoch_time=39.8s  elapsed=21.2min
+16:20:41  INFO   [fold 1 seed 43 (2/3)] epoch  31  train_loss=0.0494  val_loss=0.1251  epoch_time=37.7s  elapsed=21.8min
+16:21:20  INFO   [fold 1 seed 43 (2/3)] epoch  32  train_loss=0.0488  val_loss=0.1270  epoch_time=38.2s  elapsed=22.4min
+16:21:58  INFO   [fold 1 seed 43 (2/3)] epoch  33  train_loss=0.0516  val_loss=0.1304  epoch_time=38.4s  elapsed=23.1min
+16:22:37  INFO   [fold 1 seed 43 (2/3)] epoch  34  train_loss=0.0526  val_loss=0.1224  epoch_time=39.1s  elapsed=23.7min
+16:23:15  INFO   [fold 1 seed 43 (2/3)] epoch  35  train_loss=0.0453  val_loss=0.1200  epoch_time=38.2s  elapsed=24.3min
+16:23:53  INFO   [fold 1 seed 43 (2/3)] epoch  36  train_loss=0.0456  val_loss=0.1263  epoch_time=37.7s  elapsed=25.0min
+16:24:32  INFO   [fold 1 seed 43 (2/3)] epoch  37  train_loss=0.0406  val_loss=0.1218  epoch_time=38.7s  elapsed=25.6min
+16:25:10  INFO   [fold 1 seed 43 (2/3)] epoch  38  train_loss=0.0411  val_loss=0.1189  epoch_time=37.9s  elapsed=26.3min
+16:25:48  INFO   [fold 1 seed 43 (2/3)] epoch  39  train_loss=0.0410  val_loss=0.1191  epoch_time=38.4s  elapsed=26.9min
+16:26:26  INFO   [fold 1 seed 43 (2/3)] epoch  40  train_loss=0.0404  val_loss=0.1205  epoch_time=38.1s  elapsed=27.5min
+16:27:05  INFO   [fold 1 seed 43 (2/3)] epoch  41  train_loss=0.0390  val_loss=0.1165  epoch_time=38.8s  elapsed=28.2min
+16:27:42  INFO   [fold 1 seed 43 (2/3)] epoch  42  train_loss=0.0390  val_loss=0.1135  epoch_time=37.2s  elapsed=28.8min
+16:28:19  INFO   [fold 1 seed 43 (2/3)] epoch  43  train_loss=0.0371  val_loss=0.1177  epoch_time=37.3s  elapsed=29.4min
+16:28:57  INFO   [fold 1 seed 43 (2/3)] epoch  44  train_loss=0.0375  val_loss=0.1156  epoch_time=37.6s  elapsed=30.0min
+16:29:35  INFO   [fold 1 seed 43 (2/3)] epoch  45  train_loss=0.0369  val_loss=0.1160  epoch_time=38.4s  elapsed=30.7min
+16:30:13  INFO   [fold 1 seed 43 (2/3)] epoch  46  train_loss=0.0342  val_loss=0.1202  epoch_time=37.7s  elapsed=31.3min
+16:30:51  INFO   [fold 1 seed 43 (2/3)] epoch  47  train_loss=0.0350  val_loss=0.1160  epoch_time=38.4s  elapsed=32.0min
+16:31:31  INFO   [fold 1 seed 43 (2/3)] epoch  48  train_loss=0.0326  val_loss=0.1134  epoch_time=39.6s  elapsed=32.6min
+16:32:11  INFO   [fold 1 seed 43 (2/3)] epoch  49  train_loss=0.0319  val_loss=0.1167  epoch_time=39.5s  elapsed=33.3min
+16:32:49  INFO   [fold 1 seed 43 (2/3)] epoch  50  train_loss=0.0335  val_loss=0.1135  epoch_time=38.2s  elapsed=33.9min
+16:33:27  INFO   [fold 1 seed 43 (2/3)] epoch  51  train_loss=0.0308  val_loss=0.1148  epoch_time=37.8s  elapsed=34.5min
+16:34:07  INFO   [fold 1 seed 43 (2/3)] epoch  52  train_loss=0.0321  val_loss=0.1172  epoch_time=40.2s  elapsed=35.2min
+16:34:45  INFO   [fold 1 seed 43 (2/3)] epoch  53  train_loss=0.0316  val_loss=0.1174  epoch_time=37.8s  elapsed=35.8min
+16:35:22  INFO   [fold 1 seed 43 (2/3)] epoch  54  train_loss=0.0314  val_loss=0.1160  epoch_time=37.7s  elapsed=36.5min
+16:36:00  INFO   [fold 1 seed 43 (2/3)] epoch  55  train_loss=0.0303  val_loss=0.1197  epoch_time=37.7s  elapsed=37.1min
+16:36:42  INFO   [fold 1 seed 43 (2/3)] epoch  56  train_loss=0.0312  val_loss=0.1168  epoch_time=41.7s  elapsed=37.8min
+16:37:22  INFO   [fold 1 seed 43 (2/3)] epoch  57  train_loss=0.0301  val_loss=0.1143  epoch_time=40.3s  elapsed=38.5min
+16:38:00  INFO   [fold 1 seed 43 (2/3)] epoch  58  train_loss=0.0287  val_loss=0.1131  epoch_time=37.6s  elapsed=39.1min
+16:38:48  INFO   [fold 1 seed 43 (2/3)] epoch  59  train_loss=0.0289  val_loss=0.1147  epoch_time=48.7s  elapsed=39.9min
+16:38:55  INFO   [fold 1 seed 43 (2/3)] done. time=39.9min  final_epoch=60  approx_best_epoch=60
+16:38:55  INFO   [fold 1 seed 43 (2/3)] per-target R²: eea=0.895  egb=0.948  egc=0.921  ei=0.775  eps=0.798  nc=0.849  tg=0.894
+16:38:55  INFO   [fold 1 seed 44 (3/3)] starting...
+16:39:57  INFO   [fold 1 seed 44 (3/3)] epoch   0  train_loss=0.3558  val_loss=0.3098  epoch_time=56.0s  elapsed=0.9min
+16:40:44  INFO   [fold 1 seed 44 (3/3)] epoch   1  train_loss=0.2482  val_loss=0.3188  epoch_time=47.6s  elapsed=1.7min
+16:41:37  INFO   [fold 1 seed 44 (3/3)] epoch   2  train_loss=0.2259  val_loss=0.3402  epoch_time=52.4s  elapsed=2.6min
+16:42:17  INFO   [fold 1 seed 44 (3/3)] epoch   3  train_loss=0.1935  val_loss=0.3307  epoch_time=40.7s  elapsed=3.3min
+16:43:05  INFO   [fold 1 seed 44 (3/3)] epoch   4  train_loss=0.1826  val_loss=0.3867  epoch_time=47.3s  elapsed=4.1min
+16:43:52  INFO   [fold 1 seed 44 (3/3)] epoch   5  train_loss=0.1615  val_loss=0.2374  epoch_time=47.6s  elapsed=4.9min
+16:44:41  INFO   [fold 1 seed 44 (3/3)] epoch   6  train_loss=0.1485  val_loss=0.2036  epoch_time=48.8s  elapsed=5.7min
+16:45:28  INFO   [fold 1 seed 44 (3/3)] epoch   7  train_loss=0.1416  val_loss=0.2681  epoch_time=46.7s  elapsed=6.5min
+16:46:27  INFO   [fold 1 seed 44 (3/3)] epoch   8  train_loss=0.1381  val_loss=0.1751  epoch_time=59.6s  elapsed=7.4min
+16:47:23  INFO   [fold 1 seed 44 (3/3)] epoch   9  train_loss=0.1252  val_loss=0.1611  epoch_time=55.6s  elapsed=8.4min
+16:48:15  INFO   [fold 1 seed 44 (3/3)] epoch  10  train_loss=0.1211  val_loss=0.2886  epoch_time=52.0s  elapsed=9.2min
+16:48:58  INFO   [fold 1 seed 44 (3/3)] epoch  11  train_loss=0.1205  val_loss=0.1575  epoch_time=42.8s  elapsed=10.0min
+16:49:42  INFO   [fold 1 seed 44 (3/3)] epoch  12  train_loss=0.1112  val_loss=0.1699  epoch_time=44.1s  elapsed=10.7min
+16:50:26  INFO   [fold 1 seed 44 (3/3)] epoch  13  train_loss=0.1060  val_loss=0.1668  epoch_time=44.4s  elapsed=11.4min
+16:51:09  INFO   [fold 1 seed 44 (3/3)] epoch  14  train_loss=0.1036  val_loss=0.1877  epoch_time=43.0s  elapsed=12.1min
+16:51:55  INFO   [fold 1 seed 44 (3/3)] epoch  15  train_loss=0.0963  val_loss=0.1666  epoch_time=45.9s  elapsed=12.9min
+16:52:49  INFO   [fold 1 seed 44 (3/3)] epoch  16  train_loss=0.0892  val_loss=0.1536  epoch_time=53.8s  elapsed=13.8min
+16:53:28  INFO   [fold 1 seed 44 (3/3)] epoch  17  train_loss=0.0876  val_loss=0.1406  epoch_time=39.1s  elapsed=14.5min
+16:54:11  INFO   [fold 1 seed 44 (3/3)] epoch  18  train_loss=0.0861  val_loss=0.1538  epoch_time=43.3s  elapsed=15.2min
+16:54:58  INFO   [fold 1 seed 44 (3/3)] epoch  19  train_loss=0.0780  val_loss=0.1383  epoch_time=46.4s  elapsed=16.0min
+16:55:46  INFO   [fold 1 seed 44 (3/3)] epoch  20  train_loss=0.0715  val_loss=0.1516  epoch_time=48.0s  elapsed=16.8min
+16:56:33  INFO   [fold 1 seed 44 (3/3)] epoch  21  train_loss=0.0767  val_loss=0.1514  epoch_time=47.4s  elapsed=17.5min
+16:57:21  INFO   [fold 1 seed 44 (3/3)] epoch  22  train_loss=0.0774  val_loss=0.1476  epoch_time=47.8s  elapsed=18.3min
+16:58:08  INFO   [fold 1 seed 44 (3/3)] epoch  23  train_loss=0.0678  val_loss=0.1420  epoch_time=47.0s  elapsed=19.1min
+16:58:52  INFO   [fold 1 seed 44 (3/3)] epoch  24  train_loss=0.0668  val_loss=0.1371  epoch_time=43.8s  elapsed=19.9min
+16:59:40  INFO   [fold 1 seed 44 (3/3)] epoch  25  train_loss=0.0650  val_loss=0.1376  epoch_time=48.6s  elapsed=20.7min
+17:00:31  INFO   [fold 1 seed 44 (3/3)] epoch  26  train_loss=0.0623  val_loss=0.1416  epoch_time=51.0s  elapsed=21.5min
+17:01:21  INFO   [fold 1 seed 44 (3/3)] epoch  27  train_loss=0.0583  val_loss=0.1363  epoch_time=50.2s  elapsed=22.3min
+17:02:08  INFO   [fold 1 seed 44 (3/3)] epoch  28  train_loss=0.0564  val_loss=0.1329  epoch_time=46.2s  elapsed=23.1min
+17:02:50  INFO   [fold 1 seed 44 (3/3)] epoch  29  train_loss=0.0554  val_loss=0.1385  epoch_time=42.0s  elapsed=23.8min
+17:03:29  INFO   [fold 1 seed 44 (3/3)] epoch  30  train_loss=0.0539  val_loss=0.1385  epoch_time=39.3s  elapsed=24.5min
+17:04:11  INFO   [fold 1 seed 44 (3/3)] epoch  31  train_loss=0.0525  val_loss=0.1326  epoch_time=41.7s  elapsed=25.2min
+17:04:48  INFO   [fold 1 seed 44 (3/3)] epoch  32  train_loss=0.0509  val_loss=0.1284  epoch_time=37.5s  elapsed=25.8min
+17:05:27  INFO   [fold 1 seed 44 (3/3)] epoch  33  train_loss=0.0490  val_loss=0.1339  epoch_time=38.8s  elapsed=26.4min
+17:06:19  INFO   [fold 1 seed 44 (3/3)] epoch  34  train_loss=0.0471  val_loss=0.1341  epoch_time=52.4s  elapsed=27.3min
+17:07:10  INFO   [fold 1 seed 44 (3/3)] epoch  35  train_loss=0.0488  val_loss=0.1288  epoch_time=50.2s  elapsed=28.2min
+17:08:06  INFO   [fold 1 seed 44 (3/3)] epoch  36  train_loss=0.0481  val_loss=0.1308  epoch_time=56.6s  elapsed=29.1min
+17:09:17  INFO   [fold 1 seed 44 (3/3)] epoch  37  train_loss=0.0467  val_loss=0.1246  epoch_time=70.8s  elapsed=30.3min
+17:10:01  INFO   [fold 1 seed 44 (3/3)] epoch  38  train_loss=0.0456  val_loss=0.1298  epoch_time=43.8s  elapsed=31.0min
+17:10:50  INFO   [fold 1 seed 44 (3/3)] epoch  39  train_loss=0.0451  val_loss=0.1299  epoch_time=49.4s  elapsed=31.8min
+17:12:03  INFO   [fold 1 seed 44 (3/3)] epoch  40  train_loss=0.0429  val_loss=0.1277  epoch_time=72.8s  elapsed=33.0min
+17:12:57  INFO   [fold 1 seed 44 (3/3)] epoch  41  train_loss=0.0414  val_loss=0.1307  epoch_time=53.9s  elapsed=33.9min
+17:13:50  INFO   [fold 1 seed 44 (3/3)] epoch  42  train_loss=0.0392  val_loss=0.1261  epoch_time=53.2s  elapsed=34.8min
+17:14:33  INFO   [fold 1 seed 44 (3/3)] epoch  43  train_loss=0.0406  val_loss=0.1275  epoch_time=43.2s  elapsed=35.5min
+17:15:23  INFO   [fold 1 seed 44 (3/3)] epoch  44  train_loss=0.0350  val_loss=0.1247  epoch_time=49.5s  elapsed=36.4min
+17:16:14  INFO   [fold 1 seed 44 (3/3)] epoch  45  train_loss=0.0381  val_loss=0.1262  epoch_time=51.0s  elapsed=37.2min
+17:16:57  INFO   [fold 1 seed 44 (3/3)] epoch  46  train_loss=0.0363  val_loss=0.1254  epoch_time=43.4s  elapsed=37.9min
+17:17:44  INFO   [fold 1 seed 44 (3/3)] epoch  47  train_loss=0.0351  val_loss=0.1254  epoch_time=47.1s  elapsed=38.7min
+17:17:48  INFO   [fold 1 seed 44 (3/3)] done. time=38.7min  final_epoch=48  approx_best_epoch=38
+17:17:48  INFO   [fold 1 seed 44 (3/3)] per-target R²: eea=0.902  egb=0.941  egc=0.911  ei=0.729  eps=0.821  nc=0.870  tg=0.883
+17:17:48  INFO   [fold 1] BAG per-target R² (avg of 3 seeds): eea=0.8971  egb=0.9450  egc=0.9251  ei=0.7547  eps=0.8205  nc=0.8640  tg=0.8945
+17:17:48  INFO   [fold 1] total time: 109.7min (per-seed: ['31.0', '39.9', '38.7'])
+17:17:49  INFO   [fold 1] wrote checkpoint checkpoint_fold_1.pkl.gz
+17:17:49  INFO   ============================================================
+17:17:49  INFO   FOLD 2  (3-seed bag)
+17:17:49  INFO   n_train_canon=4736   n_val_canon=1184
+17:17:49  INFO   [fold 2 seed 42 (1/3)] starting...
+17:18:46  INFO   [fold 2 seed 42 (1/3)] epoch   0  train_loss=0.3423  val_loss=0.2489  epoch_time=51.5s  elapsed=0.9min
+17:19:37  INFO   [fold 2 seed 42 (1/3)] epoch   1  train_loss=0.2417  val_loss=0.2419  epoch_time=51.2s  elapsed=1.7min
+17:20:16  INFO   [fold 2 seed 42 (1/3)] epoch   2  train_loss=0.2378  val_loss=0.2125  epoch_time=39.1s  elapsed=2.4min
+17:20:54  INFO   [fold 2 seed 42 (1/3)] epoch   3  train_loss=0.2064  val_loss=0.3951  epoch_time=38.0s  elapsed=3.0min
+17:21:33  INFO   [fold 2 seed 42 (1/3)] epoch   4  train_loss=0.1954  val_loss=0.3135  epoch_time=38.3s  elapsed=3.6min
+17:22:11  INFO   [fold 2 seed 42 (1/3)] epoch   5  train_loss=0.1768  val_loss=0.3202  epoch_time=38.4s  elapsed=4.3min
+17:22:50  INFO   [fold 2 seed 42 (1/3)] epoch   6  train_loss=0.1621  val_loss=0.1648  epoch_time=39.3s  elapsed=4.9min
+17:23:33  INFO   [fold 2 seed 42 (1/3)] epoch   7  train_loss=0.1463  val_loss=0.2541  epoch_time=42.5s  elapsed=5.6min
+17:24:24  INFO   [fold 2 seed 42 (1/3)] epoch   8  train_loss=0.1385  val_loss=0.1708  epoch_time=51.6s  elapsed=6.5min
+17:25:06  INFO   [fold 2 seed 42 (1/3)] epoch   9  train_loss=0.1385  val_loss=0.1901  epoch_time=41.4s  elapsed=7.2min
+17:25:45  INFO   [fold 2 seed 42 (1/3)] epoch  10  train_loss=0.1300  val_loss=0.1418  epoch_time=39.0s  elapsed=7.8min
+17:26:23  INFO   [fold 2 seed 42 (1/3)] epoch  11  train_loss=0.1194  val_loss=0.1502  epoch_time=38.2s  elapsed=8.5min
+17:27:02  INFO   [fold 2 seed 42 (1/3)] epoch  12  train_loss=0.1220  val_loss=0.1520  epoch_time=38.7s  elapsed=9.1min
+17:27:40  INFO   [fold 2 seed 42 (1/3)] epoch  13  train_loss=0.1114  val_loss=0.1527  epoch_time=38.6s  elapsed=9.8min
+17:28:19  INFO   [fold 2 seed 42 (1/3)] epoch  14  train_loss=0.1039  val_loss=0.1388  epoch_time=38.3s  elapsed=10.4min
+17:28:56  INFO   [fold 2 seed 42 (1/3)] epoch  15  train_loss=0.0951  val_loss=0.1355  epoch_time=37.6s  elapsed=11.0min
+17:29:34  INFO   [fold 2 seed 42 (1/3)] epoch  16  train_loss=0.0961  val_loss=0.1537  epoch_time=38.1s  elapsed=11.7min
+17:30:12  INFO   [fold 2 seed 42 (1/3)] epoch  17  train_loss=0.0922  val_loss=0.1632  epoch_time=38.1s  elapsed=12.3min
+17:30:52  INFO   [fold 2 seed 42 (1/3)] epoch  18  train_loss=0.0903  val_loss=0.1466  epoch_time=40.0s  elapsed=13.0min
+17:31:33  INFO   [fold 2 seed 42 (1/3)] epoch  19  train_loss=0.0830  val_loss=0.1302  epoch_time=40.9s  elapsed=13.6min
+17:32:20  INFO   [fold 2 seed 42 (1/3)] epoch  20  train_loss=0.0799  val_loss=0.1255  epoch_time=46.9s  elapsed=14.4min
+17:32:59  INFO   [fold 2 seed 42 (1/3)] epoch  21  train_loss=0.0771  val_loss=0.1254  epoch_time=38.8s  elapsed=15.1min
+17:33:37  INFO   [fold 2 seed 42 (1/3)] epoch  22  train_loss=0.0736  val_loss=0.1149  epoch_time=37.9s  elapsed=15.7min
+17:34:19  INFO   [fold 2 seed 42 (1/3)] epoch  23  train_loss=0.0717  val_loss=0.1224  epoch_time=41.7s  elapsed=16.4min
+17:35:00  INFO   [fold 2 seed 42 (1/3)] epoch  24  train_loss=0.0645  val_loss=0.1272  epoch_time=41.1s  elapsed=17.1min
+17:35:43  INFO   [fold 2 seed 42 (1/3)] epoch  25  train_loss=0.0710  val_loss=0.1276  epoch_time=43.0s  elapsed=17.8min
+17:36:35  INFO   [fold 2 seed 42 (1/3)] epoch  26  train_loss=0.0661  val_loss=0.1268  epoch_time=52.1s  elapsed=18.7min
+17:37:34  INFO   [fold 2 seed 42 (1/3)] epoch  27  train_loss=0.0591  val_loss=0.1322  epoch_time=59.6s  elapsed=19.7min
+17:38:23  INFO   [fold 2 seed 42 (1/3)] epoch  28  train_loss=0.0634  val_loss=0.1228  epoch_time=48.7s  elapsed=20.5min
+17:39:08  INFO   [fold 2 seed 42 (1/3)] epoch  29  train_loss=0.0589  val_loss=0.1231  epoch_time=44.9s  elapsed=21.2min
+17:40:13  INFO   [fold 2 seed 42 (1/3)] epoch  30  train_loss=0.0569  val_loss=0.1127  epoch_time=65.4s  elapsed=22.3min
+17:41:27  INFO   [fold 2 seed 42 (1/3)] epoch  31  train_loss=0.0525  val_loss=0.1185  epoch_time=73.4s  elapsed=23.5min
+17:42:21  INFO   [fold 2 seed 42 (1/3)] epoch  32  train_loss=0.0513  val_loss=0.1157  epoch_time=54.3s  elapsed=24.4min
+17:43:12  INFO   [fold 2 seed 42 (1/3)] epoch  33  train_loss=0.0510  val_loss=0.1207  epoch_time=51.1s  elapsed=25.3min
+17:43:58  INFO   [fold 2 seed 42 (1/3)] epoch  34  train_loss=0.0514  val_loss=0.1171  epoch_time=45.9s  elapsed=26.1min
+17:44:39  INFO   [fold 2 seed 42 (1/3)] epoch  35  train_loss=0.0488  val_loss=0.1140  epoch_time=41.3s  elapsed=26.7min
+17:45:22  INFO   [fold 2 seed 42 (1/3)] epoch  36  train_loss=0.0463  val_loss=0.1160  epoch_time=42.2s  elapsed=27.5min
+17:46:02  INFO   [fold 2 seed 42 (1/3)] epoch  37  train_loss=0.0474  val_loss=0.1157  epoch_time=41.0s  elapsed=28.1min
+17:46:55  INFO   [fold 2 seed 42 (1/3)] epoch  38  train_loss=0.0440  val_loss=0.1159  epoch_time=52.9s  elapsed=29.0min
+17:47:46  INFO   [fold 2 seed 42 (1/3)] epoch  39  train_loss=0.0430  val_loss=0.1138  epoch_time=51.1s  elapsed=29.9min
+17:48:39  INFO   [fold 2 seed 42 (1/3)] epoch  40  train_loss=0.0400  val_loss=0.1149  epoch_time=52.6s  elapsed=30.7min
+17:48:44  INFO   [fold 2 seed 42 (1/3)] done. time=30.8min  final_epoch=41  approx_best_epoch=31
+17:48:44  INFO   [fold 2 seed 42 (1/3)] per-target R²: eea=0.898  egb=0.935  egc=0.875  ei=0.829  eps=0.809  nc=0.862  tg=0.893
+17:48:44  INFO   [fold 2 seed 43 (2/3)] starting...
+17:49:49  INFO   [fold 2 seed 43 (2/3)] epoch   0  train_loss=0.3438  val_loss=0.3542  epoch_time=59.9s  elapsed=1.0min
+17:50:37  INFO   [fold 2 seed 43 (2/3)] epoch   1  train_loss=0.2547  val_loss=0.2781  epoch_time=48.5s  elapsed=1.8min
+17:51:37  INFO   [fold 2 seed 43 (2/3)] epoch   2  train_loss=0.2330  val_loss=0.2178  epoch_time=59.3s  elapsed=2.8min
+17:52:33  INFO   [fold 2 seed 43 (2/3)] epoch   3  train_loss=0.2022  val_loss=0.1992  epoch_time=56.6s  elapsed=3.7min
+17:53:12  INFO   [fold 2 seed 43 (2/3)] epoch   4  train_loss=0.1852  val_loss=0.2200  epoch_time=39.1s  elapsed=4.4min
+17:53:51  INFO   [fold 2 seed 43 (2/3)] epoch   5  train_loss=0.1604  val_loss=0.1925  epoch_time=39.0s  elapsed=5.0min
+17:54:39  INFO   [fold 2 seed 43 (2/3)] epoch   6  train_loss=0.1550  val_loss=0.2321  epoch_time=47.1s  elapsed=5.8min
+17:55:34  INFO   [fold 2 seed 43 (2/3)] epoch   7  train_loss=0.1458  val_loss=0.1528  epoch_time=55.0s  elapsed=6.7min
+17:56:28  INFO   [fold 2 seed 43 (2/3)] epoch   8  train_loss=0.1418  val_loss=0.1645  epoch_time=54.1s  elapsed=7.6min
+17:57:29  INFO   [fold 2 seed 43 (2/3)] epoch   9  train_loss=0.1298  val_loss=0.1782  epoch_time=61.3s  elapsed=8.7min
+17:58:24  INFO   [fold 2 seed 43 (2/3)] epoch  10  train_loss=0.1261  val_loss=0.1411  epoch_time=55.5s  elapsed=9.6min
+17:59:12  INFO   [fold 2 seed 43 (2/3)] epoch  11  train_loss=0.1161  val_loss=0.1744  epoch_time=47.4s  elapsed=10.4min
+18:00:11  INFO   [fold 2 seed 43 (2/3)] epoch  12  train_loss=0.1179  val_loss=0.2151  epoch_time=59.3s  elapsed=11.4min
+18:01:04  INFO   [fold 2 seed 43 (2/3)] epoch  13  train_loss=0.1002  val_loss=0.1603  epoch_time=53.2s  elapsed=12.3min
+18:01:55  INFO   [fold 2 seed 43 (2/3)] epoch  14  train_loss=0.0970  val_loss=0.1368  epoch_time=50.8s  elapsed=13.1min
+18:02:54  INFO   [fold 2 seed 43 (2/3)] epoch  15  train_loss=0.0984  val_loss=0.1367  epoch_time=58.6s  elapsed=14.1min
+18:03:46  INFO   [fold 2 seed 43 (2/3)] epoch  16  train_loss=0.0872  val_loss=0.1363  epoch_time=52.3s  elapsed=15.0min
+18:04:44  INFO   [fold 2 seed 43 (2/3)] epoch  17  train_loss=0.0861  val_loss=0.1478  epoch_time=57.9s  elapsed=15.9min
+18:05:37  INFO   [fold 2 seed 43 (2/3)] epoch  18  train_loss=0.0824  val_loss=0.1821  epoch_time=53.3s  elapsed=16.8min
+18:06:28  INFO   [fold 2 seed 43 (2/3)] epoch  19  train_loss=0.0796  val_loss=0.1304  epoch_time=50.4s  elapsed=17.6min
+18:07:07  INFO   [fold 2 seed 43 (2/3)] epoch  20  train_loss=0.0786  val_loss=0.1336  epoch_time=39.0s  elapsed=18.3min
+18:07:46  INFO   [fold 2 seed 43 (2/3)] epoch  21  train_loss=0.0728  val_loss=0.1170  epoch_time=39.0s  elapsed=18.9min
+18:08:23  INFO   [fold 2 seed 43 (2/3)] epoch  22  train_loss=0.0691  val_loss=0.1268  epoch_time=37.5s  elapsed=19.6min
+18:09:01  INFO   [fold 2 seed 43 (2/3)] epoch  23  train_loss=0.0662  val_loss=0.1314  epoch_time=37.5s  elapsed=20.2min
+18:09:40  INFO   [fold 2 seed 43 (2/3)] epoch  24  train_loss=0.0665  val_loss=0.1216  epoch_time=39.2s  elapsed=20.8min
+18:10:17  INFO   [fold 2 seed 43 (2/3)] epoch  25  train_loss=0.0580  val_loss=0.1287  epoch_time=37.6s  elapsed=21.5min
+18:11:04  INFO   [fold 2 seed 43 (2/3)] epoch  26  train_loss=0.0585  val_loss=0.1269  epoch_time=46.3s  elapsed=22.2min
+18:11:45  INFO   [fold 2 seed 43 (2/3)] epoch  27  train_loss=0.0597  val_loss=0.1202  epoch_time=40.9s  elapsed=22.9min
+18:12:27  INFO   [fold 2 seed 43 (2/3)] epoch  28  train_loss=0.0549  val_loss=0.1150  epoch_time=42.3s  elapsed=23.6min
+18:13:11  INFO   [fold 2 seed 43 (2/3)] epoch  29  train_loss=0.0551  val_loss=0.1284  epoch_time=44.5s  elapsed=24.4min
+18:13:57  INFO   [fold 2 seed 43 (2/3)] epoch  30  train_loss=0.0512  val_loss=0.1277  epoch_time=45.1s  elapsed=25.1min
+18:14:38  INFO   [fold 2 seed 43 (2/3)] epoch  31  train_loss=0.0468  val_loss=0.1290  epoch_time=41.6s  elapsed=25.8min
+18:15:24  INFO   [fold 2 seed 43 (2/3)] epoch  32  train_loss=0.0470  val_loss=0.1182  epoch_time=45.7s  elapsed=26.6min
+18:16:02  INFO   [fold 2 seed 43 (2/3)] epoch  33  train_loss=0.0480  val_loss=0.1189  epoch_time=38.3s  elapsed=27.2min
+18:16:40  INFO   [fold 2 seed 43 (2/3)] epoch  34  train_loss=0.0489  val_loss=0.1132  epoch_time=37.6s  elapsed=27.8min
+18:17:17  INFO   [fold 2 seed 43 (2/3)] epoch  35  train_loss=0.0429  val_loss=0.1316  epoch_time=37.4s  elapsed=28.5min
+18:17:55  INFO   [fold 2 seed 43 (2/3)] epoch  36  train_loss=0.0439  val_loss=0.1188  epoch_time=37.4s  elapsed=29.1min
+18:18:33  INFO   [fold 2 seed 43 (2/3)] epoch  37  train_loss=0.0437  val_loss=0.1122  epoch_time=38.4s  elapsed=29.7min
+18:19:14  INFO   [fold 2 seed 43 (2/3)] epoch  38  train_loss=0.0411  val_loss=0.1169  epoch_time=41.3s  elapsed=30.4min
+18:19:59  INFO   [fold 2 seed 43 (2/3)] epoch  39  train_loss=0.0423  val_loss=0.1170  epoch_time=44.8s  elapsed=31.2min
+18:20:39  INFO   [fold 2 seed 43 (2/3)] epoch  40  train_loss=0.0387  val_loss=0.1192  epoch_time=39.6s  elapsed=31.8min
+18:21:17  INFO   [fold 2 seed 43 (2/3)] epoch  41  train_loss=0.0401  val_loss=0.1110  epoch_time=38.4s  elapsed=32.5min
+18:21:57  INFO   [fold 2 seed 43 (2/3)] epoch  42  train_loss=0.0379  val_loss=0.1129  epoch_time=40.0s  elapsed=33.1min
+18:22:40  INFO   [fold 2 seed 43 (2/3)] epoch  43  train_loss=0.0365  val_loss=0.1198  epoch_time=42.4s  elapsed=33.8min
+18:23:19  INFO   [fold 2 seed 43 (2/3)] epoch  44  train_loss=0.0349  val_loss=0.1146  epoch_time=39.8s  elapsed=34.5min
+18:24:01  INFO   [fold 2 seed 43 (2/3)] epoch  45  train_loss=0.0352  val_loss=0.1134  epoch_time=41.1s  elapsed=35.2min
+18:24:42  INFO   [fold 2 seed 43 (2/3)] epoch  46  train_loss=0.0353  val_loss=0.1088  epoch_time=41.2s  elapsed=35.9min
+18:25:25  INFO   [fold 2 seed 43 (2/3)] epoch  47  train_loss=0.0348  val_loss=0.1150  epoch_time=42.8s  elapsed=36.6min
+18:26:06  INFO   [fold 2 seed 43 (2/3)] epoch  48  train_loss=0.0338  val_loss=0.1109  epoch_time=41.5s  elapsed=37.3min
+18:26:47  INFO   [fold 2 seed 43 (2/3)] epoch  49  train_loss=0.0305  val_loss=0.1130  epoch_time=41.1s  elapsed=38.0min
+18:27:26  INFO   [fold 2 seed 43 (2/3)] epoch  50  train_loss=0.0321  val_loss=0.1092  epoch_time=38.3s  elapsed=38.6min
+18:28:04  INFO   [fold 2 seed 43 (2/3)] epoch  51  train_loss=0.0335  val_loss=0.1089  epoch_time=38.5s  elapsed=39.3min
+18:28:46  INFO   [fold 2 seed 43 (2/3)] epoch  52  train_loss=0.0302  val_loss=0.1101  epoch_time=42.3s  elapsed=40.0min
+18:29:31  INFO   [fold 2 seed 43 (2/3)] epoch  53  train_loss=0.0298  val_loss=0.1135  epoch_time=44.8s  elapsed=40.7min
+18:30:12  INFO   [fold 2 seed 43 (2/3)] epoch  54  train_loss=0.0301  val_loss=0.1147  epoch_time=41.1s  elapsed=41.4min
+18:30:52  INFO   [fold 2 seed 43 (2/3)] epoch  55  train_loss=0.0297  val_loss=0.1100  epoch_time=39.4s  elapsed=42.0min
+18:31:31  INFO   [fold 2 seed 43 (2/3)] epoch  56  train_loss=0.0291  val_loss=0.1106  epoch_time=39.4s  elapsed=42.7min
+18:31:35  INFO   [fold 2 seed 43 (2/3)] done. time=42.7min  final_epoch=57  approx_best_epoch=47
+18:31:35  INFO   [fold 2 seed 43 (2/3)] per-target R²: eea=0.905  egb=0.933  egc=0.879  ei=0.806  eps=0.800  nc=0.861  tg=0.900
+18:31:35  INFO   [fold 2 seed 44 (3/3)] starting...
+18:32:23  INFO   [fold 2 seed 44 (3/3)] epoch   0  train_loss=0.3410  val_loss=0.3681  epoch_time=43.3s  elapsed=0.7min
+18:33:27  INFO   [fold 2 seed 44 (3/3)] epoch   1  train_loss=0.2435  val_loss=0.2529  epoch_time=64.0s  elapsed=1.8min
+18:34:23  INFO   [fold 2 seed 44 (3/3)] epoch   2  train_loss=0.2297  val_loss=0.6566  epoch_time=55.8s  elapsed=2.7min
+18:35:03  INFO   [fold 2 seed 44 (3/3)] epoch   3  train_loss=0.1948  val_loss=0.2054  epoch_time=40.0s  elapsed=3.4min
+18:35:43  INFO   [fold 2 seed 44 (3/3)] epoch   4  train_loss=0.1910  val_loss=0.4612  epoch_time=39.8s  elapsed=4.0min
+18:36:39  INFO   [fold 2 seed 44 (3/3)] epoch   5  train_loss=0.1693  val_loss=0.1512  epoch_time=55.6s  elapsed=5.0min
+18:37:33  INFO   [fold 2 seed 44 (3/3)] epoch   6  train_loss=0.1567  val_loss=0.1646  epoch_time=54.4s  elapsed=5.9min
+18:38:12  INFO   [fold 2 seed 44 (3/3)] epoch   7  train_loss=0.1461  val_loss=0.1625  epoch_time=39.4s  elapsed=6.5min
+18:39:05  INFO   [fold 2 seed 44 (3/3)] epoch   8  train_loss=0.1464  val_loss=0.3333  epoch_time=52.2s  elapsed=7.4min
+18:39:46  INFO   [fold 2 seed 44 (3/3)] epoch   9  train_loss=0.1337  val_loss=0.2055  epoch_time=41.7s  elapsed=8.1min
+18:40:40  INFO   [fold 2 seed 44 (3/3)] epoch  10  train_loss=0.1338  val_loss=0.1522  epoch_time=54.1s  elapsed=9.0min
+18:41:31  INFO   [fold 2 seed 44 (3/3)] epoch  11  train_loss=0.1245  val_loss=0.1740  epoch_time=50.9s  elapsed=9.9min
+18:42:22  INFO   [fold 2 seed 44 (3/3)] epoch  12  train_loss=0.1186  val_loss=0.1803  epoch_time=50.6s  elapsed=10.7min
+18:43:13  INFO   [fold 2 seed 44 (3/3)] epoch  13  train_loss=0.1131  val_loss=0.1458  epoch_time=51.4s  elapsed=11.6min
+18:44:04  INFO   [fold 2 seed 44 (3/3)] epoch  14  train_loss=0.1077  val_loss=0.1588  epoch_time=50.5s  elapsed=12.4min
+18:44:51  INFO   [fold 2 seed 44 (3/3)] epoch  15  train_loss=0.0984  val_loss=0.1453  epoch_time=46.8s  elapsed=13.2min
+18:45:38  INFO   [fold 2 seed 44 (3/3)] epoch  16  train_loss=0.0960  val_loss=0.1374  epoch_time=47.8s  elapsed=14.0min
+18:46:26  INFO   [fold 2 seed 44 (3/3)] epoch  17  train_loss=0.0897  val_loss=0.1327  epoch_time=47.3s  elapsed=14.8min
+18:47:09  INFO   [fold 2 seed 44 (3/3)] epoch  18  train_loss=0.0837  val_loss=0.1334  epoch_time=43.0s  elapsed=15.5min
+18:47:54  INFO   [fold 2 seed 44 (3/3)] epoch  19  train_loss=0.0827  val_loss=0.1239  epoch_time=45.6s  elapsed=16.2min
+18:48:35  INFO   [fold 2 seed 44 (3/3)] epoch  20  train_loss=0.0844  val_loss=0.1284  epoch_time=40.1s  elapsed=16.9min
+18:49:13  INFO   [fold 2 seed 44 (3/3)] epoch  21  train_loss=0.0798  val_loss=0.1719  epoch_time=38.0s  elapsed=17.5min
+18:49:53  INFO   [fold 2 seed 44 (3/3)] epoch  22  train_loss=0.0742  val_loss=0.1292  epoch_time=40.5s  elapsed=18.2min
+18:50:33  INFO   [fold 2 seed 44 (3/3)] epoch  23  train_loss=0.0695  val_loss=0.1441  epoch_time=39.5s  elapsed=18.9min
+18:51:10  INFO   [fold 2 seed 44 (3/3)] epoch  24  train_loss=0.0721  val_loss=0.1321  epoch_time=37.7s  elapsed=19.5min
+18:51:49  INFO   [fold 2 seed 44 (3/3)] epoch  25  train_loss=0.0685  val_loss=0.1227  epoch_time=38.9s  elapsed=20.2min
+18:52:29  INFO   [fold 2 seed 44 (3/3)] epoch  26  train_loss=0.0695  val_loss=0.1371  epoch_time=39.5s  elapsed=20.8min
+18:53:10  INFO   [fold 2 seed 44 (3/3)] epoch  27  train_loss=0.0601  val_loss=0.1222  epoch_time=41.6s  elapsed=21.5min
+18:53:53  INFO   [fold 2 seed 44 (3/3)] epoch  28  train_loss=0.0642  val_loss=0.1183  epoch_time=42.9s  elapsed=22.2min
+18:54:40  INFO   [fold 2 seed 44 (3/3)] epoch  29  train_loss=0.0574  val_loss=0.1182  epoch_time=46.4s  elapsed=23.0min
+18:55:20  INFO   [fold 2 seed 44 (3/3)] epoch  30  train_loss=0.0531  val_loss=0.1208  epoch_time=40.4s  elapsed=23.7min
+18:55:59  INFO   [fold 2 seed 44 (3/3)] epoch  31  train_loss=0.0538  val_loss=0.1196  epoch_time=39.3s  elapsed=24.3min
+18:56:37  INFO   [fold 2 seed 44 (3/3)] epoch  32  train_loss=0.0553  val_loss=0.1240  epoch_time=38.2s  elapsed=25.0min
+18:57:17  INFO   [fold 2 seed 44 (3/3)] epoch  33  train_loss=0.0504  val_loss=0.1161  epoch_time=39.2s  elapsed=25.6min
+18:57:59  INFO   [fold 2 seed 44 (3/3)] epoch  34  train_loss=0.0483  val_loss=0.1188  epoch_time=42.1s  elapsed=26.3min
+18:58:37  INFO   [fold 2 seed 44 (3/3)] epoch  35  train_loss=0.0471  val_loss=0.1157  epoch_time=38.5s  elapsed=27.0min
+18:59:17  INFO   [fold 2 seed 44 (3/3)] epoch  36  train_loss=0.0482  val_loss=0.1232  epoch_time=39.6s  elapsed=27.6min
+18:59:56  INFO   [fold 2 seed 44 (3/3)] epoch  37  train_loss=0.0461  val_loss=0.1173  epoch_time=39.7s  elapsed=28.3min
+19:00:37  INFO   [fold 2 seed 44 (3/3)] epoch  38  train_loss=0.0442  val_loss=0.1216  epoch_time=40.1s  elapsed=28.9min
+19:01:15  INFO   [fold 2 seed 44 (3/3)] epoch  39  train_loss=0.0412  val_loss=0.1188  epoch_time=38.5s  elapsed=29.6min
+19:01:54  INFO   [fold 2 seed 44 (3/3)] epoch  40  train_loss=0.0409  val_loss=0.1167  epoch_time=38.5s  elapsed=30.2min
+19:02:31  INFO   [fold 2 seed 44 (3/3)] epoch  41  train_loss=0.0415  val_loss=0.1176  epoch_time=37.7s  elapsed=30.9min
+19:03:16  INFO   [fold 2 seed 44 (3/3)] epoch  42  train_loss=0.0399  val_loss=0.1173  epoch_time=45.1s  elapsed=31.6min
+19:04:04  INFO   [fold 2 seed 44 (3/3)] epoch  43  train_loss=0.0399  val_loss=0.1192  epoch_time=47.9s  elapsed=32.4min
+19:04:45  INFO   [fold 2 seed 44 (3/3)] epoch  44  train_loss=0.0396  val_loss=0.1132  epoch_time=40.5s  elapsed=33.1min
+19:05:24  INFO   [fold 2 seed 44 (3/3)] epoch  45  train_loss=0.0364  val_loss=0.1113  epoch_time=39.0s  elapsed=33.7min
+19:06:05  INFO   [fold 2 seed 44 (3/3)] epoch  46  train_loss=0.0366  val_loss=0.1117  epoch_time=41.0s  elapsed=34.4min
+19:06:47  INFO   [fold 2 seed 44 (3/3)] epoch  47  train_loss=0.0361  val_loss=0.1133  epoch_time=41.7s  elapsed=35.1min
+19:07:25  INFO   [fold 2 seed 44 (3/3)] epoch  48  train_loss=0.0338  val_loss=0.1149  epoch_time=38.5s  elapsed=35.8min
+19:08:03  INFO   [fold 2 seed 44 (3/3)] epoch  49  train_loss=0.0337  val_loss=0.1141  epoch_time=38.4s  elapsed=36.4min
+19:08:41  INFO   [fold 2 seed 44 (3/3)] epoch  50  train_loss=0.0315  val_loss=0.1127  epoch_time=37.6s  elapsed=37.0min
+19:09:19  INFO   [fold 2 seed 44 (3/3)] epoch  51  train_loss=0.0313  val_loss=0.1086  epoch_time=37.6s  elapsed=37.6min
+19:10:19  INFO   [fold 2 seed 44 (3/3)] epoch  52  train_loss=0.0315  val_loss=0.1142  epoch_time=60.8s  elapsed=38.7min
+19:32:20  INFO   [fold 2 seed 44 (3/3)] epoch  53  train_loss=0.0327  val_loss=0.1116  epoch_time=1320.7s  elapsed=60.7min
+19:47:37  INFO   [fold 2 seed 44 (3/3)] epoch  54  train_loss=0.0312  val_loss=0.1084  epoch_time=917.2s  elapsed=76.0min
+19:48:32  INFO   [fold 2 seed 44 (3/3)] epoch  55  train_loss=0.0304  val_loss=0.1125  epoch_time=54.7s  elapsed=76.9min
+19:49:13  INFO   [fold 2 seed 44 (3/3)] epoch  56  train_loss=0.0299  val_loss=0.1095  epoch_time=41.0s  elapsed=77.5min
+19:50:02  INFO   [fold 2 seed 44 (3/3)] epoch  57  train_loss=0.0297  val_loss=0.1142  epoch_time=48.9s  elapsed=78.4min
+19:50:45  INFO   [fold 2 seed 44 (3/3)] epoch  58  train_loss=0.0287  val_loss=0.1166  epoch_time=43.4s  elapsed=79.1min
+19:51:28  INFO   [fold 2 seed 44 (3/3)] epoch  59  train_loss=0.0300  val_loss=0.1108  epoch_time=42.9s  elapsed=79.8min
+19:51:36  INFO   [fold 2 seed 44 (3/3)] done. time=79.8min  final_epoch=60  approx_best_epoch=60
+19:51:36  INFO   [fold 2 seed 44 (3/3)] per-target R²: eea=0.899  egb=0.928  egc=0.875  ei=0.749  eps=0.841  nc=0.860  tg=0.902
+19:51:36  INFO   [fold 2] BAG per-target R² (avg of 3 seeds): eea=0.9108  egb=0.9401  egc=0.8842  ei=0.8116  eps=0.8266  nc=0.8709  tg=0.9069
+19:51:36  INFO   [fold 2] total time: 153.3min (per-seed: ['30.8', '42.7', '79.8'])
+19:51:37  INFO   [fold 2] wrote checkpoint checkpoint_fold_2.pkl.gz
+19:51:37  INFO   ============================================================
+19:51:37  INFO   FOLD 3  (3-seed bag)
+19:51:37  INFO   n_train_canon=4736   n_val_canon=1184
+19:51:37  INFO   [fold 3 seed 42 (1/3)] starting...
+20:23:04  INFO   [fold 3 seed 42 (1/3)] epoch   0  train_loss=0.3455  val_loss=0.2420  epoch_time=1880.9s  elapsed=31.3min
+20:33:22  INFO   [fold 3 seed 42 (1/3)] epoch   1  train_loss=0.2594  val_loss=0.2932  epoch_time=618.6s  elapsed=41.7min
+20:50:18  INFO   [fold 3 seed 42 (1/3)] epoch   2  train_loss=0.2322  val_loss=0.4080  epoch_time=1016.0s  elapsed=58.6min
+20:54:02  INFO   [fold 3 seed 42 (1/3)] epoch   3  train_loss=0.2037  val_loss=0.2734  epoch_time=223.5s  elapsed=62.3min
+20:57:46  INFO   [fold 3 seed 42 (1/3)] epoch   4  train_loss=0.1881  val_loss=0.1954  epoch_time=224.5s  elapsed=66.1min
+21:08:30  INFO   [fold 3 seed 42 (1/3)] epoch   5  train_loss=0.1756  val_loss=0.2370  epoch_time=643.2s  elapsed=76.8min
+21:21:36  INFO   [fold 3 seed 42 (1/3)] epoch   6  train_loss=0.1674  val_loss=0.1898  epoch_time=786.9s  elapsed=89.9min
+21:23:42  INFO   [fold 3 seed 42 (1/3)] epoch   7  train_loss=0.1587  val_loss=0.1648  epoch_time=125.4s  elapsed=92.0min
+21:24:58  INFO   [fold 3 seed 42 (1/3)] epoch   8  train_loss=0.1477  val_loss=0.1541  epoch_time=75.9s  elapsed=93.2min
+21:25:55  INFO   [fold 3 seed 42 (1/3)] epoch   9  train_loss=0.1327  val_loss=0.1428  epoch_time=57.3s  elapsed=94.2min
+21:28:21  INFO   [fold 3 seed 42 (1/3)] epoch  10  train_loss=0.1285  val_loss=0.1382  epoch_time=146.0s  elapsed=96.6min
+21:45:01  INFO   [fold 3 seed 42 (1/3)] epoch  11  train_loss=0.1256  val_loss=0.1375  epoch_time=1000.3s  elapsed=113.3min
+21:49:30  INFO   [fold 3 seed 42 (1/3)] epoch  12  train_loss=0.1230  val_loss=0.1131  epoch_time=268.7s  elapsed=117.8min
+21:50:56  INFO   [fold 3 seed 42 (1/3)] epoch  13  train_loss=0.1072  val_loss=0.1271  epoch_time=85.7s  elapsed=119.2min
+22:00:39  INFO   [fold 3 seed 42 (1/3)] epoch  14  train_loss=0.0998  val_loss=0.1200  epoch_time=583.0s  elapsed=128.9min
+22:04:58  INFO   [fold 3 seed 42 (1/3)] epoch  15  train_loss=0.1020  val_loss=0.1154  epoch_time=258.7s  elapsed=133.2min
+22:08:55  INFO   [fold 3 seed 42 (1/3)] epoch  16  train_loss=0.1003  val_loss=0.1137  epoch_time=237.9s  elapsed=137.2min
+22:12:49  INFO   [fold 3 seed 42 (1/3)] epoch  17  train_loss=0.0919  val_loss=0.1700  epoch_time=233.7s  elapsed=141.1min
+22:16:31  INFO   [fold 3 seed 42 (1/3)] epoch  18  train_loss=0.0926  val_loss=0.1253  epoch_time=222.3s  elapsed=144.8min
+22:20:15  INFO   [fold 3 seed 42 (1/3)] epoch  19  train_loss=0.0871  val_loss=0.1019  epoch_time=224.0s  elapsed=148.5min
+22:24:21  INFO   [fold 3 seed 42 (1/3)] epoch  20  train_loss=0.0832  val_loss=0.1052  epoch_time=245.8s  elapsed=152.6min
+22:30:10  INFO   [fold 3 seed 42 (1/3)] epoch  21  train_loss=0.0827  val_loss=0.1010  epoch_time=349.3s  elapsed=158.5min
+22:37:33  INFO   [fold 3 seed 42 (1/3)] epoch  22  train_loss=0.0792  val_loss=0.1116  epoch_time=442.6s  elapsed=165.8min
+23:02:21  INFO   [fold 3 seed 42 (1/3)] epoch  23  train_loss=0.0717  val_loss=0.1045  epoch_time=1488.2s  elapsed=190.6min
+23:26:30  INFO   [fold 3 seed 42 (1/3)] epoch  24  train_loss=0.0671  val_loss=0.1009  epoch_time=1448.7s  elapsed=214.8min
+23:30:16  INFO   [fold 3 seed 42 (1/3)] epoch  25  train_loss=0.0608  val_loss=0.1044  epoch_time=225.9s  elapsed=218.6min
+23:32:15  INFO   [fold 3 seed 42 (1/3)] epoch  26  train_loss=0.0630  val_loss=0.0990  epoch_time=119.2s  elapsed=220.5min
+23:38:50  INFO   [fold 3 seed 42 (1/3)] epoch  27  train_loss=0.0594  val_loss=0.1065  epoch_time=394.6s  elapsed=227.1min
+23:49:11  INFO   [fold 3 seed 42 (1/3)] epoch  28  train_loss=0.0604  val_loss=0.1039  epoch_time=621.6s  elapsed=237.5min
+00:00:47  INFO   [fold 3 seed 42 (1/3)] epoch  29  train_loss=0.0549  val_loss=0.1002  epoch_time=695.4s  elapsed=249.1min
+00:08:45  INFO   [fold 3 seed 42 (1/3)] epoch  30  train_loss=0.0603  val_loss=0.1044  epoch_time=478.5s  elapsed=257.0min
+00:19:44  INFO   [fold 3 seed 42 (1/3)] epoch  31  train_loss=0.0541  val_loss=0.0984  epoch_time=658.9s  elapsed=268.0min
+00:30:04  INFO   [fold 3 seed 42 (1/3)] epoch  32  train_loss=0.0530  val_loss=0.0977  epoch_time=619.9s  elapsed=278.4min
+00:38:13  INFO   [fold 3 seed 42 (1/3)] epoch  33  train_loss=0.0516  val_loss=0.1019  epoch_time=488.8s  elapsed=286.5min
+00:45:46  INFO   [fold 3 seed 42 (1/3)] epoch  34  train_loss=0.0472  val_loss=0.0947  epoch_time=452.6s  elapsed=294.0min
+00:49:53  INFO   [fold 3 seed 42 (1/3)] epoch  35  train_loss=0.0481  val_loss=0.1071  epoch_time=247.5s  elapsed=298.2min
+00:51:09  INFO   [fold 3 seed 42 (1/3)] epoch  36  train_loss=0.0447  val_loss=0.0966  epoch_time=76.0s  elapsed=299.4min
+00:52:26  INFO   [fold 3 seed 42 (1/3)] epoch  37  train_loss=0.0484  val_loss=0.0980  epoch_time=77.0s  elapsed=300.7min
+00:53:42  INFO   [fold 3 seed 42 (1/3)] epoch  38  train_loss=0.0482  val_loss=0.0935  epoch_time=76.1s  elapsed=302.0min
+00:55:01  INFO   [fold 3 seed 42 (1/3)] epoch  39  train_loss=0.0441  val_loss=0.0929  epoch_time=78.7s  elapsed=303.3min
+00:56:16  INFO   [fold 3 seed 42 (1/3)] epoch  40  train_loss=0.0465  val_loss=0.0909  epoch_time=75.2s  elapsed=304.6min
+00:57:40  INFO   [fold 3 seed 42 (1/3)] epoch  41  train_loss=0.0401  val_loss=0.0928  epoch_time=84.2s  elapsed=306.0min
+00:59:03  INFO   [fold 3 seed 42 (1/3)] epoch  42  train_loss=0.0430  val_loss=0.0892  epoch_time=82.6s  elapsed=307.3min
+01:00:19  INFO   [fold 3 seed 42 (1/3)] epoch  43  train_loss=0.0381  val_loss=0.0948  epoch_time=76.1s  elapsed=308.6min
+01:23:26  INFO   [fold 3 seed 42 (1/3)] epoch  44  train_loss=0.0390  val_loss=0.0951  epoch_time=1387.3s  elapsed=331.7min
+01:35:36  INFO   [fold 3 seed 42 (1/3)] epoch  45  train_loss=0.0411  val_loss=0.0995  epoch_time=729.6s  elapsed=343.9min
+01:43:22  INFO   [fold 3 seed 42 (1/3)] epoch  46  train_loss=0.0368  val_loss=0.0917  epoch_time=466.3s  elapsed=351.7min
+01:53:53  INFO   [fold 3 seed 42 (1/3)] epoch  47  train_loss=0.0368  val_loss=0.0936  epoch_time=630.6s  elapsed=362.2min
+02:16:27  INFO   [fold 3 seed 42 (1/3)] epoch  48  train_loss=0.0376  val_loss=0.0931  epoch_time=1354.4s  elapsed=384.7min
+02:41:13  INFO   [fold 3 seed 42 (1/3)] epoch  49  train_loss=0.0357  val_loss=0.0932  epoch_time=1485.6s  elapsed=409.5min
+02:58:13  INFO   [fold 3 seed 42 (1/3)] epoch  50  train_loss=0.0361  val_loss=0.0914  epoch_time=1020.5s  elapsed=426.5min
+05:03:41  INFO   [fold 3 seed 42 (1/3)] epoch  51  train_loss=0.0349  val_loss=0.0909  epoch_time=7527.5s  elapsed=552.0min
+06:58:27  INFO   [fold 3 seed 42 (1/3)] epoch  52  train_loss=0.0342  val_loss=0.0951  epoch_time=6886.5s  elapsed=666.7min
+06:58:31  INFO   [fold 3 seed 42 (1/3)] done. time=666.8min  final_epoch=53  approx_best_epoch=43
+06:58:31  INFO   [fold 3 seed 42 (1/3)] per-target R²: eea=0.903  egb=0.935  egc=0.910  ei=0.894  eps=0.775  nc=0.874  tg=0.895
+06:58:31  INFO   [fold 3 seed 43 (2/3)] starting...
+07:48:46  INFO   [fold 3 seed 43 (2/3)] epoch   0  train_loss=0.3587  val_loss=0.2597  epoch_time=2753.9s  elapsed=45.9min
+08:52:51  INFO   [fold 3 seed 43 (2/3)] epoch   1  train_loss=0.2640  val_loss=0.4393  epoch_time=3845.3s  elapsed=110.0min
+09:54:42  INFO   [fold 3 seed 43 (2/3)] epoch   2  train_loss=0.2217  val_loss=0.3090  epoch_time=3710.8s  elapsed=171.8min
+09:58:36  INFO   [fold 3 seed 43 (2/3)] epoch   3  train_loss=0.1968  val_loss=0.2637  epoch_time=233.5s  elapsed=175.7min
+10:00:11  INFO   [fold 3 seed 43 (2/3)] epoch   4  train_loss=0.1801  val_loss=0.1582  epoch_time=95.8s  elapsed=177.3min
+10:08:58  INFO   [fold 3 seed 43 (2/3)] epoch   5  train_loss=0.1664  val_loss=0.1789  epoch_time=526.2s  elapsed=186.1min
+10:14:00  INFO   [fold 3 seed 43 (2/3)] epoch   6  train_loss=0.1598  val_loss=0.1481  epoch_time=302.3s  elapsed=191.1min
+10:14:40  INFO   [fold 3 seed 43 (2/3)] epoch   7  train_loss=0.1466  val_loss=0.3038  epoch_time=40.1s  elapsed=191.8min
+10:15:27  INFO   [fold 3 seed 43 (2/3)] epoch   8  train_loss=0.1402  val_loss=0.1514  epoch_time=47.0s  elapsed=192.6min
+10:16:32  INFO   [fold 3 seed 43 (2/3)] epoch   9  train_loss=0.1334  val_loss=0.1303  epoch_time=64.5s  elapsed=193.7min
+10:17:27  INFO   [fold 3 seed 43 (2/3)] epoch  10  train_loss=0.1251  val_loss=0.1478  epoch_time=55.7s  elapsed=194.6min
+10:18:20  INFO   [fold 3 seed 43 (2/3)] epoch  11  train_loss=0.1181  val_loss=0.1428  epoch_time=53.0s  elapsed=195.5min
+10:19:06  INFO   [fold 3 seed 43 (2/3)] epoch  12  train_loss=0.1162  val_loss=0.1198  epoch_time=45.3s  elapsed=196.2min
+10:19:43  INFO   [fold 3 seed 43 (2/3)] epoch  13  train_loss=0.1092  val_loss=0.1245  epoch_time=37.3s  elapsed=196.8min
+10:20:20  INFO   [fold 3 seed 43 (2/3)] epoch  14  train_loss=0.1021  val_loss=0.1354  epoch_time=37.6s  elapsed=197.5min
+10:20:58  INFO   [fold 3 seed 43 (2/3)] epoch  15  train_loss=0.0965  val_loss=0.1449  epoch_time=37.4s  elapsed=198.1min
+10:21:35  INFO   [fold 3 seed 43 (2/3)] epoch  16  train_loss=0.0907  val_loss=0.1094  epoch_time=37.6s  elapsed=198.7min
+10:22:13  INFO   [fold 3 seed 43 (2/3)] epoch  17  train_loss=0.0946  val_loss=0.1029  epoch_time=37.6s  elapsed=199.3min
+10:22:50  INFO   [fold 3 seed 43 (2/3)] epoch  18  train_loss=0.0834  val_loss=0.1088  epoch_time=37.0s  elapsed=200.0min
+10:23:27  INFO   [fold 3 seed 43 (2/3)] epoch  19  train_loss=0.0760  val_loss=0.1060  epoch_time=37.5s  elapsed=200.6min
+10:24:04  INFO   [fold 3 seed 43 (2/3)] epoch  20  train_loss=0.0753  val_loss=0.1201  epoch_time=36.9s  elapsed=201.2min
+10:24:45  INFO   [fold 3 seed 43 (2/3)] epoch  21  train_loss=0.0751  val_loss=0.1133  epoch_time=40.6s  elapsed=201.9min
+10:25:24  INFO   [fold 3 seed 43 (2/3)] epoch  22  train_loss=0.0717  val_loss=0.1193  epoch_time=39.2s  elapsed=202.5min
+10:26:07  INFO   [fold 3 seed 43 (2/3)] epoch  23  train_loss=0.0749  val_loss=0.1107  epoch_time=42.6s  elapsed=203.2min
+10:26:57  INFO   [fold 3 seed 43 (2/3)] epoch  24  train_loss=0.0679  val_loss=0.1096  epoch_time=50.1s  elapsed=204.1min
+10:27:37  INFO   [fold 3 seed 43 (2/3)] epoch  25  train_loss=0.0628  val_loss=0.0971  epoch_time=40.2s  elapsed=204.8min
+10:28:18  INFO   [fold 3 seed 43 (2/3)] epoch  26  train_loss=0.0602  val_loss=0.1033  epoch_time=40.4s  elapsed=205.4min
+10:29:13  INFO   [fold 3 seed 43 (2/3)] epoch  27  train_loss=0.0587  val_loss=0.0989  epoch_time=55.2s  elapsed=206.3min
+10:30:01  INFO   [fold 3 seed 43 (2/3)] epoch  28  train_loss=0.0597  val_loss=0.0964  epoch_time=48.3s  elapsed=207.2min
+10:30:50  INFO   [fold 3 seed 43 (2/3)] epoch  29  train_loss=0.0531  val_loss=0.0944  epoch_time=48.5s  elapsed=208.0min
+10:31:42  INFO   [fold 3 seed 43 (2/3)] epoch  30  train_loss=0.0502  val_loss=0.1051  epoch_time=52.8s  elapsed=208.8min
+10:32:29  INFO   [fold 3 seed 43 (2/3)] epoch  31  train_loss=0.0524  val_loss=0.1088  epoch_time=46.6s  elapsed=209.6min
+10:33:23  INFO   [fold 3 seed 43 (2/3)] epoch  32  train_loss=0.0496  val_loss=0.1061  epoch_time=54.2s  elapsed=210.5min
+10:34:22  INFO   [fold 3 seed 43 (2/3)] epoch  33  train_loss=0.0485  val_loss=0.0984  epoch_time=58.7s  elapsed=211.5min
+10:35:01  INFO   [fold 3 seed 43 (2/3)] epoch  34  train_loss=0.0448  val_loss=0.0953  epoch_time=39.8s  elapsed=212.2min
+10:35:39  INFO   [fold 3 seed 43 (2/3)] epoch  35  train_loss=0.0426  val_loss=0.0939  epoch_time=37.8s  elapsed=212.8min
+10:36:18  INFO   [fold 3 seed 43 (2/3)] epoch  36  train_loss=0.0446  val_loss=0.0958  epoch_time=38.6s  elapsed=213.4min
+10:37:09  INFO   [fold 3 seed 43 (2/3)] epoch  37  train_loss=0.0443  val_loss=0.1151  epoch_time=50.7s  elapsed=214.3min
+10:37:51  INFO   [fold 3 seed 43 (2/3)] epoch  38  train_loss=0.0467  val_loss=0.0938  epoch_time=42.2s  elapsed=215.0min
+10:38:33  INFO   [fold 3 seed 43 (2/3)] epoch  39  train_loss=0.0419  val_loss=0.0939  epoch_time=42.4s  elapsed=215.7min
+10:39:16  INFO   [fold 3 seed 43 (2/3)] epoch  40  train_loss=0.0417  val_loss=0.0929  epoch_time=43.3s  elapsed=216.4min
+10:40:01  INFO   [fold 3 seed 43 (2/3)] epoch  41  train_loss=0.0391  val_loss=0.0965  epoch_time=44.6s  elapsed=217.2min
+10:40:54  INFO   [fold 3 seed 43 (2/3)] epoch  42  train_loss=0.0378  val_loss=0.0930  epoch_time=52.4s  elapsed=218.0min
+10:41:34  INFO   [fold 3 seed 43 (2/3)] epoch  43  train_loss=0.0392  val_loss=0.0941  epoch_time=40.5s  elapsed=218.7min
+10:42:12  INFO   [fold 3 seed 43 (2/3)] epoch  44  train_loss=0.0365  val_loss=0.0920  epoch_time=38.2s  elapsed=219.3min
+10:42:55  INFO   [fold 3 seed 43 (2/3)] epoch  45  train_loss=0.0365  val_loss=0.0938  epoch_time=42.9s  elapsed=220.1min
+10:43:38  INFO   [fold 3 seed 43 (2/3)] epoch  46  train_loss=0.0338  val_loss=0.0970  epoch_time=42.7s  elapsed=220.8min
+10:44:18  INFO   [fold 3 seed 43 (2/3)] epoch  47  train_loss=0.0358  val_loss=0.0954  epoch_time=40.5s  elapsed=221.4min
+10:44:59  INFO   [fold 3 seed 43 (2/3)] epoch  48  train_loss=0.0342  val_loss=0.0953  epoch_time=40.8s  elapsed=222.1min
+10:45:45  INFO   [fold 3 seed 43 (2/3)] epoch  49  train_loss=0.0340  val_loss=0.0959  epoch_time=45.7s  elapsed=222.9min
+10:46:25  INFO   [fold 3 seed 43 (2/3)] epoch  50  train_loss=0.0333  val_loss=0.0967  epoch_time=40.8s  elapsed=223.6min
+10:47:09  INFO   [fold 3 seed 43 (2/3)] epoch  51  train_loss=0.0319  val_loss=0.0941  epoch_time=43.7s  elapsed=224.3min
+10:48:00  INFO   [fold 3 seed 43 (2/3)] epoch  52  train_loss=0.0313  val_loss=0.0926  epoch_time=50.5s  elapsed=225.1min
+10:49:05  INFO   [fold 3 seed 43 (2/3)] epoch  53  train_loss=0.0340  val_loss=0.0917  epoch_time=65.3s  elapsed=226.2min
+10:49:51  INFO   [fold 3 seed 43 (2/3)] epoch  54  train_loss=0.0306  val_loss=0.0933  epoch_time=45.7s  elapsed=227.0min
+10:50:40  INFO   [fold 3 seed 43 (2/3)] epoch  55  train_loss=0.0298  val_loss=0.0948  epoch_time=49.4s  elapsed=227.8min
+10:51:42  INFO   [fold 3 seed 43 (2/3)] epoch  56  train_loss=0.0287  val_loss=0.0923  epoch_time=62.1s  elapsed=228.8min
+10:52:28  INFO   [fold 3 seed 43 (2/3)] epoch  57  train_loss=0.0298  val_loss=0.0958  epoch_time=46.2s  elapsed=229.6min
+10:53:18  INFO   [fold 3 seed 43 (2/3)] epoch  58  train_loss=0.0322  val_loss=0.0954  epoch_time=49.4s  elapsed=230.4min
+10:54:08  INFO   [fold 3 seed 43 (2/3)] epoch  59  train_loss=0.0312  val_loss=0.0930  epoch_time=50.5s  elapsed=231.3min
+10:54:12  INFO   [fold 3 seed 43 (2/3)] done. time=231.3min  final_epoch=60  approx_best_epoch=60
+10:54:12  INFO   [fold 3 seed 43 (2/3)] per-target R²: eea=0.897  egb=0.930  egc=0.915  ei=0.920  eps=0.747  nc=0.901  tg=0.896
+10:54:12  INFO   [fold 3 seed 44 (3/3)] starting...
+10:55:12  INFO   [fold 3 seed 44 (3/3)] epoch   0  train_loss=0.3353  val_loss=0.2740  epoch_time=54.4s  elapsed=0.9min
+10:55:54  INFO   [fold 3 seed 44 (3/3)] epoch   1  train_loss=0.2529  val_loss=0.2246  epoch_time=42.1s  elapsed=1.6min
+10:56:42  INFO   [fold 3 seed 44 (3/3)] epoch   2  train_loss=0.2252  val_loss=0.2047  epoch_time=47.8s  elapsed=2.4min
+10:57:25  INFO   [fold 3 seed 44 (3/3)] epoch   3  train_loss=0.1974  val_loss=0.3253  epoch_time=43.4s  elapsed=3.1min
+10:58:12  INFO   [fold 3 seed 44 (3/3)] epoch   4  train_loss=0.1883  val_loss=0.2139  epoch_time=46.3s  elapsed=3.9min
+10:58:56  INFO   [fold 3 seed 44 (3/3)] epoch   5  train_loss=0.1621  val_loss=0.1660  epoch_time=44.3s  elapsed=4.6min
+10:59:39  INFO   [fold 3 seed 44 (3/3)] epoch   6  train_loss=0.1596  val_loss=0.1586  epoch_time=42.5s  elapsed=5.3min
+11:00:22  INFO   [fold 3 seed 44 (3/3)] epoch   7  train_loss=0.1490  val_loss=0.1371  epoch_time=43.3s  elapsed=6.1min
+11:01:09  INFO   [fold 3 seed 44 (3/3)] epoch   8  train_loss=0.1408  val_loss=0.1292  epoch_time=46.8s  elapsed=6.8min
+11:01:53  INFO   [fold 3 seed 44 (3/3)] epoch   9  train_loss=0.1415  val_loss=0.1751  epoch_time=44.0s  elapsed=7.6min
+11:02:36  INFO   [fold 3 seed 44 (3/3)] epoch  10  train_loss=0.1210  val_loss=0.1410  epoch_time=43.8s  elapsed=8.3min
+11:03:30  INFO   [fold 3 seed 44 (3/3)] epoch  11  train_loss=0.1139  val_loss=0.1224  epoch_time=53.9s  elapsed=9.2min
+11:04:17  INFO   [fold 3 seed 44 (3/3)] epoch  12  train_loss=0.1154  val_loss=0.1121  epoch_time=46.7s  elapsed=10.0min
+11:05:02  INFO   [fold 3 seed 44 (3/3)] epoch  13  train_loss=0.1038  val_loss=0.1122  epoch_time=44.9s  elapsed=10.7min
+11:05:45  INFO   [fold 3 seed 44 (3/3)] epoch  14  train_loss=0.1036  val_loss=0.1232  epoch_time=43.4s  elapsed=11.5min
+11:06:29  INFO   [fold 3 seed 44 (3/3)] epoch  15  train_loss=0.0932  val_loss=0.1051  epoch_time=43.7s  elapsed=12.2min
+11:07:13  INFO   [fold 3 seed 44 (3/3)] epoch  16  train_loss=0.0872  val_loss=0.1064  epoch_time=43.8s  elapsed=12.9min
+11:07:57  INFO   [fold 3 seed 44 (3/3)] epoch  17  train_loss=0.0906  val_loss=0.1107  epoch_time=43.9s  elapsed=13.7min
+11:08:35  INFO   [fold 3 seed 44 (3/3)] epoch  18  train_loss=0.0922  val_loss=0.1061  epoch_time=37.9s  elapsed=14.3min
+11:09:12  INFO   [fold 3 seed 44 (3/3)] epoch  19  train_loss=0.0793  val_loss=0.1137  epoch_time=37.5s  elapsed=14.9min
+11:09:50  INFO   [fold 3 seed 44 (3/3)] epoch  20  train_loss=0.0835  val_loss=0.1312  epoch_time=37.7s  elapsed=15.5min
+11:10:27  INFO   [fold 3 seed 44 (3/3)] epoch  21  train_loss=0.0720  val_loss=0.1137  epoch_time=37.2s  elapsed=16.2min
+11:11:05  INFO   [fold 3 seed 44 (3/3)] epoch  22  train_loss=0.0720  val_loss=0.1021  epoch_time=37.8s  elapsed=16.8min
+11:11:42  INFO   [fold 3 seed 44 (3/3)] epoch  23  train_loss=0.0691  val_loss=0.1048  epoch_time=37.3s  elapsed=17.4min
+11:12:19  INFO   [fold 3 seed 44 (3/3)] epoch  24  train_loss=0.0635  val_loss=0.0982  epoch_time=36.8s  elapsed=18.0min
+11:12:56  INFO   [fold 3 seed 44 (3/3)] epoch  25  train_loss=0.0638  val_loss=0.1050  epoch_time=37.3s  elapsed=18.6min
+11:13:34  INFO   [fold 3 seed 44 (3/3)] epoch  26  train_loss=0.0640  val_loss=0.1057  epoch_time=37.3s  elapsed=19.3min
+11:14:13  INFO   [fold 3 seed 44 (3/3)] epoch  27  train_loss=0.0578  val_loss=0.1040  epoch_time=39.2s  elapsed=19.9min
+11:14:59  INFO   [fold 3 seed 44 (3/3)] epoch  28  train_loss=0.0575  val_loss=0.0991  epoch_time=46.6s  elapsed=20.7min
+11:15:37  INFO   [fold 3 seed 44 (3/3)] epoch  29  train_loss=0.0540  val_loss=0.1042  epoch_time=38.1s  elapsed=21.3min
+11:16:25  INFO   [fold 3 seed 44 (3/3)] epoch  30  train_loss=0.0525  val_loss=0.0981  epoch_time=47.1s  elapsed=22.1min
+11:17:30  INFO   [fold 3 seed 44 (3/3)] epoch  31  train_loss=0.0479  val_loss=0.1006  epoch_time=65.3s  elapsed=23.2min
+11:18:21  INFO   [fold 3 seed 44 (3/3)] epoch  32  train_loss=0.0492  val_loss=0.1072  epoch_time=51.4s  elapsed=24.1min
+11:19:06  INFO   [fold 3 seed 44 (3/3)] epoch  33  train_loss=0.0492  val_loss=0.1018  epoch_time=44.2s  elapsed=24.8min
+11:19:47  INFO   [fold 3 seed 44 (3/3)] epoch  34  train_loss=0.0507  val_loss=0.1094  epoch_time=41.3s  elapsed=25.5min
+11:20:29  INFO   [fold 3 seed 44 (3/3)] epoch  35  train_loss=0.0470  val_loss=0.0923  epoch_time=42.5s  elapsed=26.2min
+11:21:14  INFO   [fold 3 seed 44 (3/3)] epoch  36  train_loss=0.0460  val_loss=0.0989  epoch_time=44.9s  elapsed=26.9min
+11:22:09  INFO   [fold 3 seed 44 (3/3)] epoch  37  train_loss=0.0465  val_loss=0.0959  epoch_time=54.8s  elapsed=27.9min
+11:23:01  INFO   [fold 3 seed 44 (3/3)] epoch  38  train_loss=0.0432  val_loss=0.1039  epoch_time=52.0s  elapsed=28.7min
+11:24:45  INFO   [fold 3 seed 44 (3/3)] epoch  39  train_loss=0.0426  val_loss=0.0972  epoch_time=104.2s  elapsed=30.5min
+11:25:56  INFO   [fold 3 seed 44 (3/3)] epoch  40  train_loss=0.0389  val_loss=0.0928  epoch_time=70.4s  elapsed=31.6min
+11:27:09  INFO   [fold 3 seed 44 (3/3)] epoch  41  train_loss=0.0415  val_loss=0.0946  epoch_time=73.7s  elapsed=32.9min
+11:28:16  INFO   [fold 3 seed 44 (3/3)] epoch  42  train_loss=0.0365  val_loss=0.0935  epoch_time=67.0s  elapsed=34.0min
+11:29:21  INFO   [fold 3 seed 44 (3/3)] epoch  43  train_loss=0.0372  val_loss=0.0926  epoch_time=64.6s  elapsed=35.1min
+11:30:28  INFO   [fold 3 seed 44 (3/3)] epoch  44  train_loss=0.0372  val_loss=0.0909  epoch_time=66.7s  elapsed=36.2min
+11:31:45  INFO   [fold 3 seed 44 (3/3)] epoch  45  train_loss=0.0346  val_loss=0.0922  epoch_time=77.4s  elapsed=37.5min
+11:32:49  INFO   [fold 3 seed 44 (3/3)] epoch  46  train_loss=0.0354  val_loss=0.0899  epoch_time=64.2s  elapsed=38.5min
+11:33:52  INFO   [fold 3 seed 44 (3/3)] epoch  47  train_loss=0.0347  val_loss=0.0868  epoch_time=62.7s  elapsed=39.6min
+11:35:09  INFO   [fold 3 seed 44 (3/3)] epoch  48  train_loss=0.0329  val_loss=0.0908  epoch_time=77.0s  elapsed=40.9min
+11:36:19  INFO   [fold 3 seed 44 (3/3)] epoch  49  train_loss=0.0342  val_loss=0.0894  epoch_time=69.6s  elapsed=42.0min
+11:37:40  INFO   [fold 3 seed 44 (3/3)] epoch  50  train_loss=0.0312  val_loss=0.0902  epoch_time=81.5s  elapsed=43.4min
+11:38:46  INFO   [fold 3 seed 44 (3/3)] epoch  51  train_loss=0.0316  val_loss=0.0897  epoch_time=66.0s  elapsed=44.5min
+11:40:07  INFO   [fold 3 seed 44 (3/3)] epoch  52  train_loss=0.0303  val_loss=0.0873  epoch_time=80.7s  elapsed=45.8min
+11:41:39  INFO   [fold 3 seed 44 (3/3)] epoch  53  train_loss=0.0334  val_loss=0.0895  epoch_time=92.0s  elapsed=47.4min
+11:43:14  INFO   [fold 3 seed 44 (3/3)] epoch  54  train_loss=0.0303  val_loss=0.0883  epoch_time=95.3s  elapsed=48.9min
+11:44:29  INFO   [fold 3 seed 44 (3/3)] epoch  55  train_loss=0.0322  val_loss=0.0879  epoch_time=74.6s  elapsed=50.2min
+11:45:46  INFO   [fold 3 seed 44 (3/3)] epoch  56  train_loss=0.0301  val_loss=0.0875  epoch_time=77.7s  elapsed=51.5min
+11:46:53  INFO   [fold 3 seed 44 (3/3)] epoch  57  train_loss=0.0293  val_loss=0.0874  epoch_time=66.8s  elapsed=52.6min
+11:46:58  INFO   [fold 3 seed 44 (3/3)] done. time=52.6min  final_epoch=58  approx_best_epoch=48
+11:46:58  INFO   [fold 3 seed 44 (3/3)] per-target R²: eea=0.886  egb=0.943  egc=0.924  ei=0.864  eps=0.796  nc=0.835  tg=0.905
+11:46:58  INFO   [fold 3] BAG per-target R² (avg of 3 seeds): eea=0.9089  egb=0.9443  egc=0.9261  ei=0.9114  eps=0.7958  nc=0.8826  tg=0.9060
+11:46:58  INFO   [fold 3] total time: 950.6min (per-seed: ['666.8', '231.3', '52.6'])
+11:46:59  INFO   [fold 3] wrote checkpoint checkpoint_fold_3.pkl.gz
+11:46:59  INFO   ============================================================
+11:46:59  INFO   FOLD 4  (3-seed bag)
+11:46:59  INFO   n_train_canon=4736   n_val_canon=1184
+11:46:59  INFO   [fold 4 seed 42 (1/3)] starting...
+11:48:13  INFO   [fold 4 seed 42 (1/3)] epoch   0  train_loss=0.3521  val_loss=0.2445  epoch_time=66.4s  elapsed=1.1min
+11:49:20  INFO   [fold 4 seed 42 (1/3)] epoch   1  train_loss=0.2598  val_loss=0.4703  epoch_time=66.9s  elapsed=2.2min
+11:50:25  INFO   [fold 4 seed 42 (1/3)] epoch   2  train_loss=0.2180  val_loss=0.2370  epoch_time=65.2s  elapsed=3.3min
+11:51:42  INFO   [fold 4 seed 42 (1/3)] epoch   3  train_loss=0.2060  val_loss=0.2660  epoch_time=77.2s  elapsed=4.6min
+11:53:26  INFO   [fold 4 seed 42 (1/3)] epoch   4  train_loss=0.1909  val_loss=0.1829  epoch_time=103.9s  elapsed=6.3min
+11:54:50  INFO   [fold 4 seed 42 (1/3)] epoch   5  train_loss=0.1781  val_loss=0.2153  epoch_time=83.8s  elapsed=7.7min
+11:55:52  INFO   [fold 4 seed 42 (1/3)] epoch   6  train_loss=0.1662  val_loss=0.1676  epoch_time=62.0s  elapsed=8.8min
+11:56:43  INFO   [fold 4 seed 42 (1/3)] epoch   7  train_loss=0.1568  val_loss=0.1607  epoch_time=51.1s  elapsed=9.6min
+11:57:30  INFO   [fold 4 seed 42 (1/3)] epoch   8  train_loss=0.1378  val_loss=0.1539  epoch_time=46.5s  elapsed=10.4min
+11:58:29  INFO   [fold 4 seed 42 (1/3)] epoch   9  train_loss=0.1296  val_loss=0.1391  epoch_time=59.1s  elapsed=11.4min
+11:59:25  INFO   [fold 4 seed 42 (1/3)] epoch  10  train_loss=0.1323  val_loss=0.1411  epoch_time=56.1s  elapsed=12.3min
+12:00:18  INFO   [fold 4 seed 42 (1/3)] epoch  11  train_loss=0.1179  val_loss=0.1554  epoch_time=53.3s  elapsed=13.2min
+12:01:05  INFO   [fold 4 seed 42 (1/3)] epoch  12  train_loss=0.1138  val_loss=0.1597  epoch_time=47.1s  elapsed=14.0min
+12:02:10  INFO   [fold 4 seed 42 (1/3)] epoch  13  train_loss=0.1131  val_loss=0.1424  epoch_time=64.6s  elapsed=15.1min
+12:02:59  INFO   [fold 4 seed 42 (1/3)] epoch  14  train_loss=0.1060  val_loss=0.1248  epoch_time=48.6s  elapsed=15.9min
+12:04:10  INFO   [fold 4 seed 42 (1/3)] epoch  15  train_loss=0.1005  val_loss=0.1474  epoch_time=71.6s  elapsed=17.1min
+12:04:59  INFO   [fold 4 seed 42 (1/3)] epoch  16  train_loss=0.1001  val_loss=0.1290  epoch_time=48.7s  elapsed=17.9min
+12:06:08  INFO   [fold 4 seed 42 (1/3)] epoch  17  train_loss=0.0948  val_loss=0.1214  epoch_time=68.7s  elapsed=19.0min
+12:07:03  INFO   [fold 4 seed 42 (1/3)] epoch  18  train_loss=0.0933  val_loss=0.1251  epoch_time=55.7s  elapsed=19.9min
+12:08:02  INFO   [fold 4 seed 42 (1/3)] epoch  19  train_loss=0.0851  val_loss=0.1514  epoch_time=58.6s  elapsed=20.9min
+12:09:01  INFO   [fold 4 seed 42 (1/3)] epoch  20  train_loss=0.0829  val_loss=0.1294  epoch_time=59.2s  elapsed=21.9min
+12:10:12  INFO   [fold 4 seed 42 (1/3)] epoch  21  train_loss=0.0802  val_loss=0.1175  epoch_time=70.6s  elapsed=23.1min
+12:11:25  INFO   [fold 4 seed 42 (1/3)] epoch  22  train_loss=0.0758  val_loss=0.1182  epoch_time=73.6s  elapsed=24.3min
+12:13:10  INFO   [fold 4 seed 42 (1/3)] epoch  23  train_loss=0.0672  val_loss=0.1111  epoch_time=105.0s  elapsed=26.1min
+12:14:39  INFO   [fold 4 seed 42 (1/3)] epoch  24  train_loss=0.0753  val_loss=0.1266  epoch_time=88.2s  elapsed=27.5min
+12:15:45  INFO   [fold 4 seed 42 (1/3)] epoch  25  train_loss=0.0690  val_loss=0.1131  epoch_time=66.8s  elapsed=28.6min
+12:17:25  INFO   [fold 4 seed 42 (1/3)] epoch  26  train_loss=0.0669  val_loss=0.1116  epoch_time=99.1s  elapsed=30.3min
+12:19:07  INFO   [fold 4 seed 42 (1/3)] epoch  27  train_loss=0.0607  val_loss=0.1110  epoch_time=102.7s  elapsed=32.0min
+12:20:50  INFO   [fold 4 seed 42 (1/3)] epoch  28  train_loss=0.0591  val_loss=0.1158  epoch_time=103.1s  elapsed=33.7min
+12:22:19  INFO   [fold 4 seed 42 (1/3)] epoch  29  train_loss=0.0579  val_loss=0.1118  epoch_time=88.4s  elapsed=35.2min
+12:23:58  INFO   [fold 4 seed 42 (1/3)] epoch  30  train_loss=0.0539  val_loss=0.1094  epoch_time=99.5s  elapsed=36.9min
+12:25:23  INFO   [fold 4 seed 42 (1/3)] epoch  31  train_loss=0.0532  val_loss=0.1140  epoch_time=85.2s  elapsed=38.3min
+12:26:32  INFO   [fold 4 seed 42 (1/3)] epoch  32  train_loss=0.0507  val_loss=0.1128  epoch_time=69.0s  elapsed=39.4min
+12:27:25  INFO   [fold 4 seed 42 (1/3)] epoch  33  train_loss=0.0515  val_loss=0.1153  epoch_time=52.8s  elapsed=40.3min
+12:28:17  INFO   [fold 4 seed 42 (1/3)] epoch  34  train_loss=0.0516  val_loss=0.1136  epoch_time=51.8s  elapsed=41.2min
+12:29:07  INFO   [fold 4 seed 42 (1/3)] epoch  35  train_loss=0.0468  val_loss=0.1100  epoch_time=49.4s  elapsed=42.0min
+12:29:56  INFO   [fold 4 seed 42 (1/3)] epoch  36  train_loss=0.0462  val_loss=0.1059  epoch_time=49.4s  elapsed=42.8min
+12:31:10  INFO   [fold 4 seed 42 (1/3)] epoch  37  train_loss=0.0448  val_loss=0.1094  epoch_time=73.8s  elapsed=44.1min
+12:31:57  INFO   [fold 4 seed 42 (1/3)] epoch  38  train_loss=0.0431  val_loss=0.1074  epoch_time=46.8s  elapsed=44.8min
+12:32:42  INFO   [fold 4 seed 42 (1/3)] epoch  39  train_loss=0.0437  val_loss=0.1099  epoch_time=45.1s  elapsed=45.6min
+12:33:29  INFO   [fold 4 seed 42 (1/3)] epoch  40  train_loss=0.0421  val_loss=0.1099  epoch_time=47.2s  elapsed=46.4min
+12:34:32  INFO   [fold 4 seed 42 (1/3)] epoch  41  train_loss=0.0390  val_loss=0.1086  epoch_time=62.6s  elapsed=47.4min
+12:35:29  INFO   [fold 4 seed 42 (1/3)] epoch  42  train_loss=0.0417  val_loss=0.1108  epoch_time=57.3s  elapsed=48.4min
+12:36:19  INFO   [fold 4 seed 42 (1/3)] epoch  43  train_loss=0.0389  val_loss=0.1066  epoch_time=50.6s  elapsed=49.2min
+12:37:07  INFO   [fold 4 seed 42 (1/3)] epoch  44  train_loss=0.0355  val_loss=0.1085  epoch_time=47.9s  elapsed=50.0min
+12:37:51  INFO   [fold 4 seed 42 (1/3)] epoch  45  train_loss=0.0385  val_loss=0.1051  epoch_time=43.3s  elapsed=50.7min
+12:38:30  INFO   [fold 4 seed 42 (1/3)] epoch  46  train_loss=0.0378  val_loss=0.1085  epoch_time=39.7s  elapsed=51.4min
+12:39:22  INFO   [fold 4 seed 42 (1/3)] epoch  47  train_loss=0.0360  val_loss=0.1039  epoch_time=51.5s  elapsed=52.3min
+12:40:11  INFO   [fold 4 seed 42 (1/3)] epoch  48  train_loss=0.0341  val_loss=0.1076  epoch_time=49.1s  elapsed=53.1min
+12:41:04  INFO   [fold 4 seed 42 (1/3)] epoch  49  train_loss=0.0337  val_loss=0.1053  epoch_time=52.6s  elapsed=53.9min
+12:41:56  INFO   [fold 4 seed 42 (1/3)] epoch  50  train_loss=0.0336  val_loss=0.1044  epoch_time=52.5s  elapsed=54.8min
+12:43:11  INFO   [fold 4 seed 42 (1/3)] epoch  51  train_loss=0.0316  val_loss=0.1056  epoch_time=75.0s  elapsed=56.1min
+12:44:27  INFO   [fold 4 seed 42 (1/3)] epoch  52  train_loss=0.0342  val_loss=0.1066  epoch_time=75.6s  elapsed=57.3min
+12:45:22  INFO   [fold 4 seed 42 (1/3)] epoch  53  train_loss=0.0316  val_loss=0.1095  epoch_time=55.7s  elapsed=58.3min
+12:46:17  INFO   [fold 4 seed 42 (1/3)] epoch  54  train_loss=0.0328  val_loss=0.1009  epoch_time=55.1s  elapsed=59.2min
+12:47:16  INFO   [fold 4 seed 42 (1/3)] epoch  55  train_loss=0.0329  val_loss=0.1057  epoch_time=58.7s  elapsed=60.2min
+12:48:13  INFO   [fold 4 seed 42 (1/3)] epoch  56  train_loss=0.0307  val_loss=0.1045  epoch_time=56.4s  elapsed=61.1min
+12:49:08  INFO   [fold 4 seed 42 (1/3)] epoch  57  train_loss=0.0307  val_loss=0.1045  epoch_time=55.1s  elapsed=62.0min
+12:50:12  INFO   [fold 4 seed 42 (1/3)] epoch  58  train_loss=0.0296  val_loss=0.1026  epoch_time=64.8s  elapsed=63.1min
+12:51:28  INFO   [fold 4 seed 42 (1/3)] epoch  59  train_loss=0.0288  val_loss=0.1025  epoch_time=75.9s  elapsed=64.4min
+12:51:36  INFO   [fold 4 seed 42 (1/3)] done. time=64.4min  final_epoch=60  approx_best_epoch=60
+12:51:36  INFO   [fold 4 seed 42 (1/3)] per-target R²: eea=0.933  egb=0.917  egc=0.901  ei=0.767  eps=0.711  nc=0.827  tg=0.907
+12:51:36  INFO   [fold 4 seed 43 (2/3)] starting...
+12:52:48  INFO   [fold 4 seed 43 (2/3)] epoch   0  train_loss=0.3624  val_loss=0.4444  epoch_time=63.5s  elapsed=1.1min
+12:53:38  INFO   [fold 4 seed 43 (2/3)] epoch   1  train_loss=0.2584  val_loss=0.2921  epoch_time=50.7s  elapsed=1.9min
+12:54:25  INFO   [fold 4 seed 43 (2/3)] epoch   2  train_loss=0.2302  val_loss=0.2103  epoch_time=46.4s  elapsed=2.7min
+12:55:15  INFO   [fold 4 seed 43 (2/3)] epoch   3  train_loss=0.1944  val_loss=0.1730  epoch_time=50.0s  elapsed=3.5min
+12:55:54  INFO   [fold 4 seed 43 (2/3)] epoch   4  train_loss=0.1890  val_loss=0.1666  epoch_time=38.7s  elapsed=4.2min
+12:56:32  INFO   [fold 4 seed 43 (2/3)] epoch   5  train_loss=0.1680  val_loss=0.1617  epoch_time=38.4s  elapsed=4.8min
+12:57:10  INFO   [fold 4 seed 43 (2/3)] epoch   6  train_loss=0.1595  val_loss=0.1495  epoch_time=38.4s  elapsed=5.4min
+12:57:51  INFO   [fold 4 seed 43 (2/3)] epoch   7  train_loss=0.1464  val_loss=0.1498  epoch_time=40.7s  elapsed=6.1min
+12:58:33  INFO   [fold 4 seed 43 (2/3)] epoch   8  train_loss=0.1409  val_loss=0.2106  epoch_time=42.2s  elapsed=6.8min
+12:59:16  INFO   [fold 4 seed 43 (2/3)] epoch   9  train_loss=0.1327  val_loss=0.1967  epoch_time=42.8s  elapsed=7.5min
+12:59:59  INFO   [fold 4 seed 43 (2/3)] epoch  10  train_loss=0.1319  val_loss=0.1429  epoch_time=43.4s  elapsed=8.3min
+13:00:41  INFO   [fold 4 seed 43 (2/3)] epoch  11  train_loss=0.1158  val_loss=0.1484  epoch_time=41.2s  elapsed=8.9min
+13:01:29  INFO   [fold 4 seed 43 (2/3)] epoch  12  train_loss=0.1106  val_loss=0.1307  epoch_time=48.8s  elapsed=9.8min
+13:02:16  INFO   [fold 4 seed 43 (2/3)] epoch  13  train_loss=0.1133  val_loss=0.1440  epoch_time=46.2s  elapsed=10.5min
+13:03:06  INFO   [fold 4 seed 43 (2/3)] epoch  14  train_loss=0.1093  val_loss=0.1296  epoch_time=49.9s  elapsed=11.4min
+13:03:46  INFO   [fold 4 seed 43 (2/3)] epoch  15  train_loss=0.1024  val_loss=0.1314  epoch_time=40.8s  elapsed=12.0min
+13:04:27  INFO   [fold 4 seed 43 (2/3)] epoch  16  train_loss=0.0969  val_loss=0.1236  epoch_time=40.7s  elapsed=12.7min
+13:05:06  INFO   [fold 4 seed 43 (2/3)] epoch  17  train_loss=0.0935  val_loss=0.1306  epoch_time=38.8s  elapsed=13.4min
+13:05:46  INFO   [fold 4 seed 43 (2/3)] epoch  18  train_loss=0.0836  val_loss=0.1235  epoch_time=39.7s  elapsed=14.0min
+13:06:26  INFO   [fold 4 seed 43 (2/3)] epoch  19  train_loss=0.0826  val_loss=0.1244  epoch_time=40.6s  elapsed=14.7min
+13:07:05  INFO   [fold 4 seed 43 (2/3)] epoch  20  train_loss=0.0791  val_loss=0.1162  epoch_time=39.2s  elapsed=15.4min
+13:07:44  INFO   [fold 4 seed 43 (2/3)] epoch  21  train_loss=0.0793  val_loss=0.1348  epoch_time=39.0s  elapsed=16.0min
+13:08:24  INFO   [fold 4 seed 43 (2/3)] epoch  22  train_loss=0.0750  val_loss=0.1165  epoch_time=40.0s  elapsed=16.7min
+13:09:04  INFO   [fold 4 seed 43 (2/3)] epoch  23  train_loss=0.0695  val_loss=0.1395  epoch_time=39.2s  elapsed=17.3min
+13:10:00  INFO   [fold 4 seed 43 (2/3)] epoch  24  train_loss=0.0651  val_loss=0.1167  epoch_time=56.7s  elapsed=18.3min
+13:11:43  INFO   [fold 4 seed 43 (2/3)] epoch  25  train_loss=0.0610  val_loss=0.1097  epoch_time=102.1s  elapsed=20.0min
+13:12:51  INFO   [fold 4 seed 43 (2/3)] epoch  26  train_loss=0.0637  val_loss=0.1154  epoch_time=68.2s  elapsed=21.1min
+13:14:01  INFO   [fold 4 seed 43 (2/3)] epoch  27  train_loss=0.0612  val_loss=0.1172  epoch_time=70.8s  elapsed=22.3min
+13:16:11  INFO   [fold 4 seed 43 (2/3)] epoch  28  train_loss=0.0550  val_loss=0.1149  epoch_time=129.6s  elapsed=24.4min
+13:18:15  INFO   [fold 4 seed 43 (2/3)] epoch  29  train_loss=0.0550  val_loss=0.1097  epoch_time=124.4s  elapsed=26.5min
+13:20:17  INFO   [fold 4 seed 43 (2/3)] epoch  30  train_loss=0.0491  val_loss=0.1096  epoch_time=122.0s  elapsed=28.6min
+13:22:30  INFO   [fold 4 seed 43 (2/3)] epoch  31  train_loss=0.0519  val_loss=0.1176  epoch_time=132.5s  elapsed=30.8min
+13:24:26  INFO   [fold 4 seed 43 (2/3)] epoch  32  train_loss=0.0480  val_loss=0.1090  epoch_time=115.6s  elapsed=32.7min
+13:26:06  INFO   [fold 4 seed 43 (2/3)] epoch  33  train_loss=0.0504  val_loss=0.1112  epoch_time=100.6s  elapsed=34.4min
+13:27:59  INFO   [fold 4 seed 43 (2/3)] epoch  34  train_loss=0.0460  val_loss=0.1078  epoch_time=112.6s  elapsed=36.2min
+13:29:00  INFO   [fold 4 seed 43 (2/3)] epoch  35  train_loss=0.0497  val_loss=0.1098  epoch_time=61.6s  elapsed=37.3min
+13:29:40  INFO   [fold 4 seed 43 (2/3)] epoch  36  train_loss=0.0463  val_loss=0.1092  epoch_time=39.7s  elapsed=37.9min
+13:30:20  INFO   [fold 4 seed 43 (2/3)] epoch  37  train_loss=0.0415  val_loss=0.1100  epoch_time=39.9s  elapsed=38.6min
+13:31:11  INFO   [fold 4 seed 43 (2/3)] epoch  38  train_loss=0.0417  val_loss=0.1054  epoch_time=51.5s  elapsed=39.5min
+13:32:03  INFO   [fold 4 seed 43 (2/3)] epoch  39  train_loss=0.0412  val_loss=0.1051  epoch_time=51.9s  elapsed=40.3min
+13:32:51  INFO   [fold 4 seed 43 (2/3)] epoch  40  train_loss=0.0423  val_loss=0.1049  epoch_time=47.3s  elapsed=41.1min
+13:33:37  INFO   [fold 4 seed 43 (2/3)] epoch  41  train_loss=0.0390  val_loss=0.1068  epoch_time=45.9s  elapsed=41.9min
+13:34:25  INFO   [fold 4 seed 43 (2/3)] epoch  42  train_loss=0.0370  val_loss=0.1073  epoch_time=48.8s  elapsed=42.7min
+13:35:21  INFO   [fold 4 seed 43 (2/3)] epoch  43  train_loss=0.0377  val_loss=0.1046  epoch_time=55.7s  elapsed=43.6min
+13:36:07  INFO   [fold 4 seed 43 (2/3)] epoch  44  train_loss=0.0405  val_loss=0.1090  epoch_time=46.0s  elapsed=44.4min
+13:36:47  INFO   [fold 4 seed 43 (2/3)] epoch  45  train_loss=0.0373  val_loss=0.1111  epoch_time=39.9s  elapsed=45.0min
+13:37:27  INFO   [fold 4 seed 43 (2/3)] epoch  46  train_loss=0.0367  val_loss=0.1062  epoch_time=40.0s  elapsed=45.7min
+13:38:07  INFO   [fold 4 seed 43 (2/3)] epoch  47  train_loss=0.0333  val_loss=0.1056  epoch_time=39.9s  elapsed=46.4min
+13:38:47  INFO   [fold 4 seed 43 (2/3)] epoch  48  train_loss=0.0335  val_loss=0.1082  epoch_time=39.7s  elapsed=47.0min
+13:39:27  INFO   [fold 4 seed 43 (2/3)] epoch  49  train_loss=0.0331  val_loss=0.1071  epoch_time=40.0s  elapsed=47.7min
+13:40:06  INFO   [fold 4 seed 43 (2/3)] epoch  50  train_loss=0.0351  val_loss=0.1050  epoch_time=39.3s  elapsed=48.4min
+13:40:48  INFO   [fold 4 seed 43 (2/3)] epoch  51  train_loss=0.0327  val_loss=0.1079  epoch_time=42.5s  elapsed=49.1min
+13:41:31  INFO   [fold 4 seed 43 (2/3)] epoch  52  train_loss=0.0318  val_loss=0.1046  epoch_time=43.1s  elapsed=49.8min
+13:42:14  INFO   [fold 4 seed 43 (2/3)] epoch  53  train_loss=0.0319  val_loss=0.1065  epoch_time=42.7s  elapsed=50.5min
+13:42:54  INFO   [fold 4 seed 43 (2/3)] epoch  54  train_loss=0.0311  val_loss=0.1044  epoch_time=40.3s  elapsed=51.2min
+13:43:35  INFO   [fold 4 seed 43 (2/3)] epoch  55  train_loss=0.0305  val_loss=0.1022  epoch_time=40.1s  elapsed=51.8min
+13:44:15  INFO   [fold 4 seed 43 (2/3)] epoch  56  train_loss=0.0286  val_loss=0.1050  epoch_time=40.0s  elapsed=52.5min
+13:44:55  INFO   [fold 4 seed 43 (2/3)] epoch  57  train_loss=0.0299  val_loss=0.1045  epoch_time=40.4s  elapsed=53.2min
+13:45:38  INFO   [fold 4 seed 43 (2/3)] epoch  58  train_loss=0.0296  val_loss=0.1040  epoch_time=43.1s  elapsed=53.9min
+13:46:21  INFO   [fold 4 seed 43 (2/3)] epoch  59  train_loss=0.0310  val_loss=0.1054  epoch_time=42.7s  elapsed=54.6min
+13:46:25  INFO   [fold 4 seed 43 (2/3)] done. time=54.6min  final_epoch=60  approx_best_epoch=60
+13:46:25  INFO   [fold 4 seed 43 (2/3)] per-target R²: eea=0.932  egb=0.903  egc=0.894  ei=0.806  eps=0.649  nc=0.779  tg=0.910
+13:46:25  INFO   [fold 4 seed 44 (3/3)] starting...
+13:47:10  INFO   [fold 4 seed 44 (3/3)] epoch   0  train_loss=0.3611  val_loss=0.5669  epoch_time=40.2s  elapsed=0.7min
+13:47:51  INFO   [fold 4 seed 44 (3/3)] epoch   1  train_loss=0.2606  val_loss=0.3899  epoch_time=40.6s  elapsed=1.3min
+13:48:32  INFO   [fold 4 seed 44 (3/3)] epoch   2  train_loss=0.2237  val_loss=0.2564  epoch_time=41.3s  elapsed=2.0min
+13:49:16  INFO   [fold 4 seed 44 (3/3)] epoch   3  train_loss=0.2005  val_loss=0.2260  epoch_time=44.0s  elapsed=2.8min
+13:50:05  INFO   [fold 4 seed 44 (3/3)] epoch   4  train_loss=0.1857  val_loss=0.2278  epoch_time=48.2s  elapsed=3.6min
+13:50:53  INFO   [fold 4 seed 44 (3/3)] epoch   5  train_loss=0.1727  val_loss=0.1975  epoch_time=48.6s  elapsed=4.4min
+13:51:42  INFO   [fold 4 seed 44 (3/3)] epoch   6  train_loss=0.1701  val_loss=0.3692  epoch_time=48.4s  elapsed=5.2min
+13:52:30  INFO   [fold 4 seed 44 (3/3)] epoch   7  train_loss=0.1477  val_loss=0.1773  epoch_time=48.8s  elapsed=6.0min
+13:53:19  INFO   [fold 4 seed 44 (3/3)] epoch   8  train_loss=0.1469  val_loss=0.2058  epoch_time=48.6s  elapsed=6.8min
+13:54:07  INFO   [fold 4 seed 44 (3/3)] epoch   9  train_loss=0.1377  val_loss=0.1383  epoch_time=48.4s  elapsed=7.6min
+13:55:01  INFO   [fold 4 seed 44 (3/3)] epoch  10  train_loss=0.1307  val_loss=0.1718  epoch_time=54.1s  elapsed=8.5min
+13:55:50  INFO   [fold 4 seed 44 (3/3)] epoch  11  train_loss=0.1247  val_loss=0.1285  epoch_time=48.3s  elapsed=9.3min
+13:56:38  INFO   [fold 4 seed 44 (3/3)] epoch  12  train_loss=0.1190  val_loss=0.1557  epoch_time=48.6s  elapsed=10.1min
+13:57:28  INFO   [fold 4 seed 44 (3/3)] epoch  13  train_loss=0.1074  val_loss=0.1311  epoch_time=49.6s  elapsed=11.0min
+13:58:17  INFO   [fold 4 seed 44 (3/3)] epoch  14  train_loss=0.1043  val_loss=0.1237  epoch_time=48.9s  elapsed=11.8min
+13:59:06  INFO   [fold 4 seed 44 (3/3)] epoch  15  train_loss=0.1020  val_loss=0.1615  epoch_time=48.8s  elapsed=12.6min
+13:59:54  INFO   [fold 4 seed 44 (3/3)] epoch  16  train_loss=0.1055  val_loss=0.1429  epoch_time=48.3s  elapsed=13.4min
+14:00:42  INFO   [fold 4 seed 44 (3/3)] epoch  17  train_loss=0.0953  val_loss=0.1268  epoch_time=48.5s  elapsed=14.2min
+14:01:31  INFO   [fold 4 seed 44 (3/3)] epoch  18  train_loss=0.0927  val_loss=0.1346  epoch_time=48.4s  elapsed=15.0min
+14:02:21  INFO   [fold 4 seed 44 (3/3)] epoch  19  train_loss=0.0872  val_loss=0.1326  epoch_time=49.8s  elapsed=15.8min
+14:03:12  INFO   [fold 4 seed 44 (3/3)] epoch  20  train_loss=0.0858  val_loss=0.1184  epoch_time=51.4s  elapsed=16.7min
+14:04:11  INFO   [fold 4 seed 44 (3/3)] epoch  21  train_loss=0.0817  val_loss=0.1266  epoch_time=59.3s  elapsed=17.7min
+14:04:58  INFO   [fold 4 seed 44 (3/3)] epoch  22  train_loss=0.0745  val_loss=0.1194  epoch_time=46.1s  elapsed=18.5min
+14:05:45  INFO   [fold 4 seed 44 (3/3)] epoch  23  train_loss=0.0738  val_loss=0.1356  epoch_time=47.0s  elapsed=19.2min
+14:06:40  INFO   [fold 4 seed 44 (3/3)] epoch  24  train_loss=0.0674  val_loss=0.1130  epoch_time=55.8s  elapsed=20.2min
+14:07:27  INFO   [fold 4 seed 44 (3/3)] epoch  25  train_loss=0.0651  val_loss=0.1294  epoch_time=47.1s  elapsed=21.0min
+14:08:11  INFO   [fold 4 seed 44 (3/3)] epoch  26  train_loss=0.0663  val_loss=0.1228  epoch_time=44.0s  elapsed=21.7min
+14:09:46  INFO   [fold 4 seed 44 (3/3)] epoch  27  train_loss=0.0662  val_loss=0.1102  epoch_time=95.0s  elapsed=23.3min
+14:11:01  INFO   [fold 4 seed 44 (3/3)] epoch  28  train_loss=0.0595  val_loss=0.1113  epoch_time=74.4s  elapsed=24.5min
+14:12:09  INFO   [fold 4 seed 44 (3/3)] epoch  29  train_loss=0.0626  val_loss=0.1138  epoch_time=68.1s  elapsed=25.6min
+14:13:13  INFO   [fold 4 seed 44 (3/3)] epoch  30  train_loss=0.0572  val_loss=0.1148  epoch_time=64.5s  elapsed=26.7min
+14:14:07  INFO   [fold 4 seed 44 (3/3)] epoch  31  train_loss=0.0585  val_loss=0.1140  epoch_time=53.4s  elapsed=27.6min
+14:15:09  INFO   [fold 4 seed 44 (3/3)] epoch  32  train_loss=0.0526  val_loss=0.1089  epoch_time=61.9s  elapsed=28.6min
+14:16:08  INFO   [fold 4 seed 44 (3/3)] epoch  33  train_loss=0.0531  val_loss=0.1088  epoch_time=58.8s  elapsed=29.6min
+14:17:11  INFO   [fold 4 seed 44 (3/3)] epoch  34  train_loss=0.0492  val_loss=0.1072  epoch_time=63.6s  elapsed=30.7min
+14:18:20  INFO   [fold 4 seed 44 (3/3)] epoch  35  train_loss=0.0509  val_loss=0.1068  epoch_time=68.8s  elapsed=31.8min
+14:19:43  INFO   [fold 4 seed 44 (3/3)] epoch  36  train_loss=0.0485  val_loss=0.1098  epoch_time=82.7s  elapsed=33.2min
+14:21:29  INFO   [fold 4 seed 44 (3/3)] epoch  37  train_loss=0.0437  val_loss=0.1090  epoch_time=106.5s  elapsed=35.0min
+14:23:10  INFO   [fold 4 seed 44 (3/3)] epoch  38  train_loss=0.0447  val_loss=0.1052  epoch_time=101.1s  elapsed=36.7min
+14:25:18  INFO   [fold 4 seed 44 (3/3)] epoch  39  train_loss=0.0443  val_loss=0.1062  epoch_time=127.3s  elapsed=38.8min
+14:26:10  INFO   [fold 4 seed 44 (3/3)] epoch  40  train_loss=0.0435  val_loss=0.1111  epoch_time=52.6s  elapsed=39.7min
+14:27:14  INFO   [fold 4 seed 44 (3/3)] epoch  41  train_loss=0.0414  val_loss=0.1070  epoch_time=63.9s  elapsed=40.7min
+14:28:10  INFO   [fold 4 seed 44 (3/3)] epoch  42  train_loss=0.0400  val_loss=0.1091  epoch_time=55.4s  elapsed=41.7min
+14:29:02  INFO   [fold 4 seed 44 (3/3)] epoch  43  train_loss=0.0417  val_loss=0.1083  epoch_time=52.6s  elapsed=42.5min
+14:30:00  INFO   [fold 4 seed 44 (3/3)] epoch  44  train_loss=0.0391  val_loss=0.1063  epoch_time=57.3s  elapsed=43.5min
+14:30:54  INFO   [fold 4 seed 44 (3/3)] epoch  45  train_loss=0.0382  val_loss=0.1036  epoch_time=54.7s  elapsed=44.4min
+14:31:56  INFO   [fold 4 seed 44 (3/3)] epoch  46  train_loss=0.0370  val_loss=0.1039  epoch_time=61.8s  elapsed=45.4min
+14:32:58  INFO   [fold 4 seed 44 (3/3)] epoch  47  train_loss=0.0387  val_loss=0.1075  epoch_time=61.8s  elapsed=46.5min
+14:33:54  INFO   [fold 4 seed 44 (3/3)] epoch  48  train_loss=0.0360  val_loss=0.1070  epoch_time=55.6s  elapsed=47.4min
+14:34:50  INFO   [fold 4 seed 44 (3/3)] epoch  49  train_loss=0.0361  val_loss=0.1048  epoch_time=56.2s  elapsed=48.3min
+14:35:41  INFO   [fold 4 seed 44 (3/3)] epoch  50  train_loss=0.0344  val_loss=0.1053  epoch_time=50.7s  elapsed=49.2min
+14:36:43  INFO   [fold 4 seed 44 (3/3)] epoch  51  train_loss=0.0347  val_loss=0.1071  epoch_time=63.0s  elapsed=50.2min
+14:37:57  INFO   [fold 4 seed 44 (3/3)] epoch  52  train_loss=0.0347  val_loss=0.1084  epoch_time=73.0s  elapsed=51.4min
+14:39:24  INFO   [fold 4 seed 44 (3/3)] epoch  53  train_loss=0.0329  val_loss=0.1078  epoch_time=87.6s  elapsed=52.9min
+14:40:16  INFO   [fold 4 seed 44 (3/3)] epoch  54  train_loss=0.0338  val_loss=0.1028  epoch_time=52.3s  elapsed=53.8min
+14:41:08  INFO   [fold 4 seed 44 (3/3)] epoch  55  train_loss=0.0329  val_loss=0.1053  epoch_time=51.6s  elapsed=54.6min
+14:41:58  INFO   [fold 4 seed 44 (3/3)] epoch  56  train_loss=0.0325  val_loss=0.1057  epoch_time=50.0s  elapsed=55.5min
+14:42:54  INFO   [fold 4 seed 44 (3/3)] epoch  57  train_loss=0.0316  val_loss=0.1052  epoch_time=55.6s  elapsed=56.4min
+14:43:43  INFO   [fold 4 seed 44 (3/3)] epoch  58  train_loss=0.0299  val_loss=0.1045  epoch_time=49.6s  elapsed=57.2min
+14:45:08  INFO   [fold 4 seed 44 (3/3)] epoch  59  train_loss=0.0293  val_loss=0.1011  epoch_time=85.1s  elapsed=58.6min
+14:45:20  INFO   [fold 4 seed 44 (3/3)] done. time=58.6min  final_epoch=60  approx_best_epoch=60
+14:45:20  INFO   [fold 4 seed 44 (3/3)] per-target R²: eea=0.941  egb=0.921  egc=0.897  ei=0.765  eps=0.724  nc=0.841  tg=0.909
+14:45:20  INFO   [fold 4] BAG per-target R² (avg of 3 seeds): eea=0.9424  egb=0.9238  egc=0.9077  ei=0.8023  eps=0.7065  nc=0.8253  tg=0.9168
+14:45:20  INFO   [fold 4] total time: 177.7min (per-seed: ['64.4', '54.6', '58.6'])
+14:45:21  INFO   [fold 4] wrote checkpoint checkpoint_fold_4.pkl.gz
+14:45:21  INFO   ============================================================
+14:45:21  INFO   PER-TARGET OOF R²  (5-fold × 3-seed bagged on trimer SMILES)
+14:45:21  INFO   ============================================================
+14:45:21  INFO      eea  n=  221  OOF R²=0.9179   fold-bag=['0.926', '0.897', '0.911', '0.909', '0.942']
+14:45:21  INFO      egb  n=  337  OOF R²=0.9396   fold-bag=['0.933', '0.945', '0.940', '0.944', '0.924']
+14:45:21  INFO      egc  n= 2028  OOF R²=0.9086   fold-bag=['0.897', '0.925', '0.884', '0.926', '0.908']
+14:45:21  INFO       ei  n=  222  OOF R²=0.8163   fold-bag=['0.846', '0.755', '0.812', '0.911', '0.802']
+14:45:21  INFO      eps  n=  229  OOF R²=0.8121   fold-bag=['0.871', '0.821', '0.827', '0.796', '0.707']
+14:45:21  INFO       nc  n=  229  OOF R²=0.8526   fold-bag=['0.799', '0.864', '0.871', '0.883', '0.825']
+14:45:21  INFO       tg  n= 4139  OOF R²=0.9082   fold-bag=['0.916', '0.894', '0.907', '0.906', '0.917']
+14:45:21  INFO     MEAN R² = 0.8793
+14:45:21  INFO   all fold×seed best_epochs = [41, 33, 21, 33, 60, 38, 31, 47, 60, 43, 60, 48, 60, 60, 60]   →   refit for 51 epochs
+14:45:21  INFO   [REFIT seed 42 (1/3)] starting refit for 51 epochs
+14:46:44  INFO   [REFIT seed 42 (1/3)] epoch   0  train_loss=0.3254  val_loss=nan  epoch_time=74.8s  elapsed=1.2min
+14:48:01  INFO   [REFIT seed 42 (1/3)] epoch   1  train_loss=0.2350  val_loss=nan  epoch_time=77.3s  elapsed=2.5min
+14:48:56  INFO   [REFIT seed 42 (1/3)] epoch   2  train_loss=0.2173  val_loss=nan  epoch_time=55.2s  elapsed=3.5min
+14:49:46  INFO   [REFIT seed 42 (1/3)] epoch   3  train_loss=0.1940  val_loss=nan  epoch_time=50.2s  elapsed=4.3min
+14:50:56  INFO   [REFIT seed 42 (1/3)] epoch   4  train_loss=0.1794  val_loss=nan  epoch_time=69.7s  elapsed=5.5min
+14:51:45  INFO   [REFIT seed 42 (1/3)] epoch   5  train_loss=0.1714  val_loss=nan  epoch_time=48.8s  elapsed=6.3min
+14:52:32  INFO   [REFIT seed 42 (1/3)] epoch   6  train_loss=0.1591  val_loss=nan  epoch_time=47.4s  elapsed=7.1min
+14:54:07  INFO   [REFIT seed 42 (1/3)] epoch   7  train_loss=0.1420  val_loss=nan  epoch_time=94.7s  elapsed=8.6min
+14:55:13  INFO   [REFIT seed 42 (1/3)] epoch   8  train_loss=0.1291  val_loss=nan  epoch_time=65.9s  elapsed=9.7min
+14:56:37  INFO   [REFIT seed 42 (1/3)] epoch   9  train_loss=0.1323  val_loss=nan  epoch_time=84.6s  elapsed=11.1min
+14:57:53  INFO   [REFIT seed 42 (1/3)] epoch  10  train_loss=0.1206  val_loss=nan  epoch_time=75.3s  elapsed=12.4min
+14:59:07  INFO   [REFIT seed 42 (1/3)] epoch  11  train_loss=0.1102  val_loss=nan  epoch_time=74.1s  elapsed=13.6min
+14:59:56  INFO   [REFIT seed 42 (1/3)] epoch  12  train_loss=0.1130  val_loss=nan  epoch_time=49.6s  elapsed=14.5min
+15:01:02  INFO   [REFIT seed 42 (1/3)] epoch  13  train_loss=0.1038  val_loss=nan  epoch_time=65.4s  elapsed=15.5min
+15:01:50  INFO   [REFIT seed 42 (1/3)] epoch  14  train_loss=0.0989  val_loss=nan  epoch_time=48.0s  elapsed=16.3min
+15:02:51  INFO   [REFIT seed 42 (1/3)] epoch  15  train_loss=0.0959  val_loss=nan  epoch_time=61.4s  elapsed=17.4min
+15:03:52  INFO   [REFIT seed 42 (1/3)] epoch  16  train_loss=0.0932  val_loss=nan  epoch_time=61.0s  elapsed=18.4min
+15:04:42  INFO   [REFIT seed 42 (1/3)] epoch  17  train_loss=0.0850  val_loss=nan  epoch_time=49.8s  elapsed=19.2min
+15:06:09  INFO   [REFIT seed 42 (1/3)] epoch  18  train_loss=0.0870  val_loss=nan  epoch_time=87.1s  elapsed=20.7min
+15:07:07  INFO   [REFIT seed 42 (1/3)] epoch  19  train_loss=0.0807  val_loss=nan  epoch_time=57.4s  elapsed=21.6min
+15:08:09  INFO   [REFIT seed 42 (1/3)] epoch  20  train_loss=0.0750  val_loss=nan  epoch_time=62.2s  elapsed=22.7min
+15:09:11  INFO   [REFIT seed 42 (1/3)] epoch  21  train_loss=0.0719  val_loss=nan  epoch_time=62.1s  elapsed=23.7min
+15:10:09  INFO   [REFIT seed 42 (1/3)] epoch  22  train_loss=0.0714  val_loss=nan  epoch_time=58.4s  elapsed=24.7min
+15:11:08  INFO   [REFIT seed 42 (1/3)] epoch  23  train_loss=0.0656  val_loss=nan  epoch_time=58.5s  elapsed=25.6min
+15:12:07  INFO   [REFIT seed 42 (1/3)] epoch  24  train_loss=0.0643  val_loss=nan  epoch_time=59.5s  elapsed=26.6min
+15:13:00  INFO   [REFIT seed 42 (1/3)] epoch  25  train_loss=0.0597  val_loss=nan  epoch_time=53.0s  elapsed=27.5min
+15:13:58  INFO   [REFIT seed 42 (1/3)] epoch  26  train_loss=0.0593  val_loss=nan  epoch_time=57.5s  elapsed=28.5min
+15:14:59  INFO   [REFIT seed 42 (1/3)] epoch  27  train_loss=0.0571  val_loss=nan  epoch_time=60.9s  elapsed=29.5min
+15:15:57  INFO   [REFIT seed 42 (1/3)] epoch  28  train_loss=0.0565  val_loss=nan  epoch_time=58.2s  elapsed=30.5min
+15:16:53  INFO   [REFIT seed 42 (1/3)] epoch  29  train_loss=0.0536  val_loss=nan  epoch_time=56.7s  elapsed=31.4min
+15:18:05  INFO   [REFIT seed 42 (1/3)] epoch  30  train_loss=0.0514  val_loss=nan  epoch_time=71.4s  elapsed=32.6min
+15:19:18  INFO   [REFIT seed 42 (1/3)] epoch  31  train_loss=0.0522  val_loss=nan  epoch_time=73.0s  elapsed=33.8min
+15:20:38  INFO   [REFIT seed 42 (1/3)] epoch  32  train_loss=0.0496  val_loss=nan  epoch_time=79.8s  elapsed=35.1min
+15:21:59  INFO   [REFIT seed 42 (1/3)] epoch  33  train_loss=0.0483  val_loss=nan  epoch_time=81.2s  elapsed=36.5min
+15:23:17  INFO   [REFIT seed 42 (1/3)] epoch  34  train_loss=0.0464  val_loss=nan  epoch_time=77.8s  elapsed=37.8min
+15:24:09  INFO   [REFIT seed 42 (1/3)] epoch  35  train_loss=0.0442  val_loss=nan  epoch_time=52.7s  elapsed=38.7min
+15:25:04  INFO   [REFIT seed 42 (1/3)] epoch  36  train_loss=0.0463  val_loss=nan  epoch_time=54.3s  elapsed=39.6min
+15:25:51  INFO   [REFIT seed 42 (1/3)] epoch  37  train_loss=0.0414  val_loss=nan  epoch_time=47.5s  elapsed=40.4min
+15:26:53  INFO   [REFIT seed 42 (1/3)] epoch  38  train_loss=0.0400  val_loss=nan  epoch_time=61.5s  elapsed=41.4min
+15:27:54  INFO   [REFIT seed 42 (1/3)] epoch  39  train_loss=0.0410  val_loss=nan  epoch_time=60.9s  elapsed=42.4min
+15:28:48  INFO   [REFIT seed 42 (1/3)] epoch  40  train_loss=0.0409  val_loss=nan  epoch_time=53.9s  elapsed=43.3min
+15:29:38  INFO   [REFIT seed 42 (1/3)] epoch  41  train_loss=0.0397  val_loss=nan  epoch_time=50.1s  elapsed=44.1min
+15:30:31  INFO   [REFIT seed 42 (1/3)] epoch  42  train_loss=0.0377  val_loss=nan  epoch_time=53.1s  elapsed=45.0min
+15:31:24  INFO   [REFIT seed 42 (1/3)] epoch  43  train_loss=0.0369  val_loss=nan  epoch_time=53.4s  elapsed=45.9min
+15:32:20  INFO   [REFIT seed 42 (1/3)] epoch  44  train_loss=0.0364  val_loss=nan  epoch_time=55.7s  elapsed=46.8min
+15:33:22  INFO   [REFIT seed 42 (1/3)] epoch  45  train_loss=0.0367  val_loss=nan  epoch_time=62.6s  elapsed=47.9min
+15:34:37  INFO   [REFIT seed 42 (1/3)] epoch  46  train_loss=0.0360  val_loss=nan  epoch_time=74.3s  elapsed=49.1min
+15:35:59  INFO   [REFIT seed 42 (1/3)] epoch  47  train_loss=0.0344  val_loss=nan  epoch_time=82.1s  elapsed=50.5min
+15:37:19  INFO   [REFIT seed 42 (1/3)] epoch  48  train_loss=0.0355  val_loss=nan  epoch_time=80.2s  elapsed=51.8min
+15:38:45  INFO   [REFIT seed 42 (1/3)] epoch  49  train_loss=0.0338  val_loss=nan  epoch_time=86.5s  elapsed=53.3min
+15:40:10  INFO   [REFIT seed 42 (1/3)] epoch  50  train_loss=0.0331  val_loss=nan  epoch_time=84.9s  elapsed=54.7min
+15:40:10  INFO   [REFIT seed 42 (1/3)] refit done. time=54.7min
+15:40:45  INFO   [REFIT seed 43 (2/3)] starting refit for 51 epochs
+15:42:47  INFO   [REFIT seed 43 (2/3)] epoch   0  train_loss=0.3223  val_loss=nan  epoch_time=116.4s  elapsed=1.9min
+15:44:22  INFO   [REFIT seed 43 (2/3)] epoch   1  train_loss=0.2359  val_loss=nan  epoch_time=94.4s  elapsed=3.5min
+15:45:31  INFO   [REFIT seed 43 (2/3)] epoch   2  train_loss=0.2138  val_loss=nan  epoch_time=69.0s  elapsed=4.7min
+15:46:27  INFO   [REFIT seed 43 (2/3)] epoch   3  train_loss=0.1984  val_loss=nan  epoch_time=56.3s  elapsed=5.6min
+15:47:19  INFO   [REFIT seed 43 (2/3)] epoch   4  train_loss=0.1801  val_loss=nan  epoch_time=52.4s  elapsed=6.5min
+15:48:13  INFO   [REFIT seed 43 (2/3)] epoch   5  train_loss=0.1715  val_loss=nan  epoch_time=54.1s  elapsed=7.4min
+15:49:10  INFO   [REFIT seed 43 (2/3)] epoch   6  train_loss=0.1519  val_loss=nan  epoch_time=56.6s  elapsed=8.3min
+15:50:06  INFO   [REFIT seed 43 (2/3)] epoch   7  train_loss=0.1411  val_loss=nan  epoch_time=56.3s  elapsed=9.3min
+15:51:08  INFO   [REFIT seed 43 (2/3)] epoch   8  train_loss=0.1354  val_loss=nan  epoch_time=61.2s  elapsed=10.3min
+15:52:29  INFO   [REFIT seed 43 (2/3)] epoch   9  train_loss=0.1231  val_loss=nan  epoch_time=81.3s  elapsed=11.6min
+15:53:34  INFO   [REFIT seed 43 (2/3)] epoch  10  train_loss=0.1169  val_loss=nan  epoch_time=64.9s  elapsed=12.7min
+15:55:08  INFO   [REFIT seed 43 (2/3)] epoch  11  train_loss=0.1099  val_loss=nan  epoch_time=93.7s  elapsed=14.3min
+15:57:10  INFO   [REFIT seed 43 (2/3)] epoch  12  train_loss=0.1077  val_loss=nan  epoch_time=122.7s  elapsed=16.3min
+15:58:28  INFO   [REFIT seed 43 (2/3)] epoch  13  train_loss=0.1005  val_loss=nan  epoch_time=78.1s  elapsed=17.6min
+15:59:44  INFO   [REFIT seed 43 (2/3)] epoch  14  train_loss=0.0967  val_loss=nan  epoch_time=75.9s  elapsed=18.9min
+16:00:49  INFO   [REFIT seed 43 (2/3)] epoch  15  train_loss=0.0942  val_loss=nan  epoch_time=64.7s  elapsed=20.0min
+16:01:55  INFO   [REFIT seed 43 (2/3)] epoch  16  train_loss=0.0884  val_loss=nan  epoch_time=66.2s  elapsed=21.1min
+16:03:08  INFO   [REFIT seed 43 (2/3)] epoch  17  train_loss=0.0857  val_loss=nan  epoch_time=72.7s  elapsed=22.3min
+16:04:21  INFO   [REFIT seed 43 (2/3)] epoch  18  train_loss=0.0827  val_loss=nan  epoch_time=73.4s  elapsed=23.5min
+16:05:38  INFO   [REFIT seed 43 (2/3)] epoch  19  train_loss=0.0773  val_loss=nan  epoch_time=76.2s  elapsed=24.8min
+16:06:49  INFO   [REFIT seed 43 (2/3)] epoch  20  train_loss=0.0751  val_loss=nan  epoch_time=71.5s  elapsed=26.0min
+16:08:03  INFO   [REFIT seed 43 (2/3)] epoch  21  train_loss=0.0721  val_loss=nan  epoch_time=74.0s  elapsed=27.2min
+16:09:19  INFO   [REFIT seed 43 (2/3)] epoch  22  train_loss=0.0689  val_loss=nan  epoch_time=76.3s  elapsed=28.5min
+16:10:52  INFO   [REFIT seed 43 (2/3)] epoch  23  train_loss=0.0652  val_loss=nan  epoch_time=92.3s  elapsed=30.0min
+16:12:29  INFO   [REFIT seed 43 (2/3)] epoch  24  train_loss=0.0643  val_loss=nan  epoch_time=97.1s  elapsed=31.6min
+16:14:12  INFO   [REFIT seed 43 (2/3)] epoch  25  train_loss=0.0613  val_loss=nan  epoch_time=102.7s  elapsed=33.3min
+16:15:53  INFO   [REFIT seed 43 (2/3)] epoch  26  train_loss=0.0579  val_loss=nan  epoch_time=100.9s  elapsed=35.0min
+16:17:07  INFO   [REFIT seed 43 (2/3)] epoch  27  train_loss=0.0560  val_loss=nan  epoch_time=74.1s  elapsed=36.3min
+16:17:56  INFO   [REFIT seed 43 (2/3)] epoch  28  train_loss=0.0541  val_loss=nan  epoch_time=49.5s  elapsed=37.1min
+16:18:55  INFO   [REFIT seed 43 (2/3)] epoch  29  train_loss=0.0523  val_loss=nan  epoch_time=59.3s  elapsed=38.1min
+16:19:49  INFO   [REFIT seed 43 (2/3)] epoch  30  train_loss=0.0518  val_loss=nan  epoch_time=53.4s  elapsed=39.0min
+16:20:37  INFO   [REFIT seed 43 (2/3)] epoch  31  train_loss=0.0484  val_loss=nan  epoch_time=48.5s  elapsed=39.8min
+16:21:33  INFO   [REFIT seed 43 (2/3)] epoch  32  train_loss=0.0469  val_loss=nan  epoch_time=56.0s  elapsed=40.7min
+16:22:41  INFO   [REFIT seed 43 (2/3)] epoch  33  train_loss=0.0489  val_loss=nan  epoch_time=67.7s  elapsed=41.8min
+16:23:34  INFO   [REFIT seed 43 (2/3)] epoch  34  train_loss=0.0441  val_loss=nan  epoch_time=52.5s  elapsed=42.7min
+16:24:25  INFO   [REFIT seed 43 (2/3)] epoch  35  train_loss=0.0456  val_loss=nan  epoch_time=51.9s  elapsed=43.6min
+16:25:26  INFO   [REFIT seed 43 (2/3)] epoch  36  train_loss=0.0432  val_loss=nan  epoch_time=60.6s  elapsed=44.6min
+16:26:22  INFO   [REFIT seed 43 (2/3)] epoch  37  train_loss=0.0432  val_loss=nan  epoch_time=55.5s  elapsed=45.5min
+16:27:25  INFO   [REFIT seed 43 (2/3)] epoch  38  train_loss=0.0406  val_loss=nan  epoch_time=63.2s  elapsed=46.6min
+16:28:11  INFO   [REFIT seed 43 (2/3)] epoch  39  train_loss=0.0409  val_loss=nan  epoch_time=45.9s  elapsed=47.3min
+16:28:52  INFO   [REFIT seed 43 (2/3)] epoch  40  train_loss=0.0402  val_loss=nan  epoch_time=41.7s  elapsed=48.0min
+16:29:33  INFO   [REFIT seed 43 (2/3)] epoch  41  train_loss=0.0392  val_loss=nan  epoch_time=40.9s  elapsed=48.7min
+16:30:27  INFO   [REFIT seed 43 (2/3)] epoch  42  train_loss=0.0362  val_loss=nan  epoch_time=54.0s  elapsed=49.6min
+16:31:19  INFO   [REFIT seed 43 (2/3)] epoch  43  train_loss=0.0353  val_loss=nan  epoch_time=51.7s  elapsed=50.5min
+16:32:08  INFO   [REFIT seed 43 (2/3)] epoch  44  train_loss=0.0372  val_loss=nan  epoch_time=48.9s  elapsed=51.3min
+16:32:53  INFO   [REFIT seed 43 (2/3)] epoch  45  train_loss=0.0366  val_loss=nan  epoch_time=44.7s  elapsed=52.0min
+16:33:36  INFO   [REFIT seed 43 (2/3)] epoch  46  train_loss=0.0351  val_loss=nan  epoch_time=43.2s  elapsed=52.7min
+16:34:22  INFO   [REFIT seed 43 (2/3)] epoch  47  train_loss=0.0358  val_loss=nan  epoch_time=46.2s  elapsed=53.5min
+16:35:06  INFO   [REFIT seed 43 (2/3)] epoch  48  train_loss=0.0339  val_loss=nan  epoch_time=43.6s  elapsed=54.2min
+16:35:57  INFO   [REFIT seed 43 (2/3)] epoch  49  train_loss=0.0336  val_loss=nan  epoch_time=51.4s  elapsed=55.1min
+16:37:00  INFO   [REFIT seed 43 (2/3)] epoch  50  train_loss=0.0330  val_loss=nan  epoch_time=63.1s  elapsed=56.2min
+16:37:00  INFO   [REFIT seed 43 (2/3)] refit done. time=56.2min
+16:37:18  INFO   [REFIT seed 44 (3/3)] starting refit for 51 epochs
+16:38:18  INFO   [REFIT seed 44 (3/3)] epoch   0  train_loss=0.3400  val_loss=nan  epoch_time=55.9s  elapsed=0.9min
+16:38:59  INFO   [REFIT seed 44 (3/3)] epoch   1  train_loss=0.2257  val_loss=nan  epoch_time=40.4s  elapsed=1.6min
+16:39:38  INFO   [REFIT seed 44 (3/3)] epoch   2  train_loss=0.2240  val_loss=nan  epoch_time=39.4s  elapsed=2.3min
+16:40:17  INFO   [REFIT seed 44 (3/3)] epoch   3  train_loss=0.1915  val_loss=nan  epoch_time=39.1s  elapsed=2.9min
+16:40:59  INFO   [REFIT seed 44 (3/3)] epoch   4  train_loss=0.1876  val_loss=nan  epoch_time=41.8s  elapsed=3.6min
+16:41:40  INFO   [REFIT seed 44 (3/3)] epoch   5  train_loss=0.1663  val_loss=nan  epoch_time=41.6s  elapsed=4.3min
+16:42:20  INFO   [REFIT seed 44 (3/3)] epoch   6  train_loss=0.1527  val_loss=nan  epoch_time=39.9s  elapsed=5.0min
+16:43:00  INFO   [REFIT seed 44 (3/3)] epoch   7  train_loss=0.1515  val_loss=nan  epoch_time=39.2s  elapsed=5.6min
+16:43:39  INFO   [REFIT seed 44 (3/3)] epoch   8  train_loss=0.1345  val_loss=nan  epoch_time=39.6s  elapsed=6.3min
+16:44:18  INFO   [REFIT seed 44 (3/3)] epoch   9  train_loss=0.1227  val_loss=nan  epoch_time=39.1s  elapsed=6.9min
+16:44:57  INFO   [REFIT seed 44 (3/3)] epoch  10  train_loss=0.1209  val_loss=nan  epoch_time=39.2s  elapsed=7.6min
+16:45:37  INFO   [REFIT seed 44 (3/3)] epoch  11  train_loss=0.1142  val_loss=nan  epoch_time=39.9s  elapsed=8.2min
+16:46:17  INFO   [REFIT seed 44 (3/3)] epoch  12  train_loss=0.1069  val_loss=nan  epoch_time=39.6s  elapsed=8.9min
+16:46:56  INFO   [REFIT seed 44 (3/3)] epoch  13  train_loss=0.1026  val_loss=nan  epoch_time=39.1s  elapsed=9.6min
+16:47:35  INFO   [REFIT seed 44 (3/3)] epoch  14  train_loss=0.1000  val_loss=nan  epoch_time=39.2s  elapsed=10.2min
+16:48:23  INFO   [REFIT seed 44 (3/3)] epoch  15  train_loss=0.0962  val_loss=nan  epoch_time=48.3s  elapsed=11.0min
+16:49:12  INFO   [REFIT seed 44 (3/3)] epoch  16  train_loss=0.0836  val_loss=nan  epoch_time=48.8s  elapsed=11.8min
+16:50:07  INFO   [REFIT seed 44 (3/3)] epoch  17  train_loss=0.0820  val_loss=nan  epoch_time=54.3s  elapsed=12.7min
+16:50:56  INFO   [REFIT seed 44 (3/3)] epoch  18  train_loss=0.0755  val_loss=nan  epoch_time=49.2s  elapsed=13.6min
+16:52:01  INFO   [REFIT seed 44 (3/3)] epoch  19  train_loss=0.0743  val_loss=nan  epoch_time=65.7s  elapsed=14.7min
+16:52:47  INFO   [REFIT seed 44 (3/3)] epoch  20  train_loss=0.0725  val_loss=nan  epoch_time=46.0s  elapsed=15.4min
+16:53:39  INFO   [REFIT seed 44 (3/3)] epoch  21  train_loss=0.0724  val_loss=nan  epoch_time=51.7s  elapsed=16.3min
+16:54:37  INFO   [REFIT seed 44 (3/3)] epoch  22  train_loss=0.0660  val_loss=nan  epoch_time=57.8s  elapsed=17.2min
+16:55:28  INFO   [REFIT seed 44 (3/3)] epoch  23  train_loss=0.0682  val_loss=nan  epoch_time=50.6s  elapsed=18.1min
+16:56:20  INFO   [REFIT seed 44 (3/3)] epoch  24  train_loss=0.0610  val_loss=nan  epoch_time=52.4s  elapsed=19.0min
+16:57:52  INFO   [REFIT seed 44 (3/3)] epoch  25  train_loss=0.0565  val_loss=nan  epoch_time=91.7s  elapsed=20.5min
+16:59:50  INFO   [REFIT seed 44 (3/3)] epoch  26  train_loss=0.0591  val_loss=nan  epoch_time=118.4s  elapsed=22.5min
+17:00:38  INFO   [REFIT seed 44 (3/3)] epoch  27  train_loss=0.0559  val_loss=nan  epoch_time=48.1s  elapsed=23.3min
+17:01:20  INFO   [REFIT seed 44 (3/3)] epoch  28  train_loss=0.0531  val_loss=nan  epoch_time=41.7s  elapsed=24.0min
+17:02:00  INFO   [REFIT seed 44 (3/3)] epoch  29  train_loss=0.0532  val_loss=nan  epoch_time=40.7s  elapsed=24.6min
+17:02:56  INFO   [REFIT seed 44 (3/3)] epoch  30  train_loss=0.0468  val_loss=nan  epoch_time=55.6s  elapsed=25.6min
+17:03:49  INFO   [REFIT seed 44 (3/3)] epoch  31  train_loss=0.0484  val_loss=nan  epoch_time=52.8s  elapsed=26.4min
+17:04:42  INFO   [REFIT seed 44 (3/3)] epoch  32  train_loss=0.0462  val_loss=nan  epoch_time=53.0s  elapsed=27.3min
+17:05:23  INFO   [REFIT seed 44 (3/3)] epoch  33  train_loss=0.0452  val_loss=nan  epoch_time=41.5s  elapsed=28.0min
+17:06:12  INFO   [REFIT seed 44 (3/3)] epoch  34  train_loss=0.0436  val_loss=nan  epoch_time=48.2s  elapsed=28.8min
+17:07:08  INFO   [REFIT seed 44 (3/3)] epoch  35  train_loss=0.0441  val_loss=nan  epoch_time=56.3s  elapsed=29.8min
+17:07:54  INFO   [REFIT seed 44 (3/3)] epoch  36  train_loss=0.0416  val_loss=nan  epoch_time=46.0s  elapsed=30.5min
+17:08:57  INFO   [REFIT seed 44 (3/3)] epoch  37  train_loss=0.0400  val_loss=nan  epoch_time=63.0s  elapsed=31.6min
+17:09:41  INFO   [REFIT seed 44 (3/3)] epoch  38  train_loss=0.0395  val_loss=nan  epoch_time=44.1s  elapsed=32.3min
+17:10:29  INFO   [REFIT seed 44 (3/3)] epoch  39  train_loss=0.0372  val_loss=nan  epoch_time=48.2s  elapsed=33.1min
+17:11:17  INFO   [REFIT seed 44 (3/3)] epoch  40  train_loss=0.0407  val_loss=nan  epoch_time=48.2s  elapsed=33.9min
+17:12:07  INFO   [REFIT seed 44 (3/3)] epoch  41  train_loss=0.0380  val_loss=nan  epoch_time=49.1s  elapsed=34.7min
+17:12:57  INFO   [REFIT seed 44 (3/3)] epoch  42  train_loss=0.0377  val_loss=nan  epoch_time=50.9s  elapsed=35.6min
+17:13:54  INFO   [REFIT seed 44 (3/3)] epoch  43  train_loss=0.0358  val_loss=nan  epoch_time=57.0s  elapsed=36.5min
+17:14:44  INFO   [REFIT seed 44 (3/3)] epoch  44  train_loss=0.0363  val_loss=nan  epoch_time=50.0s  elapsed=37.4min
+17:15:42  INFO   [REFIT seed 44 (3/3)] epoch  45  train_loss=0.0366  val_loss=nan  epoch_time=57.3s  elapsed=38.3min
+17:16:34  INFO   [REFIT seed 44 (3/3)] epoch  46  train_loss=0.0360  val_loss=nan  epoch_time=52.3s  elapsed=39.2min
+17:17:23  INFO   [REFIT seed 44 (3/3)] epoch  47  train_loss=0.0344  val_loss=nan  epoch_time=49.2s  elapsed=40.0min
+17:18:20  INFO   [REFIT seed 44 (3/3)] epoch  48  train_loss=0.0327  val_loss=nan  epoch_time=57.2s  elapsed=41.0min
+17:19:32  INFO   [REFIT seed 44 (3/3)] epoch  49  train_loss=0.0341  val_loss=nan  epoch_time=71.4s  elapsed=42.2min
+17:20:19  INFO   [REFIT seed 44 (3/3)] epoch  50  train_loss=0.0331  val_loss=nan  epoch_time=47.4s  elapsed=42.9min
+17:20:19  INFO   [REFIT seed 44 (3/3)] refit done. time=42.9min
+17:20:40  INFO   cached refit test predictions to refit_test_preds.pkl.gz
+17:20:40  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chemprop_multitask_chainext_cpu/oof.csv  rows=7405
+17:20:40  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chemprop_multitask_chainext_cpu/submission.csv  rows=4940
+17:20:40  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chemprop_multitask_chainext_cpu/cv_summary.json
+17:20:40  INFO   ============================================================
+17:20:40  INFO   PER-TARGET OOF R²  (trimer Chemprop)  vs monomer 3-seed Chemprop reference
+17:20:40  INFO   ============================================================
+17:20:40  INFO     target      trimer     mono 3s     delta
+17:20:40  INFO        eea      0.9179      0.9082   +0.0097
+17:20:40  INFO        egb      0.9396      0.9305   +0.0091
+17:20:40  INFO        egc      0.9086      0.9070   +0.0016
+17:20:40  INFO         ei      0.8163      0.7766   +0.0397
+17:20:40  INFO        eps      0.8121      0.7916   +0.0205
+17:20:40  INFO         nc      0.8526      0.8681   -0.0155
+17:20:40  INFO         tg      0.9082      0.9083   -0.0001
+17:20:40  INFO       MEAN      0.8793      0.8700   +0.0093
+17:20:40  INFO     (monomer Chemprop 3-seed LB reference: 0.892)
+17:20:40  INFO   total wall time: 1648.8min
