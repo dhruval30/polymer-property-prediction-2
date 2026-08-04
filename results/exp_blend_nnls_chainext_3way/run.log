@@ -1,0 +1,86 @@
+13:40:46  INFO   logging to /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_blend_nnls_chainext_3way/run.log
+13:40:46  INFO   === exp_blend_nnls_chainext_3way ===
+13:40:46  INFO   input files verified:
+13:40:46  INFO     Chemprop 3-seed dir : /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chemprop_multitask_cpu_3seed
+13:40:46  INFO     LGB mono-Max dir    : /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_maxwell_prior_lgbm
+13:40:46  INFO     LGB chain-ext dir   : /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chain_ext_lgbm
+13:40:46  INFO   loading OOF from all three sources...
+13:40:46  INFO     Chemprop 3-seed OOF: (7405, 4)
+13:40:46  INFO     LGB mono-Max    OOF: (7405, 4)
+13:40:46  INFO     LGB chain-ext   OOF: (7405, 4)
+13:40:46  INFO     aligned OOF: (7405, 6)  (train rows with all 3 predictions)
+13:40:46  INFO   loading test submissions from all three sources...
+13:40:46  INFO     aligned sub: (4940, 5)
+13:40:46  INFO   ============================================================
+13:40:46  INFO   PER-TARGET 3-WAY NNLS BLEND  (Chemprop 3-seed + LGB mono + LGB chain-ext)
+13:40:46  INFO   ============================================================
+13:40:46  INFO   CONFIG: CHEMPROP_WEIGHT_FLOOR=0.3   APPLY_CHEMPROP_BIAS=0.0
+13:40:46  INFO   [eea] n_oof=221
+13:40:46  INFO     [eea] individual OOF R²:  Chemprop=0.9082   LGB_mono=0.8708   LGB_ext=0.8734
+13:40:46  INFO     [eea] NNLS raw:   w_c=0.7121  w_m=0.0515  w_x=0.2421  (sum=1.0057)
+13:40:46  INFO     [eea] normalized: w_c=0.7081  w_m=0.0513  w_x=0.2407
+13:40:46  INFO     [eea] BLEND OOF R² = 0.9148   Δ vs best solo (chemprop: 0.9082) = +0.0066
+13:40:46  INFO   [egb] n_oof=337
+13:40:46  INFO     [egb] individual OOF R²:  Chemprop=0.9305   LGB_mono=0.9105   LGB_ext=0.9087
+13:40:46  INFO     [egb] NNLS raw:   w_c=0.6786  w_m=0.2105  w_x=0.1203  (sum=1.0093)
+13:40:46  INFO     [egb] normalized: w_c=0.6723  w_m=0.2085  w_x=0.1191
+13:40:46  INFO     [egb] BLEND OOF R² = 0.9364   Δ vs best solo (chemprop: 0.9305) = +0.0060
+13:40:46  INFO   [egc] n_oof=2028
+13:40:46  INFO     [egc] individual OOF R²:  Chemprop=0.9070   LGB_mono=0.9000   LGB_ext=0.9023
+13:40:46  INFO     [egc] NNLS raw:   w_c=0.5340  w_m=0.0801  w_x=0.3859  (sum=0.9999)
+13:40:46  INFO     [egc] normalized: w_c=0.5340  w_m=0.0801  w_x=0.3859
+13:40:46  INFO     [egc] BLEND OOF R² = 0.9195   Δ vs best solo (chemprop: 0.9070) = +0.0125
+13:40:46  INFO   [ei] n_oof=222
+13:40:46  INFO     [ei] individual OOF R²:  Chemprop=0.7766   LGB_mono=0.7933   LGB_ext=0.8041
+13:40:46  INFO     [ei] NNLS raw:   w_c=0.3504  w_m=0.0046  w_x=0.6434  (sum=0.9984)
+13:40:46  INFO     [ei] normalized: w_c=0.3509  w_m=0.0046  w_x=0.6444
+13:40:46  INFO     [ei] BLEND OOF R² = 0.8155   Δ vs best solo (lgb_ext: 0.8041) = +0.0113
+13:40:46  INFO   [eps] n_oof=229
+13:40:46  INFO     [eps] individual OOF R²:  Chemprop=0.7916   LGB_mono=0.8186   LGB_ext=0.8218
+13:40:46  INFO     [eps] NNLS raw:   w_c=0.3767  w_m=0.4211  w_x=0.2070  (sum=1.0048)
+13:40:46  INFO     [eps] normalized: w_c=0.3749  w_m=0.4191  w_x=0.2060
+13:40:46  INFO     [eps] BLEND OOF R² = 0.8394   Δ vs best solo (lgb_ext: 0.8218) = +0.0177
+13:40:46  INFO   [nc] n_oof=229
+13:40:46  INFO     [nc] individual OOF R²:  Chemprop=0.8681   LGB_mono=0.8603   LGB_ext=0.8471
+13:40:46  INFO     [nc] NNLS raw:   w_c=0.5412  w_m=0.4593  w_x=0.0000  (sum=1.0005)
+13:40:46  INFO     [nc] normalized: w_c=0.5410  w_m=0.4590  w_x=0.0000
+13:40:46  INFO     [nc] BLEND OOF R² = 0.8880   Δ vs best solo (chemprop: 0.8681) = +0.0199
+13:40:46  INFO   [tg] n_oof=4139
+13:40:46  INFO     [tg] individual OOF R²:  Chemprop=0.9083   LGB_mono=0.9057   LGB_ext=0.9063
+13:40:46  INFO     [tg] NNLS raw:   w_c=0.4994  w_m=0.2383  w_x=0.2641  (sum=1.0017)
+13:40:46  INFO     [tg] normalized: w_c=0.4985  w_m=0.2379  w_x=0.2636
+13:40:46  INFO     [tg] BLEND OOF R² = 0.9186   Δ vs best solo (chemprop: 0.9083) = +0.0103
+13:40:46  INFO   ============================================================
+13:40:46  INFO   SUMMARY: per-target OOF R² (individual vs 3-way blend)
+13:40:46  INFO   ============================================================
+13:40:46  INFO     target       chemp    lgb_mono     lgb_ext       blend     w_c     w_m     w_x        best
+13:40:46  INFO        eea      0.9082      0.8708      0.8734      0.9148   0.708   0.051   0.241    chemprop
+13:40:46  INFO        egb      0.9305      0.9105      0.9087      0.9364   0.672   0.209   0.119    chemprop
+13:40:46  INFO        egc      0.9070      0.9000      0.9023      0.9195   0.534   0.080   0.386    chemprop
+13:40:46  INFO         ei      0.7766      0.7933      0.8041      0.8155   0.351   0.005   0.644     lgb_ext
+13:40:46  INFO        eps      0.7916      0.8186      0.8218      0.8394   0.375   0.419   0.206     lgb_ext
+13:40:46  INFO         nc      0.8681      0.8603      0.8471      0.8880   0.541   0.459   0.000    chemprop
+13:40:46  INFO         tg      0.9083      0.9057      0.9063      0.9186   0.499   0.238   0.264    chemprop
+13:40:46  INFO       MEAN      0.8701      0.8656      0.8662      0.8903
+13:40:46  INFO     BLEND OOF lift vs Chemprop solo : +0.0203
+13:40:46  INFO     BLEND OOF lift vs LGB_mono solo : +0.0247
+13:40:46  INFO     BLEND OOF lift vs LGB_ext solo  : +0.0241
+13:40:46  INFO     Prior 2-way (mono-LGB) blend OOF: 0.8873  (LB 0.897)
+13:40:46  INFO     3-way ΔOOF vs prior 2-way : +0.0030
+13:40:46  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_blend_nnls_chainext_3way/submission.csv  rows=4940
+13:40:46  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_blend_nnls_chainext_3way/blended_oof.csv  rows=7405
+13:40:46  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_blend_nnls_chainext_3way/blend_summary.json
+13:40:46  INFO   ============================================================
+13:40:46  INFO   DECISION GUIDANCE
+13:40:46  INFO   ============================================================
+13:40:46  INFO     Chemprop 3-seed solo LB (ref):    0.892
+13:40:46  INFO     LGB mono-Max solo LB (ref):       0.860
+13:40:46  INFO     LGB chain-ext solo LB (ref):      0.894
+13:40:46  INFO     Prior 2-way blend LB (mono-LGB):  0.897  (current best ensemble)
+13:40:46  INFO     This 3-way blend OOF R² mean:     0.8903
+13:40:46  INFO   
+13:40:46  INFO   Interpretation rules:
+13:40:46  INFO     - Blend OOF > pure 2-way chain-ext blend OOF:  submit the 3-way.
+13:40:46  INFO     - Blend OOF ≈ 2-way chain-ext blend OOF:  submit whichever is higher.
+13:40:46  INFO     - Watch nc column specifically: if 3-way's nc R² beats the 2-way's, the 3-way earns its keep.
+13:40:46  INFO   wall time: 0.2s
