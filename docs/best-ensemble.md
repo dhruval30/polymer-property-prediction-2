@@ -144,7 +144,9 @@ Every ensemble attempt (blend, stack, meta-learner) tracked here. Base-model-onl
 
 | # | date | ensemble | LB | Δ | rank | OOF | bases | notes |
 |--:|------|----------|:--:|:-:|:----:|:---:|-------|-------|
-| 3 | 2026-08-02 | `exp_blend_nnls_3seed` | **0.897** 🎯 | ↑ +0.002 | **5** (tied w/ 4) | **0.8873** | **Chemprop 3-seed bag** + LGB+Maxwell | Same 2-way NNLS structure as #1 but with the Chemprop base upgraded to the 5-fold × 3-seed bag (LB 0.892 solo vs 0.887 single-seed). NNLS gave Chemprop more weight (mean 0.61 → 0.70). 6 of 7 target OOFs improved vs 3-way blend; only ei regressed -0.006. **Beats the 3-way blend at lower compute** because Chemprop base upgrade > adding a weak 3rd base (CatBoost). Current best. |
+| 5 | 2026-08-03 | `exp_blend_nnls_chainext_3way` ⚠️ FAILED | 0.894 | ↓ -0.003 | — | 0.8903 | Chemprop 3-seed + **LGB mono-Max** + **LGB chain-ext-Max** | Attempted safer 3-way including mono-LGB to recover nc where chain-ext regressed. NNLS gave mono-LGB weight 0.46 on nc (chain-ext 0.00 on nc), but overall same failure mode as #4 — Chemprop and chain-ext LGB too correlated for the blend to lift. |
+| 4 | 2026-08-03 | `exp_blend_nnls_chainext` ⚠️ FAILED | 0.893 | ↓ -0.004 | — | 0.8893 | Chemprop 3-seed + **LGB chain-ext-Max** | Swapped mono-LGB (LB 0.860) for chain-ext-LGB (LB 0.894). Relaxed bias mitigations (floor 0.30, bias 0.00) because chain-ext LGB is OOF-underrated, not overrated. OOF up +0.002, LB down 0.004. **Root cause: chain-ext LGB and Chemprop both learn polymer-context features — too correlated to add diversity.** The mono-LGB + Chemprop blend worked because mono-LGB had orthogonal (monomer-only) signal. |
+| 3 | 2026-08-02 | `exp_blend_nnls_3seed` | **0.897** 🎯 | ↑ +0.002 | **5** (tied w/ 4) | **0.8873** | **Chemprop 3-seed bag** + LGB+Maxwell | Same 2-way NNLS structure as #1 but with the Chemprop base upgraded to the 5-fold × 3-seed bag (LB 0.892 solo vs 0.887 single-seed). NNLS gave Chemprop more weight (mean 0.61 → 0.70). 6 of 7 target OOFs improved vs 3-way blend; only ei regressed -0.006. **Beats the 3-way blend at lower compute** because Chemprop base upgrade > adding a weak 3rd base (CatBoost). Still current best. |
 | 2 | 2026-08-02 | `exp_blend_nnls_3way` | 0.895 | ↑ +0.001 | ~4 | 0.8842 | Chemprop + LGB+Maxwell + **CatBoost+Maxwell** | Added CatBoost as 3rd base. CAT got 0.27-0.31 weight on egc/ei/tg (solo wins), 0.0 weight on egb/eps (redundant with LGB). +0.001 LB for +100 min compute — poor ROI. Superseded by #3. |
 | 1 | 2026-08-02 | `exp_blend_nnls` | 0.894 | — (1st ensemble) | 5 | 0.8828 | Chemprop single-seed + LGB+Maxwell | Per-target NNLS with Chemprop weight floor 0.40 + bias +0.15. First ensemble of the competition. **Fastest reproduction target** — ~67 min wall time. Use when iterating on new base models or blend recipes. |
 
@@ -192,9 +194,10 @@ To include a third base (e.g., a Chemprop 3-seed bag, or CatBoost, or PI1M-pretr
 |------|:-------:|--------|:---------:|-------|
 | Chemprop 1-seed | 0.887 | `exp_chemprop_multitask_cpu.py` | 52 min | Original — kept for historical alignment |
 | **Chemprop 3-seed bag** | **0.892** | `exp_chemprop_multitask_cpu_3seed.py` | 225 min | Best neural solo. Preferred Chemprop base for blends. |
-| LGB + Maxwell (mono-only) | 0.860 | `exp_maxwell_prior_lgbm.py` | 15 min | Original tree base — superseded by chain-ext |
+| Chemprop 3-seed on TRIMER ⚠️ IGNORE | 0.891 | `exp_chemprop_multitask_chainext_cpu.py` | **27.5h** | LB -0.001 vs monomer Chemprop despite OOF +0.009. **Kaggle-incompatible (12h limit). DO NOT USE.** |
+| LGB + Maxwell (mono-only) | 0.860 | `exp_maxwell_prior_lgbm.py` | 15 min | Original tree base — **still valuable for blends** (its orthogonal signal is what made the 0.897 ensemble work) |
 | CatBoost + Maxwell | ~0.860 | `exp_maxwell_prior_catboost.py` | 100 min | Marginal ensemble value |
-| **⭐ LGB + chain-ext + Maxwell** | **0.894** 🏆 | `exp_chain_ext_lgbm.py` | 37 min | **Best solo overall. Trimer chain extension unlocked +0.034 LB vs mono-only. Preferred LGB base for blends.** |
+| **🏆 LGB + chain-ext + Maxwell** | **0.894** | `exp_chain_ext_lgbm.py` | 37 min | **Best solo overall.** But **BAD blend partner for Chemprop** (too correlated). Use as solo, not as blend component. |
 
 ### Ensemble reproduction gotchas
 
