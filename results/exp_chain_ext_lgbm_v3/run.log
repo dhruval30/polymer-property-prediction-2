@@ -1,0 +1,194 @@
+10:55:59  INFO   logging to /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chain_ext_lgbm_v3/run.log
+10:55:59  INFO   === exp_chain_ext_lgbm_v3 ===
+10:55:59  INFO   CONFIG: n_splits=5 seed=42 chain_n_units=3
+10:55:59  INFO   CV mode: aux-augmented via IterativeImputer + nc-fix + bandgap-physics (egb+ei)
+10:55:59  INFO   LGB_PARAMS = {'objective': 'regression', 'metric': 'rmse', 'learning_rate': 0.03, 'num_leaves': 63, 'min_child_samples': 10, 'feature_fraction': 0.5, 'bagging_fraction': 0.85, 'bagging_freq': 1, 'reg_lambda': 1.0, 'verbosity': -1, 'n_jobs': -1, 'seed': 42}
+10:55:59  INFO   IterImputer: max_iter=5 lgb_estimators=100 lr=0.1
+10:55:59  INFO   loading train.csv / test.csv
+10:55:59  INFO   train raw: (7409, 3)   test raw: (4940, 3)
+10:55:59  INFO   canonicalizing 10605 unique raw SMILES
+10:56:03  INFO   collapsing 4 duplicate (canon, target_type) rows in train by mean
+10:56:03  INFO   train after dedup: (7405, 4)
+10:56:03  INFO   per-target train counts: {'tg': 4139, 'egc': 2028, 'egb': 337, 'eps': 229, 'nc': 229, 'ei': 222, 'eea': 221}
+10:56:03  INFO   per-target test  counts: {'tg': 2763, 'egc': 1352, 'egb': 224, 'eps': 153, 'nc': 153, 'ei': 148, 'eea': 147}
+10:56:03  INFO   unique canonical SMILES: 8990
+10:56:03  INFO   generating 3-mer polymer SMILES...
+10:56:15  INFO   chain extension: 8990/8990 SMILES extended  time=12.7s
+10:56:15  INFO   MONOMER features
+10:58:25  INFO     desc_mono: (8990, 207)  dropped=10  time=130.0s
+10:58:28  INFO     morgan2c_mono: (8990, 2048)  time=2.6s
+10:58:31  INFO     morgan3c_mono: (8990, 2048)  time=2.8s
+10:59:00  INFO     maccs_mono: (8990, 167)  time=29.3s
+10:59:05  INFO     atompair_c_mono: (8990, 2048)  time=4.7s
+10:59:09  INFO     toptorsion_c_mono: (8990, 2048)  time=3.9s
+10:59:39  INFO     avalon_mono: (8990, 512)  time=30.7s
+10:59:39  INFO   TRIMER features
+11:13:44  INFO     desc_tri: (8990, 207)  dropped=10  time=845.1s
+11:13:52  INFO     morgan2c_tri: (8990, 2048)  time=8.0s
+11:14:39  INFO     maccs_tri: (8990, 167)  time=46.7s
+11:15:18  INFO     atompair_c_tri: (8990, 2048)  time=38.6s
+11:17:12  INFO     avalon_tri: (8990, 512)  time=114.0s
+11:17:12  INFO   DOMAIN features (15 hand-engineered)
+11:17:21  INFO     domain_mono: (8990, 15)  time=9.4s
+11:17:21  INFO   FEATURE MATRIX TOTAL: (8990, 14075)  size≈506.1MB
+11:17:22  INFO   feature families: desc_mono=207, morgan2c_mono=2048, morgan3c_mono=2048, maccs_mono=167, atompair_c_mono=2048, toptorsion_c_mono=2048, avalon_mono=512, desc_tri=207, morgan2c_tri=2048, maccs_tri=167, atompair_c_tri=2048, avalon_tri=512, domain_mono=15
+11:17:22  INFO   ============================================================
+11:17:22  INFO   BUILDING ITERATIVELY IMPUTED AUX FEATURES (per-fold + full)
+11:17:22  INFO   ============================================================
+11:17:22  INFO   aux target matrix: (8990, 7)   NaN per target: {'eea': 8769, 'egb': 8653, 'egc': 6962, 'ei': 8768, 'eps': 8761, 'nc': 8761, 'tg': 4851}
+11:17:35  INFO     IterImputer fold 0: (8990, 7) → imputed in 12.9s  n_iter=5  n_iter_capped_at=5
+11:17:47  INFO     IterImputer fold 1: (8990, 7) → imputed in 12.7s  n_iter=5  n_iter_capped_at=5
+11:18:01  INFO     IterImputer fold 2: (8990, 7) → imputed in 13.2s  n_iter=5  n_iter_capped_at=5
+11:18:13  INFO     IterImputer fold 3: (8990, 7) → imputed in 12.8s  n_iter=5  n_iter_capped_at=5
+11:18:26  INFO     IterImputer fold 4: (8990, 7) → imputed in 12.9s  n_iter=5  n_iter_capped_at=5
+11:18:41  INFO     IterImputer full-train: (8990, 7) → imputed in 14.6s  n_iter=5  n_iter_capped_at=5
+11:18:41  INFO   ============================================================
+11:18:41  INFO   START TARGET: eea
+11:18:41  INFO   ============================================================
+11:18:41  INFO   [eea] train rows=221   test rows=147   y range=[0.3936, 5.1438]   std=1.1047
+11:18:41  INFO   [eea] X_smi shape train=(221, 14075), test=(147, 14075)
+11:18:49  INFO   [eea] fold 0: best_iter=1418   R²=0.8746   n_val=45
+11:18:56  INFO   [eea] fold 1: best_iter=1530   R²=0.9114   n_val=44
+11:19:00  INFO   [eea] fold 2: best_iter= 498   R²=0.8932   n_val=44
+11:19:02  INFO   [eea] fold 3: best_iter= 155   R²=0.9085   n_val=44
+11:19:22  INFO   [eea] fold 4: best_iter=3966   R²=0.7725   n_val=44
+11:19:22  INFO   [eea] OOF R² (LGB only, pre-Maxwell/bandgap) = 0.8767   (fold mean 0.8720)
+11:19:22  INFO   [eea] refitting on full train for 1559 rounds  X_tr shape=(221, 14089)
+11:19:32  INFO   [eea] gain totals: mono=1290 (32.4%)  tri=1401 (35.2%)  domain=31 (0.8%)  aux=1253 (31.5%)
+11:19:32  INFO   ============================================================
+11:19:32  INFO   START TARGET: egb
+11:19:32  INFO   ============================================================
+11:19:32  INFO   [egb] train rows=337   test rows=224   y range=[0.5068, 10.1137]   std=1.9757
+11:19:32  INFO   [egb] X_smi shape train=(337, 14075), test=(224, 14075)
+11:19:41  INFO   [egb] fold 0: best_iter= 596   R²=0.9531   n_val=68
+11:19:47  INFO   [egb] fold 1: best_iter= 569   R²=0.9454   n_val=68
+11:19:51  INFO   [egb] fold 2: best_iter= 250   R²=0.8916   n_val=67
+11:19:56  INFO   [egb] fold 3: best_iter= 287   R²=0.9007   n_val=67
+11:20:02  INFO   [egb] fold 4: best_iter= 461   R²=0.8950   n_val=67
+11:20:02  INFO   [egb] OOF R² (LGB only, pre-Maxwell/bandgap) = 0.9211   (fold mean 0.9171)
+11:20:02  INFO   [egb] refitting on full train for 507 rounds  X_tr shape=(337, 14089)
+11:20:08  INFO   [egb] gain totals: mono=993 (5.2%)  tri=1432 (7.6%)  domain=2731 (14.4%)  aux=13768 (72.7%)
+11:20:08  INFO   ============================================================
+11:20:08  INFO   START TARGET: egc
+11:20:08  INFO   ============================================================
+11:20:08  INFO   [egc] train rows=2028   test rows=1352   y range=[0.0205, 9.8627]   std=1.5678
+11:20:08  INFO   [egc] X_smi shape train=(2028, 14075), test=(1352, 14075)
+11:20:39  INFO   [egc] fold 0: best_iter= 360   R²=0.9577   n_val=406
+11:21:11  INFO   [egc] fold 1: best_iter= 417   R²=0.9572   n_val=406
+11:25:59  INFO   [egc] fold 2: best_iter=3998   R²=0.9347   n_val=406
+11:26:22  INFO   [egc] fold 3: best_iter= 240   R²=0.9353   n_val=405
+11:27:03  INFO   [egc] fold 4: best_iter= 304   R²=0.9538   n_val=405
+11:27:03  INFO   [egc] OOF R² (LGB only, pre-Maxwell/bandgap) = 0.9477   (fold mean 0.9478)
+11:27:03  INFO   [egc] refitting on full train for 396 rounds  X_tr shape=(2028, 14089)
+11:27:25  INFO   [egc] gain totals: mono=4556 (6.3%)  tri=2578 (3.6%)  domain=1612 (2.2%)  aux=63414 (87.9%)
+11:27:25  INFO   ============================================================
+11:27:25  INFO   START TARGET: ei
+11:27:25  INFO   ============================================================
+11:27:25  INFO   [ei] train rows=222   test rows=148   y range=[4.0261, 9.8385]   std=1.0447
+11:27:25  INFO   [ei] X_smi shape train=(222, 14075), test=(148, 14075)
+11:27:30  INFO   [ei] fold 0: best_iter= 686   R²=0.8591   n_val=45
+11:27:42  INFO   [ei] fold 1: best_iter=2384   R²=0.8585   n_val=45
+11:27:46  INFO   [ei] fold 2: best_iter= 545   R²=0.8258   n_val=44
+11:28:09  INFO   [ei] fold 3: best_iter=3987   R²=0.8287   n_val=44
+11:28:11  INFO   [ei] fold 4: best_iter= 105   R²=0.6819   n_val=44
+11:28:11  INFO   [ei] OOF R² (LGB only, pre-Maxwell/bandgap) = 0.8187   (fold mean 0.8108)
+11:28:11  INFO   [ei] refitting on full train for 754 rounds  X_tr shape=(222, 14089)
+11:28:16  INFO   [ei] gain totals: mono=628 (17.5%)  tri=1587 (44.3%)  domain=32 (0.9%)  aux=1328 (37.1%)
+11:28:16  INFO   ============================================================
+11:28:16  INFO   START TARGET: eps
+11:28:16  INFO   ============================================================
+11:28:16  INFO   [eps] train rows=229   test rows=153   y range=[2.6100, 9.0900]   std=1.0916
+11:28:16  INFO   [eps] X_smi shape train=(229, 14075), test=(153, 14075)
+11:28:20  INFO   [eps] fold 0: best_iter= 523   R²=0.8861   n_val=46
+11:28:22  INFO   [eps] fold 1: best_iter= 109   R²=0.8264   n_val=46
+11:28:25  INFO   [eps] fold 2: best_iter= 338   R²=0.7254   n_val=46
+11:28:26  INFO   [eps] fold 3: best_iter= 100   R²=0.8037   n_val=46
+11:28:31  INFO   [eps] fold 4: best_iter= 806   R²=0.7472   n_val=45
+11:28:31  INFO   [eps] OOF R² (LGB only, pre-Maxwell/bandgap) = 0.7893   (fold mean 0.7977)
+11:28:31  INFO   [eps] refitting on full train for 371 rounds  X_tr shape=(229, 14089)
+11:28:34  INFO   [eps] gain totals: mono=282 (7.1%)  tri=465 (11.7%)  domain=46 (1.2%)  aux=3190 (80.0%)
+11:28:34  INFO   ============================================================
+11:28:34  INFO   START TARGET: nc
+11:28:34  INFO   ============================================================
+11:28:34  INFO   [nc] NC-FIX: dropping trimer features for this target
+11:28:34  INFO   [nc] train rows=229   test rows=153   y range=[1.5596, 2.7581]   std=0.2349
+11:28:34  INFO   [nc] X_smi shape train=(229, 9093), test=(153, 9093)
+11:28:36  INFO   [nc] fold 0: best_iter= 421   R²=0.9289   n_val=46
+11:28:38  INFO   [nc] fold 1: best_iter= 262   R²=0.8070   n_val=46
+11:28:39  INFO   [nc] fold 2: best_iter=  71   R²=0.8809   n_val=46
+11:28:40  INFO   [nc] fold 3: best_iter= 318   R²=0.9134   n_val=46
+11:28:45  INFO   [nc] fold 4: best_iter=1029   R²=0.8482   n_val=45
+11:28:45  INFO   [nc] OOF R² (LGB only, pre-Maxwell/bandgap) = 0.8682   (fold mean 0.8757)
+11:28:45  INFO   [nc] refitting on full train for 349 rounds  X_tr shape=(229, 9107)
+11:28:46  INFO   [nc] gain totals: mono=32 (17.5%)  tri=0 (0.0%)  domain=4 (2.2%)  aux=144 (78.7%)
+11:28:46  INFO   ============================================================
+11:28:46  INFO   START TARGET: tg
+11:28:46  INFO   ============================================================
+11:28:46  INFO   [tg] train rows=4139   test rows=2763   y range=[-109.8200, 495.0000]   std=109.1038
+11:28:46  INFO   [tg] X_smi shape train=(4139, 14075), test=(2763, 14075)
+11:29:46  INFO   [tg] fold 0: best_iter= 625   R²=0.9606   n_val=828
+11:30:46  INFO   [tg] fold 1: best_iter= 557   R²=0.9594   n_val=828
+11:32:22  INFO   [tg] fold 2: best_iter= 928   R²=0.9642   n_val=828
+11:34:31  INFO   [tg] fold 3: best_iter=1398   R²=0.9485   n_val=828
+11:35:26  INFO   [tg] fold 4: best_iter= 483   R²=0.9543   n_val=827
+11:35:26  INFO   [tg] OOF R² (LGB only, pre-Maxwell/bandgap) = 0.9575   (fold mean 0.9574)
+11:35:26  INFO   [tg] refitting on full train for 687 rounds  X_tr shape=(4139, 14089)
+11:36:28  INFO   [tg] gain totals: mono=15804214 (2.2%)  tri=29140279 (4.1%)  domain=19029985 (2.7%)  aux=645380878 (91.0%)
+11:36:28  INFO   ============================================================
+11:36:28  INFO   PER-TARGET OOF R²  (pre-Maxwell, post-nc-fix + IterImputer aux + domain feats)
+11:36:28  INFO   ============================================================
+11:36:28  INFO      eea   n=  221   R²=0.8767   gain: mono=32.4% tri=35.2% domain=0.8% aux=31.5%
+11:36:28  INFO      egb   n=  337   R²=0.9211   gain: mono=5.2% tri=7.6% domain=14.4% aux=72.7%
+11:36:28  INFO      egc   n= 2028   R²=0.9477   gain: mono=6.3% tri=3.6% domain=2.2% aux=87.9%
+11:36:28  INFO       ei   n=  222   R²=0.8187   gain: mono=17.5% tri=44.3% domain=0.9% aux=37.1%
+11:36:28  INFO      eps   n=  229   R²=0.7893   gain: mono=7.1% tri=11.7% domain=1.2% aux=80.0%
+11:36:28  INFO       nc   n=  229   R²=0.8682   gain: mono=17.5% tri=0.0% domain=2.2% aux=78.7%
+11:36:28  INFO       tg   n= 4139   R²=0.9575   gain: mono=2.2% tri=4.1% domain=2.7% aux=91.0%
+11:36:28  INFO     MEAN R² (pre-Maxwell) = 0.8827
+11:36:28  INFO   ============================================================
+11:36:28  INFO   MAXWELL RELATION POST-FIT (EPS ↔ Nc)
+11:36:28  INFO   ============================================================
+11:36:28  INFO   co-labeled train molecules: n=134
+11:36:28  INFO   forward EPS = 1.0401·Nc² + 0.6155   R²=0.8553
+11:36:28  INFO   reverse Nc² = 0.8223·EPS + 0.0398   R²(on Nc)=0.8368
+11:36:28  INFO   eps blend: LGB R²=0.7893  pure-Maxwell R²=0.8355  best w=0.305  blend R²=0.8466   Δ=+0.0573
+11:36:28  INFO   nc blend: LGB R²=0.8682  pure-Maxwell R²=0.8413  best w=0.590  blend R²=0.8933   Δ=+0.0251
+11:36:28  INFO   MEAN R² (post-Maxwell, pre-bandgap) = 0.8945
+11:36:28  INFO   ============================================================
+11:36:28  INFO   BANDGAP CONSISTENCY POST-PROCESSOR  (egb + ei only)
+11:36:28  INFO   ============================================================
+11:36:28  INFO   [egb] physics recipe: from ['egc']
+11:36:28  INFO     [egb] n_phys_valid=175/337   LGB R²=0.9211   pure-physics R²=0.9016   best w_lgb=0.670   blend R²=0.9274   Δ=+0.0063
+11:36:28  INFO     [egb] APPLY bandgap blend (Δ=+0.0063 > 0.001)
+11:36:28  INFO   [ei] physics recipe: from ['egc', 'eea']
+11:36:28  INFO     [ei] n_phys_valid=59/222   LGB R²=0.8187   pure-physics R²=0.7817   best w_lgb=0.935   blend R²=0.8188   Δ=+0.0002
+11:36:28  INFO     [ei] SKIP bandgap blend (Δ=+0.0002 ≤ 0.001)
+11:36:28  INFO   ============================================================
+11:36:28  INFO   FINAL PER-TARGET OOF R² (post-Maxwell + post-bandgap)
+11:36:28  INFO   ============================================================
+11:36:28  INFO      eea   R²=0.8767
+11:36:28  INFO      egb   R²=0.9274
+11:36:28  INFO      egc   R²=0.9477
+11:36:28  INFO       ei   R²=0.8187
+11:36:28  INFO      eps   R²=0.8466
+11:36:28  INFO       nc   R²=0.8933
+11:36:28  INFO       tg   R²=0.9575
+11:36:28  INFO     MEAN R² (final) = 0.8954
+11:36:28  INFO     Pipeline lift: pre-Maxwell 0.8827 → post-Maxwell 0.8945 → post-bandgap 0.8954
+11:36:28  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chain_ext_lgbm_v3/oof.csv  rows=7405
+11:36:28  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chain_ext_lgbm_v3/submission.csv  rows=4940
+11:36:28  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chain_ext_lgbm_v3/cv_summary.json
+11:36:28  INFO   ============================================================
+11:36:28  INFO   FINAL PER-TARGET OOF R²  (v3)  vs chain-ext v1 reference
+11:36:28  INFO   ============================================================
+11:36:28  INFO     target          v3      v1 ref     delta
+11:36:28  INFO        eea      0.8767      0.8734   +0.0033
+11:36:28  INFO        egb      0.9274      0.9087   +0.0187
+11:36:28  INFO        egc      0.9477      0.9023   +0.0454
+11:36:28  INFO         ei      0.8187      0.8041   +0.0146
+11:36:28  INFO        eps      0.8466      0.8218   +0.0248
+11:36:28  INFO         nc      0.8933      0.8471   +0.0462
+11:36:28  INFO         tg      0.9575      0.9063   +0.0512
+11:36:28  INFO       MEAN      0.8954      0.8662   +0.0292
+11:36:28  INFO     (chain-ext v1 LB reference: 0.894)
+11:36:28  INFO   wall time: 40.5min

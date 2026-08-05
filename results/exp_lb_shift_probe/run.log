@@ -1,0 +1,34 @@
+10:54:05  INFO   logging to /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_lb_shift_probe/run.log
+10:54:05  INFO   === exp_lb_shift_probe ===
+10:54:05  INFO   loading train.csv / test.csv
+10:54:05  INFO   train raw: (7409, 3)   test raw: (4940, 3)
+10:54:05  INFO   ============================================================
+10:54:05  INFO   PER-TARGET TRAIN STATS
+10:54:05  INFO   ============================================================
+10:54:05  INFO      eea   n_train=  221   mean=  +2.2781   std=  1.1072   range=[   +0.39,    +5.14]   n_test=  147
+10:54:05  INFO      egb   n_train=  337   mean=  +4.2763   std=  1.9786   range=[   +0.51,   +10.11]   n_test=  224
+10:54:05  INFO      egc   n_train= 2028   mean=  +4.5290   std=  1.5682   range=[   +0.02,    +9.86]   n_test= 1352
+10:54:05  INFO       ei   n_train=  222   mean=  +6.3463   std=  1.0471   range=[   +4.03,    +9.84]   n_test=  148
+10:54:05  INFO      eps   n_train=  229   mean=  +4.5766   std=  1.0940   range=[   +2.61,    +9.09]   n_test=  153
+10:54:05  INFO       nc   n_train=  229   mean=  +1.9340   std=  0.2354   range=[   +1.56,    +2.76]   n_test=  153
+10:54:05  INFO       tg   n_train= 4143   mean=+143.4589   std=109.0836   range=[ -109.82,  +495.00]   n_test= 2763
+10:54:05  INFO   ============================================================
+10:54:05  INFO   BUILDING PROBE SUBMISSION (train_mean per target_type)
+10:54:05  INFO   ============================================================
+10:54:05  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_lb_shift_probe/submission.csv  rows=4940
+10:54:05  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_lb_shift_probe/probe_stats.json
+10:54:05  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_lb_shift_probe/probe_analysis_template.py  (fill in LB_MEAN_R2 after submitting and run it)
+10:54:05  INFO   ============================================================
+10:54:05  INFO   NEXT STEPS
+10:54:05  INFO   ============================================================
+10:54:05  INFO   1. Submit results/exp_lb_shift_probe/submission.csv to Kaggle.
+10:54:05  INFO   2. Note the returned mean R² score.
+10:54:05  INFO   3. Edit results/exp_lb_shift_probe/probe_analysis_template.py
+10:54:05  INFO      → set LB_MEAN_R2 = <score>, then run it.
+10:54:05  INFO   4. The analysis will estimate per-target shift bounds and recommend follow-up.
+10:54:05  INFO   
+10:54:05  INFO   EXPECTED OUTCOMES:
+10:54:05  INFO     - R²_mean ≈ 0.0    → no shift; skip this path.
+10:54:05  INFO     - R²_mean ≈ -0.05  → small shift; likely +0.005 recoverable on 1 target.
+10:54:05  INFO     - R²_mean < -0.10  → LARGE shift; up to +0.02+ recoverable (Sandman-style).
+10:54:05  INFO   wall time: 0.1s
