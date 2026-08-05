@@ -1,0 +1,258 @@
+17:35:16  INFO   logging to /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chain_ext_lgbm_v2/run.log
+17:35:16  INFO   === exp_chain_ext_lgbm_v2 ===
+17:35:16  INFO   CONFIG: n_splits=5 seed=42 chain_n_units=3 morgan2=2048 morgan3=2048 atompair=2048 toptorsion=2048 avalon=512
+17:35:16  INFO   CV mode: aux-augmented + per-target-optuna + per-target-transform + nc-fix + bandgap-physics
+17:35:16  INFO   Optuna trials per target: {'eea': 30, 'egb': 30, 'ei': 30, 'eps': 30, 'nc': 30, 'egc': 50, 'tg': 50}
+17:35:16  INFO   loading train.csv / test.csv
+17:35:16  INFO   train raw: (7409, 3)   test raw: (4940, 3)
+17:35:16  INFO   canonicalizing 10605 unique raw SMILES
+17:35:20  INFO   collapsing 4 duplicate (canon, target_type) rows in train by mean
+17:35:20  INFO   train after dedup: (7405, 4)
+17:35:20  INFO   per-target train counts: {'tg': 4139, 'egc': 2028, 'egb': 337, 'eps': 229, 'nc': 229, 'ei': 222, 'eea': 221}
+17:35:20  INFO   per-target test  counts: {'tg': 2763, 'egc': 1352, 'egb': 224, 'eps': 153, 'nc': 153, 'ei': 148, 'eea': 147}
+17:35:20  INFO   unique canonical SMILES: 8990
+17:35:20  INFO   generating 3-mer polymer SMILES...
+17:35:33  INFO   chain extension: 8990/8990 SMILES extended (100.0%; rest kept as monomer)  time=12.6s
+17:35:33  INFO   MONOMER features
+17:37:48  INFO     desc_mono: (8990, 207)  dropped=10  time=135.4s
+17:37:51  INFO     morgan2c_mono: (8990, 2048)  time=2.6s
+17:37:53  INFO     morgan3c_mono: (8990, 2048)  time=2.9s
+17:38:23  INFO     maccs_mono: (8990, 167)  time=29.7s
+17:38:28  INFO     atompair_c_mono: (8990, 2048)  time=4.8s
+17:38:32  INFO     toptorsion_c_mono: (8990, 2048)  time=3.9s
+17:39:04  INFO     avalon_mono: (8990, 512)  time=31.9s
+17:39:04  INFO   TRIMER features (from 3-mer SMILES)
+17:50:17  INFO     desc_tri: (8990, 207)  dropped=10  time=673.4s
+17:50:25  INFO     morgan2c_tri: (8990, 2048)  time=8.2s
+17:51:12  INFO     maccs_tri: (8990, 167)  time=46.5s
+17:51:50  INFO     atompair_c_tri: (8990, 2048)  time=38.5s
+17:53:47  INFO     avalon_tri: (8990, 512)  time=117.0s
+17:53:48  INFO   FEATURE MATRIX TOTAL: (8990, 14060)  size≈505.6MB
+17:53:48  INFO   feature families: desc_mono=207, morgan2c_mono=2048, morgan3c_mono=2048, maccs_mono=167, atompair_c_mono=2048, toptorsion_c_mono=2048, avalon_mono=512, desc_tri=207, morgan2c_tri=2048, maccs_tri=167, atompair_c_tri=2048, avalon_tri=512
+17:53:48  INFO   total SMILES features (with trimer): 14060
+17:53:48  INFO   building aux lookup over 5920 unique canonical SMILES in train
+17:53:49  INFO   aux lookup built.  aux features per row: 14
+17:53:49  INFO   ============================================================
+17:53:49  INFO   START TARGET: eea
+17:53:49  INFO   ============================================================
+17:53:49  INFO   [eea] train rows=221   test rows=147   y range=[0.3936, 5.1438]   std=1.1047
+17:53:49  INFO   [eea] X shape train=(221, 14074), test=(147, 14074)
+17:53:49  INFO   [eea] transform search
+17:54:15  INFO     [eea]    identity: OOF R² (orig space) = 0.8731
+17:54:36  INFO     [eea]       log1p: OOF R² (orig space) = 0.8753
+17:54:58  INFO     [eea]        sqrt: OOF R² (orig space) = 0.8788
+17:55:22  INFO     [eea]  yeojohnson: OOF R² (orig space) = 0.8807
+17:55:39  INFO     [eea]   rankgauss: OOF R² (orig space) = 0.8772
+17:55:39  INFO     [eea] BEST transform: yeojohnson  (R²=0.8807)
+17:55:39  INFO   [eea] Optuna: 30 trials, timeout 2700s
+17:57:11  INFO     [eea/tune] trial   5: best R² so far = 0.8834
+18:00:13  INFO     [eea/tune] trial  10: best R² so far = 0.8834
+18:02:08  INFO     [eea/tune] trial  15: best R² so far = 0.8885
+18:03:11  INFO     [eea/tune] trial  20: best R² so far = 0.8901
+18:05:18  INFO     [eea/tune] trial  25: best R² so far = 0.8901
+18:38:39  INFO     [eea/tune] trial  30: best R² so far = 0.8909
+18:38:39  INFO   [eea] Optuna DONE: 30 trials  best R² = 0.8909  time=43.0min
+18:38:39  INFO     best_params: {'learning_rate': 0.009422688196272677, 'num_leaves': 186, 'min_child_samples': 9, 'feature_fraction': 0.38155272741086305, 'bagging_fraction': 0.5557499989162626, 'reg_lambda': 0.35383179471752013, 'reg_alpha': 0.0003888065387409915, 'max_depth': 7}
+18:40:58  INFO   [eea] FINAL OOF R² (orig space) = 0.8909   transform=yeojohnson   best_iters median=2897
+18:40:58  INFO   [eea] refitting on full train for 3186 rounds
+18:41:12  INFO   [eea] gain totals: mono=3955 (52.4%)  tri=3444 (45.6%)  aux=148 (2.0%)
+18:41:12  INFO   ============================================================
+18:41:12  INFO   START TARGET: egb
+18:41:12  INFO   ============================================================
+18:41:12  INFO   [egb] train rows=337   test rows=224   y range=[0.5068, 10.1137]   std=1.9757
+18:41:12  INFO   [egb] X shape train=(337, 14074), test=(224, 14074)
+18:41:12  INFO   [egb] transform search
+18:41:35  INFO     [egb]    identity: OOF R² (orig space) = 0.9087
+18:42:12  INFO     [egb]       log1p: OOF R² (orig space) = 0.9090
+18:42:46  INFO     [egb]        sqrt: OOF R² (orig space) = 0.9077
+18:43:24  INFO     [egb]  yeojohnson: OOF R² (orig space) = 0.9064
+18:43:47  INFO     [egb]   rankgauss: OOF R² (orig space) = 0.9072
+18:43:47  INFO     [egb] BEST transform: log1p  (R²=0.9090)
+18:43:47  INFO   [egb] Optuna: 30 trials, timeout 2700s
+18:46:09  INFO     [egb/tune] trial   5: best R² so far = 0.9112
+18:49:47  INFO     [egb/tune] trial  10: best R² so far = 0.9112
+18:51:47  INFO     [egb/tune] trial  15: best R² so far = 0.9137
+18:55:05  INFO     [egb/tune] trial  20: best R² so far = 0.9149
+18:59:15  INFO     [egb/tune] trial  25: best R² so far = 0.9149
+19:03:13  INFO     [egb/tune] trial  30: best R² so far = 0.9149
+19:03:13  INFO   [egb] Optuna DONE: 30 trials  best R² = 0.9149  time=19.4min
+19:03:13  INFO     best_params: {'learning_rate': 0.013553783184480118, 'num_leaves': 211, 'min_child_samples': 50, 'feature_fraction': 0.34076602270036116, 'bagging_fraction': 0.8522080317956169, 'reg_lambda': 0.0373186190698203, 'reg_alpha': 0.04959085864137911, 'max_depth': 12}
+19:04:22  INFO   [egb] FINAL OOF R² (orig space) = 0.9149   transform=log1p   best_iters median=2970
+19:04:22  INFO   [egb] refitting on full train for 3267 rounds
+19:04:32  INFO   [egb] gain totals: mono=569 (33.6%)  tri=1086 (64.1%)  aux=33 (1.9%)
+19:04:32  INFO   ============================================================
+19:04:32  INFO   START TARGET: egc
+19:04:32  INFO   ============================================================
+19:04:32  INFO   [egc] train rows=2028   test rows=1352   y range=[0.0205, 9.8627]   std=1.5678
+19:04:32  INFO   [egc] X shape train=(2028, 14074), test=(1352, 14074)
+19:04:32  INFO   [egc] transform search
+19:07:36  INFO     [egc]    identity: OOF R² (orig space) = 0.9022
+19:11:33  INFO     [egc]       log1p: OOF R² (orig space) = 0.9005
+19:15:04  INFO     [egc]        sqrt: OOF R² (orig space) = 0.9009
+19:18:39  INFO     [egc]  yeojohnson: OOF R² (orig space) = 0.9022
+19:22:25  INFO     [egc]   rankgauss: OOF R² (orig space) = 0.9008
+19:22:25  INFO     [egc] BEST transform: yeojohnson  (R²=0.9022)
+19:22:25  INFO   [egc] Optuna: 50 trials, timeout 2700s
+19:38:20  INFO     [egc/tune] trial   5: best R² so far = 0.9035
+20:03:04  INFO     [egc/tune] trial  10: best R² so far = 0.9058
+20:23:30  INFO   [egc] Optuna DONE: 12 trials  best R² = 0.9065  time=61.1min
+20:23:30  INFO     best_params: {'learning_rate': 0.005296516157377654, 'num_leaves': 130, 'min_child_samples': 4, 'feature_fraction': 0.4990022152248164, 'bagging_fraction': 0.6706322194231403, 'reg_lambda': 1.2199933082832917, 'reg_alpha': 0.0005398014928287577, 'max_depth': 8}
+21:48:12  INFO   [egc] FINAL OOF R² (orig space) = 0.9065   transform=yeojohnson   best_iters median=4769
+21:48:12  INFO   [egc] refitting on full train for 5245 rounds
+22:03:47  INFO   [egc] gain totals: mono=81156 (59.3%)  tri=55024 (40.2%)  aux=755 (0.6%)
+22:03:47  INFO   ============================================================
+22:03:47  INFO   START TARGET: ei
+22:03:47  INFO   ============================================================
+22:03:47  INFO   [ei] train rows=222   test rows=148   y range=[4.0261, 9.8385]   std=1.0447
+22:03:47  INFO   [ei] X shape train=(222, 14074), test=(148, 14074)
+22:03:47  INFO   [ei] transform search
+22:04:12  INFO     [ei]    identity: OOF R² (orig space) = 0.8040
+22:04:30  INFO     [ei]       log1p: OOF R² (orig space) = 0.7889
+22:04:54  INFO     [ei]        sqrt: OOF R² (orig space) = 0.7928
+22:05:12  INFO     [ei]  yeojohnson: OOF R² (orig space) = 0.7940
+22:05:30  INFO     [ei]   rankgauss: OOF R² (orig space) = 0.7965
+22:05:30  INFO     [ei] BEST transform: identity  (R²=0.8040)
+22:05:30  INFO   [ei] Optuna: 30 trials, timeout 2700s
+22:06:34  INFO     [ei/tune] trial   5: best R² so far = 0.8033
+22:08:08  INFO     [ei/tune] trial  10: best R² so far = 0.8033
+22:09:19  INFO     [ei/tune] trial  15: best R² so far = 0.8047
+22:10:03  INFO     [ei/tune] trial  20: best R² so far = 0.8054
+22:10:51  INFO     [ei/tune] trial  25: best R² so far = 0.8082
+22:11:35  INFO     [ei/tune] trial  30: best R² so far = 0.8090
+22:11:35  INFO   [ei] Optuna DONE: 30 trials  best R² = 0.8090  time=6.1min
+22:11:35  INFO     best_params: {'learning_rate': 0.06637260887988251, 'num_leaves': 78, 'min_child_samples': 10, 'feature_fraction': 0.5197301852996222, 'bagging_fraction': 0.6879104042450688, 'reg_lambda': 0.11380458871703926, 'reg_alpha': 3.26012437726262e-06, 'max_depth': 12}
+22:11:52  INFO   [ei] FINAL OOF R² (orig space) = 0.8090   transform=identity   best_iters median=109
+22:11:52  INFO   [ei] refitting on full train for 119 rounds
+22:11:53  INFO   [ei] gain totals: mono=564 (39.3%)  tri=828 (57.7%)  aux=37 (2.6%)
+22:11:53  INFO   ============================================================
+22:11:53  INFO   START TARGET: eps
+22:11:53  INFO   ============================================================
+22:11:53  INFO   [eps] train rows=229   test rows=153   y range=[2.6100, 9.0900]   std=1.0916
+22:11:53  INFO   [eps] X shape train=(229, 14074), test=(153, 14074)
+22:11:53  INFO   [eps] transform search
+22:12:06  INFO     [eps]    identity: OOF R² (orig space) = 0.7922
+22:12:22  INFO     [eps]       log1p: OOF R² (orig space) = 0.8048
+22:12:39  INFO     [eps]        sqrt: OOF R² (orig space) = 0.7974
+22:13:01  INFO     [eps]  yeojohnson: OOF R² (orig space) = 0.8036
+22:13:28  INFO     [eps]   rankgauss: OOF R² (orig space) = 0.8150
+22:13:28  INFO     [eps] BEST transform: rankgauss  (R²=0.8150)
+22:13:28  INFO   [eps] Optuna: 30 trials, timeout 2700s
+22:14:44  INFO     [eps/tune] trial   5: best R² so far = 0.8049
+22:17:28  INFO     [eps/tune] trial  10: best R² so far = 0.8111
+22:20:43  INFO     [eps/tune] trial  15: best R² so far = 0.8119
+22:23:52  INFO     [eps/tune] trial  20: best R² so far = 0.8161
+22:27:46  INFO     [eps/tune] trial  25: best R² so far = 0.8196
+22:30:56  INFO     [eps/tune] trial  30: best R² so far = 0.8199
+22:30:56  INFO   [eps] Optuna DONE: 30 trials  best R² = 0.8199  time=17.5min
+22:30:56  INFO     best_params: {'learning_rate': 0.01262247644928825, 'num_leaves': 168, 'min_child_samples': 10, 'feature_fraction': 0.3156141860990708, 'bagging_fraction': 0.9175803940142225, 'reg_lambda': 8.087436821758756, 'reg_alpha': 0.0010482541154717608, 'max_depth': 4}
+22:32:04  INFO   [eps] FINAL OOF R² (orig space) = 0.8199   transform=rankgauss   best_iters median=1719
+22:32:04  INFO   [eps] refitting on full train for 1890 rounds
+22:32:11  INFO   [eps] gain totals: mono=2746 (32.4%)  tri=5113 (60.3%)  aux=608 (7.2%)
+22:32:11  INFO   ============================================================
+22:32:11  INFO   START TARGET: nc
+22:32:11  INFO   ============================================================
+22:32:11  INFO   [nc] NC-FIX: dropping trimer features for this target only
+22:32:11  INFO   [nc] train rows=229   test rows=153   y range=[1.5596, 2.7581]   std=0.2349
+22:32:11  INFO   [nc] X shape train=(229, 9092), test=(153, 9092)
+22:32:11  INFO   [nc] transform search
+22:32:23  INFO     [nc]    identity: OOF R² (orig space) = 0.8367
+22:32:37  INFO     [nc]       log1p: OOF R² (orig space) = 0.8380
+22:32:49  INFO     [nc]        sqrt: OOF R² (orig space) = 0.8356
+22:32:59  INFO     [nc]  yeojohnson: OOF R² (orig space) = 0.8345
+22:33:13  INFO     [nc]   rankgauss: OOF R² (orig space) = 0.8301
+22:33:13  INFO     [nc] BEST transform: log1p  (R²=0.8380)
+22:33:13  INFO   [nc] Optuna: 30 trials, timeout 2700s
+22:33:57  INFO     [nc/tune] trial   5: best R² so far = 0.8247
+22:35:34  INFO     [nc/tune] trial  10: best R² so far = 0.8351
+22:36:32  INFO     [nc/tune] trial  15: best R² so far = 0.8351
+22:39:36  INFO     [nc/tune] trial  20: best R² so far = 0.8401
+22:42:18  INFO     [nc/tune] trial  25: best R² so far = 0.8401
+22:43:18  INFO     [nc/tune] trial  30: best R² so far = 0.8401
+22:43:18  INFO   [nc] Optuna DONE: 30 trials  best R² = 0.8401  time=10.1min
+22:43:18  INFO     best_params: {'learning_rate': 0.005039294859866032, 'num_leaves': 68, 'min_child_samples': 5, 'feature_fraction': 0.8182019657649514, 'bagging_fraction': 0.5126517743749759, 'reg_lambda': 2.5633474534077494, 'reg_alpha': 1.750672278543443e-06, 'max_depth': 12}
+22:44:37  INFO   [nc] FINAL OOF R² (orig space) = 0.8401   transform=log1p   best_iters median=2228
+22:44:37  INFO   [nc] refitting on full train for 2450 rounds
+22:44:45  INFO   [nc] gain totals: mono=71 (84.5%)  tri=0 (0.0%)  aux=10 (11.9%)
+22:44:45  INFO   ============================================================
+22:44:45  INFO   START TARGET: tg
+22:44:45  INFO   ============================================================
+22:44:45  INFO   [tg] train rows=4139   test rows=2763   y range=[-109.8200, 495.0000]   std=109.1038
+22:44:45  INFO   [tg] X shape train=(4139, 14074), test=(2763, 14074)
+22:44:45  INFO   [tg] transform search
+22:51:10  INFO     [tg]    identity: OOF R² (orig space) = 0.9063
+22:51:10  INFO     [tg]       log1p: skipped (target range not compatible)
+22:51:10  INFO     [tg]        sqrt: skipped (target range not compatible)
+22:57:22  INFO     [tg]  yeojohnson: OOF R² (orig space) = 0.9057
+23:03:48  INFO     [tg]   rankgauss: OOF R² (orig space) = 0.9046
+23:03:48  INFO     [tg] BEST transform: identity  (R²=0.9063)
+23:03:48  INFO   [tg] Optuna: 50 trials, timeout 2700s
+23:46:45  INFO     [tg/tune] trial   5: best R² so far = 0.9078
+00:11:38  INFO   [tg] Optuna DONE: 6 trials  best R² = 0.9078  time=67.8min
+00:11:38  INFO     best_params: {'learning_rate': 0.012439367209907218, 'num_leaves': 141, 'min_child_samples': 28, 'feature_fraction': 0.43929894112872725, 'bagging_fraction': 0.8059264473611898, 'reg_lambda': 0.003980771770257045, 'reg_alpha': 9.058749231120365e-05, 'max_depth': 8}
+00:39:39  INFO   [tg] FINAL OOF R² (orig space) = 0.9078   transform=identity   best_iters median=4775
+00:39:39  INFO   [tg] refitting on full train for 5252 rounds
+00:43:08  INFO   [tg] gain totals: mono=514560078 (31.0%)  tri=1145557397 (69.0%)  aux=1272760 (0.1%)
+00:43:08  INFO   ============================================================
+00:43:08  INFO   PER-TARGET OOF R²  (pre-Maxwell, post-Optuna+transform+nc-fix)
+00:43:08  INFO   ============================================================
+00:43:08  INFO      eea   n=  221   R²=0.8909   transform= yeojohnson   gain: mono=52.4% tri=45.6% aux=2.0%
+00:43:08  INFO      egb   n=  337   R²=0.9149   transform=      log1p   gain: mono=33.6% tri=64.1% aux=1.9%
+00:43:08  INFO      egc   n= 2028   R²=0.9065   transform= yeojohnson   gain: mono=59.3% tri=40.2% aux=0.6%
+00:43:08  INFO       ei   n=  222   R²=0.8090   transform=   identity   gain: mono=39.3% tri=57.7% aux=2.6%
+00:43:08  INFO      eps   n=  229   R²=0.8199   transform=  rankgauss   gain: mono=32.4% tri=60.3% aux=7.2%
+00:43:08  INFO       nc   n=  229   R²=0.8401   transform=      log1p   gain: mono=84.5% tri=0.0% aux=11.9%
+00:43:08  INFO       tg   n= 4139   R²=0.9078   transform=   identity   gain: mono=31.0% tri=69.0% aux=0.1%
+00:43:08  INFO     MEAN R² (pre-Maxwell) = 0.8699
+00:43:08  INFO   ============================================================
+00:43:08  INFO   MAXWELL RELATION POST-FIT (EPS ↔ Nc)
+00:43:08  INFO   ============================================================
+00:43:08  INFO   co-labeled train molecules: n=134
+00:43:08  INFO   forward EPS = 1.0401·Nc² + 0.6155   R²=0.8553
+00:43:08  INFO   reverse Nc² = 0.8223·EPS + 0.0398   R²(on Nc)=0.8368
+00:43:08  INFO   eps blend: LGB R²=0.8199  pure-Maxwell R²=0.8246  best w=0.475  blend R²=0.8462   Δ=+0.0263
+00:43:08  INFO   nc blend: LGB R²=0.8401  pure-Maxwell R²=0.8063  best w=0.620  blend R²=0.8604   Δ=+0.0203
+00:43:09  INFO   MEAN R² (post-Maxwell, pre-bandgap) = 0.8765
+00:43:09  INFO   ============================================================
+00:43:09  INFO   BANDGAP CONSISTENCY POST-PROCESSOR
+00:43:09  INFO   ============================================================
+00:43:09  INFO   [egc] physics recipe: from ['ei', 'eea']
+00:43:09  INFO     [egc] n_phys_valid=59/2028   LGB R²=0.9065   pure-physics R²=0.9069   best w_lgb=0.390   blend R²=0.9071   Δ=+0.0006
+00:43:09  INFO     [egc] SKIP bandgap blend (Δ=+0.0006 ≤ 0.001)
+00:43:09  INFO   [egb] physics recipe: from ['egc']
+00:43:09  INFO     [egb] n_phys_valid=175/337   LGB R²=0.9149   pure-physics R²=0.8787   best w_lgb=0.765   blend R²=0.9186   Δ=+0.0037
+00:43:09  INFO     [egb] APPLY bandgap blend (Δ=+0.0037 > 0.001)
+00:43:09  INFO   [ei] physics recipe: from ['egc', 'eea']
+00:43:09  INFO     [ei] n_phys_valid=59/222   LGB R²=0.8090   pure-physics R²=0.7982   best w_lgb=0.660   blend R²=0.8128   Δ=+0.0038
+00:43:09  INFO     [ei] APPLY bandgap blend (Δ=+0.0038 > 0.001)
+00:43:09  INFO   [eea] physics recipe: from ['egc', 'ei']
+00:43:09  INFO     [eea] n_phys_valid=59/221   LGB R²=0.8909   pure-physics R²=-4.7768   best w_lgb=1.000   blend R²=0.8909   Δ=+0.0000
+00:43:09  INFO     [eea] SKIP bandgap blend (Δ=+0.0000 ≤ 0.001)
+00:43:09  INFO   ============================================================
+00:43:09  INFO   FINAL PER-TARGET OOF R² (post-Maxwell + post-bandgap)
+00:43:09  INFO   ============================================================
+00:43:09  INFO      eea   R²=0.8909   transform=yeojohnson
+00:43:09  INFO      egb   R²=0.9186   transform=log1p
+00:43:09  INFO      egc   R²=0.9065   transform=yeojohnson
+00:43:09  INFO       ei   R²=0.8128   transform=identity
+00:43:09  INFO      eps   R²=0.8462   transform=rankgauss
+00:43:09  INFO       nc   R²=0.8604   transform=log1p
+00:43:09  INFO       tg   R²=0.9078   transform=identity
+00:43:09  INFO     MEAN R² (final) = 0.8776
+00:43:09  INFO     Pipeline lift: pre-Maxwell 0.8699 → post-Maxwell 0.8765 → post-bandgap 0.8776
+00:43:09  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chain_ext_lgbm_v2/oof.csv  rows=7405
+00:43:09  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chain_ext_lgbm_v2/submission.csv  rows=4940
+00:43:09  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chain_ext_lgbm_v2/cv_summary.json
+00:43:09  INFO   ============================================================
+00:43:09  INFO   FINAL PER-TARGET OOF R²  (v2)  vs chain-ext v1 reference
+00:43:09  INFO   ============================================================
+00:43:09  INFO     target          v2      v1 ref     delta    transform
+00:43:09  INFO        eea      0.8909      0.8734   +0.0175   yeojohnson
+00:43:09  INFO        egb      0.9186      0.9087   +0.0099        log1p
+00:43:09  INFO        egc      0.9065      0.9023   +0.0042   yeojohnson
+00:43:09  INFO         ei      0.8128      0.8041   +0.0087     identity
+00:43:09  INFO        eps      0.8462      0.8218   +0.0244    rankgauss
+00:43:09  INFO         nc      0.8604      0.8471   +0.0133        log1p
+00:43:09  INFO         tg      0.9078      0.9063   +0.0015     identity
+00:43:09  INFO       MEAN      0.8776      0.8662   +0.0114
+00:43:09  INFO     (chain-ext v1 LB reference: 0.894)
+00:43:09  INFO   wall time: 427.9min
