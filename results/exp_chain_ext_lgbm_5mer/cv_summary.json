@@ -1,0 +1,341 @@
+{
+  "exp_name": "exp_chain_ext_lgbm_5mer",
+  "mean_r2": 0.8604068186003786,
+  "mean_r2_lgb_only_pre_maxwell": 0.8521375196465418,
+  "per_target": {
+    "eea": {
+      "n_train": 221,
+      "n_test": 147,
+      "oof_r2": 0.8774925411830716,
+      "fold_r2s": [
+        0.8459084811549569,
+        0.9191369008009648,
+        0.8966365698199091,
+        0.8833288730272818,
+        0.811048603160018
+      ],
+      "best_iters": [
+        1093,
+        3995,
+        337,
+        129,
+        3989
+      ],
+      "refit_iters": 1202,
+      "family_gains": {
+        "desc_mono": 1048,
+        "morgan2c_mono": 157,
+        "morgan3c_mono": 3,
+        "maccs_mono": 29,
+        "atompair_c_mono": 696,
+        "toptorsion_c_mono": 70,
+        "avalon_mono": 215,
+        "desc_tri": 1242,
+        "morgan2c_tri": 32,
+        "maccs_tri": 10,
+        "atompair_c_tri": 311,
+        "avalon_tri": 139
+      },
+      "mono_gain_share": 55.29793069060085,
+      "tri_gain_share": 43.23111443530291,
+      "aux_gain_share": 1.2964348042882075
+    },
+    "egb": {
+      "n_train": 337,
+      "n_test": 224,
+      "oof_r2": 0.9061277178254906,
+      "fold_r2s": [
+        0.934849732602572,
+        0.9388373435248325,
+        0.9254591360899626,
+        0.9095154456522208,
+        0.8027863304965019
+      ],
+      "best_iters": [
+        343,
+        1106,
+        210,
+        3822,
+        648
+      ],
+      "refit_iters": 712,
+      "family_gains": {
+        "desc_mono": 4135,
+        "morgan2c_mono": 44,
+        "morgan3c_mono": 24,
+        "maccs_mono": 146,
+        "atompair_c_mono": 661,
+        "toptorsion_c_mono": 4,
+        "avalon_mono": 132,
+        "desc_tri": 8526,
+        "morgan2c_tri": 27,
+        "maccs_tri": 18,
+        "atompair_c_tri": 4249,
+        "avalon_tri": 575
+      },
+      "mono_gain_share": 26.75887889345328,
+      "tri_gain_share": 69.65316416203005,
+      "aux_gain_share": 3.556757318912173
+    },
+    "egc": {
+      "n_train": 2028,
+      "n_test": 1352,
+      "oof_r2": 0.9004551916030649,
+      "fold_r2s": [
+        0.9103663911545746,
+        0.9122162868753834,
+        0.8796560992984418,
+        0.8883798288872505,
+        0.9117179038119825
+      ],
+      "best_iters": [
+        259,
+        203,
+        4000,
+        773,
+        3998
+      ],
+      "refit_iters": 850,
+      "family_gains": {
+        "desc_mono": 35286,
+        "morgan2c_mono": 4922,
+        "morgan3c_mono": 354,
+        "maccs_mono": 3012,
+        "atompair_c_mono": 1291,
+        "toptorsion_c_mono": 279,
+        "avalon_mono": 2257,
+        "desc_tri": 7854,
+        "morgan2c_tri": 766,
+        "maccs_tri": 734,
+        "atompair_c_tri": 10959,
+        "avalon_tri": 5562
+      },
+      "mono_gain_share": 64.40003260692353,
+      "tri_gain_share": 35.15433943807402,
+      "aux_gain_share": 0.4361176023042226
+    },
+    "ei": {
+      "n_train": 222,
+      "n_test": 148,
+      "oof_r2": 0.7898962991038827,
+      "fold_r2s": [
+        0.8107746542741051,
+        0.8411710926774083,
+        0.7966264824662482,
+        0.8101655566788712,
+        0.6436689772829655
+      ],
+      "best_iters": [
+        847,
+        343,
+        184,
+        1128,
+        246
+      ],
+      "refit_iters": 377,
+      "family_gains": {
+        "desc_mono": 873,
+        "morgan2c_mono": 5,
+        "morgan3c_mono": 4,
+        "maccs_mono": 20,
+        "atompair_c_mono": 28,
+        "toptorsion_c_mono": 3,
+        "avalon_mono": 71,
+        "desc_tri": 2126,
+        "morgan2c_tri": 5,
+        "maccs_tri": 17,
+        "atompair_c_tri": 245,
+        "avalon_tri": 142
+      },
+      "mono_gain_share": 27.742470295661786,
+      "tri_gain_share": 70.04697430229345,
+      "aux_gain_share": 2.1000276319425257
+    },
+    "eps": {
+      "n_train": 229,
+      "n_test": 153,
+      "oof_r2": 0.8083222391605362,
+      "fold_r2s": [
+        0.8494228141811253,
+        0.8315506843581535,
+        0.7300306252004342,
+        0.7597178452198571,
+        0.7421525531945166
+      ],
+      "best_iters": [
+        265,
+        133,
+        418,
+        252,
+        380
+      ],
+      "refit_iters": 291,
+      "family_gains": {
+        "desc_mono": 1106,
+        "morgan2c_mono": 18,
+        "morgan3c_mono": 22,
+        "maccs_mono": 21,
+        "atompair_c_mono": 60,
+        "toptorsion_c_mono": 6,
+        "avalon_mono": 54,
+        "desc_tri": 1456,
+        "morgan2c_tri": 11,
+        "maccs_tri": 25,
+        "atompair_c_tri": 696,
+        "avalon_tri": 119
+      },
+      "mono_gain_share": 31.490090530951797,
+      "tri_gain_share": 56.44727183753364,
+      "aux_gain_share": 11.989234157083436
+    },
+    "nc": {
+      "n_train": 229,
+      "n_test": 153,
+      "oof_r2": 0.8359387050859133,
+      "fold_r2s": [
+        0.864032261742545,
+        0.7606225051751905,
+        0.768573620475109,
+        0.8535867886552201,
+        0.8144699831008496
+      ],
+      "best_iters": [
+        313,
+        642,
+        82,
+        975,
+        385
+      ],
+      "refit_iters": 423,
+      "family_gains": {
+        "desc_mono": 25,
+        "morgan2c_mono": 0,
+        "morgan3c_mono": 0,
+        "maccs_mono": 0,
+        "atompair_c_mono": 7,
+        "toptorsion_c_mono": 1,
+        "avalon_mono": 3,
+        "desc_tri": 45,
+        "morgan2c_tri": 0,
+        "maccs_tri": 0,
+        "atompair_c_tri": 73,
+        "avalon_tri": 11
+      },
+      "mono_gain_share": 19.25133689839572,
+      "tri_gain_share": 68.98395721925134,
+      "aux_gain_share": 9.090909090909092
+    },
+    "tg": {
+      "n_train": 4139,
+      "n_test": 2763,
+      "oof_r2": 0.9046150362406913,
+      "fold_r2s": [
+        0.9197910557237883,
+        0.9040040071029097,
+        0.9009092451904903,
+        0.9074444721174681,
+        0.8905897135054167
+      ],
+      "best_iters": [
+        1084,
+        1810,
+        4000,
+        958,
+        1338
+      ],
+      "refit_iters": 1471,
+      "family_gains": {
+        "desc_mono": 73791194,
+        "morgan2c_mono": 32667966,
+        "morgan3c_mono": 16563324,
+        "maccs_mono": 14357520,
+        "atompair_c_mono": 20513214,
+        "toptorsion_c_mono": 2254701,
+        "avalon_mono": 31618539,
+        "desc_tri": 52029908,
+        "morgan2c_tri": 11911341,
+        "maccs_tri": 6534100,
+        "atompair_c_tri": 424631850,
+        "avalon_tri": 37558697
+      },
+      "mono_gain_share": 26.450218860397126,
+      "tri_gain_share": 73.47024957132771,
+      "aux_gain_share": 0.07953087862851461
+    }
+  },
+  "chain_extension": {
+    "n_units": 5,
+    "n_extended": 8990,
+    "n_total_smiles": 8990,
+    "pct_extended": 100.0
+  },
+  "maxwell": {
+    "n_co_labeled": 134,
+    "forward_fit": {
+      "a": 1.0401055525894538,
+      "b": 0.6154939128711197,
+      "r2": 0.8552517478012409
+    },
+    "reverse_fit": {
+      "a": 0.8222739948575409,
+      "b": 0.039755475649065904,
+      "r2_on_nc": 0.8368023881341389
+    },
+    "eps_blend": {
+      "baseline_r2": 0.7785301573792986,
+      "best_w": 0.435,
+      "best_r2": 0.8083222391605362
+    },
+    "nc_blend": {
+      "baseline_r2": 0.8078456941902927,
+      "best_w": 0.5700000000000001,
+      "best_r2": 0.8359387050859133
+    }
+  },
+  "config": {
+    "n_splits": 5,
+    "seed": 42,
+    "chain_n_units": 5,
+    "morgan2_nbits": 2048,
+    "morgan3_nbits": 2048,
+    "atompair_nbits": 2048,
+    "toptorsion_nbits": 2048,
+    "avalon_nbits": 512,
+    "n_estimators": 4000,
+    "early_stop": 200,
+    "refit_multiplier": 1.1,
+    "lgb_params": {
+      "objective": "regression",
+      "metric": "rmse",
+      "learning_rate": 0.03,
+      "num_leaves": 63,
+      "min_child_samples": 10,
+      "feature_fraction": 0.5,
+      "bagging_fraction": 0.85,
+      "bagging_freq": 1,
+      "reg_lambda": 1.0,
+      "verbosity": -1,
+      "n_jobs": -1,
+      "seed": 42
+    },
+    "smiles_families": {
+      "desc_mono": 207,
+      "morgan2c_mono": 2048,
+      "morgan3c_mono": 2048,
+      "maccs_mono": 167,
+      "atompair_c_mono": 2048,
+      "toptorsion_c_mono": 2048,
+      "avalon_mono": 512,
+      "desc_tri": 207,
+      "morgan2c_tri": 2048,
+      "maccs_tri": 167,
+      "atompair_c_tri": 2048,
+      "avalon_tri": 512
+    },
+    "n_smiles_features": 14060,
+    "n_aux_features": 14,
+    "n_features_total": 14074,
+    "cv_mode": "aux-augmented"
+  },
+  "elapsed_seconds": 4603.3
+}

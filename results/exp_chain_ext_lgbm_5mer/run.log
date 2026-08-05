@@ -1,0 +1,150 @@
+12:12:02  INFO   logging to /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chain_ext_lgbm_5mer/run.log
+12:12:02  INFO   === exp_chain_ext_lgbm_5mer ===
+12:12:02  INFO   CONFIG: n_splits=5 seed=42 chain_n_units=5 morgan2=2048 morgan3=2048 atompair=2048 toptorsion=2048 avalon=512 early_stop=200
+12:12:02  INFO   CV mode: aux-augmented (aux lookup from full train, target slot masked)
+12:12:02  INFO   Post-fit: Maxwell EPS↔Nc physics prior blend
+12:12:02  INFO   LGB_PARAMS = {'objective': 'regression', 'metric': 'rmse', 'learning_rate': 0.03, 'num_leaves': 63, 'min_child_samples': 10, 'feature_fraction': 0.5, 'bagging_fraction': 0.85, 'bagging_freq': 1, 'reg_lambda': 1.0, 'verbosity': -1, 'n_jobs': -1, 'seed': 42}
+12:12:02  INFO   loading train.csv / test.csv
+12:12:02  INFO   train raw: (7409, 3)   test raw: (4940, 3)
+12:12:02  INFO   canonicalizing 10605 unique raw SMILES
+12:12:06  INFO   collapsing 4 duplicate (canon, target_type) rows in train by mean
+12:12:06  INFO   train after dedup: (7405, 4)
+12:12:06  INFO   per-target train counts: {'tg': 4139, 'egc': 2028, 'egb': 337, 'eps': 229, 'nc': 229, 'ei': 222, 'eea': 221}
+12:12:06  INFO   per-target test  counts: {'tg': 2763, 'egc': 1352, 'egb': 224, 'eps': 153, 'nc': 153, 'ei': 148, 'eea': 147}
+12:12:06  INFO   unique canonical SMILES: 8990
+12:12:06  INFO   generating 5-mer polymer SMILES...
+12:12:28  INFO   chain extension: 8990/8990 SMILES extended (100.0%; rest kept as monomer)  time=22.5s
+12:12:28  INFO   MONOMER features
+12:14:36  INFO     desc_mono: (8990, 207)  dropped=10  time=127.9s
+12:14:39  INFO     morgan2c_mono: (8990, 2048)  time=2.7s
+12:14:42  INFO     morgan3c_mono: (8990, 2048)  time=2.9s
+12:15:11  INFO     maccs_mono: (8990, 167)  time=29.6s
+12:15:23  INFO     atompair_c_mono: (8990, 2048)  time=11.7s
+12:15:29  INFO     toptorsion_c_mono: (8990, 2048)  time=6.6s
+12:16:15  INFO     avalon_mono: (8990, 512)  time=45.2s
+12:16:15  INFO   TRIMER features (from 5-mer SMILES)
+12:54:24  INFO     desc_tri: (8990, 207)  dropped=10  time=2289.4s
+12:54:39  INFO     morgan2c_tri: (8990, 2048)  time=14.7s
+12:55:41  INFO     maccs_tri: (8990, 167)  time=62.4s
+12:57:54  INFO     atompair_c_tri: (8990, 2048)  time=133.0s
+13:04:49  INFO     avalon_tri: (8990, 512)  time=414.8s
+13:04:49  INFO   FEATURE MATRIX TOTAL: (8990, 14060)  size≈505.6MB
+13:04:50  INFO   cached features to feature_cache.pkl
+13:04:50  INFO   feature families: desc_mono=207, morgan2c_mono=2048, morgan3c_mono=2048, maccs_mono=167, atompair_c_mono=2048, toptorsion_c_mono=2048, avalon_mono=512, desc_tri=207, morgan2c_tri=2048, maccs_tri=167, atompair_c_tri=2048, avalon_tri=512
+13:04:50  INFO   total SMILES features: 14060   (8990/8990 SMILES got chain-extended)
+13:04:50  INFO   building aux lookup over 5920 unique canonical SMILES in train
+13:04:51  INFO   aux lookup built.  aux features per row: 14
+13:04:51  INFO   [eea] train rows=221   test rows=147   y range=[0.3936, 5.1438]   std=1.1047
+13:04:51  INFO   [eea] X shape train=(221, 14074), test=(147, 14074)
+13:04:57  INFO   [eea] fold 0: best_iter=1093   R²=0.8459   n_val=45
+13:05:17  INFO   [eea] fold 1: best_iter=3995   R²=0.9191   n_val=44
+13:05:20  INFO   [eea] fold 2: best_iter= 337   R²=0.8966   n_val=44
+13:05:22  INFO   [eea] fold 3: best_iter= 129   R²=0.8833   n_val=44
+13:05:41  INFO   [eea] fold 4: best_iter=3989   R²=0.8110   n_val=44
+13:05:41  INFO   [eea] OOF R² (LGB only, pre-Maxwell) = 0.8775   (fold mean 0.8712)
+13:05:41  INFO   [eea] refitting on full train for 1202 rounds
+13:05:49  INFO   [eea] gain totals: mono=2218 (55.3%)  tri=1734 (43.2%)  aux=52 (1.3%)
+13:05:49  INFO   [eea] top-5 families by gain: desc_tri=31.0%  desc_mono=26.1%  atompair_c_mono=17.4%  atompair_c_tri=7.8%  avalon_mono=5.4%
+13:05:49  INFO   [egb] train rows=337   test rows=224   y range=[0.5068, 10.1137]   std=1.9757
+13:05:49  INFO   [egb] X shape train=(337, 14074), test=(224, 14074)
+13:05:53  INFO   [egb] fold 0: best_iter= 343   R²=0.9348   n_val=68
+13:06:04  INFO   [egb] fold 1: best_iter=1106   R²=0.9388   n_val=68
+13:06:07  INFO   [egb] fold 2: best_iter= 210   R²=0.9255   n_val=67
+13:06:40  INFO   [egb] fold 3: best_iter=3822   R²=0.9095   n_val=67
+13:06:46  INFO   [egb] fold 4: best_iter= 648   R²=0.8028   n_val=67
+13:06:46  INFO   [egb] OOF R² (LGB only, pre-Maxwell) = 0.9061   (fold mean 0.9023)
+13:06:46  INFO   [egb] refitting on full train for 712 rounds
+13:06:54  INFO   [egb] gain totals: mono=5146 (26.8%)  tri=13395 (69.7%)  aux=684 (3.6%)
+13:06:54  INFO   [egb] top-5 families by gain: desc_tri=44.3%  atompair_c_tri=22.1%  desc_mono=21.5%  atompair_c_mono=3.4%  avalon_tri=3.0%
+13:06:54  INFO   [egc] train rows=2028   test rows=1352   y range=[0.0205, 9.8627]   std=1.5678
+13:06:54  INFO   [egc] X shape train=(2028, 14074), test=(1352, 14074)
+13:07:13  INFO   [egc] fold 0: best_iter= 259   R²=0.9104   n_val=406
+13:07:31  INFO   [egc] fold 1: best_iter= 203   R²=0.9122   n_val=406
+13:10:31  INFO   [egc] fold 2: best_iter=4000   R²=0.8797   n_val=406
+13:11:14  INFO   [egc] fold 3: best_iter= 773   R²=0.8884   n_val=405
+13:14:18  INFO   [egc] fold 4: best_iter=3998   R²=0.9117   n_val=405
+13:14:18  INFO   [egc] OOF R² (LGB only, pre-Maxwell) = 0.9005   (fold mean 0.9005)
+13:14:18  INFO   [egc] refitting on full train for 850 rounds
+13:14:59  INFO   [egc] gain totals: mono=47401 (64.4%)  tri=25875 (35.2%)  aux=321 (0.4%)
+13:14:59  INFO   [egc] top-5 families by gain: desc_mono=47.9%  atompair_c_tri=14.9%  desc_tri=10.7%  avalon_tri=7.6%  morgan2c_mono=6.7%
+13:14:59  INFO   [ei] train rows=222   test rows=148   y range=[4.0261, 9.8385]   std=1.0447
+13:14:59  INFO   [ei] X shape train=(222, 14074), test=(148, 14074)
+13:15:04  INFO   [ei] fold 0: best_iter= 847   R²=0.8108   n_val=45
+13:15:07  INFO   [ei] fold 1: best_iter= 343   R²=0.8412   n_val=45
+13:15:09  INFO   [ei] fold 2: best_iter= 184   R²=0.7966   n_val=44
+13:15:16  INFO   [ei] fold 3: best_iter=1128   R²=0.8102   n_val=44
+13:15:18  INFO   [ei] fold 4: best_iter= 246   R²=0.6437   n_val=44
+13:15:18  INFO   [ei] OOF R² (LGB only, pre-Maxwell) = 0.7899   (fold mean 0.7805)
+13:15:18  INFO   [ei] refitting on full train for 377 rounds
+13:15:21  INFO   [ei] gain totals: mono=1004 (27.7%)  tri=2535 (70.0%)  aux=76 (2.1%)
+13:15:21  INFO   [ei] top-5 families by gain: desc_tri=58.7%  desc_mono=24.1%  atompair_c_tri=6.8%  avalon_tri=3.9%  avalon_mono=2.0%
+13:15:21  INFO   [eps] train rows=229   test rows=153   y range=[2.6100, 9.0900]   std=1.0916
+13:15:21  INFO   [eps] X shape train=(229, 14074), test=(153, 14074)
+13:15:23  INFO   [eps] fold 0: best_iter= 265   R²=0.8494   n_val=46
+13:15:25  INFO   [eps] fold 1: best_iter= 133   R²=0.8316   n_val=46
+13:15:28  INFO   [eps] fold 2: best_iter= 418   R²=0.7300   n_val=46
+13:15:31  INFO   [eps] fold 3: best_iter= 252   R²=0.7597   n_val=46
+13:15:34  INFO   [eps] fold 4: best_iter= 380   R²=0.7422   n_val=45
+13:15:34  INFO   [eps] OOF R² (LGB only, pre-Maxwell) = 0.7785   (fold mean 0.7826)
+13:15:34  INFO   [eps] refitting on full train for 291 rounds
+13:15:36  INFO   [eps] gain totals: mono=1287 (31.5%)  tri=2307 (56.4%)  aux=490 (12.0%)
+13:15:36  INFO   [eps] top-5 families by gain: desc_tri=35.6%  desc_mono=27.1%  atompair_c_tri=17.0%  avalon_tri=2.9%  atompair_c_mono=1.5%
+13:15:36  INFO   [nc] train rows=229   test rows=153   y range=[1.5596, 2.7581]   std=0.2349
+13:15:36  INFO   [nc] X shape train=(229, 14074), test=(153, 14074)
+13:15:39  INFO   [nc] fold 0: best_iter= 313   R²=0.8640   n_val=46
+13:15:43  INFO   [nc] fold 1: best_iter= 642   R²=0.7606   n_val=46
+13:15:45  INFO   [nc] fold 2: best_iter=  82   R²=0.7686   n_val=46
+13:15:51  INFO   [nc] fold 3: best_iter= 975   R²=0.8536   n_val=46
+13:15:54  INFO   [nc] fold 4: best_iter= 385   R²=0.8145   n_val=45
+13:15:54  INFO   [nc] OOF R² (LGB only, pre-Maxwell) = 0.8078   (fold mean 0.8123)
+13:15:54  INFO   [nc] refitting on full train for 423 rounds
+13:15:57  INFO   [nc] gain totals: mono=36 (19.3%)  tri=129 (69.0%)  aux=17 (9.1%)
+13:15:57  INFO   [nc] top-5 families by gain: atompair_c_tri=39.0%  desc_tri=24.1%  desc_mono=13.4%  avalon_tri=5.9%  atompair_c_mono=3.7%
+13:15:58  INFO   [tg] train rows=4139   test rows=2763   y range=[-109.8200, 495.0000]   std=109.1038
+13:15:58  INFO   [tg] X shape train=(4139, 14074), test=(2763, 14074)
+13:17:25  INFO   [tg] fold 0: best_iter=1084   R²=0.9198   n_val=828
+13:19:43  INFO   [tg] fold 1: best_iter=1810   R²=0.9040   n_val=828
+13:24:01  INFO   [tg] fold 2: best_iter=4000   R²=0.9009   n_val=828
+13:25:19  INFO   [tg] fold 3: best_iter= 958   R²=0.9074   n_val=828
+13:27:01  INFO   [tg] fold 4: best_iter=1338   R²=0.8906   n_val=827
+13:27:01  INFO   [tg] OOF R² (LGB only, pre-Maxwell) = 0.9046   (fold mean 0.9045)
+13:27:01  INFO   [tg] refitting on full train for 1471 rounds
+13:28:44  INFO   [tg] gain totals: mono=191766458 (26.5%)  tri=532665896 (73.5%)  aux=576606 (0.1%)
+13:28:44  INFO   [tg] top-5 families by gain: atompair_c_tri=58.6%  desc_mono=10.2%  desc_tri=7.2%  avalon_tri=5.2%  morgan2c_mono=4.5%
+13:28:44  INFO   ============================================================
+13:28:44  INFO   LGB-only per-target OOF R²  (before Maxwell)
+13:28:44  INFO   ============================================================
+13:28:44  INFO      eea   n=  221   R²=0.8775   gain: mono=55.3% tri=43.2% aux=1.3%
+13:28:44  INFO      egb   n=  337   R²=0.9061   gain: mono=26.8% tri=69.7% aux=3.6%
+13:28:44  INFO      egc   n= 2028   R²=0.9005   gain: mono=64.4% tri=35.2% aux=0.4%
+13:28:44  INFO       ei   n=  222   R²=0.7899   gain: mono=27.7% tri=70.0% aux=2.1%
+13:28:44  INFO      eps   n=  229   R²=0.7785   gain: mono=31.5% tri=56.4% aux=12.0%
+13:28:44  INFO       nc   n=  229   R²=0.8078   gain: mono=19.3% tri=69.0% aux=9.1%
+13:28:44  INFO       tg   n= 4139   R²=0.9046   gain: mono=26.5% tri=73.5% aux=0.1%
+13:28:44  INFO     MEAN R² (LGB only) = 0.8521
+13:28:44  INFO   ============================================================
+13:28:44  INFO   MAXWELL RELATION POST-FIT (EPS ↔ Nc)
+13:28:44  INFO   ============================================================
+13:28:44  INFO   co-labeled train molecules: n=134
+13:28:44  INFO   forward EPS = 1.0401·Nc² + 0.6155   R²=0.8553
+13:28:44  INFO   reverse Nc² = 0.8223·EPS + 0.0398   R²(on Nc)=0.8368
+13:28:45  INFO   eps blend: LGB R²=0.7785  pure-Maxwell R²=0.7904  best w=0.435  blend R²=0.8083   Δ=+0.0298
+13:28:45  INFO   nc blend: LGB R²=0.8078  pure-Maxwell R²=0.7860  best w=0.570  blend R²=0.8359   Δ=+0.0281
+13:28:45  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chain_ext_lgbm_5mer/oof.csv  rows=7405
+13:28:45  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chain_ext_lgbm_5mer/submission.csv  rows=4940
+13:28:45  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chain_ext_lgbm_5mer/cv_summary.json
+13:28:45  INFO   ============================================================
+13:28:45  INFO   FINAL PER-TARGET OOF R²  (5-mer + Maxwell)  vs chain-ext v1 (3-mer) reference
+13:28:45  INFO   ============================================================
+13:28:45  INFO     target       5-mer    3-mer v1     delta   chain gain
+13:28:45  INFO        eea      0.8775      0.8734   +0.0041        43.2%
+13:28:45  INFO        egb      0.9061      0.9087   -0.0026        69.7%
+13:28:45  INFO        egc      0.9005      0.9023   -0.0018        35.2%
+13:28:45  INFO         ei      0.7899      0.8041   -0.0142        70.0%
+13:28:45  INFO        eps      0.8083      0.8218   -0.0135        56.4%
+13:28:45  INFO         nc      0.8359      0.8471   -0.0112        69.0%
+13:28:45  INFO         tg      0.9046      0.9063   -0.0017        73.5%
+13:28:45  INFO       MEAN      0.8604      0.8662   -0.0058
+13:28:45  INFO     (chain-ext v1 3-mer LB reference: 0.894)
+13:28:45  INFO     Note: 'chain gain %' column is the pentamer feature gain share (was named 'tri' in v1)
+13:28:45  INFO   wall time: 76.7min
