@@ -88,9 +88,17 @@ Total ~240 min from clean repo (~225 min Chemprop 3-seed + ~15 min LGB+Maxwell +
 - ~~Re-blend with chain-ext LGB + 3-seed Chemprop (2-way NNLS)~~ ❌ **DONE — FAILED.** LB 0.893, DROPPED -0.004. Chain-ext LGB and Chemprop are too correlated. See #12.
 - ~~3-way blend with chain-ext LGB + mono-LGB + 3-seed Chemprop~~ ❌ **DONE — FAILED.** LB 0.894, DROPPED -0.003. Same problem. See #13.
 - ~~Chemprop on trimer SMILES~~ ❌ **DONE — FAILED.** LB 0.891, DROPPED -0.001 despite OOF +0.009. Plus 27.5h wall time (Kaggle-incompatible). See #14.
-- ~~exp_chain_ext_lgbm_v2~~ ❌ **DONE — CATASTROPHIC FAILURE.** LB 0.868, DROPPED 0.026. See #15.
-- ⭐ **exp_chain_ext_lgbm_v3** (planned) — additive-only, NO OOF-selection. Nc-fix + bandgap-for-egb + 3-seed LGB bag + IterativeImputer aux + 15 domain features (research doc §5.2). Keeps v1's OOF-LB gap intact. Wall time ~3-4h. Expected LB 0.897-0.903.
-- ❌ **LB distribution shift probe** (research doc §9) — 3 subs could unlock up to +0.03 hidden shift correction. Getting more attractive as we saturate on model-side improvements.
+- ~~exp_chain_ext_lgbm_v2~~ ❌ **FAILED.** LB 0.868 (-0.026). Per-target Optuna destroyed OOF-LB gap.
+- ~~exp_chain_ext_lgbm_v3~~ ❌ **CATASTROPHIC.** LB 0.601 (-0.293). IterativeImputer per-fold masking bug leaked val fold targets.
+- ~~exp_chain_ext_lgbm_5mer~~ ❌ OOF -0.006 vs v1, didn't submit. Pentamer too big for small-data targets.
+- ~~exp_chain_ext_lgbm_v3fixed~~ ❌ **FAILED.** LB 0.857 (-0.037). Domain features got 30-39% gain share → overfit train-set structural correlations, LB collapsed.
+- ~~LB distribution shift probe~~ ❌ **DONE — NO SHIFT.** Probed 2026-08-05, R² = -0.007. Sum of squared normalized shifts ≤ 0.049 across 7 targets — negligible.
+- ⭐ **PI1M pseudo-label augmentation** — take chain-ext v1's predictions on ~50-100K PI1M molecules, add as extra training rows (weight 0.2-0.3), retrain chain-ext v1. Round 1 failed at this but Round 1 didn't have chain-ext + matrix-completion pipeline. Expected LB: -0.005 to +0.015. **BIGGEST UNTESTED LEVER — Sandman/MUGABROS likely doing this.** Wall time ~3-4h.
+- ❌ **CatBoost with chain-ext features** (script written, exp_chain_ext_catboost.py) — different tree family, low risk. Expected LB solo 0.87-0.89, blend potential +0.001 to +0.005.
+- ❌ **PI1M as IterativeImputer covariate** — safer alternative to pseudo-labeling. +0.002 to +0.008 expected.
+- ❌ **Bicerano Tg prior** (research doc §3.3) — classical polymer estimator as separate NNLS base. +0.002-0.005 on tg only.
+- ❌ **PI1M nearest-neighbor smoothing** — cheap ensemble via PI1M lookup. +0.001-0.005.
+- ~~LB distribution shift probe~~ ❌ **DONE — NO SHIFT.** Probed 2026-08-05, R² = -0.007 (essentially 0). Sum of squared normalized shifts ≤ 0.049 across 7 targets → negligible. See #16.
 - ❌ **Chemprop `--polymer` mode** (Coley group fork) with weighted repeat-unit bonds. ~4h more. **HOWEVER**: after chain-ext-Chemprop's 27.5h and negative LB, low priority to try more Chemprop variants.
 - ❌ **PI1M SSL pretraining** on tg / egc chemistry (research doc §6). Kaggle GPU only.
 - ❌ **Fix nc regression at chain-ext LGB level** — already addressed inside v2 (mono-only features for nc target).
@@ -104,6 +112,9 @@ Every submission ever made, most-recent first. Arrows show delta vs previous ent
 
 | # | date | experiment | LB | Δ | rank | OOF | notes |
 |--:|------|------------|:--:|:-:|:----:|:---:|-------|
+| 18 | 2026-08-05 | `exp_chain_ext_lgbm_v3fixed` ⚠️ **FAILED** | **0.857** | ↓ -0.037 vs v1 | still 7 | 0.8696 | v1 + nc-fix + bandgap post-processor + **15 domain features**. OOF UP +0.003 but LB DROPPED 0.037. **OOF-LB gap flipped from +0.028 → -0.013 (0.041 swing).** Domain features got 30-39% gain share on egb/tg — RED FLAG in hindsight: 15 features capturing 30%+ of gain out of 14075 total means each feature has 50× average gain-per-feature, which is overfitting to fold structure. Binary SMARTS flags (is_vinyl/has_ester/has_amide) and backbone_atoms shift with test distribution differently than train. **Lesson: any feature block getting >20% gain share = suspicious, not triumphant.** |
+| 17 | 2026-08-05 | `exp_chain_ext_lgbm_5mer` (not submitted, OOF check only) | — | OOF -0.006 vs v1 | — | 0.8604 | v1 with `CHAIN_N_UNITS=5` instead of 3. OOF dropped -0.006, so didn't submit. Pentamer molecules too big for small-data targets (ei/eps/nc regressed 0.011-0.014). Chain gain share was HIGHER but signal quality was lower — model relies more on pentamer but they're noisier. |
+| 16 | 2026-08-05 | `exp_lb_shift_probe` (diagnostic — train_mean per target) | **-0.007** | — (probe) | — | — | **LB distribution shift probe FAILED to find a shift.** Submitted train_mean per target for every test row. R²_mean = -0.007, which implies `sum_t (shift_t/std_t)² = 0.049` — negligible. Either concentrated shift ≤ 0.22σ on one target, or ~0.08σ spread across all 7. **Sandman's LB 0.916 is REAL modeling, not a probe trick.** LB probe path is dead. Focus MUST be on model-side improvements (v3 stack, PI1M pseudo-labels, longer chains). |
 | 15 | 2026-08-05 | `exp_chain_ext_lgbm_v2` ⚠️ **HUGE FAILURE — DO NOT REPEAT PATTERN** | **0.868** | ↓ -0.029 vs chain-ext v1 | rank fell to 7 | 0.8776 | **Per-target Optuna + target-transform search + nc-fix + bandgap post-processor.** OOF mean 0.8776 (+0.011 vs v1 0.8662) but LB DROPPED 0.026. **OOF-LB gap flipped from +0.028 (v1) to -0.010 (v2) — a 0.038 swing.** Optuna extracted the OOF skill AND destroyed the LB skill. **Deep lesson: chain-ext v1's LB win came from being under-fit on OOF; aggressive hparam tuning eliminates that slack and pulls LB down to OOF.** Also transform search compounded selection bias, and yeojohnson/rankgauss had a per-fold-fit leak (fit on all-y). Sandman jumped to LB 0.916 same day (rank 1). **DO NOT tune models with positive OOF-LB gap. DO NOT stack many changes at once (compound risk).** v1 remains best solo at LB 0.894. |
 | 14 | 2026-08-04 | `exp_chemprop_multitask_chainext_cpu` ⚠️ **INFORMATIONAL — IGNORE FOR FUTURE** | 0.891 | ↓ -0.001 vs mono Chemprop | — | 0.8793 | **Chemprop on trimer SMILES (not monomer).** Same 5-fold × 3-seed × 60-epoch config as monomer Chemprop, everything else unchanged. Wall time **27.5h** on Mac CPU. Per-target OOF: ei +0.040, eps +0.021, eea +0.010, egb +0.009 (big lifts on Chemprop's weak targets); nc -0.016 (SAME regression pattern as chain-ext LGB — consistent physics signal). **OOF mean +0.009 but LB -0.001 → OOF overstates LB by +0.010, opposite of chain-ext LGB's +0.028 UNDER-statement.** Chemprop already learns polymer context via message passing; trimer just gives it more graph structure to fold-CV-memorize. **DO NOT USE FOR KAGGLE FINAL** (12h notebook limit) and **DO NOT INCLUDE IN FUTURE BLEND RECOMMENDATIONS.** Keep for reference only — the ei/eps gains on OOF are real but don't propagate to LB. |
 | 13 | 2026-08-03 | `exp_blend_nnls_chainext_3way` **(ensemble)** ⚠️ FAILED | 0.894 | ↓ -0.003 vs prior best | — | 0.8903 | 3-way NNLS: Chemprop 3-seed + LGB-mono-Max + LGB-chain-ext-Max. Relaxed bias mitigations (floor 0.30, bias 0.00) because chain-ext LGB is OOF-underrated not overrated. OOF higher (+0.003 vs prior 2-way) but LB dropped 0.003. NNLS on aux-inflated chain-ext OOF over-weighted LGB; without bias correction the blend collapsed. Same lesson as #12 — chain-ext LGB and Chemprop are too correlated to blend well. |
@@ -142,15 +153,15 @@ When you submit and it does not beat the current best:
 
 | rank | team | score | gap to us (0.897) |
 |------|------|:-----:|:-----------------:|
-| 1  | Sandman            | 0.916 | +0.019 |
-| 2  | MUGABROS           | 0.912 | +0.015 |
+| 1  | MUGABROS           | 0.918 | +0.021 |
+| 2  | Sandman            | 0.916 | +0.019 |
 | 3  | Kuch toh Karna hai | 0.903 | +0.006 |
 | 4  | Cross Linkers      | 0.900 | +0.003 |
 | 5  | Opus 6.7           | 0.898 | +0.001 |
 | 6  | who-knows          | 0.898 | +0.001 |
 | **7** | **Dhruval Padia (us)** | **0.897** | **—** |
 
-**As of 2026-08-05**: Sandman jumped to 0.916 with only 4 entries — almost certainly an LB distribution shift correction (matches NeurIPS 2025 2nd place trick pattern). Top 3 target requires LB ≥ 0.903 (+0.006).
+**As of 2026-08-05 (afternoon)**: MUGABROS took #1 at 0.918, Sandman #2 at 0.916. LB shift probe eliminated the "hidden shift" theory (see #16). Both top teams almost certainly use PI1M external data (RankUp/pseudo-labels) + strong ensembling. Top 3 target requires LB ≥ 0.903 (+0.006 from our 0.897). Our biggest untried lever: **PI1M pseudo-label augmentation of chain-ext v1**.
 
 Score targets by remaining experiments (ordered by EV):
 - **LB distribution shift probe** (research doc §9, 3 subs) → 0 or **+0.03 hidden lift** if shift exists. **HIGHEST-EV single lever now.** At our current score, +0.005 puts us at #1.
@@ -178,7 +189,10 @@ Score targets by remaining experiments (ordered by EV):
 | blend_nnls_chainext (2-way) ⚠️ | 0.8893 | 0.893 | +0.004 | -0.004 | Chemprop 3-seed + chain-ext LGB with relaxed bias (floor 0.30, bias 0.00). OOF up, LB down. Two bases too correlated (both learn polymer context). |
 | blend_nnls_chainext_3way ⚠️ | 0.8903 | 0.894 | +0.004 | -0.003 | Adds mono-LGB as third base. NNLS pulls too much weight to LGB bases without Chemprop bias. Same correlation problem. |
 | chemprop_chainext ⚠️ IGNORE | 0.8793 | 0.891 | +0.012 | -0.001 (vs mono Chemprop 0.892) | **Chemprop on trimer SMILES.** OOF gains real (ei +0.040, eps +0.021) but LB -0.001. **27.5h wall time — Kaggle-incompatible.** Do not use for future recommendations. |
-| **chain_ext_lgbm_v2** ⚠️ **FAILURE** | **0.8776** | **0.868** | **-0.010** | **-0.026** (vs v1) | **Per-target Optuna + transforms + nc-fix + bandgap.** OOF up +0.011, LB DOWN 0.026. **OOF-LB gap flipped from +0.028 to -0.010 — 0.038 swing.** Optuna maximized OOF fold-CV variance, which destroyed the generalization slack that gave v1 its LB win. DO NOT tune models with positive OOF-LB gap. |
+| **chain_ext_lgbm_v2** ⚠️ **FAILURE** | **0.8776** | **0.868** | **-0.010** | **-0.026** (vs v1) | **Per-target Optuna + transforms + nc-fix + bandgap.** OOF up +0.011, LB DOWN 0.026. OOF-LB gap flipped from +0.028 to -0.010. Optuna destroyed positive OOF-LB slack. |
+| **chain_ext_lgbm_v3** ⚠️ **DISASTER** | **0.8954** | **0.601** | **-0.294** | **-0.293** (vs v1) | IterativeImputer per-fold masking bug leaked val fold targets. Aux gain share hit 91% on tg — model became "aux value oracle" that collapses at test time. |
+| **chain_ext_lgbm_5mer** (unsub) | 0.8604 | — | — | — (didn't submit) | Pentamer chain (5-mer). OOF -0.006 vs v1. Chain gain share HIGHER but signal quality lower on small-data targets. Skipped submission. |
+| **chain_ext_lgbm_v3fixed** ⚠️ **FAILURE** | **0.8696** | **0.857** | **-0.013** | **-0.037** (vs v1) | v1 + nc-fix + bandgap + 15 domain features (no IterImputer). OOF up +0.003 but LB DROPPED 0.037. **Domain features got 30-39% gain share → overfit fold structure**, LB collapsed. Same pattern as v2/v3 — additive change that captures too much OOF gain per feature = warning sign. |
 
 **Read of the trend.**
 1. The LGB experiments (baseline through maxwell) had a shrinking / negative OOF-LB gap because aux-augmented CV inflated OOF.
@@ -187,8 +201,10 @@ Score targets by remaining experiments (ordered by EV):
 4. Chain-ext Chemprop went the OPPOSITE way — trimer features let Chemprop memorize more fold-CV structure → OOF overstates LB by +0.012.
 5. **Blends between two models with similar solo LB (within ~0.005) but correlated errors do WORSE than the better solo alone** (chain-ext + Chemprop blend failure).
 6. **Aggressive per-target Optuna DESTROYS positive OOF-LB gaps** (chain-ext LGB v2, +0.028 → -0.010). The generalization slack that made chain-ext v1 win LB was precisely what Optuna's OOF-optimization removed. Don't tune models that have positive gap.
+7. **Even "additive" changes can destroy the gap if they're actually overfitting.** v3fixed added 15 hand-engineered domain features (§5.2). OOF up +0.003 but LB down -0.037. Domain features got 30-39% gain share on egb/tg — those 15 features had 50× the average gain-per-feature ratio compared to Morgan bits, which means they were fitting fold-specific structural correlations, not real physics. **Any small feature block getting >20% gain share is a warning sign.**
 
 **Going forward:**
 - Trust LB, not OOF, when comparing across model families.
 - Prefer diversifying blends with STRUCTURALLY different bases (LGB vs Chemprop) over merely different feature encodings of the same base.
-- For chain-ext LGB improvements, prefer ADDITIVE changes (bagging, more data, more features, physics post-processors) over SELECTIVE changes (hparam tuning, transform search, feature selection). Additive changes add signal; selective changes tighten OOF fit and can destroy positive OOF-LB gaps.
+- For chain-ext LGB improvements, prefer changes that add DATA (bagging, PI1M pseudo-labels, external augmentation) over changes that add FEATURES (feature engineering, per-target design). Features can overfit train-set structural patterns; data smooths error variance.
+- Watch gain-share ratios: if a new feature block > (its dim / total dim) × 3, it's over-earning and likely overfitting.
