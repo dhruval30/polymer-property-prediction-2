@@ -1,0 +1,96 @@
+{
+  "exp_name": "exp_bandgap_koopmans_postfit",
+  "config": {
+    "chemprop_source": "/Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chemprop_multitask_cpu_3seed",
+    "blend_submission": "/Users/dhruval/Documents/polymer-property-prediction-2/results/exp_blend_nnls_3seed/submission.csv",
+    "alpha_grid": [
+      0.5,
+      0.525,
+      0.55,
+      0.5750000000000001,
+      0.6000000000000001,
+      0.6250000000000001,
+      0.6500000000000001,
+      0.6750000000000002,
+      0.7000000000000002,
+      0.7250000000000002,
+      0.7500000000000002,
+      0.7750000000000002,
+      0.8000000000000003,
+      0.8250000000000003,
+      0.8500000000000003,
+      0.8750000000000003,
+      0.9000000000000004,
+      0.9250000000000004,
+      0.9500000000000004,
+      0.9750000000000004,
+      1.0000000000000004
+    ],
+    "physics_targets": [
+      "egc",
+      "ei",
+      "eea"
+    ]
+  },
+  "physics_recipes": {
+    "egc": "Egc = Ei - Eea   (Koopmans)",
+    "ei": "Ei  = Egc + Eea  (rearrange)",
+    "eea": "Eea = Ei - Egc   (rearrange)"
+  },
+  "alpha_tuning": {
+    "egc": {
+      "target": "egc",
+      "src_a": "ei",
+      "src_b": "eea",
+      "n_labeled": 2028,
+      "n_valid": 2028,
+      "r2_baseline_alpha1": 0.9070221185684204,
+      "r2_pure_physics_alpha0": 0.8608666658401489,
+      "best_alpha": 0.9000000000000004,
+      "r2_blend": 0.9076978128669755,
+      "delta_r2": 0.000675694298555074
+    },
+    "ei": {
+      "target": "ei",
+      "src_a": "egc",
+      "src_b": "eea",
+      "n_labeled": 222,
+      "n_valid": 222,
+      "r2_baseline_alpha1": 0.7766261100769043,
+      "r2_pure_physics_alpha0": 0.7868218421936035,
+      "best_alpha": 0.5,
+      "r2_blend": 0.7959414523531742,
+      "delta_r2": 0.019315342276269853
+    },
+    "eea": {
+      "target": "eea",
+      "src_a": "ei",
+      "src_b": "egc",
+      "n_labeled": 221,
+      "n_valid": 221,
+      "r2_baseline_alpha1": 0.9082192778587341,
+      "r2_pure_physics_alpha0": 0.8980329632759094,
+      "best_alpha": 0.6000000000000001,
+      "r2_blend": 0.9159893674072672,
+      "delta_r2": 0.007770089548533088
+    }
+  },
+  "test_modification_stats": {
+    "egc": {
+      "mean_abs_diff": 0.026004728146010174,
+      "max_abs_diff": 0.2328586141083797,
+      "n_rows": 1352
+    },
+    "ei": {
+      "mean_abs_diff": 0.08959943041600045,
+      "max_abs_diff": 0.48615851203049765,
+      "n_rows": 148
+    },
+    "eea": {
+      "mean_abs_diff": 0.06825961437242944,
+      "max_abs_diff": 0.4293191985174715,
+      "n_rows": 147
+    }
+  },
+  "elapsed_seconds": 6.57
+}

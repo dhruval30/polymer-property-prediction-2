@@ -1,0 +1,32 @@
+{
+  "exp_name": "exp_bandgap_koopmans_egb",
+  "config": {
+    "input_submission": "/Users/dhruval/Documents/polymer-property-prediction-2/results/exp_bandgap_koopmans_postfit/submission.csv",
+    "input_lb_reference": 0.902,
+    "chemprop_source": "/Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chemprop_multitask_cpu_3seed",
+    "w_own_floor": 0.5,
+    "w_own_ceiling": 0.99
+  },
+  "physics_recipe": "Egb \u2248 w_own\u00b7Egb_pred + w_koop\u00b7(Ei_pred - Eea_pred) + w_egc\u00b7Egc_pred",
+  "nnls_fit": {
+    "n_labeled": 337,
+    "n_valid": 337,
+    "r2_own_alone": 0.9304585456848145,
+    "r2_phys_koop_alone": 0.8243589997291565,
+    "r2_phys_egc_alone": 0.849850594997406,
+    "w_own": 0.9124521755384117,
+    "w_koop": 0.0,
+    "w_egc": 0.08754782446158836,
+    "w_own_raw": 0.9163177959254029,
+    "w_koop_raw": 0.0,
+    "w_egc_raw": 0.08791872242659758,
+    "r2_blend": 0.9314095973968506,
+    "delta_r2": 0.0009510517120361328
+  },
+  "test_modification": {
+    "n_rows": 224,
+    "mean_abs_diff": 0.042981130428622207,
+    "max_abs_diff": 0.12247615149040847
+  },
+  "elapsed_seconds": 5.35
+}

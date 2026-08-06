@@ -1,0 +1,51 @@
+14:33:03  INFO   logging to /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_bandgap_koopmans_egb/run.log
+14:33:03  INFO   === exp_bandgap_koopmans_egb ===
+14:33:03  INFO   Input submission: /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_bandgap_koopmans_postfit/submission.csv  (LB 0.902)
+14:33:03  INFO   Chemprop source:  /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chemprop_multitask_cpu_3seed
+14:33:03  INFO   Guard rails: w_own must be in [0.5, 0.99]
+14:33:03  INFO   ============================================================
+14:33:03  INFO   LOAD CHEMPROP OOF MATRIX
+14:33:03  INFO   ============================================================
+14:33:03  INFO   loading train.csv and rebuilding wide train...
+14:33:05  INFO     n_canon=5920   y shape=(5920, 7)   NaN frac=82.1%
+14:33:05  INFO     Egb labeled train rows: 337
+14:33:05  INFO     loaded fold 0: (1184, 7)  (val n=1184)
+14:33:05  INFO     loaded fold 1: (1184, 7)  (val n=1184)
+14:33:05  INFO     loaded fold 2: (1184, 7)  (val n=1184)
+14:33:05  INFO     loaded fold 3: (1184, 7)  (val n=1184)
+14:33:05  INFO     loaded fold 4: (1184, 7)  (val n=1184)
+14:33:05  INFO     Chemprop OOF matrix: (5920, 7)   0 canons with no predictions
+14:33:05  INFO   ============================================================
+14:33:05  INFO   3-WAY NNLS FIT FOR EGB
+14:33:05  INFO   ============================================================
+14:33:05  INFO   [EGB 3-way] n_labeled=337  n_valid=337
+14:33:05  INFO   [EGB 3-way] individual predictor R²:
+14:33:05  INFO     own (Chemprop Egb): 0.9305
+14:33:05  INFO     phys Koopmans (Ei-Eea): 0.8244
+14:33:05  INFO     phys Egc-correlation:   0.8499
+14:33:05  INFO   [EGB 3-way] NNLS raw weights:
+14:33:05  INFO     w_own=0.9163  w_koop=0.0000  w_egc=0.0879  (sum=1.0042)
+14:33:05  INFO   [EGB 3-way] normalized weights (sum=1):
+14:33:05  INFO     w_own=0.9125  w_koop=0.0000  w_egc=0.0875
+14:33:05  INFO   [EGB 3-way] blend R² = 0.9314   Δ vs own (Chemprop only) = +0.0010
+14:33:05  INFO   ============================================================
+14:33:05  INFO   APPLY TO INPUT SUBMISSION (Egb rows only)
+14:33:05  INFO   ============================================================
+14:33:05  INFO   loading Chemprop refit test predictions...
+14:33:07  INFO     Chemprop test predictions: (4133, 7)   n_test_canons=4133
+14:33:07  INFO   loading input submission: /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_bandgap_koopmans_postfit/submission.csv
+14:33:07  INFO     input submission: (4940, 2)  (LB reference: 0.902)
+14:33:08  INFO   [EGB apply] modifying 224 Egb test rows
+14:33:08  INFO   [EGB apply] mean |Δ|=0.0430   max |Δ|=0.1225
+14:33:08  INFO   [EGB apply] new pred range: [0.951, 8.016]   (orig: [0.889, 8.065])
+14:33:08  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_bandgap_koopmans_egb/submission.csv   rows=4940
+14:33:08  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_bandgap_koopmans_egb/egb_summary.json
+14:33:08  INFO   ============================================================
+14:33:08  INFO   DECISION GUIDANCE
+14:33:08  INFO   ============================================================
+14:33:08  INFO   Input submission LB (reference): 0.902
+14:33:08  INFO   NNLS weights (w_own, w_koop, w_egc): (0.912, 0.000, 0.088)
+14:33:08  INFO   OOF R² on Egb: 0.9305 → 0.9314   Δ = +0.0010
+14:33:08  INFO   Expected 7-target mean R² lift: +0.0001   (one target out of seven)
+14:33:08  INFO   SUBMIT: expected LB 0.9021 (best-case up to +0.003 → 0.905)
+14:33:08  INFO   wall time: 5.3s
