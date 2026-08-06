@@ -1,0 +1,210 @@
+{
+  "exp_name": "exp_polymer_physics_prior",
+  "mean_r2_final": 0.7596474843464293,
+  "mean_r2_pre_maxwell": 0.7286555699865894,
+  "per_target": {
+    "eea": {
+      "n_train": 221,
+      "n_test": 147,
+      "oof_r2": 0.7342052374250476,
+      "fold_r2s": [
+        0.6292837412590485,
+        0.8737549373504567,
+        0.4999562851354,
+        0.8384011086496095,
+        0.7831781738211242
+      ],
+      "top5_features": [
+        "atom_S",
+        "phenyl",
+        "sp2_c_aromatic",
+        "amine_sec",
+        "amide"
+      ]
+    },
+    "egb": {
+      "n_train": 337,
+      "n_test": 224,
+      "oof_r2": 0.8133508911936314,
+      "fold_r2s": [
+        0.8076462715379684,
+        0.8665227907352715,
+        0.8114654311779645,
+        0.8058173174666744,
+        0.740163395859234
+      ],
+      "top5_features": [
+        "sp3_c_chain",
+        "backbone_sp2_frac",
+        "sp3_frac",
+        "F_C_ratio",
+        "rot_bonds"
+      ]
+    },
+    "egc": {
+      "n_train": 2028,
+      "n_test": 1352,
+      "oof_r2": 0.7616858839746176,
+      "fold_r2s": [
+        0.8107664812266546,
+        0.7795718705082808,
+        0.7103045000004284,
+        0.756207901176559,
+        0.7497136651159588
+      ],
+      "top5_features": [
+        "heavy_atoms",
+        "sp2_c_aromatic",
+        "sp3_c_chain",
+        "aromatic_frac",
+        "backbone_atoms"
+      ]
+    },
+    "ei": {
+      "n_train": 222,
+      "n_test": 148,
+      "oof_r2": 0.7430094120007955,
+      "fold_r2s": [
+        0.7303109085755588,
+        0.7956614468486402,
+        0.6084541327475684,
+        0.8240727857285897,
+        0.6517996795045033
+      ],
+      "top5_features": [
+        "halogen_frac",
+        "backbone_atoms",
+        "backbone_sp2_frac",
+        "aromatic_5_ring",
+        "rot_bonds"
+      ]
+    },
+    "eps": {
+      "n_train": 229,
+      "n_test": 153,
+      "oof_r2": 0.7598084406675277,
+      "fold_r2s": [
+        0.6098880247447726,
+        0.7868926535684801,
+        0.5922135061537257,
+        0.6117846541564893,
+        0.5637386144517316
+      ],
+      "top5_features": [
+        "aromatic_frac",
+        "atom_S",
+        "backbone_atoms",
+        "atom_N",
+        "backbone_sp2_frac"
+      ]
+    },
+    "nc": {
+      "n_train": 229,
+      "n_test": 153,
+      "oof_r2": 0.7467974285372674,
+      "fold_r2s": [
+        0.76631836817665,
+        0.6840326817332609,
+        0.5677318735412744,
+        0.4515356651812866,
+        0.6917482124097923
+      ],
+      "top5_features": [
+        "aromatic_frac",
+        "backbone_sp2_frac",
+        "backbone_aromatic_frac",
+        "atom_S",
+        "backbone_atoms"
+      ]
+    },
+    "tg": {
+      "n_train": 4139,
+      "n_test": 2763,
+      "oof_r2": 0.7586750966261178,
+      "fold_r2s": [
+        0.7748409598655793,
+        0.7440369554108375,
+        0.7593626655181,
+        0.7610657040718118,
+        0.752609313247933
+      ],
+      "top5_features": [
+        "rot_bonds",
+        "sp3_c_chain",
+        "sp2_c_aromatic",
+        "sp3_frac",
+        "heavy_atoms"
+      ]
+    }
+  },
+  "maxwell": {
+    "n_co_labeled": 134,
+    "forward_fit": {
+      "a": 1.0401055525894538,
+      "b": 0.6154939128711197,
+      "r2": 0.8552517478012409
+    },
+    "reverse_fit": {
+      "a": 0.8222739948575409,
+      "b": 0.039755475649065904,
+      "r2_on_nc": 0.8368023881341389
+    },
+    "eps_blend": {
+      "baseline_r2": 0.6350544976299429,
+      "best_w": 0.20500000000000002,
+      "best_r2": 0.7598084406675277
+    },
+    "nc_blend": {
+      "baseline_r2": 0.654607971055973,
+      "best_w": 0.4,
+      "best_r2": 0.7467974285372674
+    }
+  },
+  "config": {
+    "n_splits": 5,
+    "seed": 42,
+    "ridge_alpha": 1.0,
+    "n_features": 36,
+    "smarts_features": [
+      "sp3_c_chain",
+      "sp3_c_ring",
+      "sp2_c_aromatic",
+      "sp2_c_alkene",
+      "phenyl",
+      "biphenyl",
+      "naphthalene",
+      "aromatic_5_ring",
+      "atom_F",
+      "atom_Cl",
+      "atom_Br",
+      "atom_Si",
+      "atom_S",
+      "atom_N",
+      "atom_O",
+      "ester",
+      "amide",
+      "ether",
+      "carbonyl",
+      "sulfone",
+      "sulfoxide",
+      "nitrile",
+      "urethane",
+      "vinyl",
+      "hydroxyl",
+      "amine_prim",
+      "amine_sec"
+    ],
+    "backbone_features": [
+      "backbone_atoms",
+      "backbone_aromatic_frac",
+      "backbone_sp2_frac",
+      "heavy_atoms",
+      "rot_bonds",
+      "F_C_ratio",
+      "halogen_frac",
+      "aromatic_frac",
+      "sp3_frac"
+    ]
+  },
+  "elapsed_seconds": 13.9
+}

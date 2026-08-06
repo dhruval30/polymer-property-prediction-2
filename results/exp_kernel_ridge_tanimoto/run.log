@@ -1,0 +1,141 @@
+11:24:02  INFO   logging to /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_kernel_ridge_tanimoto/run.log
+11:24:02  INFO   === exp_kernel_ridge_tanimoto ===
+11:24:02  INFO   CONFIG: n_splits=5  seed=42  chain_n_units=3  morgan_nbits=2048  KR_alpha=0.001
+11:24:02  INFO   Feature: BINARY Morgan-r2 fingerprints on MONO + TRIMER, concatenated → 4096 bits per canon
+11:24:02  INFO   Kernel: Tanimoto (Jaccard on binary bits)
+11:24:02  INFO   Post-fit: Maxwell EPS↔Nc physics prior blend
+11:24:02  INFO   loading train.csv / test.csv
+11:24:02  INFO   train raw: (7409, 3)   test raw: (4940, 3)
+11:24:02  INFO   canonicalizing 10605 unique raw SMILES
+11:24:06  INFO   collapsing 4 duplicate (canon, target_type) rows in train by mean
+11:24:06  INFO   train after dedup: (7405, 4)
+11:24:06  INFO   per-target train counts: {'tg': 4139, 'egc': 2028, 'egb': 337, 'eps': 229, 'nc': 229, 'ei': 222, 'eea': 221}
+11:24:06  INFO   per-target test  counts: {'tg': 2763, 'egc': 1352, 'egb': 224, 'eps': 153, 'nc': 153, 'ei': 148, 'eea': 147}
+11:24:06  INFO   unique canonical SMILES (train + test): 8990
+11:24:06  INFO   generating 3-mer polymer SMILES...
+11:24:22  INFO   chain extension: 8990/8990 extended  time=15.5s
+11:24:22  INFO   computing Morgan-r2 BIT vectors on monomer (2048 bits)...
+11:24:25  INFO     X_mono: (8990, 2048)  time=2.8s
+11:24:25  INFO   computing Morgan-r2 BIT vectors on trimer (2048 bits)...
+11:24:33  INFO     X_tri: (8990, 2048)  time=8.6s
+11:24:33  INFO   X_all (mono + trimer concat): (8990, 4096)  nnz frac=0.0186
+11:24:33  INFO   ============================================================
+11:24:33  INFO   PER-TARGET KERNEL RIDGE (Tanimoto kernel)
+11:24:33  INFO   ============================================================
+11:24:33  INFO   ------------------------------------------------------------
+11:24:33  INFO   [eea] train rows=221   test rows=147   y range=[0.3936, 5.1438]   std=1.1047
+11:24:33  INFO   [eea] X shape train=(221, 4096), test=(147, 4096)
+11:24:33  INFO   [eea] fold 0: R²=0.7611  n_val=45  time=0.0s
+11:24:33  INFO   [eea] fold 1: R²=0.8423  n_val=44  time=0.0s
+11:24:33  INFO   [eea] fold 2: R²=0.8608  n_val=44  time=0.0s
+11:24:33  INFO   [eea] fold 3: R²=0.9011  n_val=44  time=0.0s
+11:24:33  INFO   [eea] fold 4: R²=0.7751  n_val=44  time=0.0s
+11:24:33  INFO   [eea] OOF R² (KR only, pre-Maxwell) = 0.8352   (fold mean 0.8281)
+11:24:33  INFO   [eea] refit + predict test done  time=0.0s
+11:24:33  INFO   ------------------------------------------------------------
+11:24:33  INFO   [egb] train rows=337   test rows=224   y range=[0.5068, 10.1137]   std=1.9757
+11:24:33  INFO   [egb] X shape train=(337, 4096), test=(224, 4096)
+11:24:34  INFO   [egb] fold 0: R²=0.8015  n_val=68  time=0.0s
+11:24:34  INFO   [egb] fold 1: R²=0.8690  n_val=68  time=0.0s
+11:24:34  INFO   [egb] fold 2: R²=0.8448  n_val=67  time=0.0s
+11:24:34  INFO   [egb] fold 3: R²=0.8858  n_val=67  time=0.0s
+11:24:34  INFO   [egb] fold 4: R²=0.8213  n_val=67  time=0.0s
+11:24:34  INFO   [egb] OOF R² (KR only, pre-Maxwell) = 0.8480   (fold mean 0.8445)
+11:24:34  INFO   [egb] refit + predict test done  time=0.0s
+11:24:34  INFO   ------------------------------------------------------------
+11:24:34  INFO   [egc] train rows=2028   test rows=1352   y range=[0.0205, 9.8627]   std=1.5678
+11:24:34  INFO   [egc] X shape train=(2028, 4096), test=(1352, 4096)
+11:24:34  INFO   [egc] fold 0: R²=0.8871  n_val=406  time=0.2s
+11:24:34  INFO   [egc] fold 1: R²=0.8836  n_val=406  time=0.1s
+11:24:34  INFO   [egc] fold 2: R²=0.8569  n_val=406  time=0.1s
+11:24:34  INFO   [egc] fold 3: R²=0.8634  n_val=405  time=0.1s
+11:24:34  INFO   [egc] fold 4: R²=0.8910  n_val=405  time=0.1s
+11:24:34  INFO   [egc] OOF R² (KR only, pre-Maxwell) = 0.8765   (fold mean 0.8764)
+11:24:35  INFO   [egc] refit + predict test done  time=0.3s
+11:24:35  INFO   ------------------------------------------------------------
+11:24:35  INFO   [ei] train rows=222   test rows=148   y range=[4.0261, 9.8385]   std=1.0447
+11:24:35  INFO   [ei] X shape train=(222, 4096), test=(148, 4096)
+11:24:35  INFO   [ei] fold 0: R²=0.7167  n_val=45  time=0.0s
+11:24:35  INFO   [ei] fold 1: R²=0.7451  n_val=45  time=0.0s
+11:24:35  INFO   [ei] fold 2: R²=0.7682  n_val=44  time=0.0s
+11:24:35  INFO   [ei] fold 3: R²=0.7864  n_val=44  time=0.0s
+11:24:35  INFO   [ei] fold 4: R²=0.7229  n_val=44  time=0.0s
+11:24:35  INFO   [ei] OOF R² (KR only, pre-Maxwell) = 0.7541   (fold mean 0.7478)
+11:24:35  INFO   [ei] refit + predict test done  time=0.0s
+11:24:35  INFO   ------------------------------------------------------------
+11:24:35  INFO   [eps] train rows=229   test rows=153   y range=[2.6100, 9.0900]   std=1.0916
+11:24:35  INFO   [eps] X shape train=(229, 4096), test=(153, 4096)
+11:24:35  INFO   [eps] fold 0: R²=0.8496  n_val=46  time=0.0s
+11:24:35  INFO   [eps] fold 1: R²=0.8045  n_val=46  time=0.0s
+11:24:35  INFO   [eps] fold 2: R²=0.6849  n_val=46  time=0.0s
+11:24:35  INFO   [eps] fold 3: R²=0.7300  n_val=46  time=0.0s
+11:24:35  INFO   [eps] fold 4: R²=0.7249  n_val=45  time=0.0s
+11:24:35  INFO   [eps] OOF R² (KR only, pre-Maxwell) = 0.7528   (fold mean 0.7588)
+11:24:35  INFO   [eps] refit + predict test done  time=0.0s
+11:24:35  INFO   ------------------------------------------------------------
+11:24:35  INFO   [nc] train rows=229   test rows=153   y range=[1.5596, 2.7581]   std=0.2349
+11:24:35  INFO   [nc] X shape train=(229, 4096), test=(153, 4096)
+11:24:35  INFO   [nc] fold 0: R²=0.8430  n_val=46  time=0.0s
+11:24:35  INFO   [nc] fold 1: R²=0.7546  n_val=46  time=0.0s
+11:24:35  INFO   [nc] fold 2: R²=0.8127  n_val=46  time=0.0s
+11:24:35  INFO   [nc] fold 3: R²=0.8056  n_val=46  time=0.0s
+11:24:35  INFO   [nc] fold 4: R²=0.6825  n_val=45  time=0.0s
+11:24:35  INFO   [nc] OOF R² (KR only, pre-Maxwell) = 0.7820   (fold mean 0.7797)
+11:24:35  INFO   [nc] refit + predict test done  time=0.0s
+11:24:35  INFO   ------------------------------------------------------------
+11:24:35  INFO   [tg] train rows=4139   test rows=2763   y range=[-109.8200, 495.0000]   std=109.1038
+11:24:35  INFO   [tg] X shape train=(4139, 4096), test=(2763, 4096)
+11:24:35  INFO   [tg] fold 0: R²=0.9064  n_val=828  time=0.6s
+11:24:36  INFO   [tg] fold 1: R²=0.8826  n_val=828  time=0.6s
+11:24:36  INFO   [tg] fold 2: R²=0.8823  n_val=828  time=0.6s
+11:24:37  INFO   [tg] fold 3: R²=0.8897  n_val=828  time=0.6s
+11:24:38  INFO   [tg] fold 4: R²=0.8848  n_val=827  time=0.6s
+11:24:38  INFO   [tg] OOF R² (KR only, pre-Maxwell) = 0.8893   (fold mean 0.8892)
+11:24:39  INFO   [tg] refit + predict test done  time=1.2s
+11:24:39  INFO   ============================================================
+11:24:39  INFO   KR-only per-target OOF R²  (before Maxwell)
+11:24:39  INFO   ============================================================
+11:24:39  INFO      eea   n=  221   R²=0.8352
+11:24:39  INFO      egb   n=  337   R²=0.8480
+11:24:39  INFO      egc   n= 2028   R²=0.8765
+11:24:39  INFO       ei   n=  222   R²=0.7541
+11:24:39  INFO      eps   n=  229   R²=0.7528
+11:24:39  INFO       nc   n=  229   R²=0.7820
+11:24:39  INFO       tg   n= 4139   R²=0.8893
+11:24:39  INFO     MEAN R² (KR only) = 0.8197
+11:24:39  INFO   ============================================================
+11:24:39  INFO   MAXWELL RELATION POST-FIT (EPS ↔ Nc)
+11:24:39  INFO   ============================================================
+11:24:39  INFO   co-labeled train molecules: n=134
+11:24:39  INFO   forward EPS = 1.0401·Nc² + 0.6155   R²=0.8553
+11:24:39  INFO   reverse Nc² = 0.8223·EPS + 0.0398   R²(on Nc)=0.8368
+11:24:39  INFO   eps blend: KR R²=0.7528  best w=0.335  blend R²=0.8159   Δ=+0.0631
+11:24:39  INFO   nc blend: KR R²=0.7820  best w=0.455  blend R²=0.8413   Δ=+0.0593
+11:24:39  INFO   ============================================================
+11:24:39  INFO   FINAL PER-TARGET OOF R² (post-Maxwell)
+11:24:39  INFO   ============================================================
+11:24:39  INFO      eea   R²=0.8352
+11:24:39  INFO      egb   R²=0.8480
+11:24:39  INFO      egc   R²=0.8765
+11:24:39  INFO       ei   R²=0.7541
+11:24:39  INFO      eps   R²=0.8159
+11:24:39  INFO       nc   R²=0.8413
+11:24:39  INFO       tg   R²=0.8893
+11:24:39  INFO     MEAN R² (final) = 0.8372   (pre-Maxwell was 0.8197)
+11:24:39  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_kernel_ridge_tanimoto/oof.csv  rows=7405
+11:24:39  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_kernel_ridge_tanimoto/submission.csv  rows=4940
+11:24:39  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_kernel_ridge_tanimoto/cv_summary.json
+11:24:39  INFO   ============================================================
+11:24:39  INFO   FINAL PER-TARGET OOF R²  (KR + Maxwell)  vs chain-ext LGB v1 reference
+11:24:39  INFO   ============================================================
+11:24:39  INFO     target          KR      LGB v1     delta
+11:24:39  INFO        eea      0.8352      0.8734   -0.0382
+11:24:39  INFO        egb      0.8480      0.9087   -0.0607
+11:24:39  INFO        egc      0.8765      0.9023   -0.0258
+11:24:39  INFO         ei      0.7541      0.8041   -0.0500
+11:24:39  INFO        eps      0.8159      0.8218   -0.0059
+11:24:39  INFO         nc      0.8413      0.8471   -0.0058
+11:24:39  INFO         tg      0.8893      0.9063   -0.0170
+11:24:39  INFO       MEAN      0.8372      0.8662   -0.0291
+11:24:39  INFO     (chain-ext v1 LB reference: 0.894)
+11:24:39  INFO   wall time: 0.6min

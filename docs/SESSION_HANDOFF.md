@@ -174,7 +174,7 @@ Also aborted: PI1M pseudo-labeling (leak + 10h+ wall time; diagnostic showed 91%
 - MMoE / cross-stitch multi-task architectures (need >10K per task, we have 220)
 - Aggressive tautomer/stereoisomer enumeration (OPC post-comp report says overfits)
 
-## 9. Specific research questions for Fable
+## 9. Specific research questions
 
 Please investigate:
 
