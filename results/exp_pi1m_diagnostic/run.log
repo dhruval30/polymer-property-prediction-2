@@ -1,0 +1,89 @@
+15:45:13  INFO   logging to /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_pi1m_diagnostic/run.log
+15:45:13  INFO   === exp_pi1m_diagnostic ===
+15:45:13  INFO   CONFIG: PI1M_SAMPLE=100000  NN_BATCH=500
+15:45:13  INFO   loading train.csv / test.csv
+15:45:13  INFO   train raw: (7409, 3)   test raw: (4940, 3)
+15:45:13  INFO   canonicalizing 10605 unique train+test SMILES
+15:45:17  INFO     unique train canons: 5920  unique test canons: 4133
+15:45:17  INFO   loading PI1M.csv (995K rows expected)
+15:45:18  INFO   PI1M raw shape: (995799, 1)
+15:45:18  INFO   filtering PI1M to polymer-like (2 wildcards, no metals) — target sample 100000
+15:46:13  INFO   PI1M: kept 100000 valid polymer-like SMILES  (parsed 100000, filtered 1727)
+15:46:13  INFO   PI1M after dedup: 100000
+15:46:13  INFO   canonical SMILES overlap: PI1M ∩ train = 85   PI1M ∩ test = 66
+15:46:13  INFO   ============================================================
+15:46:13  INFO   BASIC DISTRIBUTION COMPARISON (MolWt, LogP, TPSA, FractionCSP3, halogen_frac)
+15:46:13  INFO   ============================================================
+15:46:13  INFO   computing basic stats for train / test / PI1M
+15:47:53  INFO                feature       train        test        PI1M   tr-pi1m Δ   te-pi1m Δ
+15:47:53  INFO                  MolWt     443.723     427.956     406.921     +36.802     +21.035
+15:47:53  INFO                   LogP       5.851       5.656       5.316      +0.535      +0.340
+15:47:53  INFO                   TPSA      65.316      62.323      61.657      +3.658      +0.666
+15:47:53  INFO                n_heavy      31.899      30.640      28.639      +3.260      +2.001
+15:47:53  INFO          aromatic_frac       0.411       0.398       0.322      +0.088      +0.076
+15:47:53  INFO           FractionCSP3       0.420       0.435       0.506      -0.087      -0.071
+15:47:53  INFO                  n_rot       8.405       8.244      10.538      -2.133      -2.294
+15:47:53  INFO                F_count       0.715       0.723       0.541      +0.175      +0.182
+15:47:53  INFO           halogen_frac       0.026       0.028       0.023      +0.003      +0.005
+15:47:53  INFO   ============================================================
+15:47:53  INFO   COMPUTING MORGAN FINGERPRINTS  (r=2, 2048 bits)
+15:47:53  INFO   ============================================================
+15:48:16  INFO     fingerprint time: 23.1s
+15:48:16  INFO     valid fps: train=5920  test=4133  PI1M=100000
+15:48:16  INFO   ============================================================
+15:48:16  INFO   NEAREST-NEIGHBOR TANIMOTO SIMILARITY
+15:48:16  INFO   ============================================================
+15:48:16  INFO   test polymers → nearest PI1M polymer:
+15:49:57  INFO     [test→PI1M] mean=0.758  median=0.760  std=0.187
+15:49:57  INFO       frac ≥ Tanimoto 0.3: 0.996
+15:49:57  INFO       frac ≥ Tanimoto 0.5: 0.910
+15:49:57  INFO       frac ≥ Tanimoto 0.7: 0.612
+15:49:57  INFO       frac ≥ Tanimoto 0.9: 0.299
+15:49:57  INFO   train polymers → nearest PI1M polymer:
+15:52:27  INFO     [train→PI1M] mean=0.765  median=0.769  std=0.184
+15:52:27  INFO       frac ≥ Tanimoto 0.3: 0.996
+15:52:27  INFO       frac ≥ Tanimoto 0.5: 0.919
+15:52:27  INFO       frac ≥ Tanimoto 0.7: 0.631
+15:52:27  INFO       frac ≥ Tanimoto 0.9: 0.294
+15:52:27  INFO   test polymers → nearest TRAIN polymer (control comparison):
+15:52:33  INFO     [test→train] mean=0.834  median=0.889  std=0.185
+15:52:33  INFO       frac ≥ Tanimoto 0.3: 0.995
+15:52:33  INFO       frac ≥ Tanimoto 0.5: 0.940
+15:52:33  INFO       frac ≥ Tanimoto 0.7: 0.762
+15:52:33  INFO       frac ≥ Tanimoto 0.9: 0.488
+15:52:33  INFO   wrote nn_hist_*.csv
+15:52:33  INFO   ============================================================
+15:52:33  INFO   ADVERSARIAL VALIDATION (Morgan-r2 classifier)
+15:52:33  INFO   ============================================================
+15:52:33  INFO   [adv val train vs pi1m] n_train=5920  n_pi1m=100000
+15:52:49  INFO     fold 0: AUC = 0.8749
+15:53:04  INFO     fold 1: AUC = 0.8783
+15:53:18  INFO     fold 2: AUC = 0.8746
+15:53:18  INFO   [adv val train vs pi1m] MEAN AUC = 0.8759  (0.5=indistinguishable, >0.85=very different)
+15:53:19  INFO   [adv val test vs pi1m] n_test=4133  n_pi1m=100000
+15:53:36  INFO     fold 0: AUC = 0.8652
+15:53:50  INFO     fold 1: AUC = 0.8602
+15:54:04  INFO     fold 2: AUC = 0.8679
+15:54:04  INFO   [adv val test vs pi1m] MEAN AUC = 0.8644  (0.5=indistinguishable, >0.85=very different)
+15:54:04  INFO   [adv val train vs test] n_train=5920  n_test=4133
+15:54:05  INFO     fold 0: AUC = 0.4849
+15:54:06  INFO     fold 1: AUC = 0.4908
+15:54:06  INFO     fold 2: AUC = 0.4878
+15:54:06  INFO   [adv val train vs test] MEAN AUC = 0.4879  (0.5=indistinguishable, >0.85=very different)
+15:54:06  INFO   ============================================================
+15:54:06  INFO   SUMMARY + RECOMMENDATION
+15:54:06  INFO   ============================================================
+15:54:06  INFO   Test → PI1M NN Tanimoto: mean=0.758  pct≥0.5=0.910  pct≥0.7=0.612
+15:54:06  INFO   Train → PI1M NN Tanimoto: mean=0.765  pct≥0.5=0.919  pct≥0.7=0.631
+15:54:06  INFO   Test → Train NN Tanimoto (control): mean=0.834  pct≥0.5=0.940
+15:54:06  INFO   Adversarial AUC train vs PI1M: 0.8759
+15:54:06  INFO   Adversarial AUC test vs PI1M:  0.8644
+15:54:06  INFO   Adversarial AUC train vs test: 0.4879
+15:54:06  INFO   
+15:54:06  INFO   DECISION:
+15:54:06  INFO     ⚠️  MARGINAL: consider pseudo-labeling but with LOW weight (0.05-0.10)
+15:54:06  INFO        Only 91.0% of test polymers have Tanimoto ≥ 0.5 in PI1M.
+15:54:06  INFO        Adversarial AUC 0.876 suggests some distribution shift.
+15:54:06  INFO        Higher risk of adding noise than signal.
+15:54:06  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_pi1m_diagnostic/diagnostic_stats.json
+15:54:06  INFO   wall time: 8.9min

@@ -1,0 +1,92 @@
+{
+  "exp_name": "exp_chain_ext_mlp",
+  "mean_r2": 0.855864917402999,
+  "mean_r2_pre_maxwell": 0.8387447680745806,
+  "per_target": {
+    "eea": {
+      "n_train": 221,
+      "oof_r2": 0.8636535406112671
+    },
+    "egb": {
+      "n_train": 337,
+      "oof_r2": 0.8923499584197998
+    },
+    "egc": {
+      "n_train": 2028,
+      "oof_r2": 0.8819236159324646
+    },
+    "ei": {
+      "n_train": 222,
+      "oof_r2": 0.8028386831283569
+    },
+    "eps": {
+      "n_train": 229,
+      "oof_r2": 0.7338153719902039
+    },
+    "nc": {
+      "n_train": 229,
+      "oof_r2": 0.8052560091018677
+    },
+    "tg": {
+      "n_train": 4139,
+      "oof_r2": 0.8913761973381042
+    }
+  },
+  "best_epochs": [
+    12,
+    21,
+    10,
+    38,
+    16
+  ],
+  "refit_epochs": 17,
+  "fold_wall_times_min": [
+    0.9511254469553629,
+    1.4359010338783265,
+    0.9332268476486206,
+    2.1874558687210084,
+    1.1965664148330688
+  ],
+  "maxwell": {
+    "n_co_labeled": 134,
+    "forward_fit": {
+      "a": 1.0401055525894538,
+      "b": 0.6154939128711197,
+      "r2": 0.8552517478012409
+    },
+    "reverse_fit": {
+      "a": 0.8222739948575409,
+      "b": 0.039755475649065904,
+      "r2_on_nc": 0.8368023881341389
+    },
+    "eps_blend": {
+      "baseline_r2": 0.733815301237404,
+      "best_w": 0.27,
+      "best_r2": 0.8037668887660012
+    },
+    "nc_blend": {
+      "baseline_r2": 0.8052560212905879,
+      "best_w": 0.47500000000000003,
+      "best_r2": 0.8551455376249988
+    }
+  },
+  "config": {
+    "hidden_dims": [
+      512,
+      256,
+      128
+    ],
+    "dropout": 0.3,
+    "lr_init": 0.001,
+    "lr_final": 0.0001,
+    "weight_decay": 0.001,
+    "batch_size": 64,
+    "max_epochs": 60,
+    "patience": 10,
+    "grad_clip": 1.0,
+    "refit_epoch_multiplier": 1.1,
+    "n_smiles_features": 14060,
+    "cv_mode": "multitask + StandardScaler(per-fold) + Maxwell"
+  },
+  "elapsed_seconds": 470.7
+}

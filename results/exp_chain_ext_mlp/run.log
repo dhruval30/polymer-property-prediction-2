@@ -1,0 +1,280 @@
+19:26:58  INFO   logging to /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chain_ext_mlp/run.log
+19:26:58  INFO   === exp_chain_ext_mlp ===
+19:26:58  INFO   CONFIG: n_splits=5 seed=42 chain_n_units=3
+19:26:58  INFO   MLP: hidden=(512, 256, 128) dropout=0.3 lr=0.001 wd=0.001 batch=64 max_epochs=60 patience=10
+19:26:58  INFO   NOTE: multitask, NO aux features (shared representation replaces cross-target signal)
+19:26:58  INFO   torch threads: 4
+19:26:58  INFO   loading train.csv / test.csv
+19:26:58  INFO   train raw: (7409, 3)   test raw: (4940, 3)
+19:26:58  INFO   canonicalizing 10605 unique raw SMILES
+19:27:02  INFO   collapsing 4 duplicate (canon, target_type) rows in train by mean
+19:27:02  INFO   train after dedup: (7405, 4)
+19:27:02  INFO   per-target train counts: {'tg': 4139, 'egc': 2028, 'egb': 337, 'eps': 229, 'nc': 229, 'ei': 222, 'eea': 221}
+19:27:02  INFO   per-target test  counts: {'tg': 2763, 'egc': 1352, 'egb': 224, 'eps': 153, 'nc': 153, 'ei': 148, 'eea': 147}
+19:27:02  INFO   loaded feature cache: feature_cache.pkl  key=ab2d3e9efcb8
+19:27:02  INFO   feature families: desc_mono=207, morgan2c_mono=2048, morgan3c_mono=2048, maccs_mono=167, atompair_c_mono=2048, toptorsion_c_mono=2048, avalon_mono=512, desc_tri=207, morgan2c_tri=2048, maccs_tri=167, atompair_c_tri=2048, avalon_tri=512
+19:27:02  INFO   total SMILES features: 14060
+19:27:02  WARNING  cleaning 2295 non-finite values in feature matrix (0.0018% of cells)
+19:27:03  INFO   wide train: n_canon=5920  y shape=(5920, 7)  NaN fraction=82.1%
+19:27:03  INFO   X_train shape: (5920, 14060)   X_test shape: (4133, 14060)
+19:27:03  INFO   ============================================================
+19:27:03  INFO   FOLD 0: n_train_canon=4736  n_val_canon=1184
+19:27:03  INFO   ============================================================
+19:27:07  INFO     [fold 0] epoch   0  train_loss=0.4137  val_loss=0.1864  elapsed=0.0min
+19:27:09  INFO     [fold 0] epoch   1  train_loss=0.2111  val_loss=0.1495  elapsed=0.1min
+19:27:11  INFO     [fold 0] epoch   2  train_loss=0.1688  val_loss=0.1503  elapsed=0.1min
+19:27:13  INFO     [fold 0] epoch   3  train_loss=0.1377  val_loss=0.1433  elapsed=0.1min
+19:27:15  INFO     [fold 0] epoch   4  train_loss=0.1233  val_loss=0.1330  elapsed=0.2min
+19:27:17  INFO     [fold 0] epoch   5  train_loss=0.1028  val_loss=0.1198  elapsed=0.2min
+19:27:19  INFO     [fold 0] epoch   6  train_loss=0.0991  val_loss=0.1246  elapsed=0.2min
+19:27:22  INFO     [fold 0] epoch   7  train_loss=0.0923  val_loss=0.1310  elapsed=0.3min
+19:27:25  INFO     [fold 0] epoch   8  train_loss=0.0888  val_loss=0.1222  elapsed=0.3min
+19:27:27  INFO     [fold 0] epoch   9  train_loss=0.0835  val_loss=0.1255  elapsed=0.4min
+19:27:30  INFO     [fold 0] epoch  10  train_loss=0.0835  val_loss=0.1308  elapsed=0.4min
+19:27:33  INFO     [fold 0] epoch  11  train_loss=0.0773  val_loss=0.1233  elapsed=0.5min
+19:27:35  INFO     [fold 0] epoch  12  train_loss=0.0785  val_loss=0.1176  elapsed=0.5min
+19:27:38  INFO     [fold 0] epoch  13  train_loss=0.0698  val_loss=0.1206  elapsed=0.6min
+19:27:40  INFO     [fold 0] epoch  14  train_loss=0.0714  val_loss=0.1184  elapsed=0.6min
+19:27:43  INFO     [fold 0] epoch  15  train_loss=0.0726  val_loss=0.1262  elapsed=0.6min
+19:27:46  INFO     [fold 0] epoch  16  train_loss=0.0657  val_loss=0.1199  elapsed=0.7min
+19:27:49  INFO     [fold 0] epoch  17  train_loss=0.0616  val_loss=0.1264  elapsed=0.7min
+19:27:51  INFO     [fold 0] epoch  18  train_loss=0.0651  val_loss=0.1240  elapsed=0.8min
+19:27:54  INFO     [fold 0] epoch  19  train_loss=0.0611  val_loss=0.1227  elapsed=0.8min
+19:27:56  INFO     [fold 0] epoch  20  train_loss=0.0594  val_loss=0.1237  elapsed=0.9min
+19:27:59  INFO     [fold 0] epoch  21  train_loss=0.0583  val_loss=0.1230  elapsed=0.9min
+19:28:02  INFO     [fold 0] epoch  22  train_loss=0.0569  val_loss=0.1229  elapsed=0.9min
+19:28:02  INFO     [fold 0] early stop at epoch 22 (best epoch 12, val_loss 0.1176)
+19:28:02  INFO     [fold 0]  eea: R²=0.8270  n_val=39
+19:28:02  INFO     [fold 0]  egb: R²=0.9127  n_val=62
+19:28:02  INFO     [fold 0]  egc: R²=0.8745  n_val=433
+19:28:02  INFO     [fold 0]   ei: R²=0.8881  n_val=40
+19:28:02  INFO     [fold 0]  eps: R²=0.7504  n_val=45
+19:28:02  INFO     [fold 0]   nc: R²=0.6599  n_val=33
+19:28:02  INFO     [fold 0]   tg: R²=0.9043  n_val=823
+19:28:02  INFO   ============================================================
+19:28:02  INFO   FOLD 1: n_train_canon=4736  n_val_canon=1184
+19:28:02  INFO   ============================================================
+19:28:05  INFO     [fold 1] epoch   0  train_loss=0.4069  val_loss=0.2459  elapsed=0.0min
+19:28:08  INFO     [fold 1] epoch   1  train_loss=0.2095  val_loss=0.1928  elapsed=0.1min
+19:28:11  INFO     [fold 1] epoch   2  train_loss=0.1605  val_loss=0.1721  elapsed=0.1min
+19:28:13  INFO     [fold 1] epoch   3  train_loss=0.1334  val_loss=0.1668  elapsed=0.2min
+19:28:16  INFO     [fold 1] epoch   4  train_loss=0.1177  val_loss=0.1653  elapsed=0.2min
+19:28:19  INFO     [fold 1] epoch   5  train_loss=0.1092  val_loss=0.1742  elapsed=0.3min
+19:28:21  INFO     [fold 1] epoch   6  train_loss=0.1032  val_loss=0.1665  elapsed=0.3min
+19:28:24  INFO     [fold 1] epoch   7  train_loss=0.0970  val_loss=0.1596  elapsed=0.4min
+19:28:27  INFO     [fold 1] epoch   8  train_loss=0.0877  val_loss=0.1523  elapsed=0.4min
+19:28:29  INFO     [fold 1] epoch   9  train_loss=0.0813  val_loss=0.1531  elapsed=0.4min
+19:28:32  INFO     [fold 1] epoch  10  train_loss=0.0784  val_loss=0.1553  elapsed=0.5min
+19:28:35  INFO     [fold 1] epoch  11  train_loss=0.0806  val_loss=0.1495  elapsed=0.5min
+19:28:37  INFO     [fold 1] epoch  12  train_loss=0.0709  val_loss=0.1539  elapsed=0.6min
+19:28:40  INFO     [fold 1] epoch  13  train_loss=0.0728  val_loss=0.1572  elapsed=0.6min
+19:28:42  INFO     [fold 1] epoch  14  train_loss=0.0742  val_loss=0.1501  elapsed=0.7min
+19:28:45  INFO     [fold 1] epoch  15  train_loss=0.0672  val_loss=0.1573  elapsed=0.7min
+19:28:48  INFO     [fold 1] epoch  16  train_loss=0.0657  val_loss=0.1503  elapsed=0.7min
+19:28:50  INFO     [fold 1] epoch  17  train_loss=0.0641  val_loss=0.1596  elapsed=0.8min
+19:28:53  INFO     [fold 1] epoch  18  train_loss=0.0630  val_loss=0.1592  elapsed=0.8min
+19:28:56  INFO     [fold 1] epoch  19  train_loss=0.0609  val_loss=0.1545  elapsed=0.9min
+19:28:58  INFO     [fold 1] epoch  20  train_loss=0.0602  val_loss=0.1579  elapsed=0.9min
+19:29:01  INFO     [fold 1] epoch  21  train_loss=0.0565  val_loss=0.1473  elapsed=1.0min
+19:29:04  INFO     [fold 1] epoch  22  train_loss=0.0573  val_loss=0.1561  elapsed=1.0min
+19:29:06  INFO     [fold 1] epoch  23  train_loss=0.0565  val_loss=0.1553  elapsed=1.1min
+19:29:09  INFO     [fold 1] epoch  24  train_loss=0.0562  val_loss=0.1551  elapsed=1.1min
+19:29:12  INFO     [fold 1] epoch  25  train_loss=0.0504  val_loss=0.1532  elapsed=1.1min
+19:29:15  INFO     [fold 1] epoch  26  train_loss=0.0531  val_loss=0.1551  elapsed=1.2min
+19:29:18  INFO     [fold 1] epoch  27  train_loss=0.0493  val_loss=0.1524  elapsed=1.3min
+19:29:21  INFO     [fold 1] epoch  28  train_loss=0.0484  val_loss=0.1575  elapsed=1.3min
+19:29:24  INFO     [fold 1] epoch  29  train_loss=0.0521  val_loss=0.1505  elapsed=1.3min
+19:29:26  INFO     [fold 1] epoch  30  train_loss=0.0505  val_loss=0.1639  elapsed=1.4min
+19:29:29  INFO     [fold 1] epoch  31  train_loss=0.0502  val_loss=0.1572  elapsed=1.4min
+19:29:29  INFO     [fold 1] early stop at epoch 31 (best epoch 21, val_loss 0.1473)
+19:29:29  INFO     [fold 1]  eea: R²=0.8654  n_val=51
+19:29:29  INFO     [fold 1]  egb: R²=0.8554  n_val=73
+19:29:29  INFO     [fold 1]  egc: R²=0.8991  n_val=413
+19:29:29  INFO     [fold 1]   ei: R²=0.7045  n_val=50
+19:29:29  INFO     [fold 1]  eps: R²=0.7587  n_val=58
+19:29:29  INFO     [fold 1]   nc: R²=0.8439  n_val=57
+19:29:29  INFO     [fold 1]   tg: R²=0.8659  n_val=812
+19:29:29  INFO   ============================================================
+19:29:29  INFO   FOLD 2: n_train_canon=4736  n_val_canon=1184
+19:29:29  INFO   ============================================================
+19:29:33  INFO     [fold 2] epoch   0  train_loss=0.3930  val_loss=0.1950  elapsed=0.0min
+19:29:35  INFO     [fold 2] epoch   1  train_loss=0.2084  val_loss=0.1574  elapsed=0.1min
+19:29:38  INFO     [fold 2] epoch   2  train_loss=0.1646  val_loss=0.1497  elapsed=0.1min
+19:29:41  INFO     [fold 2] epoch   3  train_loss=0.1356  val_loss=0.1627  elapsed=0.2min
+19:29:43  INFO     [fold 2] epoch   4  train_loss=0.1245  val_loss=0.1470  elapsed=0.2min
+19:29:46  INFO     [fold 2] epoch   5  train_loss=0.1115  val_loss=0.1349  elapsed=0.3min
+19:29:48  INFO     [fold 2] epoch   6  train_loss=0.1012  val_loss=0.1365  elapsed=0.3min
+19:29:51  INFO     [fold 2] epoch   7  train_loss=0.0905  val_loss=0.1407  elapsed=0.4min
+19:29:54  INFO     [fold 2] epoch   8  train_loss=0.0943  val_loss=0.1401  elapsed=0.4min
+19:29:56  INFO     [fold 2] epoch   9  train_loss=0.0817  val_loss=0.1330  elapsed=0.4min
+19:29:59  INFO     [fold 2] epoch  10  train_loss=0.0776  val_loss=0.1275  elapsed=0.5min
+19:30:01  INFO     [fold 2] epoch  11  train_loss=0.0741  val_loss=0.1291  elapsed=0.5min
+19:30:04  INFO     [fold 2] epoch  12  train_loss=0.0727  val_loss=0.1320  elapsed=0.6min
+19:30:07  INFO     [fold 2] epoch  13  train_loss=0.0737  val_loss=0.1401  elapsed=0.6min
+19:30:10  INFO     [fold 2] epoch  14  train_loss=0.0672  val_loss=0.1440  elapsed=0.7min
+19:30:12  INFO     [fold 2] epoch  15  train_loss=0.0711  val_loss=0.1373  elapsed=0.7min
+19:30:15  INFO     [fold 2] epoch  16  train_loss=0.0630  val_loss=0.1375  elapsed=0.8min
+19:30:18  INFO     [fold 2] epoch  17  train_loss=0.0626  val_loss=0.1368  elapsed=0.8min
+19:30:21  INFO     [fold 2] epoch  18  train_loss=0.0633  val_loss=0.1370  elapsed=0.8min
+19:30:23  INFO     [fold 2] epoch  19  train_loss=0.0591  val_loss=0.1308  elapsed=0.9min
+19:30:26  INFO     [fold 2] epoch  20  train_loss=0.0601  val_loss=0.1333  elapsed=0.9min
+19:30:26  INFO     [fold 2] early stop at epoch 20 (best epoch 10, val_loss 0.1275)
+19:30:26  INFO     [fold 2]  eea: R²=0.8756  n_val=40
+19:30:26  INFO     [fold 2]  egb: R²=0.9012  n_val=71
+19:30:26  INFO     [fold 2]  egc: R²=0.8699  n_val=375
+19:30:26  INFO     [fold 2]   ei: R²=0.8398  n_val=35
+19:30:26  INFO     [fold 2]  eps: R²=0.7403  n_val=40
+19:30:26  INFO     [fold 2]   nc: R²=0.8301  n_val=49
+19:30:26  INFO     [fold 2]   tg: R²=0.8816  n_val=852
+19:30:26  INFO   ============================================================
+19:30:26  INFO   FOLD 3: n_train_canon=4736  n_val_canon=1184
+19:30:26  INFO   ============================================================
+19:30:30  INFO     [fold 3] epoch   0  train_loss=0.3918  val_loss=0.1747  elapsed=0.0min
+19:30:32  INFO     [fold 3] epoch   1  train_loss=0.2154  val_loss=0.1428  elapsed=0.1min
+19:30:35  INFO     [fold 3] epoch   2  train_loss=0.1715  val_loss=0.1405  elapsed=0.1min
+19:30:38  INFO     [fold 3] epoch   3  train_loss=0.1379  val_loss=0.1336  elapsed=0.2min
+19:30:40  INFO     [fold 3] epoch   4  train_loss=0.1270  val_loss=0.1334  elapsed=0.2min
+19:30:43  INFO     [fold 3] epoch   5  train_loss=0.1025  val_loss=0.1198  elapsed=0.3min
+19:30:46  INFO     [fold 3] epoch   6  train_loss=0.0993  val_loss=0.1239  elapsed=0.3min
+19:30:48  INFO     [fold 3] epoch   7  train_loss=0.0896  val_loss=0.1214  elapsed=0.4min
+19:30:51  INFO     [fold 3] epoch   8  train_loss=0.0928  val_loss=0.1328  elapsed=0.4min
+19:30:54  INFO     [fold 3] epoch   9  train_loss=0.0873  val_loss=0.1181  elapsed=0.4min
+19:30:56  INFO     [fold 3] epoch  10  train_loss=0.0769  val_loss=0.1207  elapsed=0.5min
+19:30:59  INFO     [fold 3] epoch  11  train_loss=0.0842  val_loss=0.1202  elapsed=0.5min
+19:31:02  INFO     [fold 3] epoch  12  train_loss=0.0745  val_loss=0.1126  elapsed=0.6min
+19:31:05  INFO     [fold 3] epoch  13  train_loss=0.0710  val_loss=0.1123  elapsed=0.6min
+19:31:07  INFO     [fold 3] epoch  14  train_loss=0.0674  val_loss=0.1179  elapsed=0.7min
+19:31:10  INFO     [fold 3] epoch  15  train_loss=0.0701  val_loss=0.1161  elapsed=0.7min
+19:31:13  INFO     [fold 3] epoch  16  train_loss=0.0611  val_loss=0.1130  elapsed=0.8min
+19:31:16  INFO     [fold 3] epoch  17  train_loss=0.0630  val_loss=0.1096  elapsed=0.8min
+19:31:18  INFO     [fold 3] epoch  18  train_loss=0.0619  val_loss=0.1089  elapsed=0.9min
+19:31:21  INFO     [fold 3] epoch  19  train_loss=0.0604  val_loss=0.1125  elapsed=0.9min
+19:31:24  INFO     [fold 3] epoch  20  train_loss=0.0582  val_loss=0.1098  elapsed=0.9min
+19:31:26  INFO     [fold 3] epoch  21  train_loss=0.0602  val_loss=0.1098  elapsed=1.0min
+19:31:29  INFO     [fold 3] epoch  22  train_loss=0.0545  val_loss=0.1099  elapsed=1.0min
+19:31:32  INFO     [fold 3] epoch  23  train_loss=0.0574  val_loss=0.1085  elapsed=1.1min
+19:31:35  INFO     [fold 3] epoch  24  train_loss=0.0553  val_loss=0.1061  elapsed=1.1min
+19:31:37  INFO     [fold 3] epoch  25  train_loss=0.0499  val_loss=0.1116  elapsed=1.2min
+19:31:40  INFO     [fold 3] epoch  26  train_loss=0.0493  val_loss=0.1068  elapsed=1.2min
+19:31:42  INFO     [fold 3] epoch  27  train_loss=0.0498  val_loss=0.1071  elapsed=1.3min
+19:31:45  INFO     [fold 3] epoch  28  train_loss=0.0524  val_loss=0.1073  elapsed=1.3min
+19:31:48  INFO     [fold 3] epoch  29  train_loss=0.0469  val_loss=0.1068  elapsed=1.3min
+19:31:51  INFO     [fold 3] epoch  30  train_loss=0.0527  val_loss=0.1066  elapsed=1.4min
+19:31:53  INFO     [fold 3] epoch  31  train_loss=0.0482  val_loss=0.1057  elapsed=1.4min
+19:31:56  INFO     [fold 3] epoch  32  train_loss=0.0474  val_loss=0.1085  elapsed=1.5min
+19:31:59  INFO     [fold 3] epoch  33  train_loss=0.0449  val_loss=0.1071  elapsed=1.5min
+19:32:01  INFO     [fold 3] epoch  34  train_loss=0.0479  val_loss=0.1029  elapsed=1.6min
+19:32:04  INFO     [fold 3] epoch  35  train_loss=0.0453  val_loss=0.1031  elapsed=1.6min
+19:32:07  INFO     [fold 3] epoch  36  train_loss=0.0485  val_loss=0.1037  elapsed=1.7min
+19:32:09  INFO     [fold 3] epoch  37  train_loss=0.0436  val_loss=0.1034  elapsed=1.7min
+19:32:12  INFO     [fold 3] epoch  38  train_loss=0.0436  val_loss=0.1029  elapsed=1.7min
+19:32:15  INFO     [fold 3] epoch  39  train_loss=0.0436  val_loss=0.1055  elapsed=1.8min
+19:32:17  INFO     [fold 3] epoch  40  train_loss=0.0411  val_loss=0.1059  elapsed=1.8min
+19:32:20  INFO     [fold 3] epoch  41  train_loss=0.0392  val_loss=0.1032  elapsed=1.9min
+19:32:23  INFO     [fold 3] epoch  42  train_loss=0.0415  val_loss=0.1054  elapsed=1.9min
+19:32:25  INFO     [fold 3] epoch  43  train_loss=0.0435  val_loss=0.1057  elapsed=2.0min
+19:32:28  INFO     [fold 3] epoch  44  train_loss=0.0413  val_loss=0.1057  elapsed=2.0min
+19:32:30  INFO     [fold 3] epoch  45  train_loss=0.0429  val_loss=0.1073  elapsed=2.1min
+19:32:33  INFO     [fold 3] epoch  46  train_loss=0.0416  val_loss=0.1071  elapsed=2.1min
+19:32:36  INFO     [fold 3] epoch  47  train_loss=0.0372  val_loss=0.1049  elapsed=2.1min
+19:32:38  INFO     [fold 3] epoch  48  train_loss=0.0393  val_loss=0.1046  elapsed=2.2min
+19:32:38  INFO     [fold 3] early stop at epoch 48 (best epoch 38, val_loss 0.1029)
+19:32:38  INFO     [fold 3]  eea: R²=0.8661  n_val=42
+19:32:38  INFO     [fold 3]  egb: R²=0.9016  n_val=67
+19:32:38  INFO     [fold 3]  egc: R²=0.8879  n_val=398
+19:32:38  INFO     [fold 3]   ei: R²=0.8449  n_val=43
+19:32:38  INFO     [fold 3]  eps: R²=0.7394  n_val=42
+19:32:38  INFO     [fold 3]   nc: R²=0.8369  n_val=42
+19:32:38  INFO     [fold 3]   tg: R²=0.8958  n_val=822
+19:32:38  INFO   ============================================================
+19:32:38  INFO   FOLD 4: n_train_canon=4736  n_val_canon=1184
+19:32:38  INFO   ============================================================
+19:32:42  INFO     [fold 4] epoch   0  train_loss=0.4093  val_loss=0.2066  elapsed=0.0min
+19:32:44  INFO     [fold 4] epoch   1  train_loss=0.2129  val_loss=0.1484  elapsed=0.1min
+19:32:47  INFO     [fold 4] epoch   2  train_loss=0.1672  val_loss=0.1407  elapsed=0.1min
+19:32:50  INFO     [fold 4] epoch   3  train_loss=0.1360  val_loss=0.1312  elapsed=0.2min
+19:32:52  INFO     [fold 4] epoch   4  train_loss=0.1207  val_loss=0.1283  elapsed=0.2min
+19:32:55  INFO     [fold 4] epoch   5  train_loss=0.1110  val_loss=0.1282  elapsed=0.3min
+19:32:58  INFO     [fold 4] epoch   6  train_loss=0.1031  val_loss=0.1167  elapsed=0.3min
+19:33:00  INFO     [fold 4] epoch   7  train_loss=0.0944  val_loss=0.1126  elapsed=0.4min
+19:33:03  INFO     [fold 4] epoch   8  train_loss=0.0856  val_loss=0.1187  elapsed=0.4min
+19:33:06  INFO     [fold 4] epoch   9  train_loss=0.0822  val_loss=0.1225  elapsed=0.4min
+19:33:08  INFO     [fold 4] epoch  10  train_loss=0.0774  val_loss=0.1128  elapsed=0.5min
+19:33:11  INFO     [fold 4] epoch  11  train_loss=0.0784  val_loss=0.1140  elapsed=0.5min
+19:33:13  INFO     [fold 4] epoch  12  train_loss=0.0727  val_loss=0.1221  elapsed=0.6min
+19:33:16  INFO     [fold 4] epoch  13  train_loss=0.0743  val_loss=0.1166  elapsed=0.6min
+19:33:19  INFO     [fold 4] epoch  14  train_loss=0.0733  val_loss=0.1151  elapsed=0.7min
+19:33:21  INFO     [fold 4] epoch  15  train_loss=0.0644  val_loss=0.1137  elapsed=0.7min
+19:33:24  INFO     [fold 4] epoch  16  train_loss=0.0636  val_loss=0.1102  elapsed=0.7min
+19:33:27  INFO     [fold 4] epoch  17  train_loss=0.0611  val_loss=0.1130  elapsed=0.8min
+19:33:29  INFO     [fold 4] epoch  18  train_loss=0.0636  val_loss=0.1154  elapsed=0.8min
+19:33:32  INFO     [fold 4] epoch  19  train_loss=0.0597  val_loss=0.1160  elapsed=0.9min
+19:33:34  INFO     [fold 4] epoch  20  train_loss=0.0623  val_loss=0.1106  elapsed=0.9min
+19:33:37  INFO     [fold 4] epoch  21  train_loss=0.0574  val_loss=0.1131  elapsed=1.0min
+19:33:40  INFO     [fold 4] epoch  22  train_loss=0.0570  val_loss=0.1154  elapsed=1.0min
+19:33:43  INFO     [fold 4] epoch  23  train_loss=0.0563  val_loss=0.1157  elapsed=1.1min
+19:33:45  INFO     [fold 4] epoch  24  train_loss=0.0596  val_loss=0.1202  elapsed=1.1min
+19:33:48  INFO     [fold 4] epoch  25  train_loss=0.0538  val_loss=0.1205  elapsed=1.2min
+19:33:51  INFO     [fold 4] epoch  26  train_loss=0.0525  val_loss=0.1142  elapsed=1.2min
+19:33:51  INFO     [fold 4] early stop at epoch 26 (best epoch 16, val_loss 0.1102)
+19:33:51  INFO     [fold 4]  eea: R²=0.8673  n_val=49
+19:33:51  INFO     [fold 4]  egb: R²=0.9043  n_val=64
+19:33:51  INFO     [fold 4]  egc: R²=0.8742  n_val=409
+19:33:51  INFO     [fold 4]   ei: R²=0.8198  n_val=54
+19:33:51  INFO     [fold 4]  eps: R²=0.6491  n_val=44
+19:33:51  INFO     [fold 4]   nc: R²=0.8061  n_val=48
+19:33:51  INFO     [fold 4]   tg: R²=0.9091  n_val=830
+19:33:51  INFO   ============================================================
+19:33:51  INFO   PER-TARGET OOF R² (MLP alone, pre-Maxwell)
+19:33:51  INFO   ============================================================
+19:33:51  INFO      eea  n=  221  OOF R²=0.8637
+19:33:51  INFO      egb  n=  337  OOF R²=0.8923
+19:33:51  INFO      egc  n= 2028  OOF R²=0.8819
+19:33:51  INFO       ei  n=  222  OOF R²=0.8028
+19:33:51  INFO      eps  n=  229  OOF R²=0.7338
+19:33:51  INFO       nc  n=  229  OOF R²=0.8053
+19:33:51  INFO       tg  n= 4139  OOF R²=0.8914
+19:33:51  INFO     MEAN R² (MLP only) = 0.8387
+19:33:51  INFO   best_epochs per fold: [12, 21, 10, 38, 16]
+19:33:51  INFO   refitting on full train for 17 epochs
+19:33:55  INFO     [refit] epoch   0  train_loss=0.3674  elapsed=0.1min
+19:34:12  INFO     [refit] epoch   5  train_loss=0.0976  elapsed=0.3min
+19:34:28  INFO     [refit] epoch  10  train_loss=0.0695  elapsed=0.6min
+19:34:44  INFO     [refit] epoch  15  train_loss=0.0581  elapsed=0.9min
+19:34:48  INFO     [refit] epoch  16  train_loss=0.0552  elapsed=0.9min
+19:34:48  INFO   ============================================================
+19:34:48  INFO   MAXWELL RELATION POST-FIT (EPS ↔ Nc)
+19:34:48  INFO   ============================================================
+19:34:48  INFO   co-labeled train molecules: n=134
+19:34:48  INFO   forward EPS = 1.0401·Nc² + 0.6155   R²=0.8553
+19:34:48  INFO   reverse Nc² = 0.8223·EPS + 0.0398   R²(on Nc)=0.8368
+19:34:48  INFO   eps blend: MLP R²=0.7338  best w=0.270  blend R²=0.8038  Δ=+0.0700
+19:34:48  INFO   nc blend: MLP R²=0.8053  best w=0.475  blend R²=0.8551  Δ=+0.0499
+19:34:48  INFO   ============================================================
+19:34:48  INFO   FINAL PER-TARGET OOF R² (post-Maxwell)
+19:34:48  INFO   ============================================================
+19:34:48  INFO      eea   R²=0.8637
+19:34:48  INFO      egb   R²=0.8923
+19:34:48  INFO      egc   R²=0.8819
+19:34:48  INFO       ei   R²=0.8028
+19:34:48  INFO      eps   R²=0.8038
+19:34:48  INFO       nc   R²=0.8551
+19:34:48  INFO       tg   R²=0.8914
+19:34:48  INFO     MEAN R² = 0.8559   (pre-Maxwell was 0.8387)
+19:34:48  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chain_ext_mlp/oof.csv  rows=7405
+19:34:48  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chain_ext_mlp/submission.csv  rows=4940
+19:34:48  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chain_ext_mlp/cv_summary.json
+19:34:48  INFO   ============================================================
+19:34:48  INFO   FINAL PER-TARGET OOF R²  (MLP + Maxwell)  vs chain-ext LGB v1 reference
+19:34:48  INFO   ============================================================
+19:34:48  INFO     target         MLP      LGB v1     delta
+19:34:48  INFO        eea      0.8637      0.8734   -0.0097
+19:34:48  INFO        egb      0.8923      0.9087   -0.0164
+19:34:48  INFO        egc      0.8819      0.9023   -0.0204
+19:34:48  INFO         ei      0.8028      0.8041   -0.0013
+19:34:48  INFO        eps      0.8038      0.8218   -0.0180
+19:34:48  INFO         nc      0.8551      0.8471   +0.0080
+19:34:48  INFO         tg      0.8914      0.9063   -0.0149
+19:34:48  INFO       MEAN      0.8559      0.8662   -0.0104
+19:34:48  INFO     (chain-ext v1 LB reference: 0.894)
+19:34:48  INFO   wall time: 7.8min
