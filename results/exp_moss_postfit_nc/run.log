@@ -1,0 +1,51 @@
+14:40:46  INFO   logging to /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_moss_postfit_nc/run.log
+14:40:46  INFO   === exp_moss_postfit_nc ===
+14:40:46  INFO   Physics: Nc² · Egc ≈ k   →   Nc_moss = sqrt(k / Egc)
+14:40:46  INFO   Input submission: /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_bandgap_koopmans_postfit/submission.csv  (LB 0.902)
+14:40:46  INFO   Egc floor for clipping: 0.5 eV
+14:40:46  INFO   Alpha grid: 0.500 to 1.000 step 0.025
+14:40:46  INFO   ============================================================
+14:40:46  INFO   LOAD CHEMPROP OOF MATRIX
+14:40:46  INFO   ============================================================
+14:40:46  INFO   loading train.csv and rebuilding wide train...
+14:40:48  INFO     n_canon=5920   Nc labeled=229   Egc labeled=2028   both=125
+14:40:48  INFO     loaded fold 0: (1184, 7)  (val n=1184)
+14:40:48  INFO     loaded fold 1: (1184, 7)  (val n=1184)
+14:40:48  INFO     loaded fold 2: (1184, 7)  (val n=1184)
+14:40:48  INFO     loaded fold 3: (1184, 7)  (val n=1184)
+14:40:48  INFO     loaded fold 4: (1184, 7)  (val n=1184)
+14:40:48  INFO     Chemprop OOF matrix: (5920, 7)
+14:40:48  INFO   ============================================================
+14:40:48  INFO   FIT MOSS CONSTANT k
+14:40:48  INFO   ============================================================
+14:40:48  INFO   [MOSS fit] n_co_labeled = 125
+14:40:48  INFO   [MOSS fit] Nc·Nc·Egc products: median=14.6043  mean=14.4408  std=2.5175  range=[8.685, 21.122]
+14:40:48  INFO   [MOSS fit] coefficient of variation (std/mean) = 0.174   (smaller = tighter physics; >0.5 = weak law)
+14:40:48  INFO   [MOSS fit] using k = median = 14.6043
+14:40:48  INFO   [MOSS fit] R² of Moss prediction on the 26 fit rows: 0.3944   (sanity check — should be modest since k fits ONE global constant)
+14:40:48  INFO   ============================================================
+14:40:48  INFO   ALPHA TUNING FOR NC
+14:40:48  INFO   ============================================================
+14:40:48  INFO   [MOSS α tune] n_valid=229   Chemprop Nc R²=0.8681   pure-Moss R²=0.4308
+14:40:48  INFO   [MOSS α tune] best α = 0.900   blend R² = 0.8726   Δ vs baseline = +0.0045
+14:40:48  INFO   ============================================================
+14:40:48  INFO   APPLY TO INPUT SUBMISSION (Nc rows only)
+14:40:48  INFO   ============================================================
+14:40:48  INFO   loading Chemprop refit test predictions...
+14:40:50  INFO     Chemprop test predictions: (4133, 7)   n_test_canons=4133
+14:40:50  INFO   loading input submission: /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_bandgap_koopmans_postfit/submission.csv
+14:40:50  INFO     input submission: (4940, 2)  (LB reference: 0.902)
+14:40:51  INFO   [MOSS apply] modifying 153 Nc test rows
+14:40:51  INFO   [MOSS apply] mean |Δ|=0.0125   max |Δ|=0.0964
+14:40:51  INFO   [MOSS apply] new pred range: [1.5363, 2.6218]   (orig: [1.5643, 2.6285])
+14:40:51  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_moss_postfit_nc/submission.csv   rows=4940
+14:40:51  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_moss_postfit_nc/moss_summary.json
+14:40:51  INFO   ============================================================
+14:40:51  INFO   DECISION GUIDANCE
+14:40:51  INFO   ============================================================
+14:40:51  INFO   Input submission LB (reference): 0.902
+14:40:51  INFO   Fitted k = 14.6043   α = 0.900
+14:40:51  INFO   Nc OOF R²: 0.8681 → 0.8726   Δ = +0.0045
+14:40:51  INFO   Expected 7-target mean R² lift: +0.0006   (one target out of seven)
+14:40:51  INFO   SUBMIT: expected LB ≈ 0.9026   (range: 0.902 to 0.905)
+14:40:51  INFO   wall time: 5.4s

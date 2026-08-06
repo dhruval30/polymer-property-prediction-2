@@ -1,0 +1,65 @@
+{
+  "exp_name": "exp_moss_postfit_nc",
+  "config": {
+    "input_submission": "/Users/dhruval/Documents/polymer-property-prediction-2/results/exp_bandgap_koopmans_postfit/submission.csv",
+    "input_lb_reference": 0.902,
+    "chemprop_source": "/Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chemprop_multitask_cpu_3seed",
+    "egc_floor_ev": 0.5,
+    "alpha_grid": [
+      0.5,
+      0.525,
+      0.55,
+      0.5750000000000001,
+      0.6000000000000001,
+      0.6250000000000001,
+      0.6500000000000001,
+      0.6750000000000002,
+      0.7000000000000002,
+      0.7250000000000002,
+      0.7500000000000002,
+      0.7750000000000002,
+      0.8000000000000003,
+      0.8250000000000003,
+      0.8500000000000003,
+      0.8750000000000003,
+      0.9000000000000004,
+      0.9250000000000004,
+      0.9500000000000004,
+      0.9750000000000004,
+      1.0000000000000004
+    ],
+    "alpha_floor": 0.5,
+    "alpha_ceiling": 0.99
+  },
+  "physics_recipe": "Nc\u00b2 \u00b7 Egc \u2248 k    \u2192    Nc_moss = sqrt(k / max(Egc, floor))",
+  "moss_fit": {
+    "n_co_labeled": 125,
+    "k_median": 14.604273796081543,
+    "k_mean": 14.44078540802002,
+    "k_std": 2.5174646377563477,
+    "k_range": [
+      8.685107231140137,
+      21.121505737304688
+    ],
+    "k_cov": 0.17433017433790104,
+    "k_used": 14.604273796081543,
+    "r2_moss_on_fit": 0.3943723440170288
+  },
+  "alpha_tuning": {
+    "n_labeled": 229,
+    "n_valid": 229,
+    "n_egc_clipped": 0,
+    "r2_baseline": 0.868058443069458,
+    "r2_pure_moss": 0.43082213401794434,
+    "best_alpha": 0.9000000000000004,
+    "r2_blend": 0.8725559002868014,
+    "delta_r2": 0.0044974572173434035
+  },
+  "test_modification": {
+    "n_rows": 153,
+    "mean_abs_diff": 0.012463936188348696,
+    "max_abs_diff": 0.09642737368089893,
+    "n_clipped_egc_test": 0
+  },
+  "elapsed_seconds": 5.38
+}
