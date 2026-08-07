@@ -1,0 +1,52 @@
+11:56:32  INFO   logging to /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_isotonic_calibration_cv/run.log
+11:56:32  INFO   === exp_isotonic_calibration_cv ===
+11:56:32  INFO   Input submission: /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_bandgap_koopmans_postfit/submission.csv  (LB 0.902)
+11:56:32  INFO   Blend OOF:        /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_blend_nnls_3seed/blended_oof.csv
+11:56:32  INFO   Chemprop source:  /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chemprop_multitask_cpu_3seed
+11:56:32  INFO   CV splits: 5 (seed 42)
+11:56:32  INFO   Decision gates: sum ΔR² > 0.01 → SUBMIT; per-target apply if honest Δ > 0.003
+11:56:32  INFO   Koopmans alphas: egc=0.900  ei=0.500  eea=0.600
+11:56:32  INFO   loading train.csv...
+11:56:34  INFO   train canons: 5920
+11:56:34  INFO   blend OOF: (7405, 6)
+11:56:34  INFO   chemprop OOF matrix: (5920, 7)   missing rows: 0
+11:56:34  INFO   ============================================================
+11:56:34  INFO   RECONSTRUCT KOOPMANS OOF (blend + α·physics for egc/ei/eea)
+11:56:34  INFO   ============================================================
+11:56:34  INFO   [koopmans OOF egc] α=0.900   n_rows=2028   mean |Δ|=0.0279
+11:56:34  INFO   [koopmans OOF ei] α=0.500   n_rows=222   mean |Δ|=0.1012
+11:56:34  INFO   [koopmans OOF eea] α=0.600   n_rows=221   mean |Δ|=0.0733
+11:56:34  INFO   ============================================================
+11:56:34  INFO   HONEST NESTED-CV ISOTONIC EVALUATION
+11:56:34  INFO     (5-fold KFold within each target's OOF rows)
+11:56:34  INFO   ============================================================
+11:56:34  INFO   [ISO  eea] n=  221  raw R²=0.9185  in-sample R²=0.9402 (Δ=+0.0216)  HONEST-CV R²=0.9178 (Δ=-0.0007)  overfit gap=+0.0223
+11:56:34  INFO   [ISO  egb] n=  337  raw R²=0.9351  in-sample R²=0.9504 (Δ=+0.0154)  HONEST-CV R²=0.9308 (Δ=-0.0043)  overfit gap=+0.0197
+11:56:34  INFO   [ISO  egc] n= 2028  raw R²=0.9162  in-sample R²=0.9244 (Δ=+0.0082)  HONEST-CV R²=0.9166 (Δ=+0.0004)  overfit gap=+0.0078
+11:56:34  INFO   [ISO   ei] n=  222  raw R²=0.8139  in-sample R²=0.8521 (Δ=+0.0382)  HONEST-CV R²=0.8040 (Δ=-0.0099)  overfit gap=+0.0481
+11:56:34  INFO   [ISO  eps] n=  229  raw R²=0.8362  in-sample R²=0.8801 (Δ=+0.0439)  HONEST-CV R²=0.8332 (Δ=-0.0029)  overfit gap=+0.0468
+11:56:34  INFO   [ISO   nc] n=  229  raw R²=0.8858  in-sample R²=0.9140 (Δ=+0.0281)  HONEST-CV R²=0.8521 (Δ=-0.0337)  overfit gap=+0.0618
+11:56:35  INFO   [ISO   tg] n= 4139  raw R²=0.9170  in-sample R²=0.9206 (Δ=+0.0036)  HONEST-CV R²=0.9156 (Δ=-0.0014)  overfit gap=+0.0050
+11:56:35  INFO   ============================================================
+11:56:35  INFO   DECISION
+11:56:35  INFO   ============================================================
+11:56:35  INFO   sum in-sample ΔR² (overfit reference): +0.1590
+11:56:35  INFO   sum HONEST-CV ΔR²:                     -0.0526
+11:56:35  INFO   overfit inflation ratio: -3.03x
+11:56:35  INFO   targets that clear per-target apply threshold (0.003):
+11:56:35  INFO     ✗ eea: honest Δ=-0.0007
+11:56:35  INFO     ✗ egb: honest Δ=-0.0043
+11:56:35  INFO     ✗ egc: honest Δ=+0.0004
+11:56:35  INFO     ✗  ei: honest Δ=-0.0099
+11:56:35  INFO     ✗ eps: honest Δ=-0.0029
+11:56:35  INFO     ✗  nc: honest Δ=-0.0337
+11:56:35  INFO     ✗  tg: honest Δ=-0.0014
+11:56:35  INFO   → 0/7 targets will be calibrated
+11:56:35  INFO   ❌ SKIP: honest sum ΔR² = -0.0526 ≤ 0.01. Not worth a sub slot. Lock 0.902.
+11:56:35  INFO   submission.csv NOT written (decision=SKIP)
+11:56:35  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_isotonic_calibration_cv/per_target_diagnostics.csv
+11:56:35  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_isotonic_calibration_cv/calibration_summary.json
+11:56:35  INFO   wall time: 2.8s
+11:56:35  INFO   ============================================================
+11:56:35  INFO   FINAL DECISION: SKIP   honest sum ΔR² = -0.0526
+11:56:35  INFO   ============================================================

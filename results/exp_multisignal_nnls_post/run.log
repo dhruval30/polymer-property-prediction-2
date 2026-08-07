@@ -1,0 +1,106 @@
+15:06:13  INFO   logging to /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_multisignal_nnls_post/run.log
+15:06:13  INFO   === exp_multisignal_nnls_post ===
+15:06:13  INFO   Input submission: /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_bandgap_koopmans_postfit/submission.csv  (LB 0.902)
+15:06:13  INFO   Chemprop source:  /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chemprop_multitask_cpu_3seed
+15:06:13  INFO   Decision thresholds: sum ΔR² > 0.015 → SUBMIT   [0.008, 0.015] → BORDERLINE   < 0.008 → SKIP
+15:06:13  INFO   Per-target guard rails: w_own in [0.5, 0.99]
+15:06:13  INFO   ============================================================
+15:06:13  INFO   LOAD CHEMPROP OOF + LABELS
+15:06:13  INFO   ============================================================
+15:06:13  INFO   loading train.csv...
+15:06:16  INFO     n_canon=5920   y shape=(5920, 7)
+15:06:16  INFO        eea:   221 labeled
+15:06:16  INFO        egb:   337 labeled
+15:06:16  INFO        egc:  2028 labeled
+15:06:16  INFO         ei:   222 labeled
+15:06:16  INFO        eps:   229 labeled
+15:06:16  INFO         nc:   229 labeled
+15:06:16  INFO         tg:  4139 labeled
+15:06:16  INFO     loaded fold 0: (1184, 7)
+15:06:16  INFO     loaded fold 1: (1184, 7)
+15:06:16  INFO     loaded fold 2: (1184, 7)
+15:06:16  INFO     loaded fold 3: (1184, 7)
+15:06:16  INFO     loaded fold 4: (1184, 7)
+15:06:16  INFO   ============================================================
+15:06:16  INFO   FIT LINEAR REGRESSIONS ON CO-LABELED TRAIN ROWS
+15:06:16  INFO   ============================================================
+15:06:16  INFO   [linear egb→ nc] n= 133   a=+2.3061   b=-0.1074   in-sample R²=0.6823
+15:06:16  INFO   [linear egc→ nc] n= 125   a=+2.4716   b=-0.1328   in-sample R²=0.6151
+15:06:16  INFO   [maxwell EPS from Nc²] n= 134   a=+1.0401   b=+0.6155   in-sample R²=0.8553
+15:06:16  INFO   [linear egb→eps] n= 132   a=+5.9018   b=-0.3711   in-sample R²=0.4696
+15:06:16  INFO   [linear egc→eps] n= 115   a=+6.3097   b=-0.4252   in-sample R²=0.4103
+15:06:16  INFO   [linear egb→egc] n= 175   a=+1.1787   b=+0.8011   in-sample R²=0.9282
+15:06:16  INFO   ============================================================
+15:06:16  INFO   NNLS PER TARGET (on Chemprop OOF signal matrices)
+15:06:16  INFO   ============================================================
+15:06:16  INFO   ------------------------------------------------------------
+15:06:16  INFO   [NNLS nc] n_valid rows: 229   n_signals: 3
+15:06:16  INFO   [NNLS nc] signal '            own_Nc':  R² alone = +0.8681
+15:06:16  INFO   [NNLS nc] signal '    linear(Egb→Nc)':  R² alone = +0.6247
+15:06:16  INFO   [NNLS nc] signal '    linear(Egc→Nc)':  R² alone = +0.6351
+15:06:16  INFO   [NNLS nc] NNLS raw weights (sum=1.0003):
+15:06:16  INFO                   own_Nc = 0.9436
+15:06:16  INFO           linear(Egb→Nc) = 0.0000
+15:06:16  INFO           linear(Egc→Nc) = 0.0567
+15:06:16  INFO   [NNLS nc] normalized weights (sum=1):
+15:06:16  INFO                   own_Nc = 0.9434
+15:06:16  INFO           linear(Egb→Nc) = 0.0000
+15:06:16  INFO           linear(Egc→Nc) = 0.0566
+15:06:16  INFO   [NNLS nc] blend R² = 0.8689   Δ vs own = +0.0008
+15:06:16  INFO   ------------------------------------------------------------
+15:06:16  INFO   [NNLS eps] n_valid rows: 229   n_signals: 4
+15:06:16  INFO   [NNLS eps] signal '           own_EPS':  R² alone = +0.7916
+15:06:16  INFO   [NNLS eps] signal '      maxwell(Nc²)':  R² alone = +0.7115
+15:06:16  INFO   [NNLS eps] signal '   linear(Egb→EPS)':  R² alone = +0.4334
+15:06:16  INFO   [NNLS eps] signal '   linear(Egc→EPS)':  R² alone = +0.4466
+15:06:16  INFO   [NNLS eps] NNLS raw weights (sum=1.0007):
+15:06:16  INFO                  own_EPS = 0.8376
+15:06:16  INFO             maxwell(Nc²) = 0.1550
+15:06:16  INFO          linear(Egb→EPS) = 0.0000
+15:06:16  INFO          linear(Egc→EPS) = 0.0081
+15:06:16  INFO   [NNLS eps] normalized weights (sum=1):
+15:06:16  INFO                  own_EPS = 0.8371
+15:06:16  INFO             maxwell(Nc²) = 0.1548
+15:06:16  INFO          linear(Egb→EPS) = 0.0000
+15:06:16  INFO          linear(Egc→EPS) = 0.0081
+15:06:16  INFO   [NNLS eps] blend R² = 0.7948   Δ vs own = +0.0032
+15:06:16  INFO   ------------------------------------------------------------
+15:06:16  INFO   [NNLS egc] n_valid rows: 2028   n_signals: 3
+15:06:16  INFO   [NNLS egc] signal '           own_Egc':  R² alone = +0.9070
+15:06:16  INFO   [NNLS egc] signal '  koopmans(Ei-Eea)':  R² alone = +0.8609
+15:06:16  INFO   [NNLS egc] signal '   linear(Egb→Egc)':  R² alone = +0.8504
+15:06:16  INFO   [NNLS egc] NNLS raw weights (sum=0.9982):
+15:06:16  INFO                  own_Egc = 0.8663
+15:06:16  INFO         koopmans(Ei-Eea) = 0.0565
+15:06:16  INFO          linear(Egb→Egc) = 0.0753
+15:06:16  INFO   [NNLS egc] normalized weights (sum=1):
+15:06:16  INFO                  own_Egc = 0.8679
+15:06:16  INFO         koopmans(Ei-Eea) = 0.0566
+15:06:16  INFO          linear(Egb→Egc) = 0.0755
+15:06:16  INFO   [NNLS egc] blend R² = 0.9079   Δ vs own = +0.0009
+15:06:16  INFO   ============================================================
+15:06:16  INFO   DECISION
+15:06:16  INFO   ============================================================
+15:06:16  INFO   per-target ΔR²:
+15:06:16  INFO      nc:  +0.0008   (w_own = 0.943)
+15:06:16  INFO     eps:  +0.0032   (w_own = 0.837)
+15:06:16  INFO     egc:  +0.0009   (w_own = 0.868)
+15:06:16  INFO   SUM ΔR² across 3 targets: +0.0050
+15:06:16  INFO   expected 7-target mean R² lift: +0.0007
+15:06:16  INFO   ❌ SKIP: sum ΔR² < 0.008. Signal too weak to reliably transfer to LB. Recommendation: don't burn a sub slot.
+15:06:16  INFO   ============================================================
+15:06:16  INFO   APPLY WEIGHTS TO SUBMISSION (writing regardless of decision)
+15:06:16  INFO   ============================================================
+15:06:16  INFO   loading Chemprop refit test predictions...
+15:06:17  INFO     Chemprop test predictions: (4133, 7)
+15:06:17  INFO   loading input submission: /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_bandgap_koopmans_postfit/submission.csv
+15:06:17  INFO     input submission: (4940, 2)   (LB reference: 0.902)
+15:06:19  INFO   [APPLY nc] n=153  mean |Δ|=0.0052  max |Δ|=0.0256   new range=[1.549, 2.603]  (orig: [1.564, 2.628])
+15:06:19  INFO   [APPLY eps] n=153  mean |Δ|=0.0347  max |Δ|=0.1450   new range=[3.172, 7.670]  (orig: [3.135, 7.608])
+15:06:19  INFO   [APPLY egc] n=1352  mean |Δ|=0.0276  max |Δ|=0.2635   new range=[-0.972, 8.729]  (orig: [-1.235, 8.718])
+15:06:19  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_multisignal_nnls_post/submission.csv   rows=4940
+15:06:19  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_multisignal_nnls_post/multisignal_summary.json
+15:06:19  INFO   wall time: 5.3s
+15:06:19  INFO   ============================================================
+15:06:19  INFO   FINAL DECISION: SKIP   |   submission ready at /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_multisignal_nnls_post/submission.csv
+15:06:19  INFO   ============================================================

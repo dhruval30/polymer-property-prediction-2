@@ -1,0 +1,130 @@
+{
+  "exp_name": "exp_isotonic_calibration_cv",
+  "config": {
+    "input_submission": "/Users/dhruval/Documents/polymer-property-prediction-2/results/exp_bandgap_koopmans_postfit/submission.csv",
+    "input_lb_reference": 0.902,
+    "cv_n_splits": 5,
+    "cv_seed": 42,
+    "submit_sum_delta_r2": 0.01,
+    "per_target_apply_delta": 0.003,
+    "koopmans_alphas": {
+      "egc": 0.9000000000000004,
+      "ei": 0.5,
+      "eea": 0.6000000000000001
+    }
+  },
+  "per_target": {
+    "eea": {
+      "n_rows": 221,
+      "r2_raw": 0.9185254497109223,
+      "r2_insample": 0.9401535751321062,
+      "r2_cv": 0.9178177111479298,
+      "delta_insample": 0.021628125421183864,
+      "delta_cv": -0.0007077385629925548,
+      "overfit_gap": 0.02233586398417642,
+      "y_pred_min": 0.3708035027656974,
+      "y_pred_max": 4.933755483591309
+    },
+    "egb": {
+      "n_rows": 337,
+      "r2_raw": 0.9350681003660359,
+      "r2_insample": 0.9504264540913939,
+      "r2_cv": 0.9307612766358927,
+      "delta_insample": 0.015358353725357987,
+      "delta_cv": -0.004306823730143239,
+      "overfit_gap": 0.019665177455501226,
+      "y_pred_min": 0.2588476375402378,
+      "y_pred_max": 9.278098263786934
+    },
+    "egc": {
+      "n_rows": 2028,
+      "r2_raw": 0.9162378825170083,
+      "r2_insample": 0.9244428025922632,
+      "r2_cv": 0.9165960208349075,
+      "delta_insample": 0.008204920075254862,
+      "delta_cv": 0.0003581383178992148,
+      "overfit_gap": 0.007846781757355648,
+      "y_pred_min": -2.158553701511954,
+      "y_pred_max": 8.709549543244664
+    },
+    "ei": {
+      "n_rows": 222,
+      "r2_raw": 0.8138854994384261,
+      "r2_insample": 0.8521021671314535,
+      "r2_cv": 0.8040274875468387,
+      "delta_insample": 0.03821666769302734,
+      "delta_cv": -0.009858011891587415,
+      "overfit_gap": 0.048074679584614755,
+      "y_pred_min": 4.4738707014340156,
+      "y_pred_max": 9.871484069165088
+    },
+    "eps": {
+      "n_rows": 229,
+      "r2_raw": 0.8361577755408062,
+      "r2_insample": 0.8800626011941711,
+      "r2_cv": 0.8332481911037433,
+      "delta_insample": 0.043904825653364954,
+      "delta_cv": -0.0029095844370629065,
+      "overfit_gap": 0.04681441009042786,
+      "y_pred_min": 3.204226574869929,
+      "y_pred_max": 7.255722426995394
+    },
+    "nc": {
+      "n_rows": 229,
+      "r2_raw": 0.8858406667439667,
+      "r2_insample": 0.9139722475551566,
+      "r2_cv": 0.8521308171612796,
+      "delta_insample": 0.028131580811189938,
+      "delta_cv": -0.03370984958268708,
+      "overfit_gap": 0.06184143039387702,
+      "y_pred_min": 1.558280515052139,
+      "y_pred_max": 2.583683629593512
+    },
+    "tg": {
+      "n_rows": 4139,
+      "r2_raw": 0.9170251974670726,
+      "r2_insample": 0.9205782216261571,
+      "r2_cv": 0.9155985669611026,
+      "delta_insample": 0.003553024159084539,
+      "delta_cv": -0.001426630505969917,
+      "overfit_gap": 0.004979654665054456,
+      "y_pred_min": -110.294757800583,
+      "y_pred_max": 418.79051529370383
+    }
+  },
+  "sum_delta_insample": 0.15899749753846348,
+  "sum_delta_honest_cv": -0.052560500392543896,
+  "decision": "SKIP",
+  "expected_lb_if_submitted": 0.8944913570867795,
+  "test_modification_stats": {
+    "eea": {
+      "applied": false,
+      "reason": "decision=SKIP"
+    },
+    "egb": {
+      "applied": false,
+      "reason": "decision=SKIP"
+    },
+    "egc": {
+      "applied": false,
+      "reason": "decision=SKIP"
+    },
+    "ei": {
+      "applied": false,
+      "reason": "decision=SKIP"
+    },
+    "eps": {
+      "applied": false,
+      "reason": "decision=SKIP"
+    },
+    "nc": {
+      "applied": false,
+      "reason": "decision=SKIP"
+    },
+    "tg": {
+      "applied": false,
+      "reason": "decision=SKIP"
+    }
+  },
+  "elapsed_seconds": 2.81
+}

@@ -1,0 +1,63 @@
+12:08:15  INFO   logging to /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_catboost_add_to_blend/run.log
+12:08:15  INFO   ============================================================
+12:08:15  INFO   === exp_catboost_add_to_blend — add existing CatBoost as 3rd blend base ===
+12:08:15  INFO   ============================================================
+12:08:15  INFO   CatBoost source: /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_chain_ext_catboost   (chain-ext features, mean R²=0.860)
+12:08:15  INFO   CHEMPROP_WEIGHT_FLOOR=0.4   APPLY_CHEMPROP_BIAS=0.15
+12:08:15  INFO   loading train.csv from /Users/dhruval/Documents/polymer-property-prediction-2/ppp-round-2
+12:08:19  INFO   train canons: 5920
+12:08:19  INFO   ============================================================
+12:08:19  INFO   LOAD + ALIGN 3 OOFs
+12:08:19  INFO   ============================================================
+12:08:19  INFO     blend_oof (7405, 6)   catboost_oof (7405, 4)
+12:08:19  INFO     aligned 3-way OOF (7405, 7)
+12:08:19  INFO   per-target CatBoost solo OOF R²:
+12:08:19  INFO     eea  CB=0.8612  LGB=0.8708  CP=0.9082
+12:08:19  INFO     egb  CB=0.9029  LGB=0.9105  CP=0.9305
+12:08:19  INFO     egc  CB=0.9052  LGB=0.9000  CP=0.9070
+12:08:19  INFO      ei  CB=0.7914  LGB=0.7933  CP=0.7766
+12:08:19  INFO     eps  CB=0.8109  LGB=0.8186  CP=0.7916
+12:08:19  INFO      nc  CB=0.8431  LGB=0.8603  CP=0.8681
+12:08:19  INFO      tg  CB=0.9087  LGB=0.9057  CP=0.9083
+12:08:19  INFO   test subs — LGB (4940, 2)  Chemprop (4940, 2)  CatBoost (4940, 2)
+12:08:19  INFO   NaN counts after merge — chemprop=0  lgb=0  catboost=0
+12:08:19  INFO   ============================================================
+12:08:19  INFO   3-WAY NNLS BLEND
+12:08:19  INFO   ============================================================
+12:08:19  INFO   [BLEND-3W eea] NNLS raw: c=0.719 l=0.232 cb=0.055   final: c=0.865 l=0.109 cb=0.026
+12:08:19  INFO   [BLEND-3W eea] 2-way R²=0.9125  3-way R²=0.9127   Δ vs 2-way=+0.0002
+12:08:19  INFO   [BLEND-3W egb] NNLS raw: c=0.683 l=0.327 cb=0.000   final: c=0.826 l=0.174 cb=0.000
+12:08:19  INFO   [BLEND-3W egb] 2-way R²=0.9351  3-way R²=0.9351   Δ vs 2-way=+0.0000
+12:08:19  INFO   [BLEND-3W egc] NNLS raw: c=0.500 l=0.190 cb=0.310   final: c=0.650 l=0.133 cb=0.217
+12:08:19  INFO   [BLEND-3W egc] 2-way R²=0.9170  3-way R²=0.9185   Δ vs 2-way=+0.0015
+12:08:19  INFO   [BLEND-3W ei] NNLS raw: c=0.373 l=0.341 cb=0.286   final: c=0.523 l=0.260 cb=0.217
+12:08:19  INFO   [BLEND-3W ei] 2-way R²=0.8073  3-way R²=0.8095   Δ vs 2-way=+0.0023
+12:08:19  INFO   [BLEND-3W eps] NNLS raw: c=0.380 l=0.522 cb=0.103   final: c=0.528 l=0.394 cb=0.078
+12:08:19  INFO   [BLEND-3W eps] 2-way R²=0.8362  3-way R²=0.8364   Δ vs 2-way=+0.0003
+12:08:19  INFO   [BLEND-3W nc] NNLS raw: c=0.541 l=0.459 cb=0.000   final: c=0.691 l=0.309 cb=0.000
+12:08:19  INFO   [BLEND-3W nc] 2-way R²=0.8858  3-way R²=0.8858   Δ vs 2-way=+0.0000
+12:08:19  INFO   [BLEND-3W tg] NNLS raw: c=0.472 l=0.210 cb=0.319   final: c=0.621 l=0.150 cb=0.228
+12:08:19  INFO   [BLEND-3W tg] 2-way R²=0.9170  3-way R²=0.9182   Δ vs 2-way=+0.0012
+12:08:19  INFO   SUM ΔR² (3-way vs 2-way) = +0.0054
+12:08:19  INFO   ============================================================
+12:08:19  INFO   KOOPMANS POST-FIT ON 3-WAY BLEND (retune α on new OOF)
+12:08:19  INFO   ============================================================
+12:08:19  INFO   chemprop OOF matrix (5920, 7)   missing rows: 0
+12:08:19  INFO   [KOOPMANS egc] base R²=0.9185  pure-phys R²=0.8609  best α=1.000  blend R²=0.9185  Δ=+0.0000
+12:08:19  INFO   [KOOPMANS ei] base R²=0.8095  pure-phys R²=0.7868  best α=0.675  blend R²=0.8171  Δ=+0.0076
+12:08:19  INFO   [KOOPMANS eea] base R²=0.9127  pure-phys R²=0.8980  best α=0.650  blend R²=0.9187  Δ=+0.0061
+12:08:19  INFO   [KOOPMANS] sum ΔR² = +0.0137   expected 7-target mean uplift from Koopmans = +0.0020
+12:08:19  INFO   ============================================================
+12:08:19  INFO   APPLY KOOPMANS TO 3-WAY BLEND TEST PREDICTIONS
+12:08:19  INFO   ============================================================
+12:08:21  INFO   [KOOPMANS egc] α=1.000  n_rows=1352  mean |Δ|=0.0000  max |Δ|=0.0000
+12:08:21  INFO   [KOOPMANS ei] α=0.675  n_rows=148  mean |Δ|=0.0588  max |Δ|=0.3313
+12:08:21  INFO   [KOOPMANS eea] α=0.650  n_rows=147  mean |Δ|=0.0599  max |Δ|=0.3765
+12:08:21  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_catboost_add_to_blend/submission.csv  rows=4940  NaNs=0
+12:08:21  INFO   ============================================================
+12:08:21  INFO   FINAL SUBMISSION: /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_catboost_add_to_blend/submission.csv
+12:08:21  INFO   SUM ΔR² (3-way blend vs 2-way blend): +0.0054
+12:08:21  INFO   SUM ΔR² (Koopmans on 3-way): +0.0137
+12:08:21  INFO   Wall time: 6.0s
+12:08:21  INFO   Baseline LB: 0.902.  If SUM Δ vs 2-way is +0.005 or more → likely LB gain.
+12:08:21  INFO   ============================================================

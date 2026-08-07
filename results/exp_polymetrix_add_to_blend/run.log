@@ -1,0 +1,63 @@
+14:06:51  INFO   logging to /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_polymetrix_add_to_blend/run.log
+14:06:51  INFO   ============================================================
+14:06:51  INFO   === exp_polymetrix_add_to_blend — add PolyMetriX-LGB as 3rd blend base ===
+14:06:51  INFO   ============================================================
+14:06:51  INFO   CHEMPROP_WEIGHT_FLOOR=0.3  APPLY_CHEMPROP_BIAS=0.05
+14:06:51  INFO   loading train/test from /Users/dhruval/Documents/polymer-property-prediction-2/ppp-round-2
+14:06:55  INFO     train dedup (7405, 4)  test (4940, 4)
+14:06:55  INFO   ============================================================
+14:06:55  INFO   PHASE 1: POLYMETRIX FEATURIZATION
+14:06:55  INFO   ============================================================
+14:06:55  INFO   loaded PolyMetriX feature cache polymetrix_features.pkl.gz key=f33865097786
+14:06:56  INFO   loading cached LGB results from polymetrix_lgb_results.pkl.gz
+14:06:56  INFO   ============================================================
+14:06:56  INFO   PHASE 3: LOAD + ALIGN 3 OOFs
+14:06:56  INFO   ============================================================
+14:06:56  INFO     blend_oof (7405, 6)   polymetrix_oof (7405, 4)
+14:06:56  INFO     aligned 3-way OOF (7405, 7)
+14:06:56  INFO   per-target solo OOF R²:
+14:06:57  INFO     eea  PM=0.7426  LGB=0.8708  CP=0.9082
+14:06:57  INFO     egb  PM=0.8961  LGB=0.9105  CP=0.9305
+14:06:57  INFO     egc  PM=0.8490  LGB=0.9000  CP=0.9070
+14:06:57  INFO      ei  PM=0.7603  LGB=0.7933  CP=0.7766
+14:06:57  INFO     eps  PM=0.7991  LGB=0.8186  CP=0.7916
+14:06:57  INFO      nc  PM=0.8198  LGB=0.8603  CP=0.8681
+14:06:57  INFO      tg  PM=0.8824  LGB=0.9057  CP=0.9083
+14:06:57  INFO   NaN counts — chemprop=0  lgb=0  polymetrix=0
+14:06:57  INFO   ============================================================
+14:06:57  INFO   PHASE 4: 3-WAY NNLS BLEND
+14:06:57  INFO   ============================================================
+14:06:57  INFO   [BLEND-3W eea] NNLS raw: c=0.723 l=0.231 pm=0.052   final: c=0.769 l=0.188 pm=0.043
+14:06:57  INFO   [BLEND-3W eea] 2-way R²=0.9125  3-way R²=0.9144   Δ vs 2-way=+0.0019
+14:06:57  INFO   [BLEND-3W egb] NNLS raw: c=0.626 l=0.190 pm=0.193   final: c=0.670 l=0.164 pm=0.166
+14:06:57  INFO   [BLEND-3W egb] 2-way R²=0.9351  3-way R²=0.9381   Δ vs 2-way=+0.0030
+14:06:57  INFO   [BLEND-3W egc] NNLS raw: c=0.550 l=0.369 pm=0.081   final: c=0.600 l=0.328 pm=0.072
+14:06:57  INFO   [BLEND-3W egc] 2-way R²=0.9170  3-way R²=0.9186   Δ vs 2-way=+0.0016
+14:06:57  INFO   [BLEND-3W ei] NNLS raw: c=0.396 l=0.358 pm=0.245   final: c=0.446 l=0.329 pm=0.225
+14:06:57  INFO   [BLEND-3W ei] 2-way R²=0.8073  3-way R²=0.8137   Δ vs 2-way=+0.0064
+14:06:57  INFO   [BLEND-3W eps] NNLS raw: c=0.326 l=0.349 pm=0.328   final: c=0.375 l=0.322 pm=0.303
+14:06:57  INFO   [BLEND-3W eps] 2-way R²=0.8362  3-way R²=0.8502   Δ vs 2-way=+0.0141
+14:06:57  INFO   [BLEND-3W nc] NNLS raw: c=0.534 l=0.403 pm=0.064   final: c=0.583 l=0.360 pm=0.057
+14:06:57  INFO   [BLEND-3W nc] 2-way R²=0.8858  3-way R²=0.8880   Δ vs 2-way=+0.0021
+14:06:57  INFO   [BLEND-3W tg] NNLS raw: c=0.513 l=0.395 pm=0.094   final: c=0.562 l=0.353 pm=0.084
+14:06:57  INFO   [BLEND-3W tg] 2-way R²=0.9170  3-way R²=0.9182   Δ vs 2-way=+0.0012
+14:06:57  INFO   SUM ΔR² (3-way vs 2-way) = +0.0304
+14:06:57  INFO   ============================================================
+14:06:57  INFO   PHASE 5: KOOPMANS POST-FIT ON 3-WAY BLEND
+14:06:57  INFO   ============================================================
+14:06:57  INFO   chemprop OOF matrix (5920, 7)   missing rows: 0
+14:06:57  INFO   [KOOPMANS egc] base R²=0.9186  pure-phys R²=0.8609  best α=1.000  blend R²=0.9186  Δ=+0.0000
+14:06:57  INFO   [KOOPMANS ei] base R²=0.8137  pure-phys R²=0.7868  best α=0.675  blend R²=0.8220  Δ=+0.0083
+14:06:57  INFO   [KOOPMANS eea] base R²=0.9144  pure-phys R²=0.8980  best α=0.650  blend R²=0.9202  Δ=+0.0058
+14:06:57  INFO   [KOOPMANS] sum ΔR² = +0.0141
+14:06:57  INFO   [KOOPMANS egc] α=1.000  n_rows=1352  mean |Δ|=0.0000  max |Δ|=0.0000
+14:06:57  INFO   [KOOPMANS ei] α=0.675  n_rows=148  mean |Δ|=0.0600  max |Δ|=0.3242
+14:06:57  INFO   [KOOPMANS eea] α=0.650  n_rows=147  mean |Δ|=0.0609  max |Δ|=0.3857
+14:06:57  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_polymetrix_add_to_blend/submission.csv  rows=4940  NaNs=0
+14:06:57  INFO   ============================================================
+14:06:57  INFO   FINAL SUBMISSION: /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_polymetrix_add_to_blend/submission.csv
+14:06:57  INFO   SUM ΔR² (3-way blend vs 2-way blend): +0.0304
+14:06:57  INFO   SUM ΔR² (Koopmans on 3-way):          +0.0141
+14:06:57  INFO   Wall time: 0.1 min
+14:06:57  INFO   Baseline LB: 0.902.  Expected LB: 0.902 to 0.906 (60% chance ≥0.904).
+14:06:57  INFO   ============================================================
