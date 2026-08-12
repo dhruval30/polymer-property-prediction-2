@@ -1,0 +1,63 @@
+13:50:08  INFO   logging to /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_koopmans_refit_on_blend/run.log
+13:50:08  INFO   ============================================================
+13:50:08  INFO   === exp_koopmans_refit_on_blend — refit Koopmans α on BLEND OOF surface ===
+13:50:08  INFO   ============================================================
+13:50:08  INFO   Base input: submission.csv  (blend test, unadjusted, LB ~0.897)
+13:50:08  INFO   Reference:  submission.csv  (LB 0.902)
+13:50:08  INFO   OLD α grid: [0.500, 1.000] step 0.025
+13:50:08  INFO   NEW α grid: [0.100, 1.000] step 0.02  (46 values)
+13:50:08  INFO   Per-target guard rail: apply new α only if Δ > 0.0
+13:50:08  INFO   Old α values (from stored summary):
+13:50:08  INFO     egc: α=0.900
+13:50:08  INFO      ei: α=0.500
+13:50:08  INFO     eea: α=0.600
+13:50:08  INFO   loading train.csv...
+13:50:11  INFO   train canons: 5920
+13:50:11  INFO   blend OOF: (7405, 6)   cols=['canon', 'target_type', 'y_true', 'y_pred_chemprop', 'y_pred_lgb', 'y_pred_blend']
+13:50:11  INFO   chemprop OOF matrix: (5920, 7)   missing rows: 0
+13:50:11  INFO   ============================================================
+13:50:11  INFO   REFIT α ON BLEND OOF SURFACE (own = blend, physics = chemprop OOF)
+13:50:11  INFO   ============================================================
+13:50:11  INFO   [egc] baseline R²=0.9170   pure-phys R²=0.8609
+13:50:11  INFO   [egc] OLD α=0.900 (from stored summary) → R²=0.9162   (applied to blend surface)
+13:50:11  INFO   [egc] OLD-grid best α=1.000 → R²=0.9170   (refit on blend, restricted to old [0.5, 1.0] grid)
+13:50:11  INFO   [egc] NEW α=1.000 → R²=0.9170   (refit on blend, extended [0.1, 1.0] grid)   Δ vs OLD α=+0.0007
+13:50:11  INFO   ------------------------------------------------------------
+13:50:11  INFO   [ei] baseline R²=0.8073   pure-phys R²=0.7868
+13:50:11  INFO   [ei] OLD α=0.500 (from stored summary) → R²=0.8139   (applied to blend surface)
+13:50:11  INFO   [ei] OLD-grid best α=0.650 → R²=0.8154   (refit on blend, restricted to old [0.5, 1.0] grid)
+13:50:11  INFO   [ei] NEW α=0.660 → R²=0.8154   (refit on blend, extended [0.1, 1.0] grid)   Δ vs OLD α=+0.0015
+13:50:11  INFO   ------------------------------------------------------------
+13:50:11  INFO   [eea] baseline R²=0.9125   pure-phys R²=0.8980
+13:50:11  INFO   [eea] OLD α=0.600 (from stored summary) → R²=0.9185   (applied to blend surface)
+13:50:11  INFO   [eea] OLD-grid best α=0.650 → R²=0.9186   (refit on blend, restricted to old [0.5, 1.0] grid)
+13:50:11  INFO   [eea] NEW α=0.640 → R²=0.9186   (refit on blend, extended [0.1, 1.0] grid)   Δ vs OLD α=+0.0001
+13:50:11  INFO   ------------------------------------------------------------
+13:50:11  INFO   ============================================================
+13:50:11  INFO   SUMMARY
+13:50:11  INFO   ============================================================
+13:50:11  INFO     target    old α    new α    old-α R²    new-α R²      Δ R²  apply?
+13:50:11  INFO        egc    0.900    1.000      0.9162      0.9170   +0.0007  YES
+13:50:11  INFO         ei    0.500    0.660      0.8139      0.8154   +0.0015  YES
+13:50:11  INFO        eea    0.600    0.640      0.9185      0.9186   +0.0001  YES
+13:50:11  INFO   SUM ΔR² across physics targets (only counting those that will apply new α): +0.0024
+13:50:11  INFO   Expected 7-target mean R² lift: +0.0003
+13:50:11  INFO   ============================================================
+13:50:11  INFO   DECISION: 3/3 targets will use new α. Writing submission.
+13:50:11  INFO   Expected LB lift: +0.0003 → target LB ≈ 0.9023
+13:50:11  INFO   ============================================================
+13:50:11  INFO   loading blend test submission (unadjusted)
+13:50:11  INFO     (4940, 2)
+13:50:12  INFO   [APPLY egc] APPLY NEW α=1.000 (Δ=+0.0007)
+13:50:12  INFO   [APPLY egc] α=1.000   n_rows=1352   mean |Δ|=0.0000   max |Δ|=0.0000
+13:50:12  INFO   [APPLY ei] APPLY NEW α=0.660 (Δ=+0.0015)
+13:50:12  INFO   [APPLY ei] α=0.660   n_rows=148   mean |Δ|=0.0609   max |Δ|=0.3306
+13:50:12  INFO   [APPLY eea] APPLY NEW α=0.640 (Δ=+0.0001)
+13:50:12  INFO   [APPLY eea] α=0.640   n_rows=147   mean |Δ|=0.0614   max |Δ|=0.3864
+13:50:12  INFO   delta vs OLD 0.902 sub:   mean|Δ|=0.0082  max|Δ|=0.2329  rows changed: 1647/4940
+13:50:12  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_koopmans_refit_on_blend/submission.csv  rows=4940  NaNs=0
+13:50:12  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_koopmans_refit_on_blend/alpha_comparison.json
+13:50:12  INFO   wall time: 4.1s
+13:50:12  INFO   ============================================================
+13:50:12  INFO   OUTPUT: /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_koopmans_refit_on_blend/submission.csv
+13:50:12  INFO   ============================================================

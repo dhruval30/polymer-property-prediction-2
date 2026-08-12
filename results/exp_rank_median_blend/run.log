@@ -1,0 +1,56 @@
+14:22:50  INFO   logging to /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_rank_median_blend/run.log
+14:22:50  INFO   ============================================================
+14:22:50  INFO   === exp_rank_median_blend — median blend of top LB submissions ===
+14:22:50  INFO   ============================================================
+14:22:50  INFO   loading candidate submissions:
+14:22:50  INFO     loaded   koopmans_postfit  LB=0.902  rows=4940  target range=[-104.347, 418.360]
+14:22:50  INFO     loaded       koopmans_egb  LB=0.902  rows=4940  target range=[-104.347, 418.360]
+14:22:50  INFO     loaded            moss_nc  LB=0.901  rows=4940  target range=[-104.347, 418.360]
+14:22:50  INFO     loaded       catboost_add  LB=None  rows=4940  target range=[-103.990, 412.465]
+14:22:50  INFO     loaded     polymetrix_add  LB=0.9  rows=4940  target range=[-101.057, 416.628]
+14:22:50  INFO     loaded   multisignal_nnls  LB=None  rows=4940  target range=[-104.347, 418.360]
+14:22:50  INFO   loaded 6/6 candidates
+14:22:50  INFO   ============================================================
+14:22:50  INFO   BLEND: top-3 by LB (median)
+14:22:50  INFO   ============================================================
+14:22:50  INFO   [top3] median blend of 3 sources: ['koopmans_postfit', 'koopmans_egb', 'moss_nc']
+14:22:50  INFO   [top3] per-source diagnostics (delta from median):
+14:22:50  INFO              t_koopmans_postfit  mean|Δ|=0.0000  max|Δ|=0.0000
+14:22:50  INFO                  t_koopmans_egb  mean|Δ|=0.0019  max|Δ|=0.1225
+14:22:50  INFO                       t_moss_nc  mean|Δ|=0.0004  max|Δ|=0.0964
+14:22:50  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_rank_median_blend/submission_median_top3.csv  rows=4940
+14:22:50  INFO   per-target-type stats on blended submission:
+14:22:50  INFO      eea  n=  147  mean=   2.319  std=   0.996  range=[   0.112,    4.892]
+14:22:50  INFO      egb  n=  224  mean=   4.352  std=   1.860  range=[   0.889,    8.065]
+14:22:50  INFO      egc  n= 1352  mean=   4.561  std=   1.485  range=[  -1.235,    8.718]
+14:22:50  INFO       ei  n=  148  mean=   6.170  std=   0.820  range=[   4.667,    9.502]
+14:22:50  INFO      eps  n=  153  mean=   4.615  std=   1.005  range=[   3.135,    7.608]
+14:22:50  INFO       nc  n=  153  mean=   1.968  std=   0.229  range=[   1.564,    2.628]
+14:22:50  INFO       tg  n= 2763  mean= 136.923  std= 102.529  range=[-104.347,  418.360]
+14:22:50  INFO   ============================================================
+14:22:50  INFO   BLEND: top-5 (broader consensus, median)
+14:22:50  INFO   ============================================================
+14:22:50  INFO   [top5] median blend of 5 sources: ['koopmans_postfit', 'koopmans_egb', 'moss_nc', 'catboost_add', 'polymetrix_add']
+14:22:50  INFO   [top5] per-source diagnostics (delta from median):
+14:22:50  INFO              t_koopmans_postfit  mean|Δ|=0.0000  max|Δ|=0.0000
+14:22:50  INFO                  t_koopmans_egb  mean|Δ|=0.0019  max|Δ|=0.1225
+14:22:50  INFO                       t_moss_nc  mean|Δ|=0.0004  max|Δ|=0.0964
+14:22:50  INFO                  t_catboost_add  mean|Δ|=1.0658  max|Δ|=19.8363
+14:22:50  INFO                t_polymetrix_add  mean|Δ|=1.0570  max|Δ|=22.0840
+14:22:50  INFO   wrote /Users/dhruval/Documents/polymer-property-prediction-2/results/exp_rank_median_blend/submission_median_top5.csv  rows=4940
+14:22:50  INFO   per-target-type stats on blended submission:
+14:22:50  INFO      eea  n=  147  mean=   2.319  std=   0.996  range=[   0.112,    4.892]
+14:22:50  INFO      egb  n=  224  mean=   4.352  std=   1.860  range=[   0.889,    8.065]
+14:22:50  INFO      egc  n= 1352  mean=   4.561  std=   1.485  range=[  -1.235,    8.718]
+14:22:50  INFO       ei  n=  148  mean=   6.170  std=   0.820  range=[   4.667,    9.502]
+14:22:50  INFO      eps  n=  153  mean=   4.615  std=   1.005  range=[   3.135,    7.608]
+14:22:50  INFO       nc  n=  153  mean=   1.968  std=   0.229  range=[   1.564,    2.628]
+14:22:50  INFO       tg  n= 2763  mean= 136.923  std= 102.529  range=[-104.347,  418.360]
+14:22:50  INFO   ============================================================
+14:22:50  INFO   DELTA: median vs best individual sub (koopmans_postfit, LB 0.902)
+14:22:50  INFO   ============================================================
+14:22:50  INFO     median blend vs best-individual: mean|Δ|=0.0000  max|Δ|=0.0000  rows with change: 0/4940
+14:22:50  INFO   wall time: 0.1s
+14:22:50  INFO   ============================================================
+14:22:50  INFO   PRIMARY OUTPUT: submission_median_top3.csv
+14:22:50  INFO   ============================================================
